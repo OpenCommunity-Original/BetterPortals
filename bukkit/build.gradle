@@ -15,5 +15,5 @@ dependencies {
     implementation project(':shared')
     implementation project(':api')
     compileOnly 'com.comphenix.protocol:ProtocolLib:5.3.0'
-    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.21.3-R0.1-SNAPSHOT")
 }

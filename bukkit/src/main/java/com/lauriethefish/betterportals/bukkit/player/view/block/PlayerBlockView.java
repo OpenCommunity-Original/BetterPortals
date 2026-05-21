@@ -146,6 +146,8 @@ public class PlayerBlockView implements IPlayerBlockView   {
 
                         PacketContainer nbtUpdatePacket = viewableBlockArray.getDestinationTileEntityPacket(blockInfo.getOriginPos());
                         if (nbtUpdatePacket != null) {
+                            if (nbtUpdatePacket.getBlocks() != null)
+                                continue;
                             queuedTileEntityUpdates.add(nbtUpdatePacket);
                             logger.fine("Queueing tile state update at destination");
                         }
@@ -156,6 +158,8 @@ public class PlayerBlockView implements IPlayerBlockView   {
 
                         PacketContainer nbtUpdatePacket = viewableBlockArray.getOriginTileEntityPacket(blockInfo.getOriginPos());
                         if (nbtUpdatePacket != null) {
+                            if (nbtUpdatePacket.getBlocks() != null)
+                                continue;
                             queuedTileEntityUpdates.add(nbtUpdatePacket);
                             logger.fine("Queueing tile state update at origin");
                         }
