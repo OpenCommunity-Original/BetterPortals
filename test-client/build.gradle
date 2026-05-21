@@ -1,0 +1,60 @@
+plugins {
+    id 'net.fabricmc.fabric-loom' version '1.16-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+}
+
+loom {
+    runs {
+        client {
+            client()
+            configName = "Fabric Client"
+            runDir = "run"
+            vmArgs("-Xmx3G", "-Xms3G")
+            ideConfigGenerated = true
+        }
+        client2 {
+            client()
+            configName = "Fabric Client 2"
+            runDir = "run2"
+            vmArgs("-Xmx3G", "-Xms3G")
+            ideConfigGenerated = true
+        }
+    }
+}
+
+tasks.register("setupClient") {
+    doLast {
+        file("run").mkdirs()
+        file("run2").mkdirs()
+    }
+}
+
+tasks.named("runClient") {
+    dependsOn "setupClient"
+}
+
+tasks.named("runClient2") {
+    dependsOn "setupClient"
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
+configurations.maybeCreate("mappings")
+configurations.maybeCreate("modImplementation")
+configurations.maybeCreate("minecraft")
+
+dependencies {
+    minecraft "com.mojang:minecraft:26.1.2"
+    mappings "net.fabricmc:yarn:26.1.2+build.1:v2"
+    implementation "net.fabricmc:fabric-loader:${project.fabricLoaderVersion}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabricApiVersion}"
+    modImplementation "net.fabricmc:fabric-language-kotlin:${project.fabricKotlinVersion}"
+}

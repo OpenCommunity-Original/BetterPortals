@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/Lauriethefish/BetterPortals/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status"></a>
   <a href="https://papermc.io"><img src="https://img.shields.io/badge/Paper-1.21%2B%20%2F%2026.1.2-00BCD4.svg" alt="Target Platform"></a>
-  <a href="https://adoptium.net/"><img src="https://img.shields.io/badge/Java-17%20%2F%2021-ED8B00.svg" alt="Java Version"></a>
+  <a href="https://adoptium.net/"><img src="https://img.shields.io/badge/Java-25-ED8B00.svg" alt="Java Version"></a>
   <a href="https://github.com/Lauriethefish/BetterPortals/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
   <a href="https://velocitypowered.com"><img src="https://img.shields.io/badge/Proxy-Velocity%20%7C%20Bungee-7986CB.svg" alt="Proxy Support"></a>
 </p>
@@ -21,7 +21,7 @@
 BetterPortals allows players to **see through Nether and custom portals** to view blocks and entities on the target destination in real-time. By utilizing advanced packet manipulation and matrix rotation transformations entirely server-side, it delivers a seamless mod-like experience with **no client-side modifications** required.
 
 > [!IMPORTANT]
-> BetterPortals has been modernized. The minimum supported environment is **PaperMC 1.21 / 26.1.2** and **Java 17/21**. Traditional Spigot/CraftBukkit and legacy Minecraft versions are deprecated to prioritize modern, high-performance API structures.
+> BetterPortals has been modernized. The minimum supported environment is **PaperMC 1.21 / 26.1.2** and **Java 25**. Traditional Spigot/CraftBukkit and legacy Minecraft versions are deprecated to prioritize modern, high-performance API structures.
 
 ---
 
@@ -81,14 +81,31 @@ Compile and build the shaded multi-platform artifact using the Gradle wrapper:
 
 ### 2. Output Artifact
 The compiled, optimized, and minimized shaded JAR (compatible with Paper, Velocity, and BungeeCord) will be generated at:
-`./final/build/libs/BetterPortals-final-all.jar`
+`./final/build/libs/BetterPortals-1.*.*-all.jar`
 
 ---
 
-## 🛠️ VS Code Developer Tools
-This repository includes out-of-the-box configurations for Visual Studio Code (`.vscode/` folder):
-* **F5 Launching:** Direct attachment config for remote debugging on port `5005` (Paper) and `5006` (Velocity).
-* **Task Automation:** Tasks to build, package (`shadowJar`), or run the test suite (`test`) directly from the IDE command palette.
+## 🛠️ Developer Test Stack & VS Code Tools
+This repository includes a fully automated local testing environment and out-of-the-box configurations for Visual Studio Code (`.vscode/` folder):
+
+### 1. Requirements
+- **Java JDK 25** (installed and set as default in your system `PATH`/`JAVA_HOME`).
+- **Gradle 9.4.1** (automatically managed by the repository's Gradle Wrapper).
+
+### 2. Launching the Stack (F5)
+Press **F5** in VS Code to run the **`🚀 BetterPortals: Full Stack (F5)`** configuration. This automatically:
+1. Shuts down any stale Java test instances (`Kill Java` task).
+2. Cleans temporary dynamic test files like worlds, logs, and cache (`cleanTest` task).
+3. Compiles the latest shaded JAR containing all modules (`buildAll` task).
+4. Runs a **Paper Server** (on port `25565`) with the fresh plugin.
+5. Launches a **Fabric Client** that connects directly to the server for instant verification.
+
+### 3. Task Automation
+You can also run these tasks manually via the VS Code Command Palette (`Ctrl+Shift+P` -> `Run Task`):
+- `🚀 Run Full Stack (Server + Client)`: Launches the complete test environment.
+- `Cleanup Test Data`: Cleans dynamic server and client runtime files.
+- `Build All Plugins`: Compiles the shadowed plugin jar.
+- `Gradle Test`: Executes the JUnit 5 test suite.
 
 ---
 

@@ -2,12 +2,13 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         mavenCentral()
+        maven { url "https://maven.fabricmc.net/" }
         maven { url "https://repo.jpenilla.xyz/snapshots/" }
         maven { url "https://papermc.io/repo/repository/maven-public/" }
     }
 }
 
 rootProject.name = 'BetterPortals'
-gradle.ext.versionName = '0.14.1'
+gradle.ext.versionName = '1.0.0'
 
-include 'bukkit', 'bungee', 'shared', 'api', 'final', 'velocity', 'proxy'
+include 'bukkit', 'bungee', 'shared', 'api', 'final', 'velocity', 'proxy', 'test-server', 'test-client'

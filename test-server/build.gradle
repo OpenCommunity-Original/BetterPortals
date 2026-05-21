@@ -1,0 +1,73 @@
+plugins {
+    id 'xyz.jpenilla.run-paper' version '3.0.2'
+}
+
+repositories {
+    mavenCentral()
+    maven { url = 'https://repo.dmulloy2.net/repository/public/' }
+}
+
+configurations {
+    protocolLib
+}
+
+dependencies {
+    protocolLib('net.dmulloy2:ProtocolLib:5.4.0:all') {
+        transitive = false
+    }
+}
+
+tasks.register("copyPlugins", Copy) {
+    dependsOn ":final:shadowJar"
+    
+    // Copy the shaded BetterPortals jar
+    from(project(":final").tasks.named("shadowJar"))
+    // Copy ProtocolLib
+    from(configurations.protocolLib)
+    
+    into "run/plugins"
+}
+
+tasks.register("generateConfigs") {
+    doLast {
+        file("run/plugins/BetterPortals").mkdirs()
+
+        // 1. server.properties
+        def propsFile = file("run/server.properties")
+        if (!propsFile.exists()) {
+            propsFile.write("""# Minecraft server properties
+server-port=25565
+online-mode=false
+level-name=world
+view-distance=10
+simulation-distance=10
+enable-query=false
+prevent-proxy-connections=false
+""")
+            println "Generated server.properties for test-server"
+        }
+
+        // 2. BetterPortals config.yml
+        def bpConfigFile = file("run/plugins/BetterPortals/config.yml")
+        if (!bpConfigFile.exists()) {
+            bpConfigFile.write("""# BetterPortals server configuration
+proxy:
+  enabled: false
+""")
+            println "Generated BetterPortals config.yml for test-server"
+        }
+    }
+}
+
+tasks.runServer {
+    minecraftVersion("26.1.2")
+    jvmArgs("-Dcom.mojang.eula.agree=true", "-Xmx2G", "-Xms2G", "-Dpaper.playerconnection.keepalive=true", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005")
+    runDirectory(file("run"))
+    args("--port", "25565")
+    dependsOn "generateConfigs"
+    dependsOn "copyPlugins"
+}
+
+runPaper {
+    disablePluginJarDetection()
+}

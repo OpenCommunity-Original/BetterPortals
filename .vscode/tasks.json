@@ -2,6 +2,79 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "🚀 Run Full Stack (Server + Client)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Kill Java",
+                "Cleanup Test Data",
+                "Build All Plugins",
+                "Start All Instances"
+            ],
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Kill Java",
+            "type": "shell",
+            "command": "Get-Process java -ErrorAction SilentlyContinue | Stop-Process -Force",
+            "windows": {
+                "command": "Get-Process java -ErrorAction SilentlyContinue | Stop-Process -Force"
+            },
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "Start All Instances",
+            "dependsOn": [
+                "Start Paper Server",
+                "Start Minecraft Client"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Start Paper Server",
+            "type": "shell",
+            "command": ".\\gradlew :test-server:runServer",
+            "isBackground": true,
+            "presentation": {
+                "group": "bp-stack",
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "Start Minecraft Client",
+            "type": "shell",
+            "command": ".\\gradlew :test-client:runClient",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Cleanup Test Data",
+            "type": "shell",
+            "command": ".\\gradlew cleanTest",
+            "presentation": {
+                "reveal": "silent"
+            }
+        },
+        {
+            "label": "Build All Plugins",
+            "type": "shell",
+            "command": ".\\gradlew buildAll",
+            "presentation": {
+                "reveal": "always"
+            }
+        },
+        {
             "label": "Gradle Build",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew.bat",

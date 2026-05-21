@@ -2,32 +2,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "java",
-            "name": "Debug Paper (Attach 5005)",
-            "request": "attach",
-            "hostName": "localhost",
-            "port": 5005
-        },
-        {
-            "type": "java",
-            "name": "Debug Proxy (Attach 5006)",
-            "request": "attach",
-            "hostName": "localhost",
-            "port": 5006
-        },
-        {
-            "name": "Build & Package Shaded JAR",
-            "type": "node",
+            "name": "🚀 BetterPortals: Full Stack (F5)",
+            "type": "node-terminal",
             "request": "launch",
-            "runtimeExecutable": "npm",
-            "preLaunchTask": "Gradle ShadowJar"
-        },
-        {
-            "name": "Run JUnit Tests",
-            "type": "node",
-            "request": "launch",
-            "runtimeExecutable": "npm",
-            "preLaunchTask": "Gradle Test"
+            "command": "echo 'Starting BetterPortals Stack...'",
+            "preLaunchTask": "🚀 Run Full Stack (Server + Client)",
+            "iconPath": {
+                "id": "rocket"
+            }
         }
     ]
 }

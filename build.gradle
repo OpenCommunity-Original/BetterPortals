@@ -43,7 +43,7 @@ allprojects {
     }
 
     tasks.withType(JavaCompile) {
-        options.compilerArgs.addAll(['-source', '17', '-target', '17', '-Xlint:deprecation'])
+        options.compilerArgs.addAll(['-Xlint:deprecation'])
     }
 
 
@@ -70,3 +70,29 @@ subprojects {
         archivesName = "${rootProject.name}-${project.name}"
     }
 }
+
+tasks.register("buildAll") {
+    group = "build"
+    description = "Builds the final shadowJar containing all modules"
+    dependsOn ":final:shadowJar"
+}
+
+tasks.register("cleanTest") {
+    group = "build"
+    description = "Cleans test environments' dynamic run data and plugin jars"
+    doLast {
+        def dirsToDelete = [
+            "test-server/run/world",
+            "test-server/run/logs",
+            "test-server/run/plugins"
+        ]
+        dirsToDelete.forEach { path ->
+            def f = file(path)
+            if (f.exists()) {
+                delete(f)
+                println "Deleted: $path"
+            }
+        }
+    }
+}
+
