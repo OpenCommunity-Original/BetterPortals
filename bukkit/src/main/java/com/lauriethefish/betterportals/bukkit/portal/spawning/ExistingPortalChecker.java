@@ -106,6 +106,7 @@ public class ExistingPortalChecker implements IChunkChecker    {
         Collection<Location> result = new ArrayList<>();
 
         Chunk chunk = chunkPos.getChunk();
+        org.bukkit.ChunkSnapshot snapshot = chunk.getChunkSnapshot();
         org.bukkit.World world = chunk.getWorld();
         int chunkBlockX = chunkPos.x << 4;
         int chunkBlockZ = chunkPos.z << 4;
@@ -115,7 +116,7 @@ public class ExistingPortalChecker implements IChunkChecker    {
         for(int y = worldLink.getMinSpawnY(); y < worldLink.getMaxSpawnY(); y += yIncrement) {
             for(int z = 0; z < 16; z += 1) {
                 for(int x = 0; x < 16; x += 1) {
-                    if(chunk.getType(x, y, z) == Material.OBSIDIAN) {
+                    if(snapshot.getBlockType(x, y, z) == Material.OBSIDIAN) {
                         result.add(new Location(world, chunkBlockX + x, y, chunkBlockZ + z));
                     }
                 }

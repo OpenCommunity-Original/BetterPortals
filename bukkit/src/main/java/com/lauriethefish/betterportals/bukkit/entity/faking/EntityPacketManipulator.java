@@ -173,16 +173,27 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
 
         byte headRotation = RotationUtil.getPacketRotationByte(renderedPos.getYaw());
 
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_HEAD_ROTATION);
-        packet.getIntegers().write(0, tracker.getEntityId());
-        packet.getBytes().write(0, headRotation);
+        PacketContainer packet;
+        try {
+            Object nmsEntity = tracker.getEntity().getClass().getMethod("getHandle").invoke(tracker.getEntity());
+            Class<?> nmsEntityClass = Class.forName("net.minecraft.world.entity.Entity");
+            Class<?> packetClass = Class.forName("net.minecraft.network.protocol.game.ClientboundRotateHeadPacket");
+            java.lang.reflect.Constructor<?> constructor = packetClass.getConstructor(nmsEntityClass, byte.class);
+            Object nmsPacket = constructor.newInstance(nmsEntity, headRotation);
+
+            packet = new PacketContainer(PacketType.Play.Server.ENTITY_HEAD_ROTATION, nmsPacket);
+            packet.getIntegers().write(0, tracker.getEntityId());
+        } catch (Throwable ex) {
+            packet = new PacketContainer(PacketType.Play.Server.ENTITY_HEAD_ROTATION);
+            packet.getIntegers().write(0, tracker.getEntityId());
+            packet.getBytes().write(0, headRotation);
+        }
+
         PacketUtil.sendPacket(players, packet);
     }
 
     @Override
     public void sendMount(EntityInfo tracker, Collection<EntityInfo> riding, Collection<Player> players) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.MOUNT);
-
         int[] ridingIds = new int[riding.size()];
         int i = 0;
         for(EntityInfo ridingTracker : riding) {
@@ -190,8 +201,22 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
             i++;
         }
 
-        packet.getIntegers().write(0, tracker.getEntityId());
-        packet.getIntegerArrays().write(0, ridingIds);
+        PacketContainer packet;
+        try {
+            Object nmsEntity = tracker.getEntity().getClass().getMethod("getHandle").invoke(tracker.getEntity());
+            Class<?> nmsEntityClass = Class.forName("net.minecraft.world.entity.Entity");
+            Class<?> packetClass = Class.forName("net.minecraft.network.protocol.game.ClientboundSetPassengersPacket");
+            java.lang.reflect.Constructor<?> constructor = packetClass.getConstructor(nmsEntityClass);
+            Object nmsPacket = constructor.newInstance(nmsEntity);
+
+            packet = new PacketContainer(PacketType.Play.Server.MOUNT, nmsPacket);
+            packet.getIntegers().write(0, tracker.getEntityId());
+            packet.getIntegerArrays().write(0, ridingIds);
+        } catch (Throwable ex) {
+            packet = new PacketContainer(PacketType.Play.Server.MOUNT);
+            packet.getIntegers().write(0, tracker.getEntityId());
+            packet.getIntegerArrays().write(0, ridingIds);
+        }
 
         PacketUtil.sendPacket(players, packet);
     }
