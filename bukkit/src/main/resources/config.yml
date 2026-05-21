@@ -84,6 +84,14 @@ backgroundBlock: ''
 
 teleportCooldown: 2 # How long to wait before a player can go back after going through a portal (0 to disable)
 
+# Fair Use Policy: limits how many portals a single player can render simultaneously.
+# Closest portals are prioritized. Set to 0 to disable the limit (unlimited).
+maxPortalsPerPlayer: 3
+
+# Anti-Dupe Portal Policy: prevents registering two portals with an identical origin→destination pair.
+# Stops duplicate render sessions caused by portal relighting or buggy spawning logic.
+preventDuplicatePortals: true
+
 # Enables or disables the default world connections between the default overworld and nether worlds if they exist
 enableDefaultWorldConnections: true
 
