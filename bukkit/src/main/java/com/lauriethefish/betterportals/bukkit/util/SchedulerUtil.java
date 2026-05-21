@@ -17,7 +17,7 @@ public class SchedulerUtil {
     public static void init(JavaPlugin pl) {
         plugin = pl;
         try {
-            Class.forName("io.papermc.paper.threadedregions.scheduler.RegionScheduler");
+            Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
             isFolia = true;
         } catch (ClassNotFoundException e) {
             isFolia = false;

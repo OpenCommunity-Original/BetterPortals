@@ -106,15 +106,17 @@ public class ExistingPortalChecker implements IChunkChecker    {
         Collection<Location> result = new ArrayList<>();
 
         Chunk chunk = chunkPos.getChunk();
+        org.bukkit.World world = chunk.getWorld();
+        int chunkBlockX = chunkPos.x << 4;
+        int chunkBlockZ = chunkPos.z << 4;
         // The yIncrement is used to skip checking some Y levels as for 5 tall portals, we only need to check every fifth Y coordinate to guarantee that we hit one of the obsidian blocks
         // Then we can just search the surrounding area for portal positions afterwards
         // This helps performance a ton
         for(int y = worldLink.getMinSpawnY(); y < worldLink.getMaxSpawnY(); y += yIncrement) {
             for(int z = 0; z < 16; z += 1) {
                 for(int x = 0; x < 16; x += 1) {
-                    Block block = chunk.getBlock(x, y, z);
-                    if(block.getType() == Material.OBSIDIAN) {
-                        result.add(block.getLocation());
+                    if(chunk.getType(x, y, z) == Material.OBSIDIAN) {
+                        result.add(new Location(world, chunkBlockX + x, y, chunkBlockZ + z));
                     }
                 }
             }

@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 @Singleton
 public class MainUpdate implements Runnable {
-    private static final String ISSUES_URL = "https://github.com/Lauriethefish/BetterPortals/issues";
+    private static final String ISSUES_URL = "https://github.com/OpenCommunity-Original/BetterPortals/issues";
 
     private final JavaPlugin pl;
     private final PlayerDataManager playerDataManager;
@@ -30,11 +30,11 @@ public class MainUpdate implements Runnable {
 
     @Inject
     public MainUpdate(JavaPlugin pl,
-                      PlayerDataManager playerDataManager,
-                      IPortalActivityManager activityManager,
-                      EntityTrackingManager entityTrackingManager,
-                      ClientRequestHandler requestHandler,
-                      IExternalBlockWatcherManager blockWatcherManager, Logger logger) {
+            PlayerDataManager playerDataManager,
+            IPortalActivityManager activityManager,
+            EntityTrackingManager entityTrackingManager,
+            ClientRequestHandler requestHandler,
+            IExternalBlockWatcherManager blockWatcherManager, Logger logger) {
         this.pl = pl;
         this.playerDataManager = playerDataManager;
         this.activityManager = activityManager;
@@ -47,14 +47,14 @@ public class MainUpdate implements Runnable {
     private SchedulerUtil.PortalTask updateTask;
 
     public void start() {
-        if(updateTask != null) {
+        if (updateTask != null) {
             updateTask.cancel();
         }
         updateTask = SchedulerUtil.runTaskTimer(this, 0L, 1L);
     }
 
     public void stop() {
-        if(updateTask != null) {
+        if (updateTask != null) {
             updateTask.cancel();
             updateTask = null;
         }
@@ -74,14 +74,15 @@ public class MainUpdate implements Runnable {
             // Update replicated entities
             entityTrackingManager.update();
 
-            // Deactivates and view-deactivates any unused portals that were active last tick
+            // Deactivates and view-deactivates any unused portals that were active last
+            // tick
             activityManager.postUpdate();
 
             requestHandler.handlePendingRequests();
 
             blockWatcherManager.update();
 
-        }   catch(RuntimeException ex) {
+        } catch (RuntimeException ex) {
             logger.severe("A critical error occurred during main update.");
             logger.severe("Please create an issue at %s to get this fixed.", ISSUES_URL);
             ex.printStackTrace();
