@@ -64,21 +64,21 @@ public class PortalSpawner implements IPortalSpawner {
         startAsyncCheck(context, existingPortalChecker, (existingPosition) -> {
             if(existingPosition != null) {
                 logger.fine("Creating with existing position");
-                spawnPortal(existingPosition, originPosition);
-                onFinish.accept(existingPosition);
+                spawnPortal(existingPosition, originPosition, () -> onFinish.accept(existingPosition));
             }   else    {
                 logger.fine("Searching for new position");
                 // Find a new spawn position if there aren't any valid existing ones
                 startAsyncCheck(context, newPortalChecker, (newSpawnPos) -> {
+                    PortalSpawnPosition finalSpawnPos = newSpawnPos;
                     // Give up and just use the preferred destination position, which is probably in a wall, but it's our only real option
-                    if(newSpawnPos == null) {
+                    if(finalSpawnPos == null) {
                         logger.warning("Unable to find destination for a portal. This shouldn't happen really");
-                        newSpawnPos = new PortalSpawnPosition(destinationPosition, originSize, PortalDirection.EAST);
+                        finalSpawnPos = new PortalSpawnPosition(destinationPosition, originSize, PortalDirection.EAST);
                     }
 
                     logger.fine("Creating with new position");
-                    spawnPortal(newSpawnPos, originPosition);
-                    onFinish.accept(newSpawnPos);
+                    PortalSpawnPosition finalSpawnPosToUse = finalSpawnPos;
+                    spawnPortal(finalSpawnPosToUse, originPosition, () -> onFinish.accept(finalSpawnPosToUse));
                 });
             }
         });
@@ -118,7 +118,7 @@ public class PortalSpawner implements IPortalSpawner {
      * @param position Position to spawn the portal at
      */
     @SuppressWarnings("deprecation")
-    private void spawnPortal(PortalSpawnPosition position, Location originPos) {
+    private void spawnPortal(PortalSpawnPosition position, Location originPos, Runnable onComplete) {
         SchedulerUtil.runAtLocation(position.getPosition(), () -> {
             if(config.isDimensionBlendEnabled()) {
                 dimensionBlendManager.performBlend(originPos.clone().add(position.getSize().clone().multiply(0.5)), position.getPosition());
@@ -148,6 +148,9 @@ public class PortalSpawner implements IPortalSpawner {
 
                     state.update(true, false);
                 }
+            }
+            if (onComplete != null) {
+                SchedulerUtil.runTask(onComplete);
             }
         });
     }
