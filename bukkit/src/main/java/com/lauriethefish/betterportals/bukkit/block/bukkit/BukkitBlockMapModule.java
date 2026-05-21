@@ -14,7 +14,7 @@ public class BukkitBlockMapModule extends AbstractModule {
         );
 
         install(new FactoryModuleBuilder()
-            .implement(IMultiBlockChangeManager.class, MultiBlockChangeManager_1_16_2.class)
+            .implement(IMultiBlockChangeManager.class, ModernMultiBlockChangeManager.class)
             .build(IMultiBlockChangeManager.Factory.class)
         );
     }

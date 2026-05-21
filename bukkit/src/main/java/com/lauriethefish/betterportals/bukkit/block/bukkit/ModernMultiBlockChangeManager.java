@@ -15,17 +15,21 @@ import org.bukkit.util.Vector;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MultiBlockChangeManager_1_16_2 implements IMultiBlockChangeManager {
+/**
+ * Manages sending multiple block changes to a player using chunk-section-based MULTI_BLOCK_CHANGE packets.
+ * This is the modern format introduced in 1.16.2 and used up through 1.21+.
+ */
+public class ModernMultiBlockChangeManager implements IMultiBlockChangeManager {
     private final Player player;
 
     private final int minChunkY;
     private final int maxChunkY;
 
-    // Section positions have to be done with BlockPositions for now in ProtocolLib
+    // Section positions are indexed using BlockPositions in ProtocolLib
     private final HashMap<BlockPosition, Map<Vector, WrappedBlockData>> changes = new HashMap<>();
 
     @Inject
-    public MultiBlockChangeManager_1_16_2(@Assisted Player player, @Assisted("minChunkY") int minChunkY, @Assisted("maxChunkY") int maxChunkY) {
+    public ModernMultiBlockChangeManager(@Assisted Player player, @Assisted("minChunkY") int minChunkY, @Assisted("maxChunkY") int maxChunkY) {
         this.player = player;
         this.minChunkY = minChunkY;
         this.maxChunkY = maxChunkY;
