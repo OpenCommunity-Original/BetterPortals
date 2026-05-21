@@ -42,7 +42,7 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
         spawnPacket.getIntegers().write(0, tracker.getEntityId());
 
         // Translate to the correct rendered position
-        Vector actualPos = PacketUtil.readDoublePosition(spawnPacket);
+        Vector actualPos = tracker.getEntity().getLocation().toVector();
         if(tracker.getEntity() instanceof Hanging) {
             actualPos = MathUtil.moveToCenterOfBlock(actualPos);
         }
