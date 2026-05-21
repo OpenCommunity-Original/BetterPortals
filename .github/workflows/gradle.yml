@@ -84,25 +84,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Get short sha
-        if: ${{ github.ref == 'refs/heads/master' }}
-        id: get_sha
-        run: |
-          echo "SHORT_SHA=$(git rev-parse HEAD | cut -c 1-8)" >> $GITHUB_OUTPUT
-
-      - name: Set Publish JAR
-        if: ${{ github.ref == 'refs/heads/master' }}
-        run: echo "PUBLISH_JAR=$(find final/build/libs/*all.jar -print -quit)" >> $GITHUB_ENV
-
-      - name: Publish JAR to webhook
-        if: ${{ github.ref == 'refs/heads/master' }}
-        uses: tsickert/discord-webhook@v3.2.0
-        with:
-          webhook-url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          content: "`${{ steps.get_sha.outputs.SHORT_SHA }}` - `${{ github.event.head_commit.message }}`"
-          username: "BetterPortals Dev Builds"
-          avatar-url: "https://i.imgur.com/4l67APG.png"
-          filename: ${{ env.PUBLISH_JAR }}
-
       - name: Stop gradle daemons
         run: ./gradlew --stop
