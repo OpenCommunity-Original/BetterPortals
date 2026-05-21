@@ -136,8 +136,12 @@ public class PortalSpawner implements IPortalSpawner {
                 BlockState state = blockPos.getBlock().getState();
                 state.setType(isFrameBlock ? Material.OBSIDIAN : MaterialUtil.PORTAL_MATERIAL);
                 // Make sure to rotate the portal blocks for NORTH/SOUTH portals
-                if(!isFrameBlock && (direction == PortalDirection.EAST || direction == PortalDirection.WEST)) {
-                    state.setRawData((byte) 2);
+                if(!isFrameBlock) {
+                    org.bukkit.block.data.BlockData blockData = state.getBlockData();
+                    if(blockData instanceof org.bukkit.block.data.Orientable orientable) {
+                        orientable.setAxis(direction == PortalDirection.EAST || direction == PortalDirection.WEST ? org.bukkit.Axis.Z : org.bukkit.Axis.X);
+                        state.setBlockData(orientable);
+                    }
                 }
 
                 state.update(true, false);

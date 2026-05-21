@@ -1,0 +1,65 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Gradle Build",
+            "type": "shell",
+            "command": "${workspaceFolder}/gradlew.bat",
+            "args": [
+                "build"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "windows": {
+                "command": "${workspaceFolder}/gradlew.bat"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/gradlew"
+            },
+            "osx": {
+                "command": "${workspaceFolder}/gradlew"
+            }
+        },
+        {
+            "label": "Gradle ShadowJar",
+            "type": "shell",
+            "command": "${workspaceFolder}/gradlew.bat",
+            "args": [
+                "shadowJar"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "windows": {
+                "command": "${workspaceFolder}/gradlew.bat"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/gradlew"
+            },
+            "osx": {
+                "command": "${workspaceFolder}/gradlew"
+            }
+        },
+        {
+            "label": "Gradle Test",
+            "type": "shell",
+            "command": "${workspaceFolder}/gradlew.bat",
+            "args": [
+                "test"
+            ],
+            "group": "test",
+            "problemMatcher": [],
+            "windows": {
+                "command": "${workspaceFolder}/gradlew.bat"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/gradlew"
+            },
+            "osx": {
+                "command": "${workspaceFolder}/gradlew"
+            }
+        }
+    ]
+}

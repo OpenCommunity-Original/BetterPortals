@@ -107,4 +107,13 @@ public class RotationUtil {
 
         return limited < clamped ? clamped - 1 : clamped;
     }
+
+    /**
+     * Converts a float rotation angle to a byte for packets.
+     * @param angle The angle to convert
+     * @return The angle representation as a byte
+     */
+    public static byte getPacketRotationByte(float angle) {
+        return (byte) (int) (angle * 256.0f / 360.0f);
+    }
 }

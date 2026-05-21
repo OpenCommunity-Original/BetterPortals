@@ -44,7 +44,7 @@ public class PortalServer implements IPortalServer {
         isRunning = true;
 
         logger.info("Starting up portal server");
-        new Thread(() -> {
+        Thread serverThread = new Thread(() -> {
             logger.fine("Hello from server thread");
             try {
                 runServer();
@@ -61,7 +61,9 @@ public class PortalServer implements IPortalServer {
             }   finally     {
                 shutDown();
             }
-        }).start();
+        });
+        serverThread.setName("BetterPortals-PortalServer");
+        serverThread.start();
     }
 
     private void runServer() throws IOException {
@@ -87,7 +89,7 @@ public class PortalServer implements IPortalServer {
         try {
             // The socket close error will be caught since we set isRunning to false.
             serverSocket.close();
-            for(IClientHandler serverHandler : registeredServers.values()) {
+            for(IClientHandler serverHandler : new java.util.ArrayList<>(connectedServers)) {
                 serverHandler.shutDown();
             }
         }   catch(IOException ex) {

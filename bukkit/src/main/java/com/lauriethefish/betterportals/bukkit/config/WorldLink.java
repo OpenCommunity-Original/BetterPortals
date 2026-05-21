@@ -1,16 +1,12 @@
 package com.lauriethefish.betterportals.bukkit.config;
 
 import com.lauriethefish.betterportals.bukkit.util.HeightUtil;
-import com.lauriethefish.betterportals.bukkit.util.VersionUtil;
-import com.lauriethefish.betterportals.shared.util.ReflectionUtil;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**

@@ -1,34 +1,96 @@
-# BetterPortals
-BetterPortals is a minecraft spigot plugin which allows you to see through nether portals to look at the blocks on the other side.
+<p align="center">
+  <img src="https://img.icons8.com/color/144/minecraft-creeper.png" alt="BetterPortals Logo" width="100" />
+</p>
 
-It aims to provide a similar experience to the BetterPortals mod, but as a plugin, so it requires no client side mods.
+<h1 align="center">BetterPortals</h1>
 
-This works pretty well for players with low ping (under 50 ms), and portal animations are pretty smooth.
+<p align="center">
+  <strong>An enterprise-grade, highly-optimized, server-side portal rendering and teleportation engine for PaperMC.</strong>
+</p>
 
-For more info, see the plugin's [Spigot Page](https://www.spigotmc.org/resources/betterportals.75409/)
+<p align="center">
+  <a href="https://github.com/Lauriethefish/BetterPortals/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status"></a>
+  <a href="https://papermc.io"><img src="https://img.shields.io/badge/Paper-1.21%2B%20%2F%2026.1.2-00BCD4.svg" alt="Target Platform"></a>
+  <a href="https://adoptium.net/"><img src="https://img.shields.io/badge/Java-17%20%2F%2021-ED8B00.svg" alt="Java Version"></a>
+  <a href="https://github.com/Lauriethefish/BetterPortals/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+  <a href="https://velocitypowered.com"><img src="https://img.shields.io/badge/Proxy-Velocity%20%7C%20Bungee-7986CB.svg" alt="Proxy Support"></a>
+</p>
 
-## Features
-- Viewing blocks through nether portals.
-- Viewing entities through portals.
-- Creating your own custom portals (in a way like MultiversePortals).
-- Horizontal custom portals.
-- Creating portals between multiple servers. (AKA cross-server portals)
+---
 
-## Limitations
-Of course, being a plugin, there are several limitations.
-- Portal animations can lag players if not using optifine.
-- Players with high ping see artifacts of the portal projection.
-- Much longer render distances lag both players and the server.
+BetterPortals allows players to **see through Nether and custom portals** to view blocks and entities on the target destination in real-time. By utilizing advanced packet manipulation and matrix rotation transformations entirely server-side, it delivers a seamless mod-like experience with **no client-side modifications** required.
 
-## Future Plans
-- Improve performance to allow for much longer render distances.
+> [!IMPORTANT]
+> BetterPortals has been modernized. The minimum supported environment is **PaperMC 1.21 / 26.1.2** and **Java 17/21**. Traditional Spigot/CraftBukkit and legacy Minecraft versions are deprecated to prioritize modern, high-performance API structures.
 
-## Compilation
-Requirements to build:
-- [Gradle](https://gradle.org/install/) 7 or higher installed and on `PATH`.
-- Java 8 or higher on `PATH` and `JAVA_HOME` also set to point to the folder containing the bin folder.
+---
 
-1. Clone this repository (either via the `Code` dropdown on github and then downloading ZIP, or through `git clone https://github.com/Lauriethefish/BetterPortals.git`).
-2. If you want to add the commit hash to the version number (i.e. have the JAR be considered a "dev build"), then set the `BP_DEVELOPER_BUILD` environment variable to `1`.
-3. Run `gradle build` in the project root.
-4. The shaded JAR is found in `./final/build/libs/`. Make sure to pick the JAR with `-all` at the end, otherwise you will not get all of the necessary dependencies. [Example](https://i.imgur.com/yVYI1IW.png)
+## ⚡ Core High-Performance Features
+
+* **👁️ Real-time Portal Projection:** Visualizes block changes, chunks, and states across portals dynamically using ProtocolLib.
+* **👾 Real-time Entity Mirroring:** Spawns, updates, and translates destination entities (including relative camera yaw/pitch rotations).
+* **🌀 Cross-Server Teleportation:** Syncs players across a multi-server proxy network (Velocity / BungeeCord) with zero noticeable transition delay.
+* **🏎️ Async Teleportation Engine:** Replaces blocking teleport calls with Paper's non-blocking `teleportAsync` to prevent tick spikes.
+* **🛡️ Secure Communication:** Utilizes AES-GCM-128 encryption with private key authentication for cross-server backend communication.
+* **📐 Advanced Rotation Matrices:** Dynamically rotates block patterns and player velocities when passing through custom horizontal or vertical portals.
+
+---
+
+## 🏗️ System & Network Architecture
+
+BetterPortals uses a distributed architecture to coordinate cross-server portals. A centralized proxy module (`BetterPortals-proxy`) acts as a secure request router between participating backend Paper servers.
+
+```mermaid
+graph TD
+    Proxy[Velocity / BungeeCord Proxy] <-->|AES-GCM-128 TCP| Paper1[Paper Server A]
+    Proxy <-->|AES-GCM-128 TCP| Paper2[Paper Server B]
+    Paper1 -->|Mirrors Blocks/Entities| Player((Player cam))
+```
+
+---
+
+## 📚 Technical Documentation Index
+
+Detailed setup guides, protocols, and developer notes are separated into dedicated modules under the `docs` directory:
+
+| Document | Description |
+| :--- | :--- |
+| 🛠️ **[Setup & Installation Guide](docs/setup_guide.md)** | Step-by-step setup for Single Servers, Bungee/Velocity networks, security key generation, commands, and troubleshooting. |
+| 🏗️ **[Project Modular Architecture](docs/project_structure.md)** | Codebase file structure, module breakdown (`shared`, `api`, `proxy`, `bukkit`, etc.), and dependency trees. |
+| 🔌 **[Custom Network Protocol](docs/networking_protocol.md)** | Technical layout of GZIP/AES-GCM encrypted byte packets, handshakes, request-response lifecycles, and request specifications. |
+| 💻 **[Developer Reference Guide](docs/developer_guide.md)** | Gradle compile commands, JUnit 5 test instructions, remote debugging configurations, and guide for adding NMS packet features. |
+
+---
+
+## 🚀 Quick Start Compilation
+
+Ensure you have **Java 17** or **Java 21** configured on your `PATH` and `JAVA_HOME`.
+
+### 1. Build and Shade
+Compile and build the shaded multi-platform artifact using the Gradle wrapper:
+
+* **Windows:**
+  ```powershell
+  .\gradlew.bat clean shadowJar
+  ```
+* **Linux / macOS:**
+  ```bash
+  chmod +x gradlew
+  ./gradlew clean shadowJar
+  ```
+
+### 2. Output Artifact
+The compiled, optimized, and minimized shaded JAR (compatible with Paper, Velocity, and BungeeCord) will be generated at:
+`./final/build/libs/BetterPortals-final-all.jar`
+
+---
+
+## 🛠️ VS Code Developer Tools
+This repository includes out-of-the-box configurations for Visual Studio Code (`.vscode/` folder):
+* **F5 Launching:** Direct attachment config for remote debugging on port `5005` (Paper) and `5006` (Velocity).
+* **Task Automation:** Tasks to build, package (`shadowJar`), or run the test suite (`test`) directly from the IDE command palette.
+
+---
+
+## 🛡️ License
+BetterPortals is distributed under the **MIT License**. See `LICENSE` for details.

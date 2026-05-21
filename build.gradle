@@ -34,27 +34,25 @@ allprojects {
         implementation 'org.jetbrains:annotations:26.0.1'
         implementation 'com.github.spotbugs:spotbugs-annotations:4.8.6'
 
-        compileOnly 'org.projectlombok:lombok:1.18.34'
-        testImplementation 'org.projectlombok:lombok:1.18.34'
-        annotationProcessor 'org.projectlombok:lombok:1.18.34'
-        testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
-        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.3'
-        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
+        compileOnly 'org.projectlombok:lombok:1.18.46'
+        testImplementation 'org.projectlombok:lombok:1.18.46'
+        annotationProcessor 'org.projectlombok:lombok:1.18.46'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.46'
+        testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
+        testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3'
     }
 
-    tasks {
-        compileJava {
-            options.release.set(21)
-        }
+    tasks.withType(JavaCompile) {
+        options.compilerArgs.addAll(['-source', '17', '-target', '17'])
     }
 
 
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(21)
+            languageVersion = JavaLanguageVersion.of(25)
         }
-        sourceCompatibility = '21'
-        targetCompatibility = '21'
+        sourceCompatibility = '25'
+        targetCompatibility = '25'
     }
 }
 

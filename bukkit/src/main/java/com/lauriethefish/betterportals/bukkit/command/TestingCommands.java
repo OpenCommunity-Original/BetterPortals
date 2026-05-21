@@ -44,12 +44,15 @@ public class TestingCommands {
     @Path("betterportals/test/portalBlock")
     @Argument(name = "dataValue")
     @RequiresPlayer
-    @SuppressWarnings("deprecation")
     public boolean createTestPortalBlock(Player sender, byte dataValue) {
         BlockState state = sender.getLocation().getBlock().getState();
 
         state.setType(MaterialUtil.PORTAL_MATERIAL);
-        state.setRawData(dataValue);
+        org.bukkit.block.data.BlockData blockData = state.getBlockData();
+        if (blockData instanceof org.bukkit.block.data.Orientable orientable) {
+            orientable.setAxis(dataValue == 2 ? org.bukkit.Axis.Z : org.bukkit.Axis.X);
+            state.setBlockData(orientable);
+        }
 
         state.update(true, false);
         return true;

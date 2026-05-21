@@ -88,11 +88,10 @@ public class ProxyRequestHandler implements IRequestHandler {
                 }
 
                 proxy.changePlayerServer(playerId, clientHandler.getServerName());
+                onFinish.accept(new Response());
             }   catch(RequestException ex) {
                 onFinish.accept(response);
             }
         });
-
-        onFinish.accept(new Response());
     }
 }

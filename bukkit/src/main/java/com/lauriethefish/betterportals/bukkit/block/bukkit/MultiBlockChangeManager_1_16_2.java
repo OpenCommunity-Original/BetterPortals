@@ -1,8 +1,8 @@
 package com.lauriethefish.betterportals.bukkit.block.bukkit;
 
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
+import com.lauriethefish.betterportals.bukkit.nms.PacketUtil;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.comphenix.protocol.wrappers.WrappedBlockData;
 import com.google.inject.Inject;
@@ -89,11 +89,7 @@ public class MultiBlockChangeManager_1_16_2 implements IMultiBlockChangeManager 
             packet.getBlockDataArrays().writeSafely(0, data);
             packet.getShortArrays().writeSafely(0, positions);
 
-            try {
-                ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
-            }   catch(Exception ex) {
-                ex.printStackTrace();
-            }
+            PacketUtil.sendPacket(player, packet);
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.lauriethefish.betterportals.bukkit.player.view.block;
 
-import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.events.PacketContainer;
+import com.lauriethefish.betterportals.bukkit.nms.PacketUtil;
 import com.comphenix.protocol.wrappers.WrappedBlockData;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -169,12 +169,8 @@ public class PlayerBlockView implements IPlayerBlockView   {
 
             // Show the player the changed states
             multiBlockChangeManager.sendChanges();
-            try {
-                for (PacketContainer packet : queuedTileEntityUpdates) {
-                    ProtocolLibrary.getProtocolManager().sendServerPacket(player, packet);
-                }
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
+            for (PacketContainer packet : queuedTileEntityUpdates) {
+                PacketUtil.sendPacket(player, packet);
             }
 
             // Removed due to being unreasonably frequent
@@ -187,13 +183,18 @@ public class PlayerBlockView implements IPlayerBlockView   {
     // Gets the right rotation of portal block depending on the portal's direction
     private WrappedBlockData getPortalBlockData() {
         PortalDirection portalDirection = portal.getOriginPos().getDirection();
-        if(portalDirection == PortalDirection.EAST || portalDirection == PortalDirection.WEST) {
-            return WrappedBlockData.createData(MaterialUtil.PORTAL_MATERIAL, 2); // EAST/WEST portal blocks must be rotated
-        }   else if(portalDirection == PortalDirection.NORTH || portalDirection == PortalDirection.SOUTH) {
-            return WrappedBlockData.createData(MaterialUtil.PORTAL_MATERIAL, 0);
-        }   else {
-            throw new IllegalStateException("Tried to get portal block data of a horizontal portal");
+        org.bukkit.block.data.BlockData blockData = org.bukkit.Bukkit.createBlockData(MaterialUtil.PORTAL_MATERIAL);
+        if (blockData instanceof org.bukkit.block.data.Orientable orientable) {
+            if (portalDirection == PortalDirection.EAST || portalDirection == PortalDirection.WEST) {
+                orientable.setAxis(org.bukkit.Axis.Z);
+            } else if (portalDirection == PortalDirection.NORTH || portalDirection == PortalDirection.SOUTH) {
+                orientable.setAxis(org.bukkit.Axis.X);
+            } else {
+                throw new IllegalStateException("Tried to get portal block data of a horizontal portal");
+            }
+            return WrappedBlockData.createData(orientable);
         }
+        return WrappedBlockData.createData(MaterialUtil.PORTAL_MATERIAL);
     }
 
     // Sets each block inside the portal window to the specified WrappedBlockData

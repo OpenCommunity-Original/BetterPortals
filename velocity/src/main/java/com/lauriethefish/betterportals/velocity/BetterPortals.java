@@ -64,7 +64,7 @@ public class BetterPortals {
         IClientHandler to = portalServer.getServer(event.getServer().getServerInfo().getName());
 
         String previousServerName = event.getPreviousServer().get().getServerInfo().getName();
-        IClientHandler from = portalServer.getServer(event.getServer().getServerInfo().getName());
+        IClientHandler from = portalServer.getServer(previousServerName);
 
         if(from == null) {
             logger.debug("From server was unregistered for server switch event, skipping");

@@ -190,11 +190,7 @@ public class PortalEntityManager implements IPortalEntityManager {
     private void teleportLocal(Entity entity) {
         PortalTransformations transformations = portal.getTransformations();
 
-        Location destPos;
-        destPos = entity.getLocation().subtract(portal.getOriginPos().getVector());
-        destPos = transformations.rotateToDestination(destPos.toVector()).toLocation(Objects.requireNonNull(portal.getDestPos().getWorld()));
-        destPos.add(portal.getDestPos().getVector());
-        destPos.setDirection(transformations.rotateToDestination(entity.getLocation().getDirection()));
+        Location destPos = transformations.moveToDestination(entity.getLocation());
 
         if(entity instanceof Player) {
             destPos = limitToBlockHitbox(destPos);
@@ -203,8 +199,7 @@ public class PortalEntityManager implements IPortalEntityManager {
         }
 
         // Teleporting an entity removes the velocity, so we have to re-add it
-        Vector velocity = entity.getVelocity();
-        velocity = transformations.rotateToDestination(velocity);
+        final Vector velocity = transformations.rotateToDestination(entity.getVelocity());
 
         logger.fine("Teleporting entity with ID %d and of type %s to position %s", entity.getEntityId(), entity.getType(), destPos.toVector());
 
@@ -217,12 +212,18 @@ public class PortalEntityManager implements IPortalEntityManager {
             }
         }
 
-
-        entity.teleport(destPos);
-        entity.setVelocity(velocity);
-
-        if(handlePassengers) {
-            passengers.forEach(entity::addPassenger);
+        if (entity instanceof Player && passengers.isEmpty()) {
+            entity.teleportAsync(destPos).thenAccept(success -> {
+                if (Boolean.TRUE.equals(success)) {
+                    entity.setVelocity(velocity);
+                }
+            });
+        } else {
+            entity.teleport(destPos);
+            entity.setVelocity(velocity);
+            if(handlePassengers) {
+                passengers.forEach(entity::addPassenger);
+            }
         }
     }
 
@@ -241,7 +242,6 @@ public class PortalEntityManager implements IPortalEntityManager {
         playerData.freezePortalViews();
 
         Location destPosition = portal.getTransformations().moveToDestination(player.getLocation());
-        destPosition.setDirection(portal.getTransformations().rotateToDestination(player.getLocation().getDirection()));
         Vector destVelocity = portal.getTransformations().rotateToDestination(player.getVelocity());
 
 

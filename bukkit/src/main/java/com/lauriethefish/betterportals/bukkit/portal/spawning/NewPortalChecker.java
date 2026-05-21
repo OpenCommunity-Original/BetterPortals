@@ -82,7 +82,7 @@ public class NewPortalChecker implements IChunkChecker  {
 
                     boolean isFrame = x == 0 || y == 0 || x == size.getX() || y == size.getY();
 
-                    if ((!isFrame) && !MaterialUtil.isAir(type)) { // Portal block positions must be air
+                    if ((!isFrame) && !type.isAir()) { // Portal block positions must be air
                         return false;
                     }
                     if (y == 0 && (!type.isSolid())) { // The floor blocks must be solid
