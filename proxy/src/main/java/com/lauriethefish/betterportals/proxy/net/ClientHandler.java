@@ -83,6 +83,7 @@ public class ClientHandler implements IClientHandler {
      * Reads a {@link Handshake} to get info about the server that is connecting, then sends a {@link HandshakeResponse} to tell the connecting server if the connection was successful.
      * @return If the handshake was successful
      */
+    @SuppressWarnings("deprecation")
     private boolean performHandshake() throws IOException, ClassNotFoundException, GeneralSecurityException {
         logger.fine("Reading handshake . . .");
         Handshake handshake = (Handshake) objectStream.readObject();

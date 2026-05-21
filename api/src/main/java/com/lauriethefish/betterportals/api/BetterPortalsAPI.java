@@ -10,6 +10,8 @@ import java.util.UUID;
 /**
  * Main class of the BetterPortals API.
  * NOTE: No API calls should be made when the plugin is disabled.
+ *
+ * @since 0.1.0
  */
 public abstract class BetterPortalsAPI {
     @Setter private static BetterPortalsAPI instance = null;

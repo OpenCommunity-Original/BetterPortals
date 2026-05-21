@@ -5,12 +5,14 @@ import com.lauriethefish.betterportals.bukkit.chunk.chunkpos.SpiralChunkAreaIter
 import com.lauriethefish.betterportals.bukkit.config.PortalSpawnConfig;
 import com.lauriethefish.betterportals.bukkit.util.performance.OperationTimer;
 import com.lauriethefish.betterportals.shared.logging.Logger;
-import org.bukkit.Bukkit;
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 /**
@@ -40,7 +42,7 @@ public class AsyncPortalChecker implements Runnable {
     private final Iterator<ChunkPosition> iterator;
     private final IChunkChecker chunkChecker;
     private final Consumer<PortalSpawnPosition> onFinish;
-    private final BukkitTask repeatingTask;
+    private SchedulerUtil.PortalTask repeatingTask;
 
     private PortalSpawnPosition currentClosest;
     private double closestDistance = Double.POSITIVE_INFINITY;
@@ -68,7 +70,48 @@ public class AsyncPortalChecker implements Runnable {
             spawnPos.clone().add(PORTAL_SEARCH_RADIUS, 0.0, PORTAL_SEARCH_RADIUS)
         );
 
-        this.repeatingTask = Bukkit.getScheduler().runTaskTimer(pl, this, 1, 1);
+        if (SchedulerUtil.isFolia()) {
+            this.repeatingTask = null;
+            List<ChunkPosition> chunksToCheck = new ArrayList<>();
+            while (iterator.hasNext()) {
+                chunksToCheck.add(iterator.next());
+            }
+            int totalChunks = chunksToCheck.size();
+            if (totalChunks == 0) {
+                onFinish.accept(null);
+                return;
+            }
+            AtomicInteger completedCount = new AtomicInteger(0);
+            for (ChunkPosition chunk : chunksToCheck) {
+                SchedulerUtil.runAtLocation(spawnPos.getWorld(), chunk.x << 4, chunk.z << 4, () -> {
+                    try {
+                        double closestTheoreticalDistanceInChunk = chunk.getCenterPos().distance(context.getPreferredLocation()) - CHUNK_SKIP_DISTANCE;
+                        boolean shouldCheck;
+                        synchronized (this) {
+                            shouldCheck = closestTheoreticalDistanceInChunk < closestDistance;
+                        }
+                        if (shouldCheck) {
+                            PortalSpawnPosition result = chunkChecker.findClosestInChunk(chunk, context);
+                            if (result != null) {
+                                double distance = result.getPosition().distance(context.getPreferredLocation());
+                                synchronized (this) {
+                                    if (distance < closestDistance) {
+                                        closestDistance = distance;
+                                        currentClosest = result;
+                                    }
+                                }
+                            }
+                        }
+                    } finally {
+                        if (completedCount.incrementAndGet() == totalChunks) {
+                            SchedulerUtil.runTask(this::onFinish);
+                        }
+                    }
+                });
+            }
+        } else {
+            this.repeatingTask = SchedulerUtil.runTaskTimer(this, 1, 1);
+        }
     }
 
     @Override
@@ -91,7 +134,9 @@ public class AsyncPortalChecker implements Runnable {
 
     private void onFinish() {
         logger.fine("Finished delayed portal check within %d ticks", updateCount);
-        repeatingTask.cancel();
+        if(repeatingTask != null) {
+            repeatingTask.cancel();
+        }
         onFinish.accept(currentClosest);
     }
 

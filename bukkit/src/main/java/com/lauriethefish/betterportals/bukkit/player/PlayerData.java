@@ -131,6 +131,7 @@ public class PlayerData implements IPlayerData  {
 
 
     @Override
+    @SuppressWarnings("deprecation")
     public void savePermanentData() {
 
         File dataFolder = new File(pl.getDataFolder(), "playerData");

@@ -9,7 +9,7 @@ allprojects {
 
     // Optional, just for showing name
     afterEvaluate {
-        println("Evaluating project ${project.group}:${archivesBaseName}:${version}")
+        println("Evaluating project ${project.group}:${base.archivesName.get()}:${version}")
     }
 
     test {
@@ -43,7 +43,7 @@ allprojects {
     }
 
     tasks.withType(JavaCompile) {
-        options.compilerArgs.addAll(['-source', '17', '-target', '17'])
+        options.compilerArgs.addAll(['-source', '17', '-target', '17', '-Xlint:deprecation'])
     }
 
 
@@ -66,5 +66,7 @@ subprojects {
         version = gradle.ext.versionName
     }
 
-    archivesBaseName = "${rootProject.name}-${project.name}"
+    base {
+        archivesName = "${rootProject.name}-${project.name}"
+    }
 }

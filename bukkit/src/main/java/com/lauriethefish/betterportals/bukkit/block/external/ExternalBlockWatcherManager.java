@@ -64,4 +64,10 @@ public class ExternalBlockWatcherManager implements IExternalBlockWatcherManager
             }
         }
     }
+
+    @Override
+    public void clear() {
+        watchers.clear();
+        lastRequested.clear();
+    }
 }

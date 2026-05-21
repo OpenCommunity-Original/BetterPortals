@@ -73,13 +73,16 @@ public abstract class BlockUpdateFinisher {
     /**
      * Starts the task/thread that is being used
      */
-    public abstract void start();
+    public void start() {
+        hasStopped = false;
+    }
 
     /**
      * Stops the task/thread that is being used
      */
     public void stop() {
         hasStopped = true;
+        updateQueue.clear();
     }
 
     /**

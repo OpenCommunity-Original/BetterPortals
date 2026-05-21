@@ -32,6 +32,7 @@ public class EventRegistrar implements IEventRegistrar {
     public void onPluginReload() {
         logger.fine("Re-registering events . . .");
         for(Listener listener : allRegisteredListeners) {
+            org.bukkit.event.HandlerList.unregisterAll(listener);
             pl.getServer().getPluginManager().registerEvents(listener, pl);
         }
     }

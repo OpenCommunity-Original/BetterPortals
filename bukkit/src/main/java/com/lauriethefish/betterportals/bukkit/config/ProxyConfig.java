@@ -40,6 +40,9 @@ public class ProxyConfig {
         address = new InetSocketAddress(rawAddress, port);
 
         reconnectionDelay = section.getInt("reconnectionDelay");
+        if(reconnectionDelay <= 0) {
+            throw new IllegalArgumentException("reconnectionDelay must be greater than 0 (got " + reconnectionDelay + ")");
+        }
 
         overrideServerName = section.getString("serverName");
         if(overrideServerName != null && overrideServerName.isEmpty()) {

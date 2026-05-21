@@ -52,10 +52,11 @@ public class API extends BetterPortalsAPI {
     public @NotNull BetterPortal createPortal(@NotNull PortalPosition originPosition, @NotNull PortalPosition destinationPosition, @NotNull Vector size, @Nullable UUID owner, @Nullable String name, boolean isCustom) {
         verifyEnabled();
 
-        IPortal portal = portalFactory.create(originPosition, destinationPosition, size, isCustom, UUID.randomUUID(), owner, name, true);
+        UUID id = UUID.randomUUID();
+        IPortal portal = portalFactory.create(originPosition, destinationPosition, size, isCustom, id, owner, name, true);
         portalManager.registerPortal(portal);
 
-        return portal;
+        return new ApiPortalWrapper(id);
     }
 
     @Override
@@ -109,6 +110,11 @@ public class API extends BetterPortalsAPI {
     @Override
     public BetterPortal getPortalById(@NotNull UUID id) {
         verifyEnabled();
-        return portalManager.getPortalById(id);
+        BetterPortal portal = portalManager.getPortalById(id);
+        return portal == null ? null : new ApiPortalWrapper(id);
+    }
+
+    public IPortalManager getPortalManager() {
+        return portalManager;
     }
 }

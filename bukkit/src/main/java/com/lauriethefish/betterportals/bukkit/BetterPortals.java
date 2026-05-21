@@ -14,6 +14,7 @@ import com.lauriethefish.betterportals.bukkit.portal.IPortalManager;
 import com.lauriethefish.betterportals.bukkit.portal.storage.IPortalStorage;
 import com.lauriethefish.betterportals.bukkit.tasks.BlockUpdateFinisher;
 import com.lauriethefish.betterportals.bukkit.tasks.MainUpdate;
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import com.lauriethefish.betterportals.bukkit.util.performance.OperationTimer;
 import com.lauriethefish.betterportals.shared.logging.Logger;
 import org.bukkit.command.Command;
@@ -21,6 +22,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
+import com.lauriethefish.betterportals.bukkit.block.external.IExternalBlockWatcherManager;
+import com.lauriethefish.betterportals.bukkit.portal.predicate.CrossServerDestinationChecker;
 import java.io.IOException;
 import java.util.List;
 
@@ -39,12 +42,15 @@ public class BetterPortals extends JavaPlugin {
     @Inject private IPortalManager portalManager;
     @Inject private IEventRegistrar eventRegistrar;
     @Inject private API apiImplementation;
+    @Inject private IExternalBlockWatcherManager blockWatcherManager;
+    @Inject private CrossServerDestinationChecker crossServerDestinationChecker;
 
     private boolean firstEnable = true;
     private boolean didEnableFail = false;
 
     @Override
     public void onEnable() {
+        SchedulerUtil.init(this);
         OperationTimer timer = new OperationTimer();
         saveDefaultConfig();
 
@@ -116,7 +122,11 @@ public class BetterPortals extends JavaPlugin {
     }
 
     public void softReload() {
+        mainUpdate.stop();
+        portalStorage.stop();
+        blockUpdateFinisher.stop();
         apiImplementation.onDisable();
+        SchedulerUtil.cancelAll();
 
         logger.fine("Performing plugin soft-reload . . .");
         if(proxyConfig.isEnabled()) {
@@ -128,12 +138,20 @@ public class BetterPortals extends JavaPlugin {
             return;
         }
 
-        playerDataManager.onPluginDisable();
+        playerDataManager.onPluginReload();
         portalManager.onReload();
+        blockWatcherManager.clear();
+        crossServerDestinationChecker.clear();
 
         if(proxyConfig.isEnabled()) {
             portalClient.connect();
         }
+        eventRegistrar.onPluginReload();
+
+        blockUpdateFinisher.start();
+        mainUpdate.start();
+        portalStorage.start();
+
         apiImplementation.onEnable();
     }
 
@@ -142,6 +160,11 @@ public class BetterPortals extends JavaPlugin {
         // We don't want to over-save the portals file if loading it failed
         if(didEnableFail) {return;}
 
+        mainUpdate.stop();
+        portalStorage.stop();
+        blockUpdateFinisher.stop();
+        SchedulerUtil.cancelAll();
+
         try {
             playerDataManager.onPluginDisable();
         }  catch(RuntimeException ex) {
@@ -149,7 +172,15 @@ public class BetterPortals extends JavaPlugin {
             ex.printStackTrace();
         }
 
-        blockUpdateFinisher.stop();
+        try {
+            portalManager.onReload(); // Deactivates portals, unforce-loads chunks
+        } catch(RuntimeException ex) {
+            logger.severe("Error occurred while resetting portals");
+            ex.printStackTrace();
+        }
+
+        blockWatcherManager.clear();
+        crossServerDestinationChecker.clear();
 
         try {
             portalStorage.savePortals();

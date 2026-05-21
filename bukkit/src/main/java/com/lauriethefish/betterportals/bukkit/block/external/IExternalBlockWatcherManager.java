@@ -22,4 +22,9 @@ public interface IExternalBlockWatcherManager {
      * Removes any external change watchers that are unused.
      */
     void update();
+
+    /**
+     * Clears all active watchers and their cached block data.
+     */
+    void clear();
 }

@@ -4,9 +4,9 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.lauriethefish.betterportals.bukkit.config.ProxyConfig;
 import com.lauriethefish.betterportals.shared.logging.Logger;
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 @Singleton
 public class ClientReconnectHandler implements IClientReconnectHandler, Runnable  {
@@ -15,7 +15,7 @@ public class ClientReconnectHandler implements IClientReconnectHandler, Runnable
     private final IPortalClient portalClient;
     private final Logger logger;
 
-    private volatile BukkitTask reconnectWorker;
+    private volatile SchedulerUtil.PortalTask reconnectWorker;
     private boolean isFirstReconnectionAttempt;
 
     @Inject
@@ -32,6 +32,14 @@ public class ClientReconnectHandler implements IClientReconnectHandler, Runnable
     }
 
     @Override
+    public void stop() {
+        if(reconnectWorker != null) {
+            reconnectWorker.cancel();
+            reconnectWorker = null;
+        }
+    }
+
+    @Override
     public void onClientDisconnect() {
         // If there is already a reconnection task running, don't start one again.
         if(reconnectWorker != null) {return;}
@@ -42,7 +50,7 @@ public class ClientReconnectHandler implements IClientReconnectHandler, Runnable
 
         logger.info("Scheduling reconnection attempt in %d ticks", reconnectionDelay);
         isFirstReconnectionAttempt = true;
-        reconnectWorker = Bukkit.getScheduler().runTaskTimer(pl, this, reconnectionDelay, reconnectionDelay);
+        reconnectWorker = SchedulerUtil.runTaskTimer(this, reconnectionDelay, reconnectionDelay);
     }
 
     @Override

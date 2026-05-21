@@ -16,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import java.util.*;
 
 public class EntityTracker implements IEntityTracker    {
@@ -156,7 +157,7 @@ public class EntityTracker implements IEntityTracker    {
         packetManipulator.showEntity(entityInfo, player);
 
         if(sendingPlayerProfile) {
-            Bukkit.getScheduler().runTaskLater(pl, () -> packetManipulator.sendRemovePlayerProfile(entityInfo, Collections.singleton(player)), fakePlayerTabListRemoveDelay);
+            SchedulerUtil.runForEntityLater(entity, () -> packetManipulator.sendRemovePlayerProfile(entityInfo, Collections.singleton(player)), fakePlayerTabListRemoveDelay);
         }
     }
 

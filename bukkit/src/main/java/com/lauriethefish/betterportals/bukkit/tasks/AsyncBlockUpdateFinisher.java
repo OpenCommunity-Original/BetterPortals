@@ -3,7 +3,7 @@ package com.lauriethefish.betterportals.bukkit.tasks;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.lauriethefish.betterportals.shared.logging.Logger;
-import org.bukkit.Bukkit;
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -22,9 +22,22 @@ public class AsyncBlockUpdateFinisher extends BlockUpdateFinisher implements Run
         this.pl = pl;
     }
 
+    private SchedulerUtil.PortalTask updateTask;
+
     @Override
     public void start() {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(pl, this, 0, 1);
+        stop();
+        super.start();
+        updateTask = SchedulerUtil.runTimerAsync(this, 0, 1);
+    }
+
+    @Override
+    public void stop() {
+        if(updateTask != null) {
+            updateTask.cancel();
+            updateTask = null;
+        }
+        super.stop();
     }
 
     @Override

@@ -90,6 +90,7 @@ public class CommandTree {
     }
 
     // Called by the plugin when any command is executed
+    @SuppressWarnings("deprecation")
     public boolean onGlobalCommand(CommandSender sender, String label, String[] args) {
         // Add the label to the args list
         List<String> argsList = new ArrayList<>(Arrays.asList(args));

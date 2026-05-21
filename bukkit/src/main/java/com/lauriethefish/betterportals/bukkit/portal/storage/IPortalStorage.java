@@ -3,7 +3,7 @@ package com.lauriethefish.betterportals.bukkit.portal.storage;
 import com.lauriethefish.betterportals.bukkit.config.MiscConfig;
 import com.lauriethefish.betterportals.bukkit.portal.IPortalManager;
 import com.lauriethefish.betterportals.shared.logging.Logger;
-import org.bukkit.Bukkit;
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -36,13 +36,24 @@ public abstract class IPortalStorage implements Runnable    {
      */
     public abstract void savePortals() throws IOException;
 
+    private SchedulerUtil.PortalTask saveTask;
+
     public void start() {
+        stop();
         int saveInterval = miscConfig.getPortalSaveInterval();
-        if(miscConfig.getPortalSaveInterval() > 0) {
+        if(saveInterval > 0) {
             logger.fine("Starting autosave task");
-            Bukkit.getScheduler().runTaskTimer(pl, this, saveInterval, saveInterval);
+            saveTask = SchedulerUtil.runTaskTimer(this, saveInterval, saveInterval);
         }   else    {
             logger.fine("Autosave is disabled");
+        }
+    }
+
+    public void stop() {
+        if(saveTask != null) {
+            logger.fine("Stopping autosave task");
+            saveTask.cancel();
+            saveTask = null;
         }
     }
 

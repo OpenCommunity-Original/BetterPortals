@@ -44,6 +44,11 @@ public interface IPlayerDataManager {
     void onPluginDisable();
 
     /**
+     * Resets players' views and re-registers online players on soft reload.
+     */
+    void onPluginReload();
+
+    /**
      * Makes it so that when the player with the ID in <code>request</code> joins the game, they will be teleported to the destination position.
      * @param request The request used by another server to set this
      */

@@ -69,6 +69,7 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
 
     // Every packet handles spawn rotation differently for whatever reason
     // This method will set the correct field(s) for whatever packet type
+    @SuppressWarnings("deprecation")
     private void setSpawnRotation(PacketContainer packet, EntityInfo entityInfo) {
         // Calculate the correct byte yaw, pitch, and head rotation for the entity
         Location renderedPos = entityInfo.findRenderedLocation();

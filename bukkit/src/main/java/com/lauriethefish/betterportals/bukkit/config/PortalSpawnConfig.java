@@ -92,7 +92,13 @@ public class PortalSpawnConfig {
         );
 
         minimumPortalSpawnDistance = file.getInt("minimumPortalSpawnDistance");
+        if(minimumPortalSpawnDistance < 0) {
+            throw new IllegalArgumentException("minimumPortalSpawnDistance must be at least 0 (got " + minimumPortalSpawnDistance + ")");
+        }
         allowedSpawnTimePerTick = file.getDouble("allowedSpawnTimePerTick");
+        if(allowedSpawnTimePerTick <= 0.0) {
+            throw new IllegalArgumentException("allowedSpawnTimePerTick must be greater than 0.0 (got " + allowedSpawnTimePerTick + ")");
+        }
     }
 
     private void generateDefaultLinks() {

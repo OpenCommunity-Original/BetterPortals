@@ -32,10 +32,18 @@ public class MiscConfig {
 
     public void load(FileConfiguration config) {
         portalActivationDistance = config.getDouble("portalActivationDistance");
+        if(portalActivationDistance < 0.0) {
+            throw new IllegalArgumentException("portalActivationDistance must be at least 0.0 (got " + portalActivationDistance + ")");
+        }
+
         entitySupportEnabled = config.getBoolean("enableEntitySupport");
 
         boolean disableEntityCheckInterval = config.getBoolean("checkForEntitiesEveryTick");
         entityCheckInterval = disableEntityCheckInterval ? 1 : config.getInt("entityCheckInterval");
+        if(entityCheckInterval <= 0) {
+            throw new IllegalArgumentException("entityCheckInterval must be greater than 0 (got " + entityCheckInterval + ")");
+        }
+
         updateCheckEnabled = config.getBoolean("enableUpdateCheck");
 
         Level logLevel;
@@ -49,7 +57,14 @@ public class MiscConfig {
         logger.setLevel(logLevel);
 
         teleportCooldown = config.getInt("teleportCooldown");
+        if(teleportCooldown < 0) {
+            throw new IllegalArgumentException("teleportCooldown must be at least 0 (got " + teleportCooldown + ")");
+        }
+
         testingCommandsEnabled = config.getBoolean("enableTestingCommands");
         portalSaveInterval = config.getInt("portalSaveInterval");
+        if(portalSaveInterval <= 0) {
+            throw new IllegalArgumentException("portalSaveInterval must be greater than 0 (got " + portalSaveInterval + ")");
+        }
     }
 }

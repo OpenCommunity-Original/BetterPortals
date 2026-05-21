@@ -10,4 +10,9 @@ public interface IClientReconnectHandler {
      * Called if the portal client disconnects.
      */
     void onClientDisconnect();
+
+    /**
+     * Stops the reconnection task worker if it is currently running.
+     */
+    void stop();
 }

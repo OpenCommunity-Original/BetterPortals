@@ -9,6 +9,7 @@ import com.lauriethefish.betterportals.bukkit.player.IPlayerData;
 import com.lauriethefish.betterportals.bukkit.player.PlayerDataManager;
 import com.lauriethefish.betterportals.bukkit.portal.IPortalActivityManager;
 import com.lauriethefish.betterportals.shared.logging.Logger;
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -43,14 +44,32 @@ public class MainUpdate implements Runnable {
         this.logger = logger;
     }
 
+    private SchedulerUtil.PortalTask updateTask;
+
     public void start() {
-        pl.getServer().getScheduler().runTaskTimer(pl, this, 0L, 1L);
+        if(updateTask != null) {
+            updateTask.cancel();
+        }
+        updateTask = SchedulerUtil.runTaskTimer(this, 0L, 1L);
+    }
+
+    public void stop() {
+        if(updateTask != null) {
+            updateTask.cancel();
+            updateTask = null;
+        }
     }
 
     @Override
     public void run() {
         try {
-            playerDataManager.getPlayers().forEach(IPlayerData::onUpdate);
+            if (SchedulerUtil.isFolia()) {
+                playerDataManager.getPlayers().forEach(playerData -> {
+                    SchedulerUtil.runForEntity(playerData.getPlayer(), playerData::onUpdate);
+                });
+            } else {
+                playerDataManager.getPlayers().forEach(IPlayerData::onUpdate);
+            }
 
             // Update replicated entities
             entityTrackingManager.update();

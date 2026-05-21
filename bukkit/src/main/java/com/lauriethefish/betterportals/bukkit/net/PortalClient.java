@@ -11,6 +11,7 @@ import com.lauriethefish.betterportals.shared.net.encryption.EncryptedObjectStre
 import com.lauriethefish.betterportals.shared.net.encryption.IEncryptedObjectStream;
 import com.lauriethefish.betterportals.shared.net.requests.RelayRequest;
 import com.lauriethefish.betterportals.shared.net.requests.Request;
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
@@ -136,7 +137,7 @@ public class PortalClient implements IPortalClient {
      */
     private void processRequest(Request request) {
         // We don't just send the response directly, since it may take some time to process the request, and we need to be ready for more requests.
-        requestHandler.handleRequest(request, (response) -> Bukkit.getScheduler().runTaskAsynchronously(pl, () -> {
+        requestHandler.handleRequest(request, (response) -> SchedulerUtil.runAsync(() -> {
             response.setId((request).getId()); // Assign the correct request ID so that the proxy knows which request this response is for
             try {
                 send(response);
@@ -159,13 +160,14 @@ public class PortalClient implements IPortalClient {
         }
 
         // Call it on the main server thread
-        Bukkit.getScheduler().runTask(pl, () -> waiter.accept(response));
+        SchedulerUtil.runTask(() -> waiter.accept(response));
     }
 
     /**
      * Sends a {@link Handshake} to the proxy to verify the plugin version, and to tell the proxy our game version.
      * @return Whether or not the handshake was successful.
      */
+    @SuppressWarnings("deprecation")
     private boolean runHandshake() throws IOException, GeneralSecurityException, ClassNotFoundException {
         logger.fine("Running handshake . . .");
         Handshake handshake = new Handshake();
@@ -195,6 +197,7 @@ public class PortalClient implements IPortalClient {
     @Override
     public void shutDown() {
         if(!isRunning) {return;}
+        reconnectHandler.stop();
         isRunning = false;
         hasHandshakeFinished = false;
         shouldReconnectIfFailed = false;
@@ -278,7 +281,7 @@ public class PortalClient implements IPortalClient {
         }
 
         // Avoid blocking the main thread
-        Bukkit.getScheduler().runTaskAsynchronously(pl, () -> {
+        SchedulerUtil.runAsync(() -> {
             try {
                 send(request);
             } catch (IOException | GeneralSecurityException ex) {

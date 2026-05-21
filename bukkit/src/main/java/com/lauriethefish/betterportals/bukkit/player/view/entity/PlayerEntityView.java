@@ -111,6 +111,7 @@ public class PlayerEntityView implements IPlayerEntityView  {
      * @param entity The entity to check if vanished
      * @return <code>true</code> if the entity is vanished, <code>false</code> otherwise.
      */
+    @SuppressWarnings("deprecation")
     private boolean isVanished(Entity entity) {
         // Only players can be vanished
         if(!(entity instanceof Player)) {return false;}

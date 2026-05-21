@@ -10,16 +10,13 @@ dependencies {
     implementation project(':velocity')
 }
 
-def static getImplementationConfigurations(parentProject) {
-    parentProject.configurations.implementation.canBeResolved = true
-    return parentProject.configurations.implementation
+base {
+    archivesName = "${rootProject.name}"
 }
-
-archivesBaseName = "${rootProject.name}"
 
 tasks.build.dependsOn tasks.shadowJar
 shadowJar {
-    configurations = [getImplementationConfigurations(project), getImplementationConfigurations(project(':bukkit'))]
+    configurations = [project.configurations.runtimeClasspath, project(':bukkit').configurations.runtimeClasspath]
 
     relocate 'org.aopalliance', 'com.lauriethefish.betterportals.dependencies.aopalliance'
     relocate 'org.checkerframework', 'com.lauriethefish.betterportals.dependencies.checkerframework'

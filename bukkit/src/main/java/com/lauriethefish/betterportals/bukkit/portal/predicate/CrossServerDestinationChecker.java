@@ -15,10 +15,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.time.Duration;
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 public class CrossServerDestinationChecker implements PortalPredicate {
@@ -30,11 +29,21 @@ public class CrossServerDestinationChecker implements PortalPredicate {
     private final Logger logger;
     private final IPortalClient portalClient;
 
-    private final Map<BetterPortal, Boolean> cachedValidity = new HashMap<>();
-    private final Map<BetterPortal, Instant> lastChecked = new HashMap<>();
-    private final Set<BetterPortal> ongoingRequest = new HashSet<>();
+    private static class CacheEntry {
+        final boolean validity;
+        final Instant lastChecked;
+
+        CacheEntry(boolean validity, Instant lastChecked) {
+            this.validity = validity;
+            this.lastChecked = lastChecked;
+        }
+    }
+
+    private final Map<BetterPortal, CacheEntry> cache = new ConcurrentHashMap<>();
+    private final Set<BetterPortal> ongoingRequest = ConcurrentHashMap.newKeySet();
 
     private boolean wasConnectedLastTick = true;
+    private Instant lastPruneTime = Instant.now();
 
     @Inject
     public CrossServerDestinationChecker(Logger logger, IPortalClient portalClient) {
@@ -46,6 +55,10 @@ public class CrossServerDestinationChecker implements PortalPredicate {
     public boolean test(@NotNull BetterPortal portal, @NotNull Player player) {
         if(!portal.isCrossServer()) {
             return true;
+        }
+
+        if (Duration.between(lastPruneTime, Instant.now()).getSeconds() > 10) {
+            pruneCache();
         }
 
         if(!portalClient.canReceiveRequests()) {
@@ -69,8 +82,8 @@ public class CrossServerDestinationChecker implements PortalPredicate {
             runValidityCheck(portal);
 
             // If the previous validity check returned successful, don't temporarily deactivate the portal while waiting to receive the response
-            Boolean nonExpiredCachedValue = cachedValidity.get(portal);
-            return nonExpiredCachedValue != null && nonExpiredCachedValue;
+            CacheEntry entry = cache.get(portal);
+            return entry != null && entry.validity;
         }
     }
 
@@ -80,14 +93,14 @@ public class CrossServerDestinationChecker implements PortalPredicate {
      * @return The cached validity value, or null if there is none or the value is out of date.
      */
     private @Nullable Boolean checkCache(@NotNull BetterPortal portal) {
-        Instant lastTimeChecked = lastChecked.get(portal);
-        if(lastTimeChecked == null) {return null;}
-        double secondsElapsed = Duration.between(lastTimeChecked, Instant.now()).getSeconds();
+        CacheEntry entry = cache.get(portal);
+        if(entry == null) {return null;}
+        double secondsElapsed = Duration.between(entry.lastChecked, Instant.now()).getSeconds();
 
         if(secondsElapsed >= VALIDITY_CHECK_INTERVAL) {
             return null;
         }   else    {
-            return cachedValidity.get(portal);
+            return entry.validity;
         }
     }
 
@@ -114,8 +127,8 @@ public class CrossServerDestinationChecker implements PortalPredicate {
                 logger.finest("Destination validity OK!");
             }   catch(RequestException ex) {
                 // Avoid spamming validity messages by only logging when the validity changes to invalid
-                Boolean previousValidityValue = cachedValidity.get(portal);
-                if(previousValidityValue == null || previousValidityValue) {
+                CacheEntry entry = cache.get(portal);
+                if(entry == null || entry.validity) {
                     logger.warning("Not activating cross server portal - destination is invalid: %s", ex.getMessage());
                 }
                 putValidityValue(portal, false);
@@ -130,7 +143,27 @@ public class CrossServerDestinationChecker implements PortalPredicate {
      * @param newValue The new validity value
      */
     private void putValidityValue(@NotNull BetterPortal portal, boolean newValue) {
-        cachedValidity.put(portal, newValue);
-        lastChecked.put(portal, Instant.now());
+        cache.put(portal, new CacheEntry(newValue, Instant.now()));
+    }
+
+    public void clear() {
+        cache.clear();
+        ongoingRequest.clear();
+        wasConnectedLastTick = true;
+    }
+
+    private void pruneCache() {
+        Instant now = Instant.now();
+        if (Duration.between(lastPruneTime, now).getSeconds() > 10) {
+            lastPruneTime = now;
+            Instant threshold = now.minus(Duration.ofSeconds(30));
+            cache.entrySet().removeIf(entry -> {
+                if (entry.getValue().lastChecked.isBefore(threshold)) {
+                    ongoingRequest.remove(entry.getKey());
+                    return true;
+                }
+                return false;
+            });
+        }
     }
 }

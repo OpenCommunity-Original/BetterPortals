@@ -65,6 +65,20 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
     @Override
     public void onPluginDisable() {
         players.values().forEach(IPlayerData::onPluginDisable);
+        players.clear();
+        pendingTeleportOnJoin.clear();
+        pendingSelectionOnJoin.clear();
+        loggedOutPlayerSelections.clear();
+    }
+
+    @Override
+    public void onPluginReload() {
+        players.values().forEach(IPlayerData::onPluginDisable);
+        players.clear();
+        pendingTeleportOnJoin.clear();
+        pendingSelectionOnJoin.clear();
+        loggedOutPlayerSelections.clear();
+        addExistingPlayers();
     }
 
     @Override
@@ -116,7 +130,7 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
             processTeleportOnJoin(event.getPlayer(), teleportOnJoin);
         }
 
-        ISelectionManager selectionManager = loggedOutPlayerSelections.get(playerId);
+        ISelectionManager selectionManager = loggedOutPlayerSelections.remove(playerId);
         if(selectionManager != null) {
             logger.fine("Restoring selection on join");
             playerData.setSelection(selectionManager);
@@ -161,9 +175,18 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
             return;
         }
 
-        loggedOutPlayerSelections.put(event.getPlayer().getUniqueId(), playerData.getSelection());
+        UUID playerId = event.getPlayer().getUniqueId();
+        loggedOutPlayerSelections.put(playerId, playerData.getSelection());
 
-        logger.fine("Unregistering player data on leave for player: %s", event.getPlayer().getUniqueId());
+        // Prevent memory leak by removing offline selection after 5 minutes if player hasn't rejoined
+        com.lauriethefish.betterportals.bukkit.util.SchedulerUtil.runTaskLater(() -> {
+            if (Bukkit.getPlayer(playerId) == null) {
+                loggedOutPlayerSelections.remove(playerId);
+                logger.fine("Cleaned up expired selection for offline player %s", playerId);
+            }
+        }, 6000L);
+
+        logger.fine("Unregistering player data on leave for player: %s", playerId);
         players.remove(event.getPlayer());
         playerData.onLogout();
     }

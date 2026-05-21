@@ -87,7 +87,13 @@ public abstract class EntityTrackingManager {
      * Updates all currently replicated entities
      */
     public void update() {
-        trackersByPortal.values().forEach((map) -> map.values().forEach(IEntityTracker::update));
+        trackersByPortal.values().forEach((map) -> map.values().forEach(tracker -> {
+            if (com.lauriethefish.betterportals.bukkit.util.SchedulerUtil.isFolia()) {
+                com.lauriethefish.betterportals.bukkit.util.SchedulerUtil.runForEntity(tracker.getEntityInfo().getEntity(), tracker::update);
+            } else {
+                tracker.update();
+            }
+        }));
     }
 
     /**

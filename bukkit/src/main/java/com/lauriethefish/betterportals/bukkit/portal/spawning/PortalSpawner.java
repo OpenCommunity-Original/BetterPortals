@@ -7,6 +7,7 @@ import com.lauriethefish.betterportals.bukkit.config.PortalSpawnConfig;
 import com.lauriethefish.betterportals.bukkit.config.WorldLink;
 import com.lauriethefish.betterportals.bukkit.portal.blend.IDimensionBlendManager;
 import com.lauriethefish.betterportals.bukkit.util.MaterialUtil;
+import com.lauriethefish.betterportals.bukkit.util.SchedulerUtil;
 import com.lauriethefish.betterportals.shared.logging.Logger;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -118,34 +119,36 @@ public class PortalSpawner implements IPortalSpawner {
      */
     @SuppressWarnings("deprecation")
     private void spawnPortal(PortalSpawnPosition position, Location originPos) {
-        if(config.isDimensionBlendEnabled()) {
-            dimensionBlendManager.performBlend(originPos.clone().add(position.getSize().clone().multiply(0.5)), position.getPosition());
-        }
-
-        Vector size = position.getSize().clone().add(new Vector(1.0, 1.0, 0.0));
-        PortalDirection direction = position.getDirection();
-
-        for(int x = 0; x <= size.getX(); x++) {
-            for(int y = 0; y <= size.getY(); y++) {
-                Vector frameRelativePos = new Vector(x, y, 0.0);
-
-                Location blockPos = position.getPosition().clone().add(position.getDirection().swapVector(frameRelativePos));
-                boolean isFrameBlock = x == 0 || x == size.getX() || y == 0 || y == size.getY();
-
-                // This is done with a BlockState to avoid updating physics, since otherwise our portal blocks would get removed during creation
-                BlockState state = blockPos.getBlock().getState();
-                state.setType(isFrameBlock ? Material.OBSIDIAN : MaterialUtil.PORTAL_MATERIAL);
-                // Make sure to rotate the portal blocks for NORTH/SOUTH portals
-                if(!isFrameBlock) {
-                    org.bukkit.block.data.BlockData blockData = state.getBlockData();
-                    if(blockData instanceof org.bukkit.block.data.Orientable orientable) {
-                        orientable.setAxis(direction == PortalDirection.EAST || direction == PortalDirection.WEST ? org.bukkit.Axis.Z : org.bukkit.Axis.X);
-                        state.setBlockData(orientable);
-                    }
-                }
-
-                state.update(true, false);
+        SchedulerUtil.runAtLocation(position.getPosition(), () -> {
+            if(config.isDimensionBlendEnabled()) {
+                dimensionBlendManager.performBlend(originPos.clone().add(position.getSize().clone().multiply(0.5)), position.getPosition());
             }
-        }
+
+            Vector size = position.getSize().clone().add(new Vector(1.0, 1.0, 0.0));
+            PortalDirection direction = position.getDirection();
+
+            for(int x = 0; x <= size.getX(); x++) {
+                for(int y = 0; y <= size.getY(); y++) {
+                    Vector frameRelativePos = new Vector(x, y, 0.0);
+
+                    Location blockPos = position.getPosition().clone().add(position.getDirection().swapVector(frameRelativePos));
+                    boolean isFrameBlock = x == 0 || x == size.getX() || y == 0 || y == size.getY();
+
+                    // This is done with a BlockState to avoid updating physics, since otherwise our portal blocks would get removed during creation
+                    BlockState state = blockPos.getBlock().getState();
+                    state.setType(isFrameBlock ? Material.OBSIDIAN : MaterialUtil.PORTAL_MATERIAL);
+                    // Make sure to rotate the portal blocks for NORTH/SOUTH portals
+                    if(!isFrameBlock) {
+                        org.bukkit.block.data.BlockData blockData = state.getBlockData();
+                        if(blockData instanceof org.bukkit.block.data.Orientable orientable) {
+                            orientable.setAxis(direction == PortalDirection.EAST || direction == PortalDirection.WEST ? org.bukkit.Axis.Z : org.bukkit.Axis.X);
+                            state.setBlockData(orientable);
+                        }
+                    }
+
+                    state.update(true, false);
+                }
+            }
+        });
     }
 }

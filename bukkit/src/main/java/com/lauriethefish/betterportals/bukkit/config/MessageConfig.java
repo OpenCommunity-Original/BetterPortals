@@ -22,6 +22,7 @@ import java.util.Objects;
  * Handles formatting text based on what's in the messages section of the config.
  */
 @Singleton
+@SuppressWarnings("deprecation")
 public class MessageConfig {
     private static final String PORTAL_WAND_TAG = "portalWand";
 
