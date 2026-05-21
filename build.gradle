@@ -39,6 +39,8 @@ allprojects {
         annotationProcessor 'org.projectlombok:lombok:1.18.46'
         testAnnotationProcessor 'org.projectlombok:lombok:1.18.46'
         testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.11.3'
+        // Required explicitly in Gradle 9+ — no longer injected automatically on clean CI environments
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.11.3'
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.3'
     }
 

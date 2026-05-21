@@ -3,6 +3,7 @@ package com.lauriethefish.betterportals.bukkit.player;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.lauriethefish.betterportals.bukkit.BetterPortals;
+import com.lauriethefish.betterportals.bukkit.config.MiscConfig;
 import com.lauriethefish.betterportals.bukkit.portal.selection.ISelectionManager;
 import com.lauriethefish.betterportals.bukkit.player.view.IPlayerPortalView;
 import com.lauriethefish.betterportals.bukkit.player.view.PlayerPortalViewFactory;
@@ -13,16 +14,14 @@ import com.lauriethefish.betterportals.bukkit.portal.predicate.IPortalPredicateM
 import com.lauriethefish.betterportals.shared.logging.Logger;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerData implements IPlayerData  {
@@ -35,6 +34,7 @@ public class PlayerData implements IPlayerData  {
     private final IPortalManager portalManager;
     private final IPortalPredicateManager portalPredicateManager;
     private final IPortalActivityManager portalActivityManager;
+    private final MiscConfig miscConfig;
 
     private final PlayerPortalViewFactory playerPortalViewFactory;
 
@@ -44,7 +44,7 @@ public class PlayerData implements IPlayerData  {
     private boolean viewsFrozen;
 
     @Inject
-    public PlayerData(@Assisted Player player, ISelectionManager selection, IPortalManager portalManager, IPortalPredicateManager portalPredicateManager, BetterPortals pl, Logger logger, IPortalActivityManager portalActivityManager, PlayerPortalViewFactory playerPortalViewFactory) {
+    public PlayerData(@Assisted Player player, ISelectionManager selection, IPortalManager portalManager, IPortalPredicateManager portalPredicateManager, BetterPortals pl, Logger logger, IPortalActivityManager portalActivityManager, PlayerPortalViewFactory playerPortalViewFactory, MiscConfig miscConfig) {
         this.player = player;
         this.selection = selection;
         this.portalManager = portalManager;
@@ -53,6 +53,7 @@ public class PlayerData implements IPlayerData  {
         this.logger = logger;
         this.portalActivityManager = portalActivityManager;
         this.playerPortalViewFactory = playerPortalViewFactory;
+        this.miscConfig = miscConfig;
 
         permanentData = loadPermanentDataYml();
     }
@@ -85,7 +86,7 @@ public class PlayerData implements IPlayerData  {
     private Collection<IPortal> updateViewablePortals() {
         // TODO: when an API is created, allow plugins to add their own predicates
         Collection<IPortal> activatablePortals = portalManager.findActivatablePortals(player);
-        Collection<IPortal> nowViewablePortals = new ArrayList<>();
+        List<IPortal> nowViewablePortals = new ArrayList<>();
 
         // For the portals that we can activate, find out which ones can be viewed by the player
         for(IPortal portal : activatablePortals) {
@@ -93,7 +94,24 @@ public class PlayerData implements IPlayerData  {
             if(!portalPredicateManager.isViewable(portal, player)) {continue;}
 
             nowViewablePortals.add(portal);
-            // If this viewable portal was not viewed last update, add a new view for it
+        }
+
+        // ── Fair Use Policy ──────────────────────────────────────────────────
+        // If a per-player cap is configured, sort candidates by distance (ascending)
+        // and keep only the closest N portals. This prevents a single player from
+        // triggering expensive block/entity mirroring for many portals at once.
+        int limit = miscConfig.getMaxPortalsPerPlayer();
+        if(limit > 0 && nowViewablePortals.size() > limit) {
+            Location playerLoc = player.getLocation();
+            nowViewablePortals.sort(Comparator.comparingDouble(
+                    p -> p.getOriginPos().getLocation().distanceSquared(playerLoc)
+            ));
+            nowViewablePortals = nowViewablePortals.subList(0, limit);
+        }
+        // ─────────────────────────────────────────────────────────────────────
+
+        // Register views for portals that weren't viewed last update
+        for(IPortal portal : nowViewablePortals) {
             if(!portalViews.containsKey(portal)) {
                 setViewing(portal);
                 logger.finer("Portal now being viewed by player %s", player.getUniqueId());

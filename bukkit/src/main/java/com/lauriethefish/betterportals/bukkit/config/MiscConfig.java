@@ -25,6 +25,12 @@ public class MiscConfig {
 
     @Getter private int portalSaveInterval;
 
+    /** Fair Use Policy: max number of portals rendered simultaneously per player. ≤0 = unlimited. */
+    @Getter private int maxPortalsPerPlayer;
+
+    /** Anti-Dupe Policy: when true, duplicate origin→dest pairs are rejected at registration. */
+    @Getter private boolean preventDuplicatePortals;
+
     @Inject
     public MiscConfig(Logger logger) {
         this.logger = logger;
@@ -66,5 +72,8 @@ public class MiscConfig {
         if(portalSaveInterval <= 0) {
             throw new IllegalArgumentException("portalSaveInterval must be greater than 0 (got " + portalSaveInterval + ")");
         }
+
+        maxPortalsPerPlayer = config.getInt("maxPortalsPerPlayer", 3);
+        preventDuplicatePortals = config.getBoolean("preventDuplicatePortals", true);
     }
 }

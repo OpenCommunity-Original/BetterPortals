@@ -2,6 +2,7 @@ package com.lauriethefish.betterportals.bukkit.portal;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.lauriethefish.betterportals.bukkit.config.MiscConfig;
 import com.lauriethefish.betterportals.bukkit.portal.predicate.IPortalPredicateManager;
 import com.lauriethefish.betterportals.bukkit.util.StringUtil;
 import com.lauriethefish.betterportals.shared.logging.Logger;
@@ -19,16 +20,18 @@ public class PortalManager implements IPortalManager    {
     private final Logger logger;
     private final IPortalPredicateManager predicateManager;
     private final IPortalActivityManager portalActivityManager;
+    private final MiscConfig miscConfig;
 
     // Multiple portals can have the same origin position
     private final Map<Location, Set<IPortal>> portals = new HashMap<>();
     private final Map<UUID, IPortal> portalsById = new HashMap<>();
 
     @Inject
-    public PortalManager(Logger logger, IPortalPredicateManager predicateManager, IPortalActivityManager portalActivityManager) {
+    public PortalManager(Logger logger, IPortalPredicateManager predicateManager, IPortalActivityManager portalActivityManager, MiscConfig miscConfig) {
         this.logger = logger;
         this.predicateManager = predicateManager;
         this.portalActivityManager = portalActivityManager;
+        this.miscConfig = miscConfig;
     }
 
     @Override
@@ -86,8 +89,32 @@ public class PortalManager implements IPortalManager    {
     public void registerPortal(@NotNull IPortal portal) {
         logger.fine("Registering portal with origin position %s", portal.getOriginPos());
 
-        // Add a new portal array if one doesn't already exist for this location
         Location originLoc = portal.getOriginPos().getLocation();
+
+        // ── Anti-Dupe Portal Policy ───────────────────────────────────────────
+        // Reject registration if a portal with the identical origin→dest pair
+        // already exists. Without this guard, nether portal relighting (or buggy
+        // spawning logic) can create multiple overlapping render sessions that
+        // waste memory, CPU, and network bandwidth for no visual benefit.
+        if(miscConfig.isPreventDuplicatePortals()) {
+            Set<IPortal> existing = portals.get(originLoc);
+            if(existing != null) {
+                for(IPortal existingPortal : existing) {
+                    if(existingPortal.getDestPos().equals(portal.getDestPos())) {
+                        logger.fine(
+                                "Anti-Dupe: rejected duplicate portal at origin %s → dest %s (id=%s)",
+                                StringUtil.locationToString(originLoc),
+                                portal.getDestPos(),
+                                portal.getId()
+                        );
+                        return;
+                    }
+                }
+            }
+        }
+        // ─────────────────────────────────────────────────────────────────────
+
+        // Add a new portal array if one doesn't already exist for this location
         if(!portals.containsKey(originLoc)) {
             portals.put(originLoc, new HashSet<>());
         }
