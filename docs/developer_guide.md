@@ -14,10 +14,15 @@ BetterPortals uses Gradle 8.x with a multi-module configuration. All builds shou
   ```powershell
   .\gradlew.bat clean
   ```
-* **Compile and Shaded Assembly:**
-  Generates the final multi-platform shaded JAR.
+* **Build Standalone JAR:**
+  Builds only the standalone BetterPortals plugin JAR.
   ```powershell
-  .\gradlew.bat shadowJar
+  .\gradlew.bat buildPlugin
+  ```
+* **Build Release Package:**
+  Builds the plugin and packages it in a ZIP archive with ProtocolLib.
+  ```powershell
+  .\gradlew.bat buildRelease
   ```
 * **Run Unit Tests:**
   Runs JUnit 5 test suites.
@@ -43,7 +48,7 @@ Tests are written using **JUnit 5**. When writing or editing code, verify change
 We have set up VS Code `.vscode/tasks.json` and `.vscode/launch.json` configuration files to support debugging and building.
 
 ### 1. Build and Shading
-Press `Ctrl+Shift+B` or open the VS Code Command Palette and run `Tasks: Run Build Task` -> select **Gradle ShadowJar**. This automatically compiles all modules and places the final shaded JAR in `final/build/libs/`.
+Press `Ctrl+Shift+B` or open the VS Code Command Palette and run `Tasks: Run Build Task` -> select **Gradle ShadowJar**. This automatically compiles all modules and places the final shaded JAR in `build/libs/`.
 
 ### 2. Live Debug Attachment
 You can attach your VS Code debugger directly to a running Paper or Velocity server:

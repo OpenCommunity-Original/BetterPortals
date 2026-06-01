@@ -73,10 +73,50 @@ subprojects {
     }
 }
 
+configurations {
+    protocolLibJar {
+        transitive = false
+    }
+}
+
+dependencies {
+    protocolLibJar 'net.dmulloy2:ProtocolLib:5.4.0'
+}
+
+tasks.register("zipRelease", Zip) {
+    group = "build"
+    description = "Packages BetterPortals and ProtocolLib into a single ZIP archive"
+    dependsOn ":final:shadowJar"
+
+    // Add the compiled BetterPortals jar
+    from(project(":final").tasks.named("shadowJar"))
+    
+    // Add the downloaded ProtocolLib jar
+    from(configurations.protocolLibJar)
+
+    archiveFileName = "BetterPortals-with-ProtocolLib-${gradle.ext.versionName}.zip"
+    destinationDirectory = file("${layout.buildDirectory.get().asFile}/distributions")
+}
+
+tasks.register("buildPlugin", Copy) {
+    group = "build"
+    description = "Builds and copies the standalone BetterPortals plugin JAR to the root build/libs directory"
+    dependsOn ":final:shadowJar"
+
+    from(project(":final").tasks.named("shadowJar"))
+    into(file("${layout.buildDirectory.get().asFile}/libs"))
+}
+
 tasks.register("buildAll") {
     group = "build"
-    description = "Builds the final shadowJar containing all modules"
-    dependsOn ":final:shadowJar"
+    description = "Builds the final standalone shadowJar containing all modules and copies it to the root build/libs directory"
+    dependsOn "buildPlugin"
+}
+
+tasks.register("buildRelease") {
+    group = "build"
+    description = "Builds the BetterPortals plugin and packages it in a ZIP with ProtocolLib"
+    dependsOn "zipRelease"
 }
 
 tasks.register("cleanTest") {

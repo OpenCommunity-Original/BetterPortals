@@ -66,22 +66,18 @@ Detailed setup guides, protocols, and developer notes are separated into dedicat
 
 Ensure you have **Java 17** or **Java 21** configured on your `PATH` and `JAVA_HOME`.
 
-### 1. Build and Shade
-Compile and build the shaded multi-platform artifact using the Gradle wrapper:
+### 1. Build and Package Options
+Compile the plugin or package it with ProtocolLib using the Gradle wrapper:
 
-* **Windows:**
-  ```powershell
-  .\gradlew.bat clean shadowJar
-  ```
-* **Linux / macOS:**
-  ```bash
-  chmod +x gradlew
-  ./gradlew clean shadowJar
-  ```
+* **Build standalone plugin JAR only:**
+  * Windows: `.\gradlew.bat buildPlugin`
+  * Linux / macOS: `./gradlew buildPlugin`
+  * **Output:** `./build/libs/BetterPortals-*.jar`
 
-### 2. Output Artifact
-The compiled, optimized, and minimized shaded JAR (compatible with Paper, Velocity, and BungeeCord) will be generated at:
-`./final/build/libs/BetterPortals-1.*.*-all.jar`
+* **Build release ZIP (includes ProtocolLib):**
+  * Windows: `.\gradlew.bat buildRelease`
+  * Linux / macOS: `./gradlew buildRelease`
+  * **Output:** `./build/distributions/BetterPortals-with-ProtocolLib-*.zip`
 
 ---
 
