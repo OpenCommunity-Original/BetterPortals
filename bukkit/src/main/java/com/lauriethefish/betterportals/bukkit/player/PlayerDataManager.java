@@ -27,7 +27,7 @@ import java.util.*;
 public class PlayerDataManager implements IPlayerDataManager, Listener   {
     private final Logger logger;
     private final IPlayerData.Factory playerDataFactory;
-    private final Map<Player, IPlayerData> players = new HashMap<>();
+    private final Map<UUID, IPlayerData> players = new HashMap<>();
     private final ProxyConfig proxyConfig;
 
     private final Map<UUID, TeleportRequest> pendingTeleportOnJoin = new HashMap<>();
@@ -49,7 +49,7 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
 
     private void addExistingPlayers() {
         for(Player player : Bukkit.getOnlinePlayers()) {
-            players.put(player, playerDataFactory.create(player));
+            players.put(player.getUniqueId(), playerDataFactory.create(player));
         }
     }
 
@@ -60,7 +60,7 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
 
     @Override
     public @Nullable IPlayerData getPlayerData(@NotNull Player player) {
-        return players.get(player);
+        return players.get(player.getUniqueId());
     }
     @Override
     public void onPluginDisable() {
@@ -91,7 +91,10 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
         Player player = Bukkit.getPlayer(uniqueId);
         if(player != null) {
             logger.fine("Directly setting external selection for player with ID %s", uniqueId);
-            players.get(player).getSelection().setExternalSelection(selection);
+            IPlayerData data = players.get(uniqueId);
+            if (data != null) {
+                data.getSelection().setExternalSelection(selection);
+            }
         }   else    { // If the player is not online yet, add it to this map so that it will be set when they log in
             logger.fine("Setting external selection to pending for player with ID %s", uniqueId);
             pendingSelectionOnJoin.put(uniqueId, selection);
@@ -102,7 +105,8 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
     public @Nullable IPortalSelection getDestinationSelectionWhenLoggedOut(UUID uniqueId) {
         Player player = Bukkit.getPlayer(uniqueId);
         if(player != null) {
-            return players.get(player).getSelection().getDestSelection();
+            IPlayerData data = players.get(uniqueId);
+            return data != null ? data.getSelection().getDestSelection() : null;
         }   else    {
             ISelectionManager selection = loggedOutPlayerSelections.get(uniqueId);
             if(selection == null) {
@@ -123,7 +127,7 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
 
         logger.fine("Registering player data on join for player: %s", playerId);
         IPlayerData playerData = playerDataFactory.create(event.getPlayer());
-        players.put(event.getPlayer(), playerData);
+        players.put(playerId, playerData);
 
         TeleportRequest teleportOnJoin = pendingTeleportOnJoin.remove(playerId);
         if(teleportOnJoin != null) {
@@ -169,13 +173,13 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
         logger.fine("Saving selection on leave");
-        IPlayerData playerData = players.get(event.getPlayer());
+        UUID playerId = event.getPlayer().getUniqueId();
+        IPlayerData playerData = players.get(playerId);
         if(playerData == null) {
             logger.warning("Player left with no registered data. This should not happen!");
             return;
         }
 
-        UUID playerId = event.getPlayer().getUniqueId();
         loggedOutPlayerSelections.put(playerId, playerData.getSelection());
 
         // Prevent memory leak by removing offline selection after 5 minutes if player hasn't rejoined
@@ -187,7 +191,7 @@ public class PlayerDataManager implements IPlayerDataManager, Listener   {
         }, 6000L);
 
         logger.fine("Unregistering player data on leave for player: %s", playerId);
-        players.remove(event.getPlayer());
+        players.remove(playerId);
         playerData.onLogout();
     }
 }
