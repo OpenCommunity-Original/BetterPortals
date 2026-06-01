@@ -50,6 +50,16 @@ public class BetterPortals extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        if (getServer().getPluginManager().getPlugin("ProtocolLib") == null) {
+            getLogger().severe("==================================================");
+            getLogger().severe(" BetterPortals REQUIRES PROTOCOLLIB TO FUNCTION!");
+            getLogger().severe(" Please download and install ProtocolLib from:");
+            getLogger().severe(" https://www.spigotmc.org/resources/protocollib.1997/");
+            getLogger().severe("==================================================");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
         SchedulerUtil.init(this);
         OperationTimer timer = new OperationTimer();
         saveDefaultConfig();
