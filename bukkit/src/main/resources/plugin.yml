@@ -26,6 +26,7 @@ permissions:
     default: op
   betterportals.linkexternal:
     description: ' Allows you to run /bp linkexternal to create cross-server portals.'
+    default: op
   betterportals.reconnect:
     description: ' Allows you to use the /bp reconnect command'
     default: op
@@ -56,4 +57,10 @@ permissions:
     default: "true"
   betterportals.wand:
     description: Allows you to get the portal wand with /bp wands
+    default: op
+  betterportals.getallowNonPlayerTeleportation:
+    description: ' Allows checking if the portal allows item/mob teleportation'
+    default: op
+  betterportals.setAllowNonPlayerTeleportation:
+    description: ' Allows configuring if the portal allows item/mob teleportation'
     default: op

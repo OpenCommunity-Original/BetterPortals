@@ -48,10 +48,10 @@ public class SelectionEvents implements Listener {
         IPortalSelection selection = playerData.getSelection().getCurrentlySelecting();
         if(action == Action.LEFT_CLICK_BLOCK) {
             selection.setPositionA(blockPos);
-            player.sendMessage(messageConfig.getChatMessage("setPosA"));
+            player.sendMessage(messageConfig.getChatMessage(player, "setPosA"));
         }   else {
             selection.setPositionB(blockPos);
-            player.sendMessage(messageConfig.getChatMessage("setPosB"));
+            player.sendMessage(messageConfig.getChatMessage(player, "setPosB"));
         }
 
 

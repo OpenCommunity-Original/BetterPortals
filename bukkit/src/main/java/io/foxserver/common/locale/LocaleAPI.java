@@ -389,7 +389,6 @@ public class LocaleAPI implements Listener {
                 if (in != null) {
                     target.getParentFile().mkdirs();
                     Files.copy(in, target.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                    plugin.getLogger().info("Extracted lang/" + locale + ".yml");
                 }
             } catch (Exception e) {
                 plugin.getLogger().log(Level.WARNING, "Failed to extract bundled resource lang file: " + locale, e);
@@ -418,7 +417,6 @@ public class LocaleAPI implements Listener {
                         target.getParentFile().mkdirs();
                         try (InputStream in = zip.getInputStream(entry)) {
                             Files.copy(in, target.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                            plugin.getLogger().info("Extracted lang/" + fileName);
                         }
                     }
                 }

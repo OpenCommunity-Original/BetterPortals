@@ -51,7 +51,7 @@ public class MainCommands {
         OperationTimer timer = new OperationTimer();
         pl.softReload();
 
-        sender.sendMessage(String.format("%s (%.03fms)", messageConfig.getChatMessage("reload"), timer.getTimeTakenMillis()));
+        sender.sendMessage(String.format("%s (%.03fms)", messageConfig.getChatMessage(sender, "reload"), timer.getTimeTakenMillis()));
         return true;
     }
 
@@ -61,14 +61,14 @@ public class MainCommands {
     @RequiresPermissions("betterportals.reconnect")
     public boolean reconnect(CommandSender sender) throws CommandException  {
         if(!proxyConfig.isEnabled()) {
-            throw new CommandException(messageConfig.getErrorMessage("proxyDisabled"));
+            throw new CommandException(messageConfig.getErrorMessage(sender, "proxyDisabled"));
         }
 
         if(portalClient.isConnectionOpen()) {
-            throw new CommandException(messageConfig.getErrorMessage("alreadyConnected"));
+            throw new CommandException(messageConfig.getErrorMessage(sender, "alreadyConnected"));
         }
 
-        sender.sendMessage(messageConfig.getChatMessage("startedReconnection"));
+        sender.sendMessage(messageConfig.getChatMessage(sender, "startedReconnection"));
         reconnectHandler.prematureReconnect();
         return true;
     }

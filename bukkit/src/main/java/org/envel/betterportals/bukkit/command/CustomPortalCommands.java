@@ -69,10 +69,10 @@ public class CustomPortalCommands {
 
 
         if(toRemove.size() == 0) {
-            throw new CommandException(messageConfig.getErrorMessage("noPortalsWithName").replace("{name}", portalName));
+            throw new CommandException(messageConfig.getErrorMessage(sender, "noPortalsWithName").replace("{name}", portalName));
         }   else    {
             toRemove.forEach(portalManager::removePortal);
-            sender.sendMessage(messageConfig.getChatMessage("portalsRemoved"));
+            sender.sendMessage(messageConfig.getChatMessage(sender, "portalsRemoved"));
             return true;
         }
     }
@@ -108,11 +108,11 @@ public class CustomPortalCommands {
         boolean twoWay = twoWayStr.equalsIgnoreCase("true") || twoWayStr.equalsIgnoreCase("twoWay") || twoWayStr.equalsIgnoreCase("dual");
         boolean invert = invertStr.equalsIgnoreCase("true") || invertStr.equalsIgnoreCase("invert");
 
-        IPortalSelection origin = makeSelection(originWorld, originCorner1, originCorner2);
-        IPortalSelection dest = makeSelection(destWorld, destCorner1, destCorner2);
+        IPortalSelection origin = makeSelection(sender, originWorld, originCorner1, originCorner2);
+        IPortalSelection dest = makeSelection(sender, destWorld, destCorner1, destCorner2);
 
         if(!origin.getPortalSize().equals(dest.getPortalSize())) {
-            throw new CommandException(messageConfig.getErrorMessage("differentSizes"));
+            throw new CommandException(messageConfig.getErrorMessage(sender, "differentSizes"));
         }
 
         if(invert) {
@@ -129,18 +129,18 @@ public class CustomPortalCommands {
                     origin.getPortalSize(), true, UUID.randomUUID(), null, name, true);
             portalManager.registerPortal(reversePortal);
         }
-        sender.sendMessage(messageConfig.getChatMessage("portalCreated"));
+        sender.sendMessage(messageConfig.getChatMessage(sender, "portalCreated"));
 
         return true;
     }
 
-    private IPortalSelection makeSelection(World world, Vector corner1, Vector corner2) throws CommandException {
+    private IPortalSelection makeSelection(CommandSender sender, World world, Vector corner1, Vector corner2) throws CommandException {
         IPortalSelection selection = selectionProvider.get();
         selection.setPositionA(corner1.toLocation(world));
         selection.setPositionB(corner2.toLocation(world));
 
         if(!selection.isValid()) {
-            throw new CommandException(String.format(messageConfig.getErrorMessage("coordinatesNotInLine"),
+            throw new CommandException(String.format(messageConfig.getErrorMessage(sender, "coordinatesNotInLine"),
                     corner1.getBlockX(), corner1.getBlockY(), corner1.getBlockZ(),
                     corner2.getBlockX(), corner2.getBlockY(), corner2.getBlockZ()));
         }
@@ -160,7 +160,7 @@ public class CustomPortalCommands {
 
         // If the player doesn't own the portal, and doesn't have permission to remove portals that aren't theirs, don't remove
         if(!player.hasPermission("betterportals.remove.others") && !player.getUniqueId().equals(portal.getOwnerId())) {
-            throw new CommandException(messageConfig.getErrorMessage("removeNotOwnedByPlayer"));
+            throw new CommandException(messageConfig.getErrorMessage(player, "removeNotOwnedByPlayer"));
         }
 
         portalManager.removePortal(portal);
@@ -170,7 +170,7 @@ public class CustomPortalCommands {
             portalManager.removePortalsAt(destPosition);
         }
 
-        player.sendMessage(messageConfig.getChatMessage("portalRemoved"));
+        player.sendMessage(messageConfig.getChatMessage(player, "portalRemoved"));
         return true;
     }
 
@@ -182,7 +182,7 @@ public class CustomPortalCommands {
     @Description("Sets the current portal wand selection as your origin position")
     public boolean setOrigin(IPlayerData playerData) throws CommandException    {
         playerData.getSelection().trySelectOrigin();
-        playerData.getPlayer().sendMessage(messageConfig.getChatMessage("originPortalSet"));
+        playerData.getPlayer().sendMessage(messageConfig.getChatMessage(playerData.getPlayer(), "originPortalSet"));
         return true;
     }
 
@@ -194,7 +194,7 @@ public class CustomPortalCommands {
     @Description("Sets the current portal wand selection as your destination position")
     public boolean setDestination(IPlayerData playerData) throws CommandException    {
         playerData.getSelection().trySelectDestination();
-        playerData.getPlayer().sendMessage(messageConfig.getChatMessage("destPortalSet"));
+        playerData.getPlayer().sendMessage(messageConfig.getChatMessage(playerData.getPlayer(), "destPortalSet"));
         return true;
     }
 
@@ -211,7 +211,7 @@ public class CustomPortalCommands {
         boolean invert = invertStr.equalsIgnoreCase("true") || invertStr.equalsIgnoreCase("invert");
 
         playerData.getSelection().tryCreateFromSelection(playerData.getPlayer(), twoWay, invert);
-        playerData.getPlayer().sendMessage(messageConfig.getChatMessage("portalsLinked"));
+        playerData.getPlayer().sendMessage(messageConfig.getChatMessage(playerData.getPlayer(), "portalsLinked"));
         return true;
     }
 
@@ -224,7 +224,7 @@ public class CustomPortalCommands {
     @Argument(name = "invert?", defaultValue = "false")
     public boolean linkExternalPortals(IPlayerData playerData, boolean invert) throws CommandException  {
         playerData.getSelection().tryCreateFromExternalSelection(playerData.getPlayer(), invert);
-        playerData.getPlayer().sendMessage(messageConfig.getChatMessage("portalsLinked"));
+        playerData.getPlayer().sendMessage(messageConfig.getChatMessage(playerData.getPlayer(), "portalsLinked"));
         return true;
     }
 
@@ -280,16 +280,16 @@ public class CustomPortalCommands {
 
         // If the player doesn't own the portal, and doesn't have permission to remove portals that aren't theirs, don't remove
         if(!player.hasPermission("betterportals.setname.others") && !player.getUniqueId().equals(portal.getOwnerId())) {
-            throw new CommandException(messageConfig.getErrorMessage("nameNotOwnedbyPlayer"));
+            throw new CommandException(messageConfig.getErrorMessage(player, "nameNotOwnedbyPlayer"));
         }
 
         // Nether portals cannot be named!
         if(portal.isNetherPortal()) {
-            throw new CommandException(messageConfig.getErrorMessage("nameNetherPortal"));
+            throw new CommandException(messageConfig.getErrorMessage(player, "nameNetherPortal"));
         }
 
         setName(portal, newName);
-        player.sendMessage(messageConfig.getChatMessage("changedName"));
+        player.sendMessage(messageConfig.getChatMessage(player, "changedName"));
         return true;
     }
 
@@ -304,10 +304,10 @@ public class CustomPortalCommands {
 
         String name = portal.getName();
         if(name == null) {
-            throw new CommandException(messageConfig.getErrorMessage("noName"));
+            throw new CommandException(messageConfig.getErrorMessage(player, "noName"));
         }
 
-        String nameFormat = messageConfig.getChatMessage("currentName");
+        String nameFormat = messageConfig.getChatMessage(player, "currentName");
         nameFormat = nameFormat.replace("{name}", portal.getName());
         player.sendMessage(nameFormat);
         return true;
@@ -323,9 +323,9 @@ public class CustomPortalCommands {
         IPortal portal = getClosestPortal(player);
 
         if(portal.allowsNonPlayerTeleportation()) {
-            player.sendMessage(messageConfig.getChatMessage("allowsItems"));
+            player.sendMessage(messageConfig.getChatMessage(player, "allowsItems"));
         }   else    {
-            player.sendMessage(messageConfig.getChatMessage("doesNotAllowItems"));
+            player.sendMessage(messageConfig.getChatMessage(player, "doesNotAllowItems"));
         }
 
         return true;
@@ -343,9 +343,9 @@ public class CustomPortalCommands {
 
         portal.setAllowsNonPlayerTeleportation(allowTeleportation);
         if(allowTeleportation) {
-            player.sendMessage(messageConfig.getChatMessage("changedAllowsItems"));
+            player.sendMessage(messageConfig.getChatMessage(player, "changedAllowsItems"));
         }   else    {
-            player.sendMessage(messageConfig.getChatMessage("changedDoesNotAllowItems"));
+            player.sendMessage(messageConfig.getChatMessage(player, "changedDoesNotAllowItems"));
         }
 
         return true;
@@ -363,13 +363,13 @@ public class CustomPortalCommands {
         if (seeThroughPortal) {
             playerData.getPermanentData().set("seeThroughPortal", true);
             playerData.savePermanentData();
-            player.sendMessage(messageConfig.getChatMessage("seeThroughPortalEnabled"));
+            player.sendMessage(messageConfig.getChatMessage(player, "seeThroughPortalEnabled"));
         }
 
         else {
             playerData.getPermanentData().set("seeThroughPortal", false);
             playerData.savePermanentData();
-            player.sendMessage(messageConfig.getChatMessage("seeThroughPortalDisabled"));
+            player.sendMessage(messageConfig.getChatMessage(player, "seeThroughPortalDisabled"));
         }
 
         return true;
@@ -377,7 +377,7 @@ public class CustomPortalCommands {
 
     @Command
     @Path("betterportals/toggleseethroughportal")
-    @RequiresPermissions("BetterPortals.see")
+    @RequiresPermissions("betterportals.see")
     @RequiresPlayer
     @Aliases("togglevanillaview")
     @Description("Toggles whether or not the current player is able to see what's on the other side of a portal.")
@@ -407,7 +407,7 @@ public class CustomPortalCommands {
     public boolean setPortalPrice(Player player, double price) throws CommandException {
         IPortal portal = getClosestPortal(player);
         if(portal.isNetherPortal()) {
-            throw new CommandException(messageConfig.getErrorMessage("nameNetherPortal"));
+            throw new CommandException(messageConfig.getErrorMessage(player, "nameNetherPortal"));
         }
         portal.setPrice(price);
         player.sendMessage(org.bukkit.ChatColor.GREEN + "Set closest portal's price to " + price);
@@ -423,7 +423,7 @@ public class CustomPortalCommands {
     public boolean setPortalPreset(Player player, String preset) throws CommandException {
         IPortal portal = getClosestPortal(player);
         if(portal.isNetherPortal()) {
-            throw new CommandException(messageConfig.getErrorMessage("nameNetherPortal"));
+            throw new CommandException(messageConfig.getErrorMessage(player, "nameNetherPortal"));
         }
         portal.setEffectPreset(preset);
         player.sendMessage(org.bukkit.ChatColor.GREEN + "Set closest portal's effect preset to " + preset);

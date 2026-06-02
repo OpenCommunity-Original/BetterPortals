@@ -316,9 +316,13 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
 
             java.util.Collection<?> textures = (java.util.Collection<?>) playerProperties.getClass().getMethod("get", Object.class).invoke(playerProperties, "textures");
             properties.getClass().getMethod("putAll", Object.class, java.lang.Iterable.class).invoke(properties, "textures", textures);
-        } catch (Exception ex) {
-            profile.getProperties().removeAll("textures");
-            profile.getProperties().putAll("textures", playerProfile.getProperties().get("textures"));
+        } catch (Throwable ex) {
+            try {
+                profile.getProperties().removeAll("textures");
+                profile.getProperties().putAll("textures", playerProfile.getProperties().get("textures"));
+            } catch (Throwable t) {
+                // Ignore failure if ProtocolLib fails on newer/unsupported server version
+            }
         }
 
         return new PlayerInfoData(
@@ -331,13 +335,17 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
 
     @Override
     public void sendAddPlayerProfile(EntityInfo tracker, Collection<Player> players) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.PLAYER_INFO);
-        packet.getPlayerInfoActions().write(0, Set.of(EnumWrappers.PlayerInfoAction.ADD_PLAYER));
+        try {
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.PLAYER_INFO);
+            packet.getPlayerInfoActions().write(0, Set.of(EnumWrappers.PlayerInfoAction.ADD_PLAYER));
 
-        List<PlayerInfoData> playerInfoDataList = new ArrayList<>();
-        playerInfoDataList.add(generatePlayerInfoData(tracker));
-        packet.getPlayerInfoDataLists().write(1, playerInfoDataList);
-        PacketUtil.sendPacket(players, packet);
+            List<PlayerInfoData> playerInfoDataList = new ArrayList<>();
+            playerInfoDataList.add(generatePlayerInfoData(tracker));
+            packet.getPlayerInfoDataLists().write(1, playerInfoDataList);
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Prevent crashes from unsupported ProtocolLib methods on newer server versions
+        }
     }
 
     @Override

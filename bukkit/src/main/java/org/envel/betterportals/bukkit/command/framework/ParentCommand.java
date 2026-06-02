@@ -165,6 +165,25 @@ public class ParentCommand implements ICommand  {
             }
             String keyName = (pathForTranslation + "_" + name).replace(" ", "_").replace("/", "_").toLowerCase();
             String localizedDesc = localeApi.getRaw(player, "commands." + keyName + ".description");
+            if (localizedDesc == null) {
+                String camelKeyName = keyName;
+                if (keyName.equals("betterportals_linkportals")) {
+                    camelKeyName = "betterportals_linkPortals";
+                } else if (keyName.equals("betterportals_linkexternalportals")) {
+                    camelKeyName = "betterportals_linkExternalPortals";
+                } else if (keyName.equals("betterportals_getallownonplayerteleportation")) {
+                    camelKeyName = "betterportals_getallowNonPlayerTeleportation";
+                } else if (keyName.equals("betterportals_setallownonplayerteleportation")) {
+                    camelKeyName = "betterportals_setAllowNonPlayerTeleportation";
+                } else if (keyName.equals("betterportals_setportalname")) {
+                    camelKeyName = "betterportals_setPortalName";
+                } else if (keyName.equals("betterportals_setorigin")) {
+                    camelKeyName = "betterportals_setOrigin";
+                } else if (keyName.equals("betterportals_setdestination")) {
+                    camelKeyName = "betterportals_setDestination";
+                }
+                localizedDesc = localeApi.getRaw(player, "commands." + camelKeyName + ".description");
+            }
             if (localizedDesc != null) {
                 desc = localizedDesc;
             }
