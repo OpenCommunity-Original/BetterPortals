@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +28,7 @@ public class MessageConfig {
     private static final String PORTAL_WAND_TAG = "portalWand";
 
     private final Logger logger;
+    private final io.foxserver.common.locale.LocaleAPI localeApi;
     private final Map<String, String> messageMap = new HashMap<>();
 
     private String portalWandName;
@@ -36,20 +38,29 @@ public class MessageConfig {
     private ItemStack portalWand = null;
 
     @Inject
-    public MessageConfig(Logger logger) {
+    public MessageConfig(Logger logger, io.foxserver.common.locale.LocaleAPI localeApi) {
         this.logger = logger;
+        this.localeApi = localeApi;
     }
 
     public void load(FileConfiguration file) {
-        ConfigurationSection messagesSection = Objects.requireNonNull(file.getConfigurationSection("chatMessages"), "Missing chat messages section");
+        ConfigurationSection messagesSection = file.getConfigurationSection("chatMessages");
+        if(messagesSection != null) {
+            for(String key : messagesSection.getKeys(false)) {
+                messageMap.put(key, translateColorCodes(messagesSection.getString(key)));
+            }
+            prefix = getRawMessage("prefix");
+            messageColor = translateColorCodes(messagesSection.getString("messageColor"));
+        }
 
-        for(String key : messagesSection.getKeys(false)) {
-            messageMap.put(key, translateColorCodes(messagesSection.getString(key)));
+        if(prefix == null) {
+            prefix = translateColorCodes("&7[&aBetterPortals&7]&a ");
+        }
+        if(messageColor == null) {
+            messageColor = translateColorCodes("&a");
         }
 
         portalWandName = translateColorCodes(Objects.requireNonNull(file.getString("portalWandName"), "Missing portalWandName"));
-        prefix = getRawMessage("prefix");
-        messageColor = translateColorCodes(Objects.requireNonNull(messagesSection.getString("messageColor"), "Missing messageColor"));
     }
 
     /**
@@ -142,41 +153,63 @@ public class MessageConfig {
         return NBTTagUtil.hasMarkerTag(item, PORTAL_WAND_TAG);
     }
 
+    private String formatMiniMessage(String message) {
+        if (message == null || message.isEmpty()) return "";
+        try {
+            return net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().serialize(
+                net.kyori.adventure.text.minimessage.MiniMessage.miniMessage().deserialize(message)
+            );
+        } catch (Exception e) {
+            return message;
+        }
+    }
+
     /**
      * Finds a chat message with the plugin prefix.
      * @param name The name in the config
      * @return A chat message with the configured plugin prefix
      */
+    public String getChatMessage(org.bukkit.command.CommandSender sender, String name) {
+        Player player = (sender instanceof Player) ? (Player) sender : null;
+        String raw = localeApi.getRaw(player, name);
+        if (raw == null) raw = getRawMessage(name);
+        if (raw == null) return "";
+        return formatMiniMessage(getPrefix(player) + raw);
+    }
+
     public String getChatMessage(String name) {
-        return prefix + getRawMessage(name);
+        return getChatMessage(null, name);
     }
 
-    /**
-     * Finds a chat message without the prefix, for boxing in a {@link CommandException}
-     * @param name The name in the config
-     * @return A chat message without the prefix.
-     */
+    public String getErrorMessage(org.bukkit.command.CommandSender sender, String name) {
+        Player player = (sender instanceof Player) ? (Player) sender : null;
+        String raw = localeApi.getRaw(player, name);
+        if (raw == null) raw = getRawMessage(name);
+        if (raw == null) return "";
+        return formatMiniMessage(raw);
+    }
+
     public String getErrorMessage(String name) {
-        return getRawMessage(name);
+        return getErrorMessage(null, name);
     }
 
-    /**
-     * Returns a yellow message for warnings in chat.
-     * @param name The name in the config
-     * @return The yellow formatted message
-     */
+    public String getWarningMessage(org.bukkit.command.CommandSender sender, String name) {
+        Player player = (sender instanceof Player) ? (Player) sender : null;
+        String raw = localeApi.getRaw(player, name);
+        if (raw == null) raw = getRawMessage(name);
+        if (raw == null || raw.isEmpty()) return "";
+        return formatMiniMessage("<yellow>" + raw + "</yellow>");
+    }
+
     public String getWarningMessage(String name) {
-        String rawMessage = getRawMessage(name);
-        if(rawMessage.isEmpty()) {return "";} // Avoid returning the extra character so that we can use a simple String#isEmpty check to see whether to send the warning
-
-        return ChatColor.YELLOW + rawMessage;
+        return getWarningMessage(null, name);
     }
 
-    /**
-     * Finds a chat message without the prefix.
-     * @param name The name in the config
-     * @return A chat message without the prefix.
-     */
+    public String getPrefix(Player player) {
+        String rawPrefix = localeApi.getRaw(player, "prefix");
+        return rawPrefix != null ? rawPrefix : prefix;
+    }
+
     public String getRawMessage(String name) {
         return messageMap.get(name);
     }

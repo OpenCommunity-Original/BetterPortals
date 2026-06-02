@@ -8,8 +8,39 @@ This guide describes how to install, configure, and manage BetterPortals on your
 Before installing, ensure your environment meets the following specifications:
 * **Server Version:** PaperMC 1.21 / 26.1.2 or higher (pure Bukkit or Spigot is not supported due to modern Paper API usage).
 * **Proxy (Optional for cross-server portals):** Velocity 3.3.0+ or BungeeCord/WaterFall.
-* **Java Version:** Java 17 or Java 21 (both runtime and compile-time).
+* **Server Version:** PaperMC 1.21 / 26.1.2 or higher (pure Bukkit or Spigot is not supported due to modern Paper API usage).
+* **Proxy (Optional for cross-server portals):** Velocity 3.3.0+ or BungeeCord/WaterFall.
+* **Java Version:** Java 25 (both runtime and compile-time).
 * **ProtocolLib:** The latest release compatible with your server version.
+
+---
+
+## Features
+
+### 1. Visual Selection Particles
+When using the portal selection wand (`/bp wand`), the plugin automatically draws a 3D grid outlining your selections:
+* **Active Selection:** Outlined in green (`HAPPY_VILLAGER` particles).
+* **Origin Selection:** Outlined in hearts (`HEART` particles).
+* **Destination Selection:** Outlined in portal magic (`PORTAL` particles).
+* *Optimization:* Particles are spawned client-side for the selecting player only. Visual outlines fade out automatically after 60 seconds of inactivity to save client performance.
+
+### 2. Vault Economy Integration
+Custom portals can charge players in-game currency to pass through:
+* Use `/bp setprice <price>` to set a usage fee.
+* Players are automatically charged via Vault when stepping through. If they lack funds, the teleportation is cancelled and a warning message is shown.
+
+### 3. Custom Portal Particle & Sound Presets
+Configure ambient audio-visual themes for your custom portals:
+* Configured in the `portalEffects` section of `config.yml`.
+* Presets define custom particle types, counts, speeds, offsets, sound types, and intervals.
+* Apply presets using `/bp setpreset <presetName>` on the closest portal.
+
+### 4. Adaptive Rendering Performance (TPS Guard)
+BetterPortals includes built-in protection against server performance degradation:
+* Monitors server performance in real-time.
+* If server TPS falls below the configured threshold (e.g., `19.0` TPS), portal rendering and block/entity mirroring are temporarily disabled for all players to reclaim server CPU time.
+* Portal views resume automatically as soon as the server stabilizes.
+* Configure this threshold using the `minTpsForRendering` setting in `config.yml` (set to `0` to disable the TPS guard).
 
 ---
 
@@ -18,7 +49,7 @@ Before installing, ensure your environment meets the following specifications:
 ### Option A: Single-Server Setup
 If you only run a single Minecraft server and do not need cross-server portals:
 1. Copy the compiled `BetterPortals-final-all.jar` (shaded JAR) into your server's `plugins/` directory.
-2. Ensure you have the compatible version of **ProtocolLib** in the same folder.
+2. Ensure you have the compatible version of **ProtocolLib** and **Vault** (optional, for portal economy) in the same folder.
 3. Start the server to generate default configurations in `plugins/BetterPortals/`.
 4. Open `plugins/BetterPortals/config.yml` to customize settings like portal search radii or viewing distances.
 5. Restart the server or run `/bp reload`.
@@ -72,9 +103,11 @@ If you need to generate a new encryption key, you can generate a random UUID and
 | `/bp reload` | `betterportals.reload` | Reloads the configuration file. |
 | `/bp create <portalName> [destServer] [destWorld]` | `betterportals.create` | Creates a new custom portal. |
 | `/bp delete <portalName>` | `betterportals.delete` | Deletes a custom portal. |
-| `/bp list` | `betterportals.list` | Lists all active portals. |
+| `/bp list` / `/bp menu` | `betterportals.list` | Opens the Admin Portal GUI menu. |
 | `/bp origin <portalName>` | `betterportals.origin` | Sets the origin position of a custom portal. |
 | `/bp destination <portalName>` | `betterportals.destination` | Sets the destination position of a custom portal. |
+| `/bp setprice <price>` | `betterportals.setname` | Sets a Vault entry fee price for the closest portal. |
+| `/bp setpreset <preset>` | `betterportals.setname` | Sets an effects preset theme for the closest portal. |
 
 ---
 

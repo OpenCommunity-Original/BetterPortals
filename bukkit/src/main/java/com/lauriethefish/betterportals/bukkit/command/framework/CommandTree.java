@@ -25,17 +25,19 @@ public class CommandTree {
     private final IPlayerDataManager playerDataManager;
     private final TestingCommands testingCommands;
 
+    private final io.foxserver.common.locale.LocaleAPI localeApi;
     private final ParentCommand rootNode;
 
     @Inject
-    public CommandTree(MessageConfig messages, Logger logger, IPlayerDataManager playerDataManager, TestingCommands testingCommands) {
+    public CommandTree(MessageConfig messages, Logger logger, IPlayerDataManager playerDataManager, TestingCommands testingCommands, io.foxserver.common.locale.LocaleAPI localeApi) {
         this.messages = messages;
         this.logger = logger;
         this.playerDataManager = playerDataManager;
         this.testingCommands = testingCommands;
+        this.localeApi = localeApi;
 
         // We don't want to print an exception if another command like /gamemode is entered
-        this.rootNode = new ParentCommand(logger, messages, true);
+        this.rootNode = new ParentCommand(logger, messages, localeApi, true);
     }
 
     private void registerCommand(Object obj, Method method) {

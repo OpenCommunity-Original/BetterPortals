@@ -4,26 +4,30 @@ import com.lauriethefish.betterportals.bukkit.config.MessageConfig;
 import com.lauriethefish.betterportals.bukkit.util.ArrayUtil;
 import com.lauriethefish.betterportals.shared.logging.Logger;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 
 import java.util.*;
 
 public class ParentCommand implements ICommand  {
     private final Logger logger;
     private final MessageConfig messageConfig;
+    private final io.foxserver.common.locale.LocaleAPI localeApi;
     private final Map<String, ICommand> subCommands = new HashMap<>();
     // Aliases are also stored in the command array, but they're put here so we can identify them as aliases
     private final Set<String> aliases = new HashSet<>();
     // If this is true, the command will just exit silently if the subcommand does not exist instead of printing a help screen
     private final boolean isRoot;
 
-    ParentCommand(Logger logger, MessageConfig messageConfig, boolean isRoot) {
+    ParentCommand(Logger logger, MessageConfig messageConfig, io.foxserver.common.locale.LocaleAPI localeApi, boolean isRoot) {
         this.logger = logger;
         this.messageConfig = messageConfig;
+        this.localeApi = localeApi;
         this.isRoot = isRoot;
     }
 
-    ParentCommand(Logger logger, MessageConfig messageConfig) {
-        this(logger, messageConfig, false);
+    ParentCommand(Logger logger, MessageConfig messageConfig, io.foxserver.common.locale.LocaleAPI localeApi) {
+        this(logger, messageConfig, localeApi, false);
     }
 
     @Override
@@ -31,7 +35,13 @@ public class ParentCommand implements ICommand  {
         // If the user didn't specify a subcommand, or they asked for help, or the subcommand was invalid, display the help screen
         if(args.length == 0 || args[0].equalsIgnoreCase("help") ||!subCommands.containsKey(args[0].toLowerCase())) {
             if(!isRoot) {
-                displayHelp(sender, pathToCall);
+                int page = 1;
+                if(args.length > 0 && args[0].equalsIgnoreCase("help") && args.length > 1) {
+                    try {
+                        page = Integer.parseInt(args[1]);
+                    } catch (NumberFormatException ignored) {}
+                }
+                displayHelp(sender, pathToCall, page);
             }
             return false;
         }   else    {
@@ -91,28 +101,118 @@ public class ParentCommand implements ICommand  {
         }
     }
 
-    private void displayHelp(CommandSender sender, String pathToCall) {
-        Map<String, ICommand> subCommands = filterSubCommands(sender);
-        if(subCommands.size() == 0) {
+    private void displayHelp(CommandSender sender, String pathToCall, int page) {
+        Map<String, ICommand> filtered = filterSubCommands(sender);
+        if(filtered.isEmpty()) {
             sender.sendMessage(messageConfig.getChatMessage("noCommands"));
             return;
         }
 
-        sender.sendMessage(messageConfig.getChatMessage("help"));
-        filterSubCommands(sender).forEach((name, subCommand) -> {
-            // Since this command is an alias, we don't display it in the help menu directly.
-            if(aliases.contains(name)) {return;}
-
-            String helpMessage = String.format("%s- %s%s", messageConfig.getMessageColor(), pathToCall, name);
-            if(subCommand instanceof SubCommand) {
-                String usage = ((SubCommand) subCommand).getUsage();
-                if(!usage.startsWith(":")) {
-                    helpMessage += " ";
-                }
-                helpMessage += usage;
-            }
-            sender.sendMessage(helpMessage);
+        List<HelpEntry> entries = new ArrayList<>();
+        filtered.forEach((name, subCommand) -> {
+            if(aliases.contains(name)) { return; }
+            entries.add(new HelpEntry(name, subCommand));
         });
+
+        entries.sort(Comparator.comparing(HelpEntry::getName));
+
+        int itemsPerPage = 6;
+        int totalPages = (int) Math.ceil((double) entries.size() / itemsPerPage);
+        if (totalPages == 0) totalPages = 1;
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+
+        int startIndex = (page - 1) * itemsPerPage;
+        int endIndex = Math.min(startIndex + itemsPerPage, entries.size());
+
+        MiniMessage mm = MiniMessage.miniMessage();
+        
+        sender.sendMessage(mm.deserialize("<gold><bold>BetterPortals Help</bold></gold> <gray>(Page " + page + "/" + totalPages + ")</gray>"));
+        sender.sendMessage(mm.deserialize("<yellow>──────────────────────────────────────────────────</yellow>"));
+
+        for (int i = startIndex; i < endIndex; i++) {
+            HelpEntry entry = entries.get(i);
+            String name = entry.getName();
+            ICommand subCommand = entry.getSubCommand();
+
+            String path = pathToCall.trim();
+            if (path.startsWith("/")) {
+                path = path.substring(1);
+            }
+            String cleanCommand = "/" + path + " " + name;
+            String label = "<gold>• <yellow>/" + path + " <white>" + name + "</white>";
+            String desc = "";
+            String argsUsage = "";
+
+            Player player = (sender instanceof Player) ? (Player) sender : null;
+
+            if (subCommand instanceof SubCommand) {
+                SubCommand sc = (SubCommand) subCommand;
+                argsUsage = sc.getArgumentsUsage();
+                desc = sc.getDescription();
+            }
+
+            // Fetch translations
+            String keyName = (pathToCall.trim() + "_" + name).replace(" ", "_").replace("/", "_").toLowerCase();
+            String localizedDesc = localeApi.getRaw(player, "commands." + keyName + ".description");
+            if (localizedDesc != null) {
+                desc = localizedDesc;
+            }
+
+            if (!argsUsage.isEmpty()) {
+                label += " <gray>" + argsUsage + "</gray>";
+            }
+            label += "</yellow>";
+
+            if (!desc.isEmpty()) {
+                label += " <dark_gray>-</dark_gray> <gray>" + desc + "</gray>";
+            }
+
+            String autofillStr = localeApi.getRaw(player, "autofill_suggest");
+            if (autofillStr == null) autofillStr = "Click to autofill command:";
+            String hoverText = "<yellow>" + autofillStr + "<br><white>" + cleanCommand + (argsUsage.isEmpty() ? "" : " " + argsUsage) + "</white>";
+            if (!desc.isEmpty()) {
+                hoverText += "<br><br><gray>" + desc + "</gray>";
+            }
+
+            String miniMessageString = "<click:suggest_command:'" + cleanCommand + " '><hover:show_text:'" + hoverText + "'>" + label + "</hover></click>";
+            sender.sendMessage(mm.deserialize(miniMessageString));
+        }
+
+        sender.sendMessage(mm.deserialize("<yellow>──────────────────────────────────────────────────</yellow>"));
+
+        if (totalPages > 1) {
+            String footer = "";
+            if (page > 1) {
+                footer += "<click:run_command:'/bp help " + (page - 1) + "'><hover:show_text:'<green>Go to page " + (page - 1) + "'><gold><b>[◀ Previous]</b></gold></hover></click>";
+            } else {
+                footer += "<dark_gray>[◀ Previous]</dark_gray>";
+            }
+
+            footer += "  <yellow>Page " + page + " of " + totalPages + "</yellow>  ";
+
+            if (page < totalPages) {
+                footer += "<click:run_command:'/bp help " + (page + 1) + "'><hover:show_text:'<green>Go to page " + (page + 1) + "'><gold><b>[Next ▶]</b></gold></hover></click>";
+            } else {
+                footer += "<dark_gray>[Next ▶]</dark_gray>";
+            }
+            sender.sendMessage(mm.deserialize("<gray>" + footer + "</gray>"));
+        } else {
+            sender.sendMessage(mm.deserialize("<gray>💡 Click on any command to copy it to your chat box.</gray>"));
+        }
+    }
+
+    private static class HelpEntry {
+        private final String name;
+        private final ICommand subCommand;
+
+        public HelpEntry(String name, ICommand subCommand) {
+            this.name = name;
+            this.subCommand = subCommand;
+        }
+
+        public String getName() { return name; }
+        public ICommand getSubCommand() { return subCommand; }
     }
 
     void addCommandAlias(String[] remainingElements, String aliasName) {
@@ -147,7 +247,7 @@ public class ParentCommand implements ICommand  {
         }   else    {
             // Add a new subparent command
             if(!subCommands.containsKey(currentName)) {
-                subCommands.put(currentName, new ParentCommand(logger, messageConfig));
+                subCommands.put(currentName, new ParentCommand(logger, messageConfig, localeApi));
             }
 
             // Add to the next parent command down if we haven't reached the bottom yet

@@ -32,13 +32,15 @@ public class CustomPortalCommands {
     private final MessageConfig messageConfig;
     private final IPortal.Factory portalFactory;
     private final Provider<IPortalSelection> selectionProvider;
+    private final com.lauriethefish.betterportals.bukkit.gui.PortalAdminGUI adminGUI;
 
     @Inject
-    public CustomPortalCommands(CommandTree commandTree, IPortalManager portalManager, MessageConfig messageConfig, IPortal.Factory portalFactory, Provider<IPortalSelection> selectionProvider) {
+    public CustomPortalCommands(CommandTree commandTree, IPortalManager portalManager, MessageConfig messageConfig, IPortal.Factory portalFactory, Provider<IPortalSelection> selectionProvider, com.lauriethefish.betterportals.bukkit.gui.PortalAdminGUI adminGUI) {
         this.portalManager = portalManager;
         this.messageConfig = messageConfig;
         this.portalFactory = portalFactory;
         this.selectionProvider = selectionProvider;
+        this.adminGUI = adminGUI;
 
         commandTree.registerCommands(this);
     }
@@ -385,5 +387,46 @@ public class CustomPortalCommands {
         return true;
     }
 
+    @Command
+    @Path("betterportals/menu")
+    @Aliases({"list", "admin", "gui"})
+    @RequiresPermissions("betterportals.select")
+    @RequiresPlayer
+    @Description("Opens the Portal Admin GUI menu")
+    public boolean openAdminMenu(Player player) {
+        adminGUI.open(player);
+        return true;
+    }
 
+    @Command
+    @Path("betterportals/setprice")
+    @RequiresPermissions("betterportals.setname")
+    @RequiresPlayer
+    @Argument(name = "price")
+    @Description("Sets the price of the closest portal")
+    public boolean setPortalPrice(Player player, double price) throws CommandException {
+        IPortal portal = getClosestPortal(player);
+        if(portal.isNetherPortal()) {
+            throw new CommandException(messageConfig.getErrorMessage("nameNetherPortal"));
+        }
+        portal.setPrice(price);
+        player.sendMessage(org.bukkit.ChatColor.GREEN + "Set closest portal's price to " + price);
+        return true;
+    }
+
+    @Command
+    @Path("betterportals/setpreset")
+    @RequiresPermissions("betterportals.setname")
+    @RequiresPlayer
+    @Argument(name = "preset")
+    @Description("Sets the effect preset of the closest portal")
+    public boolean setPortalPreset(Player player, String preset) throws CommandException {
+        IPortal portal = getClosestPortal(player);
+        if(portal.isNetherPortal()) {
+            throw new CommandException(messageConfig.getErrorMessage("nameNetherPortal"));
+        }
+        portal.setEffectPreset(preset);
+        player.sendMessage(org.bukkit.ChatColor.GREEN + "Set closest portal's effect preset to " + preset);
+        return true;
+    }
 }

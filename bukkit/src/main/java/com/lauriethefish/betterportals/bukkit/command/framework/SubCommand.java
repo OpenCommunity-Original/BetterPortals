@@ -36,9 +36,28 @@ public class SubCommand implements ICommand {
     private String[] requiredPermissions = new String[0];
     private Argument[] arguments = new Argument[0];
     private Class<?>[] argumentTypes;
-    private String description = ""; // Default is no description
+    @Getter private String description = ""; // Default is no description
 
     @Getter private String usage;
+
+    public String getArgumentsUsage() {
+        StringBuilder builder = new StringBuilder();
+        int argTypeIndex = 0;
+        for(Argument argument : arguments) {
+            if(argumentTypes[argTypeIndex].equals(Vector.class)) {
+                builder.append(String.format(" <%sX> <%sY> <%sZ>", argument.name(), argument.name(), argument.name()));
+            }   else    {
+                boolean required = argument.defaultValue().equals("");
+                if(required) {
+                    builder.append(String.format(" <%s>", argument.name()));
+                }   else    {
+                    builder.append(String.format(" [%s]", argument.name()));
+                }
+            }
+            argTypeIndex++;
+        }
+        return builder.toString().trim();
+    }
 
     SubCommand(Object instance, Method method, MessageConfig messageConfig, Logger logger, IPlayerDataManager playerDataManager) {
         this.instance = instance;

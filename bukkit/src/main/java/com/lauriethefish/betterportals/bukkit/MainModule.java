@@ -49,6 +49,16 @@ public class MainModule extends AbstractModule {
 
         bind(BlockUpdateFinisher.class).to(ThreadedBlockUpdateFinisher.class);
 
+        bind(com.lauriethefish.betterportals.bukkit.portal.selection.SelectionVisualizer.class).asEagerSingleton();
+        bind(com.lauriethefish.betterportals.bukkit.portal.effects.PortalEffectsTask.class).asEagerSingleton();
+        bind(com.lauriethefish.betterportals.bukkit.gui.PortalAdminGUI.class).asEagerSingleton();
+        bind(com.lauriethefish.betterportals.bukkit.economy.EconomyManager.class).asEagerSingleton();
+
+        io.foxserver.common.locale.LocaleAPI localeApi = new io.foxserver.common.locale.LocaleAPI(pl, "en_US", true);
+        localeApi.load();
+        pl.getServer().getPluginManager().registerEvents(localeApi, pl);
+        bind(io.foxserver.common.locale.LocaleAPI.class).toInstance(localeApi);
+
         install(new EventsModule());
         install(new CommandsModule());
         install(new PortalModule());

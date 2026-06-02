@@ -35,4 +35,14 @@ public interface IPortalSelection extends Cloneable {
     boolean isValid();
 
     IPortalSelection clone();
+
+    /**
+     * @return Axis-aligned minimum coordinate corner, or null
+     */
+    @Nullable Location getPosA();
+
+    /**
+     * @return Axis-aligned maximum coordinate corner, or null
+     */
+    @Nullable Location getPosB();
 }

@@ -9,10 +9,10 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Lauriethefish/BetterPortals/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status"></a>
+  <a href="https://github.com/OpenCommunity-Original/BetterPortals/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status"></a>
   <a href="https://papermc.io"><img src="https://img.shields.io/badge/Paper-1.21%2B%20%2F%2026.1.2-00BCD4.svg" alt="Target Platform"></a>
   <a href="https://adoptium.net/"><img src="https://img.shields.io/badge/Java-25-ED8B00.svg" alt="Java Version"></a>
-  <a href="https://github.com/Lauriethefish/BetterPortals/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+  <a href="https://github.com/OpenCommunity-Original/BetterPortals/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
   <a href="https://velocitypowered.com"><img src="https://img.shields.io/badge/Proxy-Velocity%20%7C%20Bungee-7986CB.svg" alt="Proxy Support"></a>
 </p>
 
@@ -64,7 +64,7 @@ Detailed setup guides, protocols, and developer notes are separated into dedicat
 
 ## 🚀 Quick Start Compilation
 
-Ensure you have **Java 17** or **Java 21** configured on your `PATH` and `JAVA_HOME`.
+Ensure you have **Java 25** configured on your `PATH` and `JAVA_HOME`.
 
 ### 1. Build and Package Options
 Compile the plugin or package it with ProtocolLib using the Gradle wrapper:

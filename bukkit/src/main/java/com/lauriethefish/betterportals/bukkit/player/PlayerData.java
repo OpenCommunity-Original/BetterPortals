@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.lauriethefish.betterportals.bukkit.BetterPortals;
 import com.lauriethefish.betterportals.bukkit.config.MiscConfig;
+import org.bukkit.Bukkit;
 import com.lauriethefish.betterportals.bukkit.portal.selection.ISelectionManager;
 import com.lauriethefish.betterportals.bukkit.player.view.IPlayerPortalView;
 import com.lauriethefish.betterportals.bukkit.player.view.PlayerPortalViewFactory;
@@ -81,12 +82,18 @@ public class PlayerData implements IPlayerData  {
         }
     }
 
-    // Activates/view-activates any newly activatable/viewable portals
-    // Returns a list of portals that are viewable this tick
     private Collection<IPortal> updateViewablePortals() {
+        List<IPortal> nowViewablePortals = new ArrayList<>();
+        double minTps = miscConfig.getMinTpsForRendering();
+        if (minTps > 0.0) {
+            double[] tps = Bukkit.getTPS();
+            if (tps.length > 0 && tps[0] < minTps) {
+                return nowViewablePortals;
+            }
+        }
+
         // TODO: when an API is created, allow plugins to add their own predicates
         Collection<IPortal> activatablePortals = portalManager.findActivatablePortals(player);
-        List<IPortal> nowViewablePortals = new ArrayList<>();
 
         // For the portals that we can activate, find out which ones can be viewed by the player
         for(IPortal portal : activatablePortals) {

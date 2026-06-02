@@ -80,6 +80,15 @@ public interface IPortal extends BetterPortal {
      */
     void setAllowsNonPlayerTeleportation(boolean allow);
 
+    double getPrice();
+    void setPrice(double price);
+
+    @Nullable String getEffectPreset();
+    void setEffectPreset(@Nullable String preset);
+
+    boolean isSoundEnabled();
+    void setSoundEnabled(boolean enabled);
+
     interface Factory {
         IPortal create(@Assisted("originPos") @NotNull PortalPosition originPos,
                        @Assisted("destPos") @NotNull PortalPosition destPos,

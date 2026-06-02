@@ -30,5 +30,7 @@ shadowJar {
     relocate 'com.google.inject', 'com.lauriethefish.betterportals.dependencies.com.google.inject'
     relocate 'com.google.errorprone', 'com.lauriethefish.betterportals.dependencies.com.google.errorprone'
 
-    minimize()
+    minimize {
+        exclude(dependency('com.github.ben-manes.caffeine:caffeine:.*'))
+    }
 }

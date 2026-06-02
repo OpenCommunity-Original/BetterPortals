@@ -31,6 +31,9 @@ public class MiscConfig {
     /** Anti-Dupe Policy: when true, duplicate origin→dest pairs are rejected at registration. */
     @Getter private boolean preventDuplicatePortals;
 
+    /** Minimum TPS required to render portals. ≤0 = disabled. */
+    @Getter private double minTpsForRendering;
+
     @Inject
     public MiscConfig(Logger logger) {
         this.logger = logger;
@@ -75,5 +78,6 @@ public class MiscConfig {
 
         maxPortalsPerPlayer = config.getInt("maxPortalsPerPlayer", 3);
         preventDuplicatePortals = config.getBoolean("preventDuplicatePortals", true);
+        minTpsForRendering = config.getDouble("minTpsForRendering", 19.0);
     }
 }

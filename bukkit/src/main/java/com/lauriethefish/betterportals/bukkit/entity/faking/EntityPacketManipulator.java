@@ -305,9 +305,21 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
         WrappedGameProfile playerProfile = WrappedGameProfile.fromPlayer(trackingPlayer);
 
         // We remove the existing textures (if any) and add the skin of the original player
-        profile.getProperties().removeAll("textures");
-        profile.getProperties().putAll("textures", playerProfile.getProperties().get("textures"));
+        try {
+            Object profileHandle = profile.getHandle();
+            Object playerProfileHandle = playerProfile.getHandle();
 
+            Object properties = profileHandle.getClass().getMethod("getProperties").invoke(profileHandle);
+            Object playerProperties = playerProfileHandle.getClass().getMethod("getProperties").invoke(playerProfileHandle);
+
+            properties.getClass().getMethod("removeAll", Object.class).invoke(properties, "textures");
+
+            java.util.Collection<?> textures = (java.util.Collection<?>) playerProperties.getClass().getMethod("get", Object.class).invoke(playerProperties, "textures");
+            properties.getClass().getMethod("putAll", Object.class, java.lang.Iterable.class).invoke(properties, "textures", textures);
+        } catch (Exception ex) {
+            profile.getProperties().removeAll("textures");
+            profile.getProperties().putAll("textures", playerProfile.getProperties().get("textures"));
+        }
 
         return new PlayerInfoData(
                 profile,

@@ -20,4 +20,7 @@ public interface ISelectionManager {
     void trySelectDestination() throws CommandException;
     void tryCreateFromSelection(Player player, boolean twoWay, boolean invert) throws CommandException;
     void tryCreateFromExternalSelection(Player player, boolean invert) throws CommandException;
+
+    long getLastActivityTime();
+    void recordActivity();
 }

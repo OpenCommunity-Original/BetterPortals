@@ -134,4 +134,14 @@ public class PortalSelection implements IPortalSelection    {
             throw new RuntimeException(ex);
         }
     }
+
+    @Override
+    public @Nullable Location getPosA() {
+        return posA;
+    }
+
+    @Override
+    public @Nullable Location getPosB() {
+        return posB;
+    }
 }

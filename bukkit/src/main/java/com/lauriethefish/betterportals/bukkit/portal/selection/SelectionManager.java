@@ -103,4 +103,16 @@ public class SelectionManager implements ISelectionManager {
                     originSelection.getPortalSize(), true, UUID.randomUUID(), player.getUniqueId(), null, true);
         portalManager.registerPortal(portal);
     }
+
+    private long lastActivityTime = System.currentTimeMillis();
+
+    @Override
+    public long getLastActivityTime() {
+        return lastActivityTime;
+    }
+
+    @Override
+    public void recordActivity() {
+        this.lastActivityTime = System.currentTimeMillis();
+    }
 }

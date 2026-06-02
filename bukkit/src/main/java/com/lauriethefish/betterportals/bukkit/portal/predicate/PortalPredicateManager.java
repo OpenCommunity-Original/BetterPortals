@@ -22,7 +22,7 @@ public class PortalPredicateManager implements IPortalPredicateManager  {
 
     // Add the default predicates for activation distance and view permissions
     @Inject
-    public PortalPredicateManager(Logger logger,  IPlayerDataManager playerDataManager, ActivationDistance activationDistance, CrossServerDestinationChecker crossServerDestinationChecker) {
+    public PortalPredicateManager(Logger logger,  IPlayerDataManager playerDataManager, ActivationDistance activationDistance, CrossServerDestinationChecker crossServerDestinationChecker, EconomyChargeChecker economyChargeChecker, TeleportCooldownChecker teleportCooldownChecker) {
         this.logger = logger;
 
         addActivationPredicate(activationDistance);
@@ -30,6 +30,8 @@ public class PortalPredicateManager implements IPortalPredicateManager  {
         addViewPredicate(new PermissionsChecker("betterportals.see"));
         addViewPredicate(new PlayerPreferenceChecker(playerDataManager, "seeThroughPortal"));
         addTeleportPredicate(new PermissionsChecker("betterportals.use"));
+        addTeleportPredicate(economyChargeChecker);
+        addTeleportPredicate(teleportCooldownChecker);
     }
 
     @Override

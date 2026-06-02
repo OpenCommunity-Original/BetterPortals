@@ -12,6 +12,7 @@ import com.lauriethefish.betterportals.bukkit.math.PortalTransformationsFactory;
 import com.lauriethefish.betterportals.bukkit.util.MaterialUtil;
 import com.lauriethefish.betterportals.shared.logging.Logger;
 import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.util.Vector;
@@ -45,6 +46,10 @@ public class Portal implements IPortal, ConfigurationSerializable {
 
     private int ticksSinceActivated = -1;
     private int ticksSinceViewActivated = -1;
+
+    @Getter @Setter private double price = 0.0;
+    @Getter @Setter private @Nullable String effectPreset = null;
+    @Getter @Setter private boolean soundEnabled = true;
 
     @Inject
     public Portal(IPortalManager portalManager, IPortalEntityManager.Factory entityListFactory, IBlockMap.Factory viewableBlockArrayFactory,
@@ -186,6 +191,9 @@ public class Portal implements IPortal, ConfigurationSerializable {
         result.put("allowsNonPlayerTeleportation", allowsNonPlayerTeleportation());
         if(ownerId != null) {result.put("owner", ownerId.toString());}
         if(name != null) {result.put("name", name);}
+        result.put("price", price);
+        if(effectPreset != null) {result.put("effectPreset", effectPreset);}
+        result.put("soundEnabled", soundEnabled);
 
         return result;
     }
@@ -201,7 +209,7 @@ public class Portal implements IPortal, ConfigurationSerializable {
         String ownerIdString = (String) map.get("ownerId");
         UUID ownerId = ownerIdString == null ? null : UUID.fromString(ownerIdString);
 
-        return (Portal) deserializationFactory.create(
+        Portal portal = (Portal) deserializationFactory.create(
                 (PortalPosition) map.get("originPos"),
                 (PortalPosition) map.get("destPos"),
                 (Vector) map.get("size"),
@@ -211,5 +219,15 @@ public class Portal implements IPortal, ConfigurationSerializable {
                 (String) map.get("name"),
                 (boolean) map.getOrDefault("allowsNonPlayerTeleportation", true)
         );
+        if (map.containsKey("price")) {
+            portal.setPrice(((Number) map.get("price")).doubleValue());
+        }
+        if (map.containsKey("effectPreset")) {
+            portal.setEffectPreset((String) map.get("effectPreset"));
+        }
+        if (map.containsKey("soundEnabled")) {
+            portal.setSoundEnabled((boolean) map.get("soundEnabled"));
+        }
+        return portal;
     }
 }

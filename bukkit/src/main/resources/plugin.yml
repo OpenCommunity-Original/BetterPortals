@@ -8,6 +8,7 @@ api-version: "1.21"
 softdepend:
   - Multiverse-Core
   - My_Worlds
+  - Vault
 commands:
   betterportals:
     description: Main plugin command

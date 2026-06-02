@@ -44,6 +44,7 @@ public class SelectionEvents implements Listener {
 
         // Set either position A or B depending on right/left click
         IPlayerData playerData = Objects.requireNonNull(playerDataManager.getPlayerData(player), "Player in event had no registered player data");
+        playerData.getSelection().recordActivity();
         IPortalSelection selection = playerData.getSelection().getCurrentlySelecting();
         if(action == Action.LEFT_CLICK_BLOCK) {
             selection.setPositionA(blockPos);

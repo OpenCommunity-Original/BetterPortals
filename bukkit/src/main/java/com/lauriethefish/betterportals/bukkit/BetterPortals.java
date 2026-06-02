@@ -44,6 +44,9 @@ public class BetterPortals extends JavaPlugin {
     @Inject private API apiImplementation;
     @Inject private IExternalBlockWatcherManager blockWatcherManager;
     @Inject private CrossServerDestinationChecker crossServerDestinationChecker;
+    @Inject private com.lauriethefish.betterportals.bukkit.portal.selection.SelectionVisualizer selectionVisualizer;
+    @Inject private com.lauriethefish.betterportals.bukkit.portal.effects.PortalEffectsTask portalEffectsTask;
+    @Inject private io.foxserver.common.locale.LocaleAPI localeApi;
 
     private boolean firstEnable = true;
     private boolean didEnableFail = false;
@@ -56,6 +59,7 @@ public class BetterPortals extends JavaPlugin {
             getLogger().severe(" Please download and install ProtocolLib from:");
             getLogger().severe(" https://www.spigotmc.org/resources/protocollib.1997/");
             getLogger().severe("==================================================");
+            didEnableFail = true;
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -89,6 +93,9 @@ public class BetterPortals extends JavaPlugin {
         blockUpdateFinisher.start();
         mainUpdate.start();
         portalStorage.start();
+        selectionVisualizer.start();
+        portalEffectsTask.loadPresets();
+        portalEffectsTask.start();
 
         apiImplementation.onEnable();
         firstEnable = false;
@@ -135,6 +142,8 @@ public class BetterPortals extends JavaPlugin {
         mainUpdate.stop();
         portalStorage.stop();
         blockUpdateFinisher.stop();
+        selectionVisualizer.stop();
+        portalEffectsTask.stop();
         apiImplementation.onDisable();
         SchedulerUtil.cancelAll();
 
@@ -144,6 +153,7 @@ public class BetterPortals extends JavaPlugin {
         }
 
         reloadConfig();
+        localeApi.reload();
         if(!loadConfig()) {
             return;
         }
@@ -161,6 +171,9 @@ public class BetterPortals extends JavaPlugin {
         blockUpdateFinisher.start();
         mainUpdate.start();
         portalStorage.start();
+        selectionVisualizer.start();
+        portalEffectsTask.loadPresets();
+        portalEffectsTask.start();
 
         apiImplementation.onEnable();
     }
@@ -173,6 +186,8 @@ public class BetterPortals extends JavaPlugin {
         mainUpdate.stop();
         portalStorage.stop();
         blockUpdateFinisher.stop();
+        selectionVisualizer.stop();
+        portalEffectsTask.stop();
         SchedulerUtil.cancelAll();
 
         try {
