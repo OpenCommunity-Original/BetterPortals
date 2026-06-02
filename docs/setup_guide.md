@@ -20,11 +20,11 @@ Before installing, ensure your environment meets the following specifications:
 ### 1. Per-Player Localization
 * The plugin automatically detects each player's Minecraft client language setting (`PlayerLocaleChangeEvent`).
 * Messages, commands, help menus, and GUIs are automatically rendered in the player's language.
-* Supports **27 pre-bundled languages** and customizable locales. Learn more in the [Localization Guide](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/localization_guide.md).
+* Supports **27 pre-bundled languages** and customizable locales. Learn more in the [Localization Guide](localization_guide.md).
 
 ### 2. Interactive Portal Admin GUI
 * Fully interactive in-game GUI menu accessible via `/bp gui` or `/bp menu`.
-* Allows administrators to manage all custom portals, toggle mob/item teleportation, adjust entry prices, select effect presets, toggle sounds, and delete portals with click actions. Learn more in the [Commands & Permissions Guide](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/commands_permissions.md).
+* Allows administrators to manage all custom portals, toggle mob/item teleportation, adjust entry prices, select effect presets, toggle sounds, and delete portals with click actions. Learn more in the [Commands & Permissions Guide](commands_permissions.md).
 
 ### 3. Visual Selection Particles
 * While using the portal selection wand (`/bp wand`), a 3D grid outlining selections is drawn using particles.
@@ -41,7 +41,7 @@ Before installing, ensure your environment meets the following specifications:
 ### 5. Adaptive Performance & TPS Guard
 * The plugin monitors server performance in real-time.
 * If server TPS drops below the configured threshold (e.g. `19.0` TPS), portal rendering is paused to save server ticks.
-* Portal views resume automatically as soon as the server stabilizes. Learn more in the [Configuration Guide](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/configuration_guide.md).
+* Portal views resume automatically as soon as the server stabilizes. Learn more in the [Configuration Guide](configuration_guide.md).
 
 ### 6. Custom Portal Particle & Sound Presets
 * Configure ambient themes (particles and sounds) for custom portals in `config.yml`.
@@ -52,12 +52,12 @@ Before installing, ensure your environment meets the following specifications:
 ## 📖 Detailed Guides
 
 To configure or manage specific aspects of BetterPortals, refer to these dedicated guides:
-* ⚙️ **[Configuration Guide](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/configuration_guide.md):** Detailed breakdown of all `config.yml` keys, performance tuning, and portal presets.
-* 🎮 **[Commands & Permissions Guide](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/commands_permissions.md):** Complete command reference and a walkthrough of the Interactive Admin GUI.
-* 🌐 **[Localization Guide](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/localization_guide.md):** Client language detection, custom translations, and supported languages.
-* 🛠️ **[Developer Guide](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/developer_guide.md):** Multi-module structure, compilation tasks, testing, and debugging.
-* 🏗️ **[Project Structure](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/project_structure.md):** Guide to the multi-module layout.
-* 🔌 **[Networking Protocol](file:///c:/Users/Nikita/Documents/GitHub/BetterPortals/docs/networking_protocol.md):** Technical walkthrough of the custom TCP socket communication protocol.
+* ⚙️ **[Configuration Guide](configuration_guide.md):** Detailed breakdown of all `config.yml` keys, performance tuning, and portal presets.
+* 🎮 **[Commands & Permissions Guide](commands_permissions.md):** Complete command reference and a walkthrough of the Interactive Admin GUI.
+* 🌐 **[Localization Guide](localization_guide.md):** Client language detection, custom translations, and supported languages.
+* 🛠️ **[Developer Guide](developer_guide.md):** Multi-module structure, compilation tasks, testing, and debugging.
+* 🏗️ **[Project Structure](project_structure.md):** Guide to the multi-module layout.
+* 🔌 **[Networking Protocol](networking_protocol.md):** Technical walkthrough of the custom TCP socket communication protocol.
 
 ---
 
