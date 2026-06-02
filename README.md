@@ -11,7 +11,7 @@
 <p align="center">
   <a href="https://github.com/OpenCommunity-Original/BetterPortals/actions"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status"></a>
   <a href="https://papermc.io"><img src="https://img.shields.io/badge/Paper-1.21%2B%20%2F%2026.1.2-00BCD4.svg" alt="Target Platform"></a>
-  <a href="https://adoptium.net/"><img src="https://img.shields.io/badge/Java-25-ED8B00.svg" alt="Java Version"></a>
+  <a href="https://adoptium.net/"><img src="https://img.shields.io/badge/Java-21%2B-ED8B00.svg" alt="Java Version"></a>
   <a href="https://github.com/OpenCommunity-Original/BetterPortals/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
   <a href="https://velocitypowered.com"><img src="https://img.shields.io/badge/Proxy-Velocity%20%7C%20Bungee-7986CB.svg" alt="Proxy Support"></a>
 </p>
@@ -21,7 +21,7 @@
 BetterPortals allows players to **see through Nether and custom portals** to view blocks and entities on the target destination in real-time. By utilizing advanced packet manipulation and matrix rotation transformations entirely server-side, it delivers a seamless mod-like experience with **no client-side modifications** required.
 
 > [!IMPORTANT]
-> BetterPortals has been modernized. The minimum supported environment is **PaperMC 1.21 / 26.1.2** and **Java 25**. Traditional Spigot/CraftBukkit and legacy Minecraft versions are deprecated to prioritize modern, high-performance API structures.
+> BetterPortals has been modernized. The minimum runtime supported environment is **PaperMC 1.21+** and **Java 21**. Java 25 is required for development/compilation. Traditional Spigot/CraftBukkit and legacy Minecraft versions are deprecated to prioritize modern, high-performance API structures.
 
 ---
 
@@ -51,11 +51,14 @@ graph TD
 
 ## 📚 Technical Documentation Index
 
-Detailed setup guides, protocols, and developer notes are separated into dedicated modules under the `docs` directory:
+Detailed setup guides, configurations, command lists, and developer notes are structured into modular guides under the `docs` directory:
 
 | Document | Description |
 | :--- | :--- |
-| 🛠️ **[Setup & Installation Guide](docs/setup_guide.md)** | Step-by-step setup for Single Servers, Bungee/Velocity networks, security key generation, commands, and troubleshooting. |
+| 🛠️ **[Setup & Installation Guide](docs/setup_guide.md)** | Step-by-step setup for Single Servers, Bungee/Velocity networks, security key generation, and troubleshooting. |
+| ⚙️ **[Configuration Guide](docs/configuration_guide.md)** | Explanation of all `config.yml` keys, performance optimization thresholds (TPS Guard), limits, and preset configurations. |
+| 🎮 **[Commands & Permissions Guide](docs/commands_permissions.md)** | Comprehensive list of commands, permissions, and a full walkthrough of the interactive Admin GUI. |
+| 🌐 **[Localization Guide](docs/localization_guide.md)** | Details on locale-aware systems, client language detection, custom translations, and supported languages. |
 | 🏗️ **[Project Modular Architecture](docs/project_structure.md)** | Codebase file structure, module breakdown (`shared`, `api`, `proxy`, `bukkit`, etc.), and dependency trees. |
 | 🔌 **[Custom Network Protocol](docs/networking_protocol.md)** | Technical layout of GZIP/AES-GCM encrypted byte packets, handshakes, request-response lifecycles, and request specifications. |
 | 💻 **[Developer Reference Guide](docs/developer_guide.md)** | Gradle compile commands, JUnit 5 test instructions, remote debugging configurations, and guide for adding NMS packet features. |
