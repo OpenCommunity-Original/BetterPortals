@@ -119,10 +119,7 @@ public class EventEntityTrackingManager extends EntityTrackingManager implements
         }
     }
 
-    @Override
-    public void update() {
-        trackersByPortal.values().forEach((map) -> map.values().forEach(IEntityTracker::update));
-    }
+
 
     @Override
     public @Nullable IEntityTracker getTracker(IPortal portal, Entity entity) {
