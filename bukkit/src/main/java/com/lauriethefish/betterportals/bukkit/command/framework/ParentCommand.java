@@ -126,8 +126,13 @@ public class ParentCommand implements ICommand  {
         int endIndex = Math.min(startIndex + itemsPerPage, entries.size());
 
         MiniMessage mm = MiniMessage.miniMessage();
+        Player player = (sender instanceof Player) ? (Player) sender : null;
+
+        String headerStr = localeApi.getRaw(player, "help_header");
+        if (headerStr == null) headerStr = "<gold><bold>BetterPortals Help</bold></gold> <gray>(Page {page}/{total_pages})</gray>";
+        headerStr = headerStr.replace("{page}", String.valueOf(page)).replace("{total_pages}", String.valueOf(totalPages));
         
-        sender.sendMessage(mm.deserialize("<gold><bold>BetterPortals Help</bold></gold> <gray>(Page " + page + "/" + totalPages + ")</gray>"));
+        sender.sendMessage(mm.deserialize(headerStr));
         sender.sendMessage(mm.deserialize("<yellow>──────────────────────────────────────────────────</yellow>"));
 
         for (int i = startIndex; i < endIndex; i++) {
@@ -144,8 +149,6 @@ public class ParentCommand implements ICommand  {
             String desc = "";
             String argsUsage = "";
 
-            Player player = (sender instanceof Player) ? (Player) sender : null;
-
             if (subCommand instanceof SubCommand) {
                 SubCommand sc = (SubCommand) subCommand;
                 argsUsage = sc.getArgumentsUsage();
@@ -153,7 +156,14 @@ public class ParentCommand implements ICommand  {
             }
 
             // Fetch translations
-            String keyName = (pathToCall.trim() + "_" + name).replace(" ", "_").replace("/", "_").toLowerCase();
+            String pathForTranslation = pathToCall.trim();
+            if (pathForTranslation.startsWith("/")) {
+                pathForTranslation = pathForTranslation.substring(1);
+            }
+            if (pathForTranslation.startsWith("bp")) {
+                pathForTranslation = "betterportals" + pathForTranslation.substring(2);
+            }
+            String keyName = (pathForTranslation + "_" + name).replace(" ", "_").replace("/", "_").toLowerCase();
             String localizedDesc = localeApi.getRaw(player, "commands." + keyName + ".description");
             if (localizedDesc != null) {
                 desc = localizedDesc;
@@ -183,22 +193,37 @@ public class ParentCommand implements ICommand  {
 
         if (totalPages > 1) {
             String footer = "";
+            String prevText = localeApi.getRaw(player, "help_previous");
+            if (prevText == null) prevText = "[◀ Previous]";
+            String nextText = localeApi.getRaw(player, "help_next");
+            if (nextText == null) nextText = "[Next ▶]";
+            String goToPageText = localeApi.getRaw(player, "help_go_to_page");
+            if (goToPageText == null) goToPageText = "<green>Go to page {page}";
+            
             if (page > 1) {
-                footer += "<click:run_command:'/bp help " + (page - 1) + "'><hover:show_text:'<green>Go to page " + (page - 1) + "'><gold><b>[◀ Previous]</b></gold></hover></click>";
+                String hoverPrev = goToPageText.replace("{page}", String.valueOf(page - 1));
+                footer += "<click:run_command:'/bp help " + (page - 1) + "'><hover:show_text:'" + hoverPrev + "'><gold><b>" + prevText + "</b></gold></hover></click>";
             } else {
-                footer += "<dark_gray>[◀ Previous]</dark_gray>";
+                footer += "<dark_gray>" + prevText + "</dark_gray>";
             }
 
-            footer += "  <yellow>Page " + page + " of " + totalPages + "</yellow>  ";
+            String pageIndicator = localeApi.getRaw(player, "help_page_indicator");
+            if (pageIndicator == null) pageIndicator = "<yellow>Page {page} of {total_pages}</yellow>";
+            pageIndicator = pageIndicator.replace("{page}", String.valueOf(page)).replace("{total_pages}", String.valueOf(totalPages));
+            
+            footer += "  " + pageIndicator + "  ";
 
             if (page < totalPages) {
-                footer += "<click:run_command:'/bp help " + (page + 1) + "'><hover:show_text:'<green>Go to page " + (page + 1) + "'><gold><b>[Next ▶]</b></gold></hover></click>";
+                String hoverNext = goToPageText.replace("{page}", String.valueOf(page + 1));
+                footer += "<click:run_command:'/bp help " + (page + 1) + "'><hover:show_text:'" + hoverNext + "'><gold><b>" + nextText + "</b></gold></hover></click>";
             } else {
-                footer += "<dark_gray>[Next ▶]</dark_gray>";
+                footer += "<dark_gray>" + nextText + "</dark_gray>";
             }
             sender.sendMessage(mm.deserialize("<gray>" + footer + "</gray>"));
         } else {
-            sender.sendMessage(mm.deserialize("<gray>💡 Click on any command to copy it to your chat box.</gray>"));
+            String clickInfo = localeApi.getRaw(player, "help_click_info");
+            if (clickInfo == null) clickInfo = "<gray>💡 Click on any command to copy it to your chat box.</gray>";
+            sender.sendMessage(mm.deserialize(clickInfo));
         }
     }
 

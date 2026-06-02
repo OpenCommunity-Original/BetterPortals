@@ -1,0 +1,134 @@
+# Swedish Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Klicka för att autofylla kommandot:"
+
+notEnoughPerms: "<red>Du har inte tillåtelse att använda detta kommando!</red>"
+mustBePlayer: "<red>Du måste vara en spelare för att använda detta kommando</red>"
+mustMakeSelection: "<red>Du måste göra en markering först</red>"
+invalidSelection: "<red>Ogiltig markering! Portalmarkeringar måste vara på portalens två hörn</red>"
+coordinatesNotInLine: "<red>De angivna hörngoordinaterna (%d, %d, %d), (%d, %d, %d) är inte korrekt inriktade för att skapa en platt portal (portaler är inte tillåtna på diagonaler)</red>"
+invalidCoordinates: "<red>Koordinaterna (%s, %s, %s) är inte giltiga heltalskoordinater (relativa eller andra)</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Kan inte använda relativa koordinater när kommandot körs från konsolen</red>"
+portalCreated: "Portal skapades framgångsrikt"
+noWorldExistsWithGivenName: "<red>Ingen värld med namnet {name} existerar</red>"
+mustSelectBothSides: "<red>Du måste välja båda sidorna av en portal först. För information, kör /bp help</red>"
+mustSelectOrigin: "<red>Du måste välja portalens startpunkt (origin) på denna server</red>"
+wrongNumberOfArgs: "<red>Fel antal argument. Kör /bp help för hjälp.</red>"
+noCommands: "<red>Du har inte tillåtelse att använda några underkommandon</red>"
+invalidArgs: "<red>Ett av dina argument var ogiltigt. Kör /bp help för hjälp.</red>"
+invalidBoolean: "<red>Kunde inte tolka \"{arg}\" som ett booleskt argument. hjälp: möjliga värden är \"true\" eller \"false\" och \"yes\" eller \"no\"</red>"
+differentSizes: "<red>Startportalen och destinationsportalen måste ha samma storlek</red>"
+noPortalCloseEnough: "<red>Ingen portal hittades tillräckligt nära</red>"
+removeNotOwnedByPlayer: "<red>Du har inte tillåtelse att ta bort portaler som skapats av andra personer</red>"
+nameNotOwnedbyPlayer: "<red>Du har inte tillåtelse att ändra namnet på portaler som skapats av andra personer</red>"
+unknownCommand: "<red>Okänt kommando. För hjälp, kör /bp help</red>"
+proxyDisabled: "<red>Det går inte att återansluta till proxyn: den är inte aktiverad!</red>"
+alreadyConnected: "<red>Det går inte to återansluta till proxyn: servern är redan ansluten!</red>"
+horizontalIssues: "<yellow>Varning: horisontella portaler med olika start-/destinationsriktningar kan orsaka problem med blockrotationer - inte alla block kan roteras i alla riktningar</yellow>"
+noName: "<red>Denna portal har inget namn</red>"
+nameNetherPortal: "<red>Du kan inte ändra namnet på en netherportal</red>"
+seeThroughPortalDisabled: "Alla netherportaler kommer nu att se ut som vanliga vanillaportaler för dig!"
+seeThroughPortalEnabled: "Alla berättigade netherportaler kommer nu att visa dig vad som finns på andra sidan."
+noPortalsWithName: "<red>Inga portaler existerade med namnet {name}</red>"
+noWorldLink: "<red>Tyvärr kommer den här portalen inte att aktiveras eftersom världen du befinner dig i inte är länkad.</red>\nOm du tror att detta är ett misstag, kontakta en administratör och länka denna wiki-sida: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Denna portal är för stor. Den nuvarande storleksgränsen är {size}.</red>"
+vanillaPortal: "Detta är en vanlig netherportal. Om du vill se igenom denna portal måste du tända den igen."
+outOfDate: "<yellow>Din version av BetterPortals är föråldrad ({current} vs {new}). Du kan ladda ner den från {url}</yellow>"
+reload: "Laddade om plugin"
+originPortalSet: "Startportal fastställd"
+destPortalSet: "Destinationsportal fastställd"
+portalsLinked: "Portaler länkade framgångsrikt"
+portalRemoved: "Portal borttagen"
+startedReconnection: "Började ansluta till proxyn. Se konsolen för detaljer."
+changedName: "Ändrade portalnamnet framgångsrikt"
+currentName: "Namnet på denna portal är: <yellow>{name}</yellow>"
+allowsItems: "Denna portal tillåter föremålsteleportation"
+doesNotAllowItems: "Denna portal tillåter inte föremålsteleportation"
+changedAllowsItems: "Ställde in att portalen tillåter föremålsteleportation"
+changedDoesNotAllowItems: "Ställde in att portalen inte tillåter föremålsteleportation"
+help: "Underkommandon"
+setPosA: "Bestäm position A"
+setPosB: "Bestäm position B"
+portalWandName: "<green>Portalstav</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Laddar om pluginet och konfigurationsfilen"
+  betterportals_reconnect:
+    description: "Ansluter till proxyn igen om anslutningen brutits"
+  betterportals_removebyname:
+    description: "Tar bort alla portaler med det angivna namnet"
+  betterportals_createfromcoords:
+    description: "Skapar en portal från koordinaterna för dess hörn utan att kräva en spelare"
+  betterportals_remove:
+    description: "Tar bort den närmaste portalen inom 20 block från spelaren"
+  betterportals_setOrigin:
+    description: "Ställer in den aktuella portalstavs-markeringen som din startposition"
+  betterportals_setDestination:
+    description: "Ställer in den aktuella portalstavs-markeringen som din destinationsposition"
+  betterportals_linkPortals:
+    description: "Länkar samman startportalen och destinationsportalen"
+  betterportals_linkExternalPortals:
+    description: "Länkar startmarkeringen på den här servern med en destination på en annan server"
+  betterportals_wand:
+    description: "Ger dig staven för att välja portaler"
+  betterportals_setPortalName:
+    description: "Ställer in namnet på den närmaste portalen inom 20 block"
+  betterportals_getportalname:
+    description: "Visar namnet på den närmaste portalen inom 20 block"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Visar om den närmaste portalen inom 20 block tillåter föremålsteleportation"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Ställer in om den närmaste portalen inom 20 block tillåter föremålsteleportation"
+  betterportals_setseethroughportal:
+    description: "Ställer in om den nuvarande spelaren kan se igenom portaler."
+  betterportals_toggleseethroughportal:
+    description: "Växlar om den nuvarande spelaren kan se igenom portaler."
+  betterportals_menu:
+    description: "Öppnar Portal Admin GUI-menyn"
+  betterportals_setprice:
+    description: "Ställer in priset för den närmaste portalen"
+  betterportals_setpreset:
+    description: "Ställer in effektinställningen för den närmaste portalen"
+
+gui_title_list: "Portallista (Sida {page})"
+gui_title_editor: "Portaleditormeny"
+gui_title_effects: "Portaleffektmeny"
+gui_button_teleport: "<gold>Teleportera till start"
+gui_lore_teleport: "<gray>Klicka för att teleportera till portalens start"
+gui_button_item_mob: "<gold>Föremål/Mob-teleportation"
+gui_status_enabled: "<green>Aktiverad"
+gui_status_disabled: "<red>Inaktiverad"
+gui_lore_click_toggle: "<gray>Status: {status}\n<gray>Klicka för att växla"
+gui_button_dec_price: "<red>Minska pris"
+gui_lore_dec_price: "<gray>Vänsterklick: <yellow>-$1.00</yellow>\n<gray>Högerklick: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Nuvarande pris: <yellow>{price}"
+gui_lore_price: "<gray>Klicka för att återställa priset till $0.00"
+gui_button_inc_price: "<green>Öka pris"
+gui_lore_inc_price: "<gray>Vänsterklick: <yellow>+$1.00</yellow>\n<gray>Högerklick: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Effektförinställning"
+gui_lore_effects: "<gray>Nuvarande effekt: <light_purple>{preset}</light_purple>\n<gray>Klicka för att öppna effektmenyn"
+gui_button_delete: "<red>Radera portal"
+gui_lore_delete: "<gray>Klicka för att permanent radera denna portal"
+gui_button_back: "<yellow>Tillbaka till listan"
+gui_button_back_to_editor: "<yellow>Tillbaka till editorn"
+gui_button_prev: "<yellow>Föregående sida"
+gui_button_next: "<yellow>Nästa sida"
+gui_button_sound: "<gold>Ljudeffekter"
+gui_lore_sound: "<gray>Status: {status}\n\n<gray>Klicka för att växla portalens ljudeffekter"
+gui_list_default_portal_name: "Anpassad portal"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Start: <white>{origin}</white>\n<gray>Pris: <yellow>{price}</yellow>\n<gray>Preset: <light_purple>{preset}</light_purple>\n\n<yellow>Klicka för att redigera inställningar"
+gui_effects_active: "<green>● {name} (Aktiv)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Partikel: <white>{particle}</white> (Antal: <white>{count}</white>, Hastighet: <white>{speed}</white>)\n<gray>Ljud: <white>{sound}</white> (Vol: <white>{volume}</white>, Pitch: <white>{pitch}</white>, Intervall: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Klicka för att välja denna förinställning"
+gui_effects_selected: "<green>Vald"
+
+help_header: "<gold><bold>BetterPortals Hjälp</bold></gold> <gray>(Sida {page}/{total_pages})</gray>"
+help_previous: "[◀ Föregående]"
+help_next: "[Nästa ▶]"
+help_go_to_page: "<green>Gå till sida {page}"
+help_page_indicator: "<yellow>Sida {page} av {total_pages}</yellow>"
+help_click_info: "<gray>💡 Klicka på valfritt kommando för att kopiera det till chatten.</gray>"

@@ -1,0 +1,134 @@
+# Hebrew Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "לחץ כדי להשלים אוטומטית את הפקודה:"
+
+notEnoughPerms: "<red>אין לך הרשאה להשתמש בפקודה זו!</red>"
+mustBePlayer: "<red>עליך להיות שחקן כדי להשתמש בפקודה זו</red>"
+mustMakeSelection: "<red>עליך לבצע בחירה תחילה</red>"
+invalidSelection: "<red>בחירה לא חוקית! בחירות הפורטל חייבות להיות בשתי הפינות של הפורטל</red>"
+coordinatesNotInLine: "<red>קואורדינטות הפינה שניתנו (%d, %d, %d), (%d, %d, %d) אינן מיושרות כראוי ליצירת פורטל שטוח (פורטלים אינם מורשים באלכסון)</red>"
+invalidCoordinates: "<red>הקואורדינטות (%s, %s, %s) אינן קואורדינטות שלמות חוקיות, יחסיות או אחרות</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>לא ניתן להשתמש בקואורדינטות יחסיות בעת ביצוע פקודה מהקונסולה</red>"
+portalCreated: "הפורטל נוצר בהצלחה"
+noWorldExistsWithGivenName: "<red>לא קיים עולם בשם {name}</red>"
+mustSelectBothSides: "<red>עליך לבחור תחילה את שני צידי הפורטל. למידע נוסף, הרץ /bp help</red>"
+mustSelectOrigin: "<red>עליך לבחור את מקור הפורטל בשרת זה</red>"
+wrongNumberOfArgs: "<red>מספר ארגומנטים שגוי. הרץ /bp help לעזרה.</red>"
+noCommands: "<red>אין לך הרשאה להשתמש באף פקודת משנה</red>"
+invalidArgs: "<red>אחד הארגומנטים שלך לא היה חוקי. הרץ /bp help לעזרה.</red>"
+invalidBoolean: "<red>לא ניתן לפענח את \"{arg}\" כארגומנט בוליאני. עזרה: הערכים האפשריים הם \"true\" או \"false\" ו-\"yes\" או \"no\"</red>"
+differentSizes: "<red>פורטל המקור ופורטל היעד חייבים להיות באותו גודל</red>"
+noPortalCloseEnough: "<red>לא נמצא פורטל קרוב מספיק</red>"
+removeNotOwnedByPlayer: "<red>אין לך הרשאה להסיר פורטלים שנוצרו על ידי אנשים אחרים</red>"
+nameNotOwnedbyPlayer: "<red>אין לך הרשאה לקבוע את השם של פורטלים שנוצרו על ידי אנשים אחרים</red>"
+unknownCommand: "<red>פקודה לא ידועה. לעזרה, הרץ /bp help</red>"
+proxyDisabled: "<red>לא ניתן להתחבר מחדש לפרוקסי: הוא אינו מופעל!</red>"
+alreadyConnected: "<red>לא ניתן להתחבר מחדש לפרוקסי: השרת כבר מחובר!</red>"
+horizontalIssues: "<yellow>אזהרה: פורטלים אופקיים עם כיווני מקור/יעד שונים עלולים לגרום לבעיות בסיבוב בלוקים - לא כל הבלוקים ניתנים לסיבוב בכל כיוון</yellow>"
+noName: "<red>לפורטל זה אין שם</red>"
+nameNetherPortal: "<red>אינך יכול לקבוע את השם של פורטל נדר</red>"
+seeThroughPortalDisabled: "כל פורטלי הנדר ייראו כעת כפורטלים רגילים עבורך!"
+seeThroughPortalEnabled: "כל פורטלי הנדר המתאימים יראו לך כעת מה יש בצד השני."
+noPortalsWithName: "<red>לא היו קיימים פורטלים בשם {name}</red>"
+noWorldLink: "<red>לצערי, פורטל זה לא יידלק מכיוון שהעולם שבו אתה נמצא אינו מקושר.</red>\nאם אתה מאמין שזו טעות, צור קשר עם מנהל מערכת וקשר דף ויקי זה: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>פורטל זה גדול מדי. מגבלת הגודל הנוכחית היא {size}.</red>"
+vanillaPortal: "זהו פורטל נדר רגיל. אם ברצונך לראות דרך פורטל זה, תצטרך להדליק אותו מחדש."
+outOfDate: "<yellow>גרסת ה-BetterPortals שלך אינה מעודכנת ({current} לעומת {new}). אתה יכול להוריד אותה מ-{url}</yellow>"
+reload: "התוסף נטען מחדש"
+originPortalSet: "פורטל המקור הוגדר"
+destPortalSet: "פורטל היעד הוגדר"
+portalsLinked: "הפורטלים קושרו בהצלחה"
+portalRemoved: "הפורטל הוסר"
+startedReconnection: "החל חיבור מחדש לפרוקסי. ראה קונסולה לפרטים."
+changedName: "שם הפורטל שונה בהצלחה"
+currentName: "השם של פורטל זה הוא: <yellow>{name}</yellow>"
+allowsItems: "פורטל זה מאפשר טלפורטציה של חפצים"
+doesNotAllowItems: "פורטל זה אינו מאפשר טלפורטציה של חפצים"
+changedAllowsItems: "הוגדר בהצלחה שהפורטל מאפשר טלפורטציה של חפצים"
+changedDoesNotAllowItems: "הוגדר בהצלחה שהפורטל אינו מאפשר טלפורטציה של חפצים"
+help: "פקודות משנה"
+setPosA: "הגדר מיקום א'"
+setPosB: "הגדר מיקום ב'"
+portalWandName: "<green>מטה פורטל</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "טוען מחדש את התוסף ואת קובץ ההגדרות"
+  betterportals_reconnect:
+    description: "מתחבר מחדש לפרוקסי במידה והתנתק"
+  betterportals_removebyname:
+    description: "מסיר את כל הפורטלים עם השם הנתון"
+  betterportals_createfromcoords:
+    description: "יוצר פורטל מקואורדינטות הפינות שלו ללא צורך בשחקן"
+  betterportals_remove:
+    description: "מסיר את הפורטל הקרוב ביותר בטווח של 20 בלוקים מהשחקן"
+  betterportals_setOrigin:
+    description: "מגדיר את בחירת מטה הפורטל הנוכחית כמיקום המקור שלך"
+  betterportals_setDestination:
+    description: "מגדיר את בחירת מטה הפורטל הנוכחית כמיקום היעד שלך"
+  betterportals_linkPortals:
+    description: "מקשר את פורטל המקור ופורטל היעד יחד"
+  betterportals_linkExternalPortals:
+    description: "מקשר את בחירת המקור בשרת זה עם יעד בשרת אחר"
+  betterportals_wand:
+    description: "נותן לך את המטה לבחירת פורטלים"
+  betterportals_setPortalName:
+    description: "מגדיר את השם של הפורטל הקרוב ביותר בטווח של 20 בלוקים"
+  betterportals_getportalname:
+    description: "מציג את השם של הפורטל הקרוב ביותר בטווח של 20 בלוקים"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "מציג האם הפורטל הקרוב ביותר בטווח של 20 בלוקים מאפשר טלפורטציה של חפצים"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "מגדיר האם הפורטל הקרוב ביותר בטווח של 20 בלוקים מאפשר טלפורטציה של חפצים"
+  betterportals_setseethroughportal:
+    description: "מגדיר האם השחקן הנוכחי יכול לראות מה יש בצד השני של הפורטל."
+  betterportals_toggleseethroughportal:
+    description: "משנה האם השחקן הנוכחי יכול לראות מה יש בצד השני של הפורטל."
+  betterportals_menu:
+    description: "פותח את תפריט הניהול של הפורטלים"
+  betterportals_setprice:
+    description: "מגדיר את מחיר השימוש בפורטל הקרוב ביותר"
+  betterportals_setpreset:
+    description: "מגדיر את ערכת האפקטים של הפורטל הקרוב ביותר"
+
+gui_title_list: "רשימת פורטלים (עמוד {page})"
+gui_title_editor: "תפריט עריכת פורטל"
+gui_title_effects: "תפריט אפקטים של פורטל"
+gui_button_teleport: "<gold>שתגר למקור"
+gui_lore_teleport: "<gray>לחץ כדי להשתגר למקור הפורטל"
+gui_button_item_mob: "<gold>שיגור חפצים/יצורים"
+gui_status_enabled: "<green>מופעל"
+gui_status_disabled: "<red>מושבת"
+gui_lore_click_toggle: "<gray>מצב: {status}\n<gray>לחץ כדי לשנות"
+gui_button_dec_price: "<red>הפחת מחיר"
+gui_lore_dec_price: "<gray>קליק שמאלי: <yellow>-$1.00</yellow>\n<gray>קליק ימני: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>מחיר נוכחי: <yellow>{price}"
+gui_lore_price: "<gray>לחץ כדי לאפס את המחיר ל-$0.00"
+gui_button_inc_price: "<green>הגדל מחיר"
+gui_lore_inc_price: "<gray>קליק שמאלי: <yellow>+$1.00</yellow>\n<gray>קליק ימני: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>ערכת אפקטים"
+gui_lore_effects: "<gray>ערכה נוכחית: <light_purple>{preset}</light_purple>\n<gray>לחץ כדי לפתוח את תפריט האפקטים"
+gui_button_delete: "<red>מחק פורטל"
+gui_lore_delete: "<gray>לחץ כדי למחוק לצמיתות את הפורטל"
+gui_button_back: "<yellow>חזור לרשימה"
+gui_button_back_to_editor: "<yellow>חזור לעריכה"
+gui_button_prev: "<yellow>עמוד קודם"
+gui_button_next: "<yellow>עמוד הבא"
+gui_button_sound: "<gold>אפקטים קוליים"
+gui_lore_sound: "<gray>מצב: {status}\n\n<gray>לחץ כדי להפעיל/להשבית אפקטים קוליים"
+gui_list_default_portal_name: "פורטל מותאם אישית"
+gui_list_item_lore: "<gray>מזהה: <white>{id}</white>\n<gray>מקור: <white>{origin}</white>\n<gray>מחיר: <yellow>{price}</yellow>\n<gray>ערכה: <light_purple>{preset}</light_purple>\n\n<yellow>לחץ כדי לערוך הגדרות"
+gui_effects_active: "<green>● {name} (פעיל)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>חלקיק: <white>{particle}</white> (כמות: <white>{count}</white>, מהירות: <white>{speed}</white>)\n<gray>צליל: <white>{sound}</white> (עוצמה: <white>{volume}</white>, גובה: <white>{pitch}</white>, מרווח: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>לחץ כדי לבחור בערכה זו"
+gui_effects_selected: "<green>נבחר"
+
+help_header: "<gold><bold>עזרת BetterPortals</bold></gold> <gray>(עמוד {page}/{total_pages})</gray>"
+help_previous: "[◀ הקודם]"
+help_next: "[הבא ▶]"
+help_go_to_page: "<green>עבור לעמוד {page}"
+help_page_indicator: "<yellow>עמוד {page} מתוך {total_pages}</yellow>"
+help_click_info: "<gray>💡 לחץ על פקודה כלשהי כדי להעתיק אותה לצ'אט שלך.</gray>"

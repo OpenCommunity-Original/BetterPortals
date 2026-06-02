@@ -1,0 +1,134 @@
+# Danish Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Klik for at autofylde kommando:"
+
+notEnoughPerms: "<red>Du har ikke tilladelse til at bruge denne kommando!</red>"
+mustBePlayer: "<red>Du skal være en spiller for at bruge denne kommando</red>"
+mustMakeSelection: "<red>Du skal lave en markering først</red>"
+invalidSelection: "<red>Ugyldigt valg! Portalvalg skal være på portalens to hjørner</red>"
+coordinatesNotInLine: "<red>De angivne hjørnekoordinater (%d, %d, %d), (%d, %d, %d) er ikke justeret korrekt til at producere en flad portal (portaler er ikke tilladt på diagonaler)</red>"
+invalidCoordinates: "<red>Koordinaterne (%s, %s, %s) er ikke gyldige heltalskoordinater (relative eller andre)</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Kan ikke bruge relative koordinater, når kommandoen udføres fra konsollen</red>"
+portalCreated: "Portal blev oprettet med succes"
+noWorldExistsWithGivenName: "<red>Der eksisterer ingen verden ved navn {name}</red>"
+mustSelectBothSides: "<red>Du skal vælge begge sider af en portal først. For information, kør /bp help</red>"
+mustSelectOrigin: "<red>Du skal vælge portalens startpunkt (origin) på denne server</red>"
+wrongNumberOfArgs: "<red>Forkert antal argumenter. Kør /bp help for hjælp.</red>"
+noCommands: "<red>Du har ikke tilladelse til at bruge underkommandoer</red>"
+invalidArgs: "<red>Et af dine argumenter var ugyldigt. Kør /bp help for hjælp.</red>"
+invalidBoolean: "<red>Kunne ikke tolke \"{arg}\" som et boolsk argument. hjælp: mulige værdier er \"true\" eller \"false\" og \"yes\" eller \"no\"</red>"
+differentSizes: "<red>Startportalen og destinationsportalen skal have samme størrelse</red>"
+noPortalCloseEnough: "<red>Ingen portal fundet tæt nok på</red>"
+removeNotOwnedByPlayer: "<red>Du har ikke tilladelse til at fjerne portaler oprettet af andre personer</red>"
+nameNotOwnedbyPlayer: "<red>Du har ikke tilladelse til at ændre navnet på portaler oprettet af andre personer</red>"
+unknownCommand: "<red>Ukendt kommando. For hjælp, kør /bp help</red>"
+proxyDisabled: "<red>Kan ikke genoprette forbindelse til proxyen: den er ikke aktiveret!</red>"
+alreadyConnected: "<red>Kan ikke genoprette forbindelse to proxyen: serveren er allerede tilsluttet!</red>"
+horizontalIssues: "<yellow>Advarsel: horisontale portaler med forskellige start-/destinationsretninger kan forårsage problemer med blokrotationer - ikke alle blokke kan roteres i alle retninger</yellow>"
+noName: "<red>Denne portal har intet navn</red>"
+nameNetherPortal: "<red>Du kan ikke ændre navnet på en netherportal</red>"
+seeThroughPortalDisabled: "Alle netherportaler vil nu se ud som almindelige vanillaportaler for dig!"
+seeThroughPortalEnabled: "Alle berettigede netherportaler vil nu vise dig, hvad der er på den anden side."
+noPortalsWithName: "<red>Ingen portaler eksisterede med navnet {name}</red>"
+noWorldLink: "<red>Desværre vil denne portal ikke blive tændt, da den verden du befinder dig i ikke er linket.</red>\nHvis du tror, dette er en fejl, skal du kontakte en administrator og linke denne wiki-side: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Denne portal er for stor. Den nuværende størrelsesgrænse er {size}.</red>"
+vanillaPortal: "Dette er en almindelig netherportal. Hvis du vil se igennem denne portal, skal du tænde den igen."
+outOfDate: "<yellow>Din version af BetterPortals er forældet ({current} vs {new}). Du kan downloade den fra {url}</yellow>"
+reload: "Plugin blev genindlæst"
+originPortalSet: "Startportal fastsat"
+destPortalSet: "Destinationsportal fastsat"
+portalsLinked: "Portaler blev linket med succes"
+portalRemoved: "Portal fjernet"
+startedReconnection: "Begyndte at genoprette forbindelse til proxyen. Se konsollen for detaljer."
+changedName: "Ændrede portalnavnet med succes"
+currentName: "Navnet på denne portal er: <yellow>{name}</yellow>"
+allowsItems: "Denne portal tillader genstandsteleportering"
+doesNotAllowItems: "Denne portal tillader ikke genstandsteleportering"
+changedAllowsItems: "Indstillede at portalen tillader genstandsteleportering"
+changedDoesNotAllowItems: "Indstillede at portalen ikke tillader genstandsteleportering"
+help: "Underkommandoer"
+setPosA: "Indstil position A"
+setPosB: "Indstil position B"
+portalWandName: "<green>Portalstav</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Genindlæser pluginet og konfigurationsfilen"
+  betterportals_reconnect:
+    description: "Genopretter forbindelse til proxyen, hvis den er afbrudt"
+  betterportals_removebyname:
+    description: "Fjerner alle portaler med det angivne navn"
+  betterportals_createfromcoords:
+    description: "Opretter en portal ud fra koordinaterne på dens hjørner uden at kræve en spiller"
+  betterportals_remove:
+    description: "Fjerner den nærmeste portal inden for 20 blokke fra spilleren"
+  betterportals_setOrigin:
+    description: "Indstiller det aktuelle portalstavsvalg som din startposition"
+  betterportals_setDestination:
+    description: "Indstiller det aktuelle portalstavsvalg som din destinationsposition"
+  betterportals_linkPortals:
+    description: "Linker startportalen og destinationsportalen sammen"
+  betterportals_linkExternalPortals:
+    description: "Linker startvalget på denne server med en destination på en anden server"
+  betterportals_wand:
+    description: "Giver dig staven til at vælge portaler"
+  betterportals_setPortalName:
+    description: "Indstiller navnet på den nærmeste portal inden for 20 blokke"
+  betterportals_getportalname:
+    description: "Viser navnet på den nærmeste portal inden for 20 blokke"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Viser om den nærmeste portal inden for 20 blokke tillader genstandsteleportering"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Indstiller om den nærmeste portal inden for 20 blokke tillader genstandsteleportering"
+  betterportals_setseethroughportal:
+    description: "Indstiller om den aktuelle spiller kan se gennem portaler."
+  betterportals_toggleseethroughportal:
+    description: "Skifter om den aktuelle spiller kan se gennem portaler."
+  betterportals_menu:
+    description: "Åbner Portal Admin GUI-menuen"
+  betterportals_setprice:
+    description: "Indstiller prisen for den nærmeste portal"
+  betterportals_setpreset:
+    description: "Indstiller effektforudindstillingen for den nærmeste portal"
+
+gui_title_list: "Portalliste (Side {page})"
+gui_title_editor: "Portaleditormenu"
+gui_title_effects: "Portaleffektmenu"
+gui_button_teleport: "<gold>Teleporter til start"
+gui_lore_teleport: "<gray>Klik for at teleportere til portalens start"
+gui_button_item_mob: "<gold>Genstands-/Mobteleportering"
+gui_status_enabled: "<green>Aktiveret"
+gui_status_disabled: "<red>Deaktiveret"
+gui_lore_click_toggle: "<gray>Status: {status}\n<gray>Klik for at skifte"
+gui_button_dec_price: "<red>Reducer pris"
+gui_lore_dec_price: "<gray>Venstreklik: <yellow>-$1.00</yellow>\n<gray>Højreklik: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Nuværende pris: <yellow>{price}"
+gui_lore_price: "<gray>Klik for at nulstille prisen til $0.00"
+gui_button_inc_price: "<green>Øg pris"
+gui_lore_inc_price: "<gray>Venstreklik: <yellow>+$1.00</yellow>\n<gray>Højreklik: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Effektforudindstilling"
+gui_lore_effects: "<gray>Nuværende effekt: <light_purple>{preset}</light_purple>\n<gray>Klik for at åbne effektmenuen"
+gui_button_delete: "<red>Slet portal"
+gui_lore_delete: "<gray>Klik for at slette denne portal permanent"
+gui_button_back: "<yellow>Tilbage til listen"
+gui_button_back_to_editor: "<yellow>Tilbage til editoren"
+gui_button_prev: "<yellow>Forgående side"
+gui_button_next: "<yellow>Næste side"
+gui_button_sound: "<gold>Lydeffekter"
+gui_lore_sound: "<gray>Status: {status}\n\n<gray>Klik for at slå portalens lydeffekter til/fra"
+gui_list_default_portal_name: "Tilpasset portal"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Start: <white>{origin}</white>\n<gray>Pris: <yellow>{price}</yellow>\n<gray>Preset: <light_purple>{preset}</light_purple>\n\n<yellow>Klik for at redigere indstillinger"
+gui_effects_active: "<green>● {name} (Aktiv)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Partikel: <white>{particle}</white> (Antal: <white>{count}</white>, Hastighed: <white>{speed}</white>)\n<gray>Lyd: <white>{sound}</white> (Vol: <white>{volume}</white>, Pitch: <white>{pitch}</white>, Interval: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Klik for at vælge denne forudindstilling"
+gui_effects_selected: "<green>Valgt"
+
+help_header: "<gold><bold>BetterPortals Hjælp</bold></gold> <gray>(Side {page}/{total_pages})</gray>"
+help_previous: "[◀ Forrige]"
+help_next: "[Næste ▶]"
+help_go_to_page: "<green>Gå til side {page}"
+help_page_indicator: "<yellow>Side {page} af {total_pages}</yellow>"
+help_click_info: "<gray>💡 Klik på en vilkårlig kommando for at kopiere den til chatten.</gray>"

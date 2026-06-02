@@ -1,0 +1,134 @@
+# Vietnamese Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Nhấp để tự động điền lệnh:"
+
+notEnoughPerms: "<red>Bạn không có quyền sử dụng lệnh này!</red>"
+mustBePlayer: "<red>Bạn phải là người chơi để sử dụng lệnh này</red>"
+mustMakeSelection: "<red>Bạn phải chọn vùng trước</red>"
+invalidSelection: "<red>Lựa chọn không hợp lệ! Vùng chọn portal phải nằm ở hai góc của cổng dịch chuyển</red>"
+coordinatesNotInLine: "<red>Tọa độ góc đã cho (%d, %d, %d), (%d, %d, %d) không được căn chỉnh chính xác để tạo cổng phẳng (không cho phép cổng nằm chéo)</red>"
+invalidCoordinates: "<red>Tọa độ (%s, %s, %s) không phải là tọa độ số nguyên hợp lệ</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Không thể sử dụng tọa độ tương đối khi thực hiện lệnh từ console</red>"
+portalCreated: "Tạo cổng dịch chuyển thành công"
+noWorldExistsWithGivenName: "<red>Không có thế giới nào tên là {name}</red>"
+mustSelectBothSides: "<red>Bạn phải chọn cả hai bên của cổng trước. Để biết thêm thông tin, chạy lệnh /bp help</red>"
+mustSelectOrigin: "<red>Bạn phải chọn điểm bắt đầu (origin) của cổng trên máy chủ này</red>"
+wrongNumberOfArgs: "<red>Sai số lượng tham số. Chạy /bp help để được trợ giúp.</red>"
+noCommands: "<red>Bạn không có quyền sử dụng bất kỳ lệnh phụ nào</red>"
+invalidArgs: "<red>Một trong các tham số của bạn không hợp lệ. Chạy /bp help để được trợ giúp.</red>"
+invalidBoolean: "<red>Không thể phân tích \"{arg}\" thành giá trị boolean. Trợ giúp: giá trị khả dụng là \"true\" hoặc \"false\" và \"yes\" hoặc \"no\"</red>"
+differentSizes: "<red>Cổng bắt đầu và cổng đích phải có cùng kích thước</red>"
+noPortalCloseEnough: "<red>Không tìm thấy cổng dịch chuyển nào đủ gần</red>"
+removeNotOwnedByPlayer: "<red>Bạn không có quyền xóa cổng dịch chuyển do người khác tạo</red>"
+nameNotOwnedbyPlayer: "<red>Bạn không có quyền đặt tên cho cổng dịch chuyển do người khác tạo</red>"
+unknownCommand: "<red>Lệnh không xác định. Để được trợ giúp, chạy /bp help</red>"
+proxyDisabled: "<red>Không thể kết nối lại với proxy: nó chưa được bật!</red>"
+alreadyConnected: "<red>Không thể kết nối lại với proxy: máy chủ đã được kết nối!</red>"
+horizontalIssues: "<yellow>Cảnh báo: Cổng dịch chuyển nằm ngang với các hướng đi/đích khác nhau có thể gây ra sự cố xoay khối - không phải khối nào cũng xoay được mọi hướng</yellow>"
+noName: "<red>Cổng dịch chuyển này không có tên</red>"
+nameNetherPortal: "<red>Bạn không thể đặt tên cho cổng nether</red>"
+seeThroughPortalDisabled: "Tất cả các cổng nether bây giờ sẽ trông giống như cổng mặc định đối với bạn!"
+seeThroughPortalEnabled: "Tất cả các cổng nether đủ điều kiện bây giờ sẽ hiển thị cho bạn những gì ở phía bên kia."
+noPortalsWithName: "<red>Không có cổng dịch chuyển nào có tên là {name}</red>"
+noWorldLink: "<red>Rất tiếc, cổng này sẽ không hoạt động vì thế giới bạn đang ở không được liên kết.</red>\nNếu bạn tin đây là lỗi, hãy liên hệ quản trị viên và gửi liên kết wiki này: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Cổng này quá lớn. Giới hạn kích thước hiện tại là {size}.</red>"
+vanillaPortal: "Đây là cổng nether mặc định. Nếu bạn muốn nhìn xuyên qua cổng này, bạn cần kích hoạt lại nó."
+outOfDate: "<yellow>Phiên bản BetterPortals của bạn đã lỗi thời ({current} so với {new}). Bạn có thể tải xuống từ {url}</yellow>"
+reload: "Đã tải lại plugin"
+originPortalSet: "Đã thiết lập cổng bắt đầu"
+destPortalSet: "Đã thiết lập cổng đích"
+portalsLinked: "Liên kết các cổng thành công"
+portalRemoved: "Đã xóa cổng dịch chuyển"
+startedReconnection: "Bắt đầu kết nối lại với proxy. Xem console để biết chi tiết."
+changedName: "Đổi tên cổng thành công"
+currentName: "Tên của cổng này là: <yellow>{name}</yellow>"
+allowsItems: "Cổng này cho phép dịch chuyển vật phẩm"
+doesNotAllowItems: "Cổng này không cho phép dịch chuyển vật phẩm"
+changedAllowsItems: "Đã thiết lập cổng cho phép dịch chuyển vật phẩm"
+changedDoesNotAllowItems: "Đã thiết lập cổng không cho phép dịch chuyển vật phẩm"
+help: "Các lệnh phụ"
+setPosA: "Đặt vị trí A"
+setPosB: "Đặt vị trí B"
+portalWandName: "<green>Gậy Cổng Dịch Chuyển</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Tải lại plugin và cấu hình"
+  betterportals_reconnect:
+    description: "Kết nối lại với proxy nếu bị ngắt kết nối"
+  betterportals_removebyname:
+    description: "Xóa tất cả các cổng có tên đã cho"
+  betterportals_createfromcoords:
+    description: "Tạo cổng từ tọa độ các góc của nó mà không cần người chơi"
+  betterportals_remove:
+    description: "Xóa cổng gần nhất trong vòng 20 khối của người chơi"
+  betterportals_setOrigin:
+    description: "Đặt vùng chọn hiện tại của gậy cổng làm vị trí xuất phát của bạn"
+  betterportals_setDestination:
+    description: "Đặt vùng chọn hiện tại của gậy cổng làm vị trí đích của bạn"
+  betterportals_linkPortals:
+    description: "Liên kết cổng xuất phát và cổng đích với nhau"
+  betterportals_linkExternalPortals:
+    description: "Liên kết điểm xuất phát trên máy chủ này với điểm đích trên máy chủ khác"
+  betterportals_wand:
+    description: "Đưa cho bạn gậy để lựa chọn cổng"
+  betterportals_setPortalName:
+    description: "Đặt tên cho cổng gần nhất trong vòng 20 khối"
+  betterportals_getportalname:
+    description: "Cho bạn biết tên của cổng gần nhất trong vòng 20 khối"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Cho biết cổng gần nhất trong vòng 20 khối có cho phép dịch chuyển vật phẩm hay không"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Thiết lập xem cổng gần nhất trong vòng 20 khối có cho phép dịch chuyển vật phẩm hay không"
+  betterportals_setseethroughportal:
+    description: "Thiết lập xem người chơi hiện tại có thể nhìn thấy phía bên kia của cổng hay không."
+  betterportals_toggleseethroughportal:
+    description: "Bật/Tắt chế độ nhìn xuyên qua cổng cho người chơi hiện tại."
+  betterportals_menu:
+    description: "Mở menu GUI quản trị cổng"
+  betterportals_setprice:
+    description: "Đặt giá sử dụng cho cổng gần nhất"
+  betterportals_setpreset:
+    description: "Thiết lập hiệu ứng cho cổng gần nhất"
+
+gui_title_list: "Danh sách cổng (Trang {page})"
+gui_title_editor: "Menu chỉnh sửa cổng"
+gui_title_effects: "Menu hiệu ứng cổng"
+gui_button_teleport: "<gold>Dịch chuyển đến điểm xuất phát"
+gui_lore_teleport: "<gray>Nhấp để dịch chuyển đến điểm bắt đầu của cổng"
+gui_button_item_mob: "<gold>Dịch chuyển Vật phẩm/Quái vật"
+gui_status_enabled: "<green>Đã bật"
+gui_status_disabled: "<red>Đã tắt"
+gui_lore_click_toggle: "<gray>Trạng thái: {status}\n<gray>Nhấp để chuyển đổi"
+gui_button_dec_price: "<red>Giảm giá"
+gui_lore_dec_price: "<gray>Nhấp chuột trái: <yellow>-$1.00</yellow>\n<gray>Nhấp chuột phải: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Giá hiện tại: <yellow>{price}"
+gui_lore_price: "<gray>Nhấp để đặt lại giá về $0.00"
+gui_button_inc_price: "<green>Tăng giá"
+gui_lore_inc_price: "<gray>Nhấp chuột trái: <yellow>+$1.00</yellow>\n<gray>Nhấp chuột phải: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Hiệu ứng cổng"
+gui_lore_effects: "<gray>Hiệu ứng hiện tại: <light_purple>{preset}</light_purple>\n<gray>Nhấp để mở menu hiệu ứng"
+gui_button_delete: "<red>Xóa cổng"
+gui_lore_delete: "<gray>Nhấp để xóa vĩnh viễn cổng này"
+gui_button_back: "<yellow>Quay lại danh sách"
+gui_button_back_to_editor: "<yellow>Quay lại menu chỉnh sửa"
+gui_button_prev: "<yellow>Trang trước"
+gui_button_next: "<yellow>Trang sau"
+gui_button_sound: "<gold>Hiệu ứng âm thanh"
+gui_lore_sound: "<gray>Trạng thái: {status}\n\n<gray>Nhấp để bật/tắt hiệu ứng âm thanh cổng"
+gui_list_default_portal_name: "Cổng tùy chỉnh"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Xuất phát: <white>{origin}</white>\n<gray>Giá: <yellow>{price}</yellow>\n<gray>Hiệu ứng: <light_purple>{preset}</light_purple>\n\n<yellow>Nhấp để chỉnh sửa cài đặt"
+gui_effects_active: "<green>● {name} (Đang hoạt động)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Hạt: <white>{particle}</white> (Số lượng: <white>{count}</white>, Tốc độ: <white>{speed}</white>)\n<gray>Âm thanh: <white>{sound}</white> (Âm lượng: <white>{volume}</white>, Độ cao: <white>{pitch}</white>, Khoảng cách: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Nhấp để chọn hiệu ứng này"
+gui_effects_selected: "<green>Đã chọn"
+
+help_header: "<gold><bold>Hướng dẫn BetterPortals</bold></gold> <gray>(Trang {page}/{total_pages})</gray>"
+help_previous: "[◀ Trang trước]"
+help_next: "[Trang sau ▶]"
+help_go_to_page: "<green>Đến trang {page}"
+help_page_indicator: "<yellow>Trang {page} trên {total_pages}</yellow>"
+help_click_info: "<gray>💡 Nhấp vào bất kỳ lệnh nào để sao chép vào hộp trò chuyện của bạn.</gray>"

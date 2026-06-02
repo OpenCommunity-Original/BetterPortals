@@ -1,0 +1,134 @@
+# Turkish Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Komutu otomatik doldurmak için tıklayın:"
+
+notEnoughPerms: "<red>Bu komutu kullanmak için yetkiniz yok!</red>"
+mustBePlayer: "<red>Bu komutu kullanmak için bir oyuncu olmalısınız</red>"
+mustMakeSelection: "<red>Öncelikle bir seçim yapmalısınız</red>"
+invalidSelection: "<red>Geçersiz seçim! Portal seçimleri portalın iki köşesinde olmalıdır</red>"
+coordinatesNotInLine: "<red>Belirtilen köşe koordinatları (%d, %d, %d), (%d, %d, %d) düz bir portal oluşturmak için doğru şekilde hizalanmamış (portalların köşegenler üzerinde olmasına izin verilmez)</red>"
+invalidCoordinates: "<red>Koordinatlar (%s, %s, %s) geçerli tam sayı koordinatları değil</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Komut konsoldan yürütülürken göreceli koordinatlar kullanılamaz</red>"
+portalCreated: "Portal başarıyla oluşturuldu"
+noWorldExistsWithGivenName: "<red>{name} adında bir dünya mevcut değil</red>"
+mustSelectBothSides: "<red>Öncelikle portalın her iki tarafını da seçmelisiniz. Bilgi için /bp help komutunu çalıştırın</red>"
+mustSelectOrigin: "<red>Bu sunucuda portalın başlangıç noktasını seçmelisiniz</red>"
+wrongNumberOfArgs: "<red>Yanlış argüman sayısı. Yardım için /bp help komutunu çalıştırın.</red>"
+noCommands: "<red>Herhangi bir alt komutu kullanma yetkiniz yok</red>"
+invalidArgs: "<red>Argümanlarınızdan biri geçersizdi. Yardım için /bp help komutunu çalıştırın.</red>"
+invalidBoolean: "<red>\"{arg}\" değeri mantıksal (boolean) bir argüman olarak ayrıştırılamadı. yardım: olası değerler \"true\" veya \"false\" ve \"yes\" veya \"no\"'dur</red>"
+differentSizes: "<red>Başlangıç ve hedef portalı aynı boyutta olmalıdır</red>"
+noPortalCloseEnough: "<red>Yakında hiç portal bulunamadı</red>"
+removeNotOwnedByPlayer: "<red>Diğer kişiler tarafından oluşturulan portalları kaldırma yetkiniz yok</red>"
+nameNotOwnedbyPlayer: "<red>Diğer kişiler tarafından oluşturulan portalların adını belirleme yetkiniz yok</red>"
+unknownCommand: "<red>Bilinmeyen Komut. Yardım için /bp help komutunu çalıştırın</red>"
+proxyDisabled: "<red>Proxy sunucusuna yeniden bağlanılamıyor: etkin değil!</red>"
+alreadyConnected: "<red>Proxy sunucusuna yeniden bağlanılamıyor: sunucu zaten bağlı!</red>"
+horizontalIssues: "<yellow>Uyarı: Farklı başlangıç/hedef yönlerine sahip yatay portallar blok dönüşlerinde sorunlara neden olabilir - tüm bloklar her yöne döndürülemez</yellow>"
+noName: "<red>Bu portalın bir adı yok</red>"
+nameNetherPortal: "<red>Nether portalının adını belirleyemezsiniz</red>"
+seeThroughPortalDisabled: "Artık tüm nether portalları size normal vanilya portalları gibi görünecek!"
+seeThroughPortalEnabled: "Tüm uygun nether portalları artık size diğer tarafta ne olduğunu gösterecek."
+noPortalsWithName: "<red>{name} adında hiçbir portal mevcut değil</red>"
+noWorldLink: "<red>Maalesef bulunduğunuz dünya bağlı olmadığı için bu portal aktif olmayacaktır.</red>\nBunun bir hata olduğunu düşünüyorsanız, bir yönetici ile iletişime geçin ve şu wiki sayfasını iletin: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Bu portal çok büyük. Mevcut boyut sınırı: {size}.</red>"
+vanillaPortal: "Bu standart bir nether portalıdır. İçini görmek istiyorsanız portalı yeniden yakmanız gerekir."
+outOfDate: "<yellow>BetterPortals sürümünüz güncel değil ({current} vs {new}). Buradan indirebilirsiniz: {url}</yellow>"
+reload: "Eklenti yeniden yüklendi"
+originPortalSet: "Başlangıç portalı ayarlandı"
+destPortalSet: "Hedef portalı ayarlandı"
+portalsLinked: "Portallar başarıyla birbirine bağlandı"
+portalRemoved: "Portal kaldırıldı"
+startedReconnection: "Proxy sunucusuna yeniden bağlanma başlatıldı. Detaylar için konsola bakın."
+changedName: "Portal adı başarıyla değiştirildi"
+currentName: "Bu portalın adı: <yellow>{name}</yellow>"
+allowsItems: "Bu portal eşya ışınlanmasına izin veriyor"
+doesNotAllowItems: "Bu portal eşya ışınlanmasına izin vermiyor"
+changedAllowsItems: "Portalın eşya ışınlanmasına izin vermesi başarıyla ayarlandı"
+changedDoesNotAllowItems: "Portalın eşya ışınlanmasına izin vermemesi başarıyla ayarlandı"
+help: "Alt Komutlar"
+setPosA: "A konumu ayarlandı"
+setPosB: "B konumu ayarlandı"
+portalWandName: "<green>Portal Asası</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Eklentiyi ve yapılandırma dosyasını yeniden yükler"
+  betterportals_reconnect:
+    description: "Bağlantı kesilirse proxy sunucusuna yeniden bağlanır"
+  betterportals_removebyname:
+    description: "Verilen ada sahip tüm portalları kaldırır"
+  betterportals_createfromcoords:
+    description: "Oyuncuya ihtiyaç duymadan köşelerin koordinatlarından bir portal oluşturur"
+  betterportals_remove:
+    description: "Oyuncunun 20 blok yakınındaki en yakın portalı kaldırır"
+  betterportals_setOrigin:
+    description: "Mevcut portal asası seçimini başlangıç konumunuz olarak ayarlar"
+  betterportals_setDestination:
+    description: "Mevcut portal asası seçimini hedef konumunuz olarak ayarlar"
+  betterportals_linkPortals:
+    description: "Başlangıç ve hedef portalını birbirine bağlar"
+  betterportals_linkExternalPortals:
+    description: "Bu sunucudaki başlangıç seçimini başka bir sunucudaki hedefle bağlar"
+  betterportals_wand:
+    description: "Portalları seçmeniz için size asayı verir"
+  betterportals_setPortalName:
+    description: "20 blok yakınındaki en yakın portalın adını ayarlar"
+  betterportals_getportalname:
+    description: "20 blok yakınındaki en yakın portalın adını size söyler"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "20 blok yakınındaki en yakın portalın eşya ışınlanmasına izin verip vermediğini söyler"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "20 blok yakınındaki en yakın portalın eşya ışınlanmasına izin verip vermeyeceğini ayarlar"
+  betterportals_setseethroughportal:
+    description: "Mevcut oyuncunun portalın diğer tarafını görüp göremeyeceğini ayarlar."
+  betterportals_toggleseethroughportal:
+    description: "Mevcut oyuncunun portalın diğer tarafını görüp göremeyeceğini değiştirir."
+  betterportals_menu:
+    description: "Portal Yönetici Arayüzü (GUI) menüsünü açar"
+  betterportals_setprice:
+    description: "En yakın portalın fiyatını ayarlar"
+  betterportals_setpreset:
+    description: "En yakın portalın efekt şablonunu ayarlar"
+
+gui_title_list: "Portal Listesi (Sayfa {page})"
+gui_title_editor: "Portal Editör Menüsü"
+gui_title_effects: "Portal Efektleri Menüsü"
+gui_button_teleport: "<gold>Başlangıç Noktasına Işınlan"
+gui_lore_teleport: "<gray>Portal başlangıcına ışınlanmak için tıklayın"
+gui_button_item_mob: "<gold>Eşya/Yaratık Işınlanması"
+gui_status_enabled: "<green>Aktif"
+gui_status_disabled: "<red>Devre Dışı"
+gui_lore_click_toggle: "<gray>Durum: {status}\n<gray>Değiştirmek için tıklayın"
+gui_button_dec_price: "<red>Fiyatı Düşür"
+gui_lore_dec_price: "<gray>Sol Tık: <yellow>-$1.00</yellow>\n<gray>Sağ Tık: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Mevcut Fiyat: <yellow>{price}"
+gui_lore_price: "<gray>Fiyatı $0.00 yapmak için tıklayın"
+gui_button_inc_price: "<green>Fiyatı Artır"
+gui_lore_inc_price: "<gray>Sol Tık: <yellow>+$1.00</yellow>\n<gray>Sağ Tık: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Efekt Şablonu"
+gui_lore_effects: "<gray>Mevcut Şablon: <light_purple>{preset}</light_purple>\n<gray>Efekt menüsünü açmak için tıklayın"
+gui_button_delete: "<red>Portalı Sil"
+gui_lore_delete: "<gray>Bu portalı kalıcı olarak silmek için tıklayın"
+gui_button_back: "<yellow>Listeye Geri Dön"
+gui_button_back_to_editor: "<yellow>Editöre Geri Dön"
+gui_button_prev: "<yellow>Önceki Sayfa"
+gui_button_next: "<yellow>Sonraki Sayfa"
+gui_button_sound: "<gold>Ses Efektleri"
+gui_lore_sound: "<gray>Durum: {status}\n\n<gray>Portal ses efektlerini açıp kapatmak için tıklayın"
+gui_list_default_portal_name: "Özel Portal"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Başlangıç: <white>{origin}</white>\n<gray>Fiyat: <yellow>{price}</yellow>\n<gray>Şablon: <light_purple>{preset}</light_purple>\n\n<yellow>Ayarları Düzenlemek İçin Tıklayın"
+gui_effects_active: "<green>● {name} (Aktif)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Parçacık: <white>{particle}</white> (Miktar: <white>{count}</white>, Hız: <white>{speed}</white>)\n<gray>Ses: <white>{sound}</white> (Ses Seviyesi: <white>{volume}</white>, Ton: <white>{pitch}</white>, Aralık: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Bu şablonu seçmek için tıklayın"
+gui_effects_selected: "<green>Seçildi"
+
+help_header: "<gold><bold>BetterPortals Yardımı</bold></gold> <gray>(Sayfa {page}/{total_pages})</gray>"
+help_previous: "[◀ Geri]"
+help_next: "[İleri ▶]"
+help_go_to_page: "<green>Sayfa {page} git"
+help_page_indicator: "<yellow>Sayfa {page} / {total_pages}</yellow>"
+help_click_info: "<gray>💡 Kopyalamak istediğiniz komuta tıklayın.</gray>"

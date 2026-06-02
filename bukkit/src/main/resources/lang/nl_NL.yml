@@ -1,0 +1,134 @@
+# Dutch Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Klik om de opdracht automatisch in te vullen:"
+
+notEnoughPerms: "<red>Je hebt geen toestemming om deze opdracht te gebruiken!</red>"
+mustBePlayer: "<red>Je moet een speler zijn om deze opdracht te gebruiken</red>"
+mustMakeSelection: "<red>Je moet eerst een selectie maken</red>"
+invalidSelection: "<red>Ongeldige selectie! Portaal-selecties moeten op de twee hoeken van een portaal liggen</red>"
+coordinatesNotInLine: "<red>De opgegeven hoekcoördinaten (%d, %d, %d), (%d, %d, %d) zijn niet correct uitgelijnd om een vlak portaal te produceren (portalen zijn niet toegestaan op diagonalen)</red>"
+invalidCoordinates: "<red>De coördinaten (%s, %s, %s) zijn geen geldige gehele getallen (relatief of anderszins)</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Kan geen relatieve coördinaten gebruiken bij het uitvoeren van een opdracht vanaf de console</red>"
+portalCreated: "Portaal succesvol aangemaakt"
+noWorldExistsWithGivenName: "<red>Er bestaat geen wereld genaamd {name}</red>"
+mustSelectBothSides: "<red>Je moet eerst beide zijden van een portaal selecteren. Voer /bp help uit voor informatie</red>"
+mustSelectOrigin: "<red>Je moet de oorsprong van het portaal op deze server selecteren</red>"
+wrongNumberOfArgs: "<red>Onjuist aantal argumenten. Voer /bp help uit voor hulp.</red>"
+noCommands: "<red>Je hebt geen toestemming om sub-opdrachten te gebruiken</red>"
+invalidArgs: "<red>Een van je argumenten was ongeldig. Voer /bp help uit voor hulp.</red>"
+invalidBoolean: "<red>Kon \"{arg}\" niet parseren als een boolean argument. hulp: mogelijke waarden zijn \"true\" of \"false\" en \"yes\" of \"no\"</red>"
+differentSizes: "<red>Het start- en bestemmingsportaal moeten dezelfde grootte hebben</red>"
+noPortalCloseEnough: "<red>Geen portaal dichtbij genoeg gevonden</red>"
+removeNotOwnedByPlayer: "<red>Je hebt geen toestemming om portalen te verwijderen die door anderen zijn gemaakt</red>"
+nameNotOwnedbyPlayer: "<red>Je hebt geen toestemming om de naam van portalen in te stellen die door anderen zijn gemaakt</red>"
+unknownCommand: "<red>Onbekende opdracht. Voer /bp help uit voor hulp</red>"
+proxyDisabled: "<red>Kan geen verbinding maken met de proxy: deze is niet ingeschakeld!</red>"
+alreadyConnected: "<red>Kan geen verbinding maken met de proxy: de server is al verbonden!</red>"
+horizontalIssues: "<yellow>Waarschuwing: horizontale portalen met verschillende start-/bestemmingsrichtingen kunnen problemen veroorzaken met blokrotaties - niet alle blokken kunnen in elke richting worden gedraaid</yellow>"
+noName: "<red>Dit portaal heeft geen naam</red>"
+nameNetherPortal: "<red>Je kunt de naam van een netherportaal niet instellen</red>"
+seeThroughPortalDisabled: "Alle netherportalen zien er nu voor jou uit als normale vanillaportalen!"
+seeThroughPortalEnabled: "Alle in aanmerking komende netherportalen laten je nu zien wat er aan de andere kant is."
+noPortalsWithName: "<red>Er bestonden geen portalen met de naam {name}</red>"
+noWorldLink: "<red>Helaas zal dit portaal niet worden geactiveerd omdat de wereld waarin je je bevindt niet is gekoppeld.</red>\nAls je denkt dat dit een fout is, neem dan contact op met een admin en koppel deze wiki-pagina: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Dit portaal is te groot. De huidige groottelimiet is {size}.</red>"
+vanillaPortal: "Dit is een standaard netherportaal. Als je hier doorheen wilt kijken, moet je het opnieuw aansteken."
+outOfDate: "<yellow>Jouw versie van BetterPortals is verouderd ({current} vs {new}). Je kunt deze downloaden van {url}</yellow>"
+reload: "Plugin herladen"
+originPortalSet: "Startportaal ingesteld"
+destPortalSet: "Bestemmingsportaal ingesteld"
+portalsLinked: "Portalen succesvol gekoppeld"
+portalRemoved: "Portaal verwijderd"
+startedReconnection: "Gestart met opnieuw verbinden met de proxy. Zie console voor details."
+changedName: "Naam van het portaal succesvol gewijzigd"
+currentName: "De naam voor dit portaal is: <yellow>{name}</yellow>"
+allowsItems: "Dit portaal staat item-teleportatie toe"
+doesNotAllowItems: "Dit portaal staat geen item-teleportatie toe"
+changedAllowsItems: "Succesvol ingesteld dat het portaal item-teleportatie toestaat"
+changedDoesNotAllowItems: "Succesvol ingesteld dat het portaal geen item-teleportatie toestaat"
+help: "Sub-opdrachten"
+setPosA: "Stel positie A in"
+setPosB: "Stel positie B in"
+portalWandName: "<green>Portaal Wand</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Herlaadt de plugin en het configuratiebestand"
+  betterportals_reconnect:
+    description: "Verbindt opnieuw met de proxy indien losgekoppeld"
+  betterportals_removebyname:
+    description: "Verwijdert alle portalen met de opgegeven naam"
+  betterportals_createfromcoords:
+    description: "Maakt een portaal van de coördinaten van de hoeken zonder een speler te vereisen"
+  betterportals_remove:
+    description: "Verwijdert het dichtstbijzijnde portaal binnen 20 blokken van de speler"
+  betterportals_setOrigin:
+    description: "Stelt de huidige portaalwand-selectie in als je startpositie"
+  betterportals_setDestination:
+    description: "Stelt de huidige portaalwand-selectie in als je bestemmingspositie"
+  betterportals_linkPortals:
+    description: "Koppelt het start- en bestemmingsportaal aan elkaar"
+  betterportals_linkExternalPortals:
+    description: "Koppelt de startselectie op deze server met een bestemming op een andere server"
+  betterportals_wand:
+    description: "Geeft je de wand om portalen te selecteren"
+  betterportals_setPortalName:
+    description: "Stelt de naam in van het dichtstbijzijnde portaal binnen 20 blokken"
+  betterportals_getportalname:
+    description: "Vertelt je de naam van het dichtstbijzijnde portaal binnen 20 blokken"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Vertelt je of het dichtstbijzijnde portaal binnen 20 blokken item-teleportatie toestaat"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Stelt in of het dichtstbijzijnde portaal binnen 20 blokken item-teleportatie toestaat"
+  betterportals_setseethroughportal:
+    description: "Stelt in of de huidige speler door het portaal heen kan kijken."
+  betterportals_toggleseethroughportal:
+    description: "Schakelt in of uit of de huidige speler door het portaal heen kan kijken."
+  betterportals_menu:
+    description: "Opent het Portal Admin GUI-menu"
+  betterportals_setprice:
+    description: "Stelt de prijs in van het dichtstbijzijnde portaal"
+  betterportals_setpreset:
+    description: "Stelt de effect-preset in van het dichtstbijzijnde portaal"
+
+gui_title_list: "Portalenlijst (Pagina {page})"
+gui_title_editor: "Portaal Editor Menu"
+gui_title_effects: "Portaal Effecten Menu"
+gui_button_teleport: "<gold>Teleporteer naar Start"
+gui_lore_teleport: "<gray>Klik om naar de start van het portaal te teleporten"
+gui_button_item_mob: "<gold>Item/Mob Teleportatie"
+gui_status_enabled: "<green>Ingeschakeld"
+gui_status_disabled: "<red>Uitgeschakeld"
+gui_lore_click_toggle: "<gray>Status: {status}\n<gray>Klik om te schakelen"
+gui_button_dec_price: "<red>Verlaag Prijs"
+gui_lore_dec_price: "<gray>Linksklik: <yellow>-$1.00</yellow>\n<gray>Rechtsklik: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Huidige Prijs: <yellow>{price}"
+gui_lore_price: "<gray>Klik om prijs te resetten naar $0.00"
+gui_button_inc_price: "<green>Verhoog Prijs"
+gui_lore_inc_price: "<gray>Linksklik: <yellow>+$1.00</yellow>\n<gray>Rechtsklik: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Effect Preset"
+gui_lore_effects: "<gray>Huidige Preset: <light_purple>{preset}</light_purple>\n<gray>Klik om effectenmenu te openen"
+gui_button_delete: "<red>Verwijder Portaal"
+gui_lore_delete: "<gray>Klik om dit portaal permanent te verwijderen"
+gui_button_back: "<yellow>Terug naar Lijst"
+gui_button_back_to_editor: "<yellow>Terug naar Editor"
+gui_button_prev: "<yellow>Vorige Pagina"
+gui_button_next: "<yellow>Volgende Pagina"
+gui_button_sound: "<gold>Geluidseffecten"
+gui_lore_sound: "<gray>Status: {status}\n\n<gray>Klik om portaal-geluidseffecten in of uit te schakelen"
+gui_list_default_portal_name: "Aangepast Portaal"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Start: <white>{origin}</white>\n<gray>Prijs: <yellow>{price}</yellow>\n<gray>Preset: <light_purple>{preset}</light_purple>\n\n<yellow>Klik om Instellingen te Bewerken"
+gui_effects_active: "<green>● {name} (Actief)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Deeltje: <white>{particle}</white> (Aantal: <white>{count}</white>, Snelheid: <white>{speed}</white>)\n<gray>Geluid: <white>{sound}</white> (Vol: <white>{volume}</white>, Pitch: <white>{pitch}</white>, Interval: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Klik om deze preset te selecteren"
+gui_effects_selected: "<green>Geselecteerd"
+
+help_header: "<gold><bold>BetterPortals Hulp</bold></gold> <gray>(Pagina {page}/{total_pages})</gray>"
+help_previous: "[◀ Vorige]"
+help_next: "[Volgende ▶]"
+help_go_to_page: "<green>Ga naar pagina {page}"
+help_page_indicator: "<yellow>Pagina {page} van {total_pages}</yellow>"
+help_click_info: "<gray>💡 Klik op een opdracht om deze naar je chatvak te kopiëren.</gray>"

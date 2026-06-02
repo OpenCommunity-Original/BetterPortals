@@ -126,3 +126,10 @@ gui_effects_lore: "<gray>Частицы: <white>{particle}</white> (Кол-во:
 gui_effects_click_select: "<yellow>Нажмите, чтобы выбрать этот пресет"
 gui_effects_selected: "<green>Выбрано"
 
+help_header: "<gold><bold>Справка по BetterPortals</bold></gold> <gray>(Страница {page}/{total_pages})</gray>"
+help_previous: "[◀ Назад]"
+help_next: "[Вперед ▶]"
+help_go_to_page: "<green>Перейти на страницу {page}"
+help_page_indicator: "<yellow>Страница {page} из {total_pages}</yellow>"
+help_click_info: "<gray>💡 Нажмите на любую команду, чтобы скопировать её в чат.</gray>"
+

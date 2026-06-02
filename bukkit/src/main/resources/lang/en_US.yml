@@ -126,3 +126,10 @@ gui_effects_lore: "<gray>Particle: <white>{particle}</white> (Count: <white>{cou
 gui_effects_click_select: "<yellow>Click to select this preset"
 gui_effects_selected: "<green>Selected"
 
+help_header: "<gold><bold>BetterPortals Help</bold></gold> <gray>(Page {page}/{total_pages})</gray>"
+help_previous: "[◀ Previous]"
+help_next: "[Next ▶]"
+help_go_to_page: "<green>Go to page {page}"
+help_page_indicator: "<yellow>Page {page} of {total_pages}</yellow>"
+help_click_info: "<gray>💡 Click on any command to copy it to your chat box.</gray>"
+

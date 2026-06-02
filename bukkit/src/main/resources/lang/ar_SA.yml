@@ -1,0 +1,134 @@
+# Arabic Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "انقر للإكمال التلقائي للأمر:"
+
+notEnoughPerms: "<red>ليس لديك إذن لاستخدام هذا الأمر!</red>"
+mustBePlayer: "<red>يجب أن تكون لاعباً لتتمكن من استخدام هذا الأمر</red>"
+mustMakeSelection: "<red>يجب عليك إجراء تحديد أولاً</red>"
+invalidSelection: "<red>تحديد غير صالح! يجب أن تكون تحديدات البوابة على زاويتي البوابة</red>"
+coordinatesNotInLine: "<red>إحداثيات الزوايا المحددة (%d, %d, %d), (%d, %d, %d) ليست محاذية بشكل صحيح لإنشاء بوابة مسطحة (البوابات غير مسموح بها على الخطوط المائلة)</red>"
+invalidCoordinates: "<red>الإحداثيات (%s, %s, %s) ليست إحداثيات صحيحة صالحة</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>لا يمكن استخدام الإحداثيات النسبية عند تنفيذ الأمر من وحدة التحكم (Console)</red>"
+portalCreated: "تم إنشاء البوابة بنجاح"
+noWorldExistsWithGivenName: "<red>لا يوجد عالم باسم {name}</red>"
+mustSelectBothSides: "<red>يجب عليك تحديد كلا جانبي البوابة أولاً. للحصول على معلومات، قم بتشغيل /bp help</red>"
+mustSelectOrigin: "<red>يجب عليك تحديد أصل البوابة على هذا الخادم</red>"
+wrongNumberOfArgs: "<red>عدد غير صحيح من الوسيطات. قم بتشغيل /bp help للحصول على المساعدة.</red>"
+noCommands: "<red>ليس لديك إذن لاستخدام أي أوامر فرعية</red>"
+invalidArgs: "<red>أحد الوسيطات الخاصة بك غير صالح. قم بتشغيل /bp help للحصول على المساعدة.</red>"
+invalidBoolean: "<red>تعذر تحليل \"{arg}\" كقيمة منطقية. المساعدة: القيم الممكنة هي \"true\" أو \"false\" و \"yes\" أو \"no\"</red>"
+differentSizes: "<red>يجب أن تكون بوابة الأصل وبوابة الوجهة بنفس الحجم</red>"
+noPortalCloseEnough: "<red>لم يتم العثور على بوابة قريبة بما يكفي</red>"
+removeNotOwnedByPlayer: "<red>ليس لديك إذن لإزالة البوابات التي أنشأها أشخاص آخرون</red>"
+nameNotOwnedbyPlayer: "<red>ليس لديك إذن لتعيين اسم البوابات التي أنشأها أشخاص آخرون</red>"
+unknownCommand: "<red>أمر غير معروف. للمساعدة، قم بتشغيل /bp help</red>"
+proxyDisabled: "<red>تعذر إعادة الاتصال بالوكيل (Proxy): لم يتم تمكينه!</red>"
+alreadyConnected: "<red>تعذر إعادة الاتصال بالوكيل: الخادم متصل بالفعل!</red>"
+horizontalIssues: "<yellow>تحذير: البوابات الأفقية ذات الاتجاهات المختلفة للأصل/الوجهة يمكن أن تسبب مشاكل في تدوير الكتل - لا يمكن تدوير جميع الكتل في كل اتجاه</yellow>"
+noName: "<red>هذه البوابة ليس لها اسم</red>"
+nameNetherPortal: "<red>لا يمكنك تعيين اسم لبوابة النذر</red>"
+seeThroughPortalDisabled: "ستظهر جميع بوابات النذر كالبوابات العادية الآن بالنسبة لك!"
+seeThroughPortalEnabled: "ستظهر لك جميع بوابات النذر المؤهلة ما يوجد على الجانب الآخر الآن."
+noPortalsWithName: "<red>لا توجد بوابات بالاسم {name}</red>"
+noWorldLink: "<red>للأسف، لن يتم إضاءة هذه البوابة لأن العالم الذي تتواجد فيه غير مرتبط.</red>\nإذا كنت تعتقد أن هذا خطأ، فاتصل بمسؤول النظام وقم بمشاركة صفحة الويكي هذه: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>هذه البوابة كبيرة جداً. حد الحجم الحالي هو {size}.</red>"
+vanillaPortal: "هذه بوابة نذر عادية. إذا كنت تريد الرؤية من خلال هذه البوابة، فستحتاج إلى إشعالها مجدداً."
+outOfDate: "<yellow>إصدار BetterPortals الخاص بك قديم ({current} مقابل {new}). يمكنك تنزيله من {url}</yellow>"
+reload: "تم إعادة تحميل الملحق"
+originPortalSet: "تم تعيين بوابة الأصل"
+destPortalSet: "تم تعيين بوابة الوجهة"
+portalsLinked: "تم ربط البوابات بنجاح"
+portalRemoved: "تمت إزالة البوابة"
+startedReconnection: "بدأت إعادة الاتصال بالوكيل. انظر وحدة التحكم للحصول على التفاصيل."
+changedName: "تم تغيير اسم البوابة بنجاح"
+currentName: "اسم هذه البوابة هو: <yellow>{name}</yellow>"
+allowsItems: "تسمح هذه البوابة بنقل العناصر"
+doesNotAllowItems: "لا تسمح هذه البوابة بنقل العناصر"
+changedAllowsItems: "تم تعيين البوابة بنجاح لتسمح بنقل العناصر"
+changedDoesNotAllowItems: "تم تعيين البوابة بنجاح لتمنع نقل العناصر"
+help: "الأوامر الفرعية"
+setPosA: "تعيين الموضع أ"
+setPosB: "تعيين الموضع ب"
+portalWandName: "<green>عصا البوابة</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "إعادة تحميل الملحق وملف الإعدادات"
+  betterportals_reconnect:
+    description: "إعادة الاتصال بالوكيل في حال الانقطاع"
+  betterportals_removebyname:
+    description: "إزالة جميع البوابات بالاسم المحدد"
+  betterportals_createfromcoords:
+    description: "إنشاء بوابة من إحداثيات زواياها دون الحاجة للاعب"
+  betterportals_remove:
+    description: "إزالة أقرب بوابة في حدود 20 كتلة من اللاعب"
+  betterportals_setOrigin:
+    description: "تعيين التحديد الحالي لعصا البوابة كموقع للأصل"
+  betterportals_setDestination:
+    description: "تعيين التحديد الحالي لعصا البوابة كموقع للوجهة"
+  betterportals_linkPortals:
+    description: "ربط بوابة الأصل وبوابة الوجهة معاً"
+  betterportals_linkExternalPortals:
+    description: "ربط تحديد الأصل على هذا الخادم بوجهة على خادم آخر"
+  betterportals_wand:
+    description: "يعطيك عصا لتحديد البوابات"
+  betterportals_setPortalName:
+    description: "تعيين اسم لأقرب بوابة في حدود 20 كتلة"
+  betterportals_getportalname:
+    description: "يخبرك باسم أقرب بوابة في حدود 20 كتلة"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "يخبرك ما إذا كانت أقرب بوابة في حدود 20 كتلة تسمح بنقل العناصر أم لا"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "يحدد ما إذا كانت أقرب بوابة في حدود 20 كتلة تسمح بنقل العناصر أم لا"
+  betterportals_setseethroughportal:
+    description: "يحدد ما إذا كان بإمكان اللاعب الحالي الرؤية عبر البوابة أم لا."
+  betterportals_toggleseethroughportal:
+    description: "يبدل ما إذا كان بإمكان اللاعب الحالي الرؤية عبر البوابة أم لا."
+  betterportals_menu:
+    description: "يفتح قائمة إدارة البوابات الرسومية (GUI)"
+  betterportals_setprice:
+    description: "يحدد تكلفة استخدام أقرب بوابة"
+  betterportals_setpreset:
+    description: "يحدد تأثيرات أقرب بوابة"
+
+gui_title_list: "قائمة البوابات (الصفحة {page})"
+gui_title_editor: "قائمة تعديل البوابة"
+gui_title_effects: "قائمة تأثيرات البوابة"
+gui_button_teleport: "<gold>انتقال للأصل"
+gui_lore_teleport: "<gray>انقر للانتقال إلى أصل البوابة"
+gui_button_item_mob: "<gold>انتقال العناصر/الكائنات"
+gui_status_enabled: "<green>مفعل"
+gui_status_disabled: "<red>معطل"
+gui_lore_click_toggle: "<gray>الحالة: {status}\n<gray>انقر للتبديل"
+gui_button_dec_price: "<red>تقليل السعر"
+gui_lore_dec_price: "<gray>نقرة يسار: <yellow>-$1.00</yellow>\n<gray>نقرة يمين: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>السعر الحالي: <yellow>{price}"
+gui_lore_price: "<gray>انقر لإعادة تعيين السعر لـ $0.00"
+gui_button_inc_price: "<green>زيادة السعر"
+gui_lore_inc_price: "<gray>نقرة يسار: <yellow>+$1.00</yellow>\n<gray>نقرة يمين: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>نمط التأثير"
+gui_lore_effects: "<gray>النمط الحالي: <light_purple>{preset}</light_purple>\n<gray>انقر لفتح قائمة التأثيرات"
+gui_button_delete: "<red>حذف البوابة"
+gui_lore_delete: "<gray>انقر لحذف هذه البوابة بشكل نهائي"
+gui_button_back: "<yellow>العودة للقائمة"
+gui_button_back_to_editor: "<yellow>العودة للتعديل"
+gui_button_prev: "<yellow>الصفحة السابقة"
+gui_button_next: "<yellow>الصفحة التالية"
+gui_button_sound: "<gold>التأثيرات الصوتية"
+gui_lore_sound: "<gray>الحالة: {status}\n\n<gray>انقر لتبديل التأثيرات الصوتية للبوابة"
+gui_list_default_portal_name: "بوابة مخصصة"
+gui_list_item_lore: "<gray>الرقم: <white>{id}</white>\n<gray>الأصل: <white>{origin}</white>\n<gray>السعر: <yellow>{price}</yellow>\n<gray>النمط: <light_purple>{preset}</light_purple>\n\n<yellow>انقر لتعديل الإعدادات"
+gui_effects_active: "<green>● {name} (نشط)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>الجسيمات: <white>{particle}</white> (العدد: <white>{count}</white>, السرعة: <white>{speed}</white>)\n<gray>الصوت: <white>{sound}</white> (الصوت: <white>{volume}</white>, النبرة: <white>{pitch}</white>, الوقت: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>انقر لتحديد هذا النمط"
+gui_effects_selected: "<green>محدد"
+
+help_header: "<gold><bold>مساعدة BetterPortals</bold></gold> <gray>(الصفحة {page}/{total_pages})</gray>"
+help_previous: "[◀ السابقة]"
+help_next: "[التالية ▶]"
+help_go_to_page: "<green>انتقال للصفحة {page}"
+help_page_indicator: "<yellow>صفحة {page} من {total_pages}</yellow>"
+help_click_info: "<gray>💡 انقر على أي أمر لنسخه في صندوق المحادثة الخاص بك.</gray>"
