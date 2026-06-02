@@ -18,7 +18,7 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 @Singleton
 public class MainUpdate implements Runnable {
-    private static final String ISSUES_URL = "https://github.com/OpenCommunity-Original/BetterPortals/issues";
+    private static final String ISSUES_URL = "https://discord.gg/wTVNTJsBUr";
 
     private final JavaPlugin pl;
     private final PlayerDataManager playerDataManager;

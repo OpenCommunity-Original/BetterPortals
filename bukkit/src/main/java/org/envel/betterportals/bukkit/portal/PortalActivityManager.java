@@ -23,7 +23,7 @@ public class PortalActivityManager implements IPortalActivityManager    {
     }
 
     @Override
-    public void onPortalActivatedThisTick(IPortal portal) {
+    public synchronized void onPortalActivatedThisTick(IPortal portal) {
         // If the portal is being activated and has not yet been added to the active list, activate it
         if(!activePortals.contains(portal)) {
             portal.onActivate();
@@ -38,7 +38,7 @@ public class PortalActivityManager implements IPortalActivityManager    {
     }
 
     @Override
-    public void onPortalViewedThisTick(IPortal portal) {
+    public synchronized void onPortalViewedThisTick(IPortal portal) {
         // If the portal is being viewed and has not yet been added to the viewed list, add it
         if(!viewedPortals.contains(portal)) {
             portal.onViewActivate();
@@ -53,7 +53,7 @@ public class PortalActivityManager implements IPortalActivityManager    {
     }
 
     @Override
-    public void postUpdate() {
+    public synchronized void postUpdate() {
         // Call to view-deactivate any portals no longer viewed by the player
         for(IPortal portal : viewActivePortalsYetToUpdate) {
             viewedPortals.remove(portal);
@@ -75,7 +75,7 @@ public class PortalActivityManager implements IPortalActivityManager    {
     }
 
     @Override
-    public void resetActivity() {
+    public synchronized void resetActivity() {
         for(IPortal portal : activePortals) {
             portal.onDeactivate();
             if(viewedPortals.contains(portal)) {

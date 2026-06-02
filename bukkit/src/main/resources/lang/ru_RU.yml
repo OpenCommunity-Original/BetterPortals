@@ -132,4 +132,6 @@ help_next: "[Вперед ▶]"
 help_go_to_page: "<green>Перейти на страницу {page}"
 help_page_indicator: "<yellow>Страница {page} из {total_pages}</yellow>"
 help_click_info: "<gray>💡 Нажмите на любую команду, чтобы скопировать её в чат.</gray>"
+economy_charged: "Списано {amount} за использование портала."
+economy_not_enough_money: "<red>Вам требуется {amount} для прохода через портал! (Ваш баланс: {balance})</red>"
 

@@ -101,7 +101,11 @@ Press **F5** in VS Code to run the **`🚀 BetterPortals: Full Stack (F5)`** con
 
 ### 3. Task Automation
 You can also run these tasks manually via the VS Code Command Palette (`Ctrl+Shift+P` -> `Run Task`):
-- `🚀 Run Full Stack (Server + Client)`: Launches the complete test environment.
+- `🚀 Run Full Stack (Server + Client)`: Launches the complete test environment (Paper + Client).
+- `🚀 Run Folia Stack (Folia + Client)`: Launches the Folia server alongside the client using optimized, minimized resources:
+  - Server limited to **1GB heap** (`-Xmx1G`).
+  - Client limited to **1.2GB heap** (`-Xmx1200M`).
+  - Folia region thread pool limited to **1 thread** and async pool to **2 threads** to prevent local CPU overload.
 - `Cleanup Test Data`: Cleans dynamic server and client runtime files.
 - `Build All Plugins`: Compiles the shadowed plugin jar.
 - `Gradle Test`: Executes the JUnit 5 test suite.

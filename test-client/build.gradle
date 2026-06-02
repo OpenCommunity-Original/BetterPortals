@@ -23,6 +23,13 @@ loom {
             vmArgs("-Xmx3G", "-Xms3G")
             ideConfigGenerated = true
         }
+        clientLow {
+            client()
+            configName = "Fabric Client Low Resource"
+            runDir = "run"
+            vmArgs("-Xmx1200M", "-Xms512M")
+            ideConfigGenerated = true
+        }
     }
 }
 
@@ -38,6 +45,10 @@ tasks.named("runClient") {
 }
 
 tasks.named("runClient2") {
+    dependsOn "setupClient"
+}
+
+tasks.named("runClientLow") {
     dependsOn "setupClient"
 }
 

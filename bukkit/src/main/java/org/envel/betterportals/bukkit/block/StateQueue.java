@@ -2,6 +2,7 @@ package org.envel.betterportals.bukkit.block;
 
 import org.envel.betterportals.shared.logging.Logger;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -23,7 +24,7 @@ public class StateQueue {
         this.logger = logger;
     }
 
-    public List<IViewableBlockInfo> getViewableStates() {
+    public synchronized List<IViewableBlockInfo> getViewableStates() {
         // If the initial states haven't yet been added, then we return an empty list
         if(!hasFinishedInit) {
             logger.fine("Init not finished");
@@ -42,10 +43,10 @@ public class StateQueue {
             }
         }
 
-        return viewableStates;
+        return new ArrayList<>(viewableStates);
     }
 
-    public void addStatesInitially(List<IViewableBlockInfo> blockInfoList) {
+    public synchronized void addStatesInitially(List<IViewableBlockInfo> blockInfoList) {
         if(hasFinishedInit) {
             throw new IllegalStateException("Cannot add initial states multiple times");
         }
@@ -55,12 +56,12 @@ public class StateQueue {
         hasFinishedInit = true;
     }
 
-    public void enqueueStates(List<IViewableBlockInfo> blockInfoList) {
+    public synchronized void enqueueStates(List<IViewableBlockInfo> blockInfoList) {
         logger.fine("Enqueueing states");
         newStateQueue.add(blockInfoList);
     }
 
-    public int stateCount() {
+    public synchronized int stateCount() {
         return size;
     }
 }

@@ -16,9 +16,17 @@ public class ModernChunkLoader implements IChunkLoader {
 
     @Override
     public void setForceLoaded(Chunk chunk) {
-        SchedulerUtil.runAtLocation(chunk.getWorld(), chunk.getX() << 4, chunk.getZ() << 4, () -> {
+        SchedulerUtil.runTask(() -> {
             chunk.setForceLoaded(true);
             loadedChunks.add(new ChunkPosition(chunk));
+        });
+    }
+
+    @Override
+    public void setForceLoaded(ChunkPosition chunk) {
+        SchedulerUtil.runTask(() -> {
+            chunk.getWorld().setChunkForceLoaded(chunk.x, chunk.z, true);
+            loadedChunks.add(chunk);
         });
     }
 
@@ -26,7 +34,7 @@ public class ModernChunkLoader implements IChunkLoader {
     public void setNotForceLoaded(@NotNull ChunkPosition chunk) {
         if(loadedChunks.remove(chunk)) {
             // Do it this way to avoid loading the chunk by calling getChunk
-            SchedulerUtil.runAtLocation(chunk.getWorld(), chunk.x << 4, chunk.z << 4, () -> {
+            SchedulerUtil.runTask(() -> {
                 chunk.getWorld().setChunkForceLoaded(chunk.x, chunk.z, false);
             });
         }

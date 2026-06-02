@@ -132,4 +132,6 @@ help_next: "[Next ▶]"
 help_go_to_page: "<green>Go to page {page}"
 help_page_indicator: "<yellow>Page {page} of {total_pages}</yellow>"
 help_click_info: "<gray>💡 Click on any command to copy it to your chat box.</gray>"
+economy_charged: "Charged {amount} to use this portal."
+economy_not_enough_money: "<red>You need {amount} to pass through this portal! (Your balance: {balance})</red>"
 

@@ -5,6 +5,7 @@ import com.google.inject.Singleton;
 import org.envel.betterportals.bukkit.config.PortalSpawnConfig;
 import org.envel.betterportals.bukkit.util.MaterialUtil;
 import org.envel.betterportals.bukkit.util.VersionUtil;
+import org.envel.betterportals.bukkit.util.SchedulerUtil;
 import org.envel.betterportals.shared.logging.Logger;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -49,6 +50,11 @@ public class DimensionBlendManager implements IDimensionBlendManager    {
 
     @Override
     public void performBlend(@NotNull Location origin, @NotNull Location destination) {
+        if (SchedulerUtil.isFolia()) {
+            performBlendFolia(origin, destination);
+            return;
+        }
+
         logger.fine("Origin for blend: %s.", origin.toVector());
         int blockRadius = (int) (1.0 / spawnConfig.getBlendFallOff() + 4.0 + INITIAL_CHANCE);
 
@@ -86,6 +92,55 @@ public class DimensionBlendManager implements IDimensionBlendManager    {
                 }
             }
         }
+    }
+
+    private void performBlendFolia(@NotNull Location origin, @NotNull Location destination) {
+        int blockRadius = (int) (1.0 / spawnConfig.getBlendFallOff() + 4.0 + INITIAL_CHANCE);
+        Material fillInBlock = findFillInBlock(destination);
+
+        SchedulerUtil.runAtLocation(destination, () -> {
+            java.util.Map<Vector, Material> destTypes = new java.util.HashMap<>();
+            for(int z = -blockRadius; z < blockRadius; z++) {
+                for(int y = -blockRadius; y < blockRadius; y++) {
+                    for(int x = -blockRadius; x < blockRadius; x++) {
+                        Vector relativePos = new Vector(x, y, z);
+                        double swapChance = calculateSwapChance(relativePos);
+                        if(random.nextDouble() > swapChance) {continue;}
+
+                        Location destPos = destination.clone().add(applyRandomOffset(relativePos, 10.0));
+                        org.bukkit.World destWorld = destPos.getWorld();
+                        Material destType = destWorld != null ? destWorld.getBlockData(destPos.getBlockX(), destPos.getBlockY(), destPos.getBlockZ()).getMaterial() : Material.AIR;
+                        if(!destType.isSolid()) {destType = fillInBlock;}
+
+                        destTypes.put(relativePos, destType);
+                    }
+                }
+            }
+
+            SchedulerUtil.runAtLocation(origin, () -> {
+                for (java.util.Map.Entry<Vector, Material> entry : destTypes.entrySet()) {
+                    Vector relativePos = entry.getKey();
+                    Material destType = entry.getValue();
+
+                    Location originPos = origin.clone().add(relativePos);
+                    org.bukkit.World origWorld = originPos.getWorld();
+                    if (origWorld == null) continue;
+
+                    Material originType = origWorld.getBlockData(originPos.getBlockX(), originPos.getBlockY(), originPos.getBlockZ()).getMaterial();
+
+                    boolean skip = false;
+                    for(Material type : BLACKLISTED_COPY_BLOCKS) {
+                        if(originType == type || destType == type) {
+                            skip = true;
+                            break;
+                        }
+                    }
+                    if(skip) {continue;}
+
+                    originPos.getBlock().setType(destType);
+                }
+            });
+        });
     }
 
     /**

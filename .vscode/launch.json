@@ -10,6 +10,16 @@
             "iconPath": {
                 "id": "rocket"
             }
+        },
+        {
+            "name": "🚀 BetterPortals: Folia Stack",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "echo 'Starting BetterPortals Folia Stack...'",
+            "preLaunchTask": "🚀 Run Folia Stack (Folia + Client)",
+            "iconPath": {
+                "id": "rocket"
+            }
         }
     ]
 }

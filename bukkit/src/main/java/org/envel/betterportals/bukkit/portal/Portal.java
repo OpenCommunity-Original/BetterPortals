@@ -11,8 +11,10 @@ import org.envel.betterportals.bukkit.math.PortalTransformations;
 import org.envel.betterportals.bukkit.math.PortalTransformationsFactory;
 import org.envel.betterportals.bukkit.util.MaterialUtil;
 import org.envel.betterportals.shared.logging.Logger;
+import org.envel.betterportals.bukkit.util.SchedulerUtil;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.bukkit.Material;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.util.Vector;
@@ -46,6 +48,11 @@ public class Portal implements IPortal, ConfigurationSerializable {
 
     private int ticksSinceActivated = -1;
     private int ticksSinceViewActivated = -1;
+
+    private boolean originBlockValidCached = true;
+    private boolean destBlockValidCached = true;
+    private final AtomicBoolean originChecking = new AtomicBoolean(false);
+    private final AtomicBoolean destChecking = new AtomicBoolean(false);
 
     @Getter @Setter private double price = 0.0;
     @Getter @Setter private @Nullable String effectPreset = null;
@@ -170,13 +177,60 @@ public class Portal implements IPortal, ConfigurationSerializable {
         allowNonPlayerTeleportation = allow;
     }
 
+    private void updateValidityCache() {
+        if (!SchedulerUtil.isFolia() || isCustom) {
+            return;
+        }
+
+        // Check origin
+        if (originChecking.compareAndSet(false, true)) {
+            var loc = originPos.getLocation();
+            var world = loc.getWorld();
+            if (world != null) {
+                SchedulerUtil.runAtLocation(loc, () -> {
+                    try {
+                        originBlockValidCached = world.getBlockData(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()).getMaterial() == MaterialUtil.PORTAL_MATERIAL;
+                    } catch (Exception ignored) {
+                    } finally {
+                        originChecking.set(false);
+                    }
+                });
+            } else {
+                originChecking.set(false);
+            }
+        }
+
+        // Check destination (only if not external/cross-server)
+        if (!isCrossServer && destChecking.compareAndSet(false, true)) {
+            var loc = destPos.getLocation();
+            var world = loc.getWorld();
+            if (world != null) {
+                SchedulerUtil.runAtLocation(loc, () -> {
+                    try {
+                        destBlockValidCached = world.getBlockData(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()).getMaterial() == MaterialUtil.PORTAL_MATERIAL;
+                    } catch (Exception ignored) {
+                    } finally {
+                        destChecking.set(false);
+                    }
+                });
+            } else {
+                destChecking.set(false);
+            }
+        }
+    }
+
     private boolean isStillValid() {
         // Custom portals shouldn't remove themselves if the portal blocks are broken
         if(isCustom) {return true;}
 
+        if (SchedulerUtil.isFolia()) {
+            updateValidityCache();
+            return originBlockValidCached && destBlockValidCached;
+        }
+
         // For nether portals, the portal blocks must have the type of the portal material
         return      originPos.getLocation().getBlock().getType() == MaterialUtil.PORTAL_MATERIAL
-                &&  destPos.getLocation().getBlock().getType() == MaterialUtil.PORTAL_MATERIAL;
+                &&  (isCrossServer || destPos.getLocation().getBlock().getType() == MaterialUtil.PORTAL_MATERIAL);
     }
 
     @NotNull

@@ -19,9 +19,9 @@
         {
             "label": "Kill Java",
             "type": "shell",
-            "command": "Get-Process java -ErrorAction SilentlyContinue | Stop-Process -Force",
+            "command": "if (Get-Process java -ErrorAction SilentlyContinue) { Get-Process java | Stop-Process -Force }",
             "windows": {
-                "command": "Get-Process java -ErrorAction SilentlyContinue | Stop-Process -Force"
+                "command": "if (Get-Process java -ErrorAction SilentlyContinue) { Get-Process java | Stop-Process -Force }"
             },
             "presentation": {
                 "reveal": "silent"
@@ -50,12 +50,58 @@
             }
         },
         {
+            "label": "Start Folia Server",
+            "type": "shell",
+            "command": ".\\gradlew :test-server:runFolia",
+            "isBackground": true,
+            "presentation": {
+                "group": "bp-stack",
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
             "label": "Start Minecraft Client",
             "type": "shell",
             "command": ".\\gradlew :test-client:runClient",
             "presentation": {
                 "reveal": "always",
                 "panel": "new"
+            }
+        },
+        {
+            "label": "Start Minecraft Client Low",
+            "type": "shell",
+            "command": ".\\gradlew :test-client:runClientLow",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Start Folia All Instances",
+            "dependsOn": [
+                "Start Folia Server",
+                "Start Minecraft Client Low"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
+            }
+        },
+        {
+            "label": "🚀 Run Folia Stack (Folia + Client)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Kill Java",
+                "Cleanup Test Data",
+                "Build All Plugins",
+                "Start Folia All Instances"
+            ],
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated"
             }
         },
         {

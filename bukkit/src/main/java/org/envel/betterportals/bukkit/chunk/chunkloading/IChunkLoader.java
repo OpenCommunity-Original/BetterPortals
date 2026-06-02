@@ -18,7 +18,7 @@ public interface IChunkLoader {
 
     default void forceLoadAllPos(@NotNull Iterator<? extends ChunkPosition> iterator) {
         while(iterator.hasNext()) {
-            setForceLoaded(iterator.next().getChunk());
+            setForceLoaded(iterator.next());
         }
     }
 

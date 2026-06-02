@@ -70,4 +70,14 @@ tasks.runServer {
 
 runPaper {
     disablePluginJarDetection()
+    folia.registerTask()
+}
+
+tasks.runFolia {
+    minecraftVersion("26.1.2")
+    jvmArgs("-Dcom.mojang.eula.agree=true", "-Xmx1G", "-Xms512M", "-Dpaper.thread-pool.region-thread-limit=1", "-Dpaper.thread-pool.async-thread-limit=2", "-Dpaper.playerconnection.keepalive=true", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5008")
+    runDirectory(file("run"))
+    args("--port", "25565")
+    dependsOn "generateConfigs"
+    dependsOn "copyPlugins"
 }

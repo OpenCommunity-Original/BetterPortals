@@ -43,8 +43,11 @@ public class PortalEntityManager implements IPortalEntityManager {
 
     private final boolean requireDestination;
 
-    @Getter private Collection<Entity> destinationEntities = null;
-    private Map<Entity, Location> originEntities = null;
+    @Getter private volatile Collection<Entity> destinationEntities = java.util.concurrent.ConcurrentHashMap.newKeySet();
+    private volatile Map<Entity, Location> originEntities = new java.util.concurrent.ConcurrentHashMap<>();
+
+    private final java.util.concurrent.atomic.AtomicBoolean isFetchingDest = new java.util.concurrent.atomic.AtomicBoolean(false);
+    private final java.util.concurrent.atomic.AtomicBoolean isFetchingOrigin = new java.util.concurrent.atomic.AtomicBoolean(false);
 
     @Inject
     public PortalEntityManager(@Assisted IPortal portal, @Assisted boolean requireDestination, MiscConfig miscConfig, RenderConfig renderConfig, IPortalPredicateManager predicateManager, Logger logger, IPortalClient
@@ -72,6 +75,11 @@ public class PortalEntityManager implements IPortalEntityManager {
     }
 
     private void updateEntityLists() {
+        if (org.envel.betterportals.bukkit.util.SchedulerUtil.isFolia()) {
+            updateEntityListsFolia();
+            return;
+        }
+
         if(requireDestination) {
             destinationEntities = getNearbyEntities(destinationEntities, portal.getDestPos());
         }
@@ -84,6 +92,55 @@ public class PortalEntityManager implements IPortalEntityManager {
             Location oldLocation = oldOriginEntities == null ? null : oldOriginEntities.get(entity);
             originEntities.put(entity, oldLocation != null ? oldLocation : entity.getLocation());
         });
+    }
+
+    private void updateEntityListsFolia() {
+        if (requireDestination && isFetchingDest.compareAndSet(false, true)) {
+            Location loc = portal.getDestPos().getLocation();
+            org.bukkit.World world = loc.getWorld();
+            if (world != null) {
+                org.envel.betterportals.bukkit.util.SchedulerUtil.runAtLocation(loc, () -> {
+                    try {
+                        Collection<Entity> nearby = java.util.concurrent.ConcurrentHashMap.newKeySet();
+                        nearby.addAll(entityFinder.getNearbyEntities(
+                            null,
+                            loc,
+                            renderConfig.getMaxXZ(),
+                            renderConfig.getMaxY(),
+                            renderConfig.getMaxXZ()
+                        ));
+                        destinationEntities = nearby;
+                    } catch (Exception ignored) {
+                    } finally {
+                        isFetchingDest.set(false);
+                    }
+                });
+            } else {
+                isFetchingDest.set(false);
+            }
+        }
+
+        if (isFetchingOrigin.compareAndSet(false, true)) {
+            Location loc = portal.getOriginPos().getLocation();
+            org.bukkit.World world = loc.getWorld();
+            if (world != null) {
+                org.envel.betterportals.bukkit.util.SchedulerUtil.runAtLocation(loc, () -> {
+                    try {
+                        Map<Entity, Location> newOrigin = new java.util.concurrent.ConcurrentHashMap<>();
+                        getNearbyEntities(portal.getOriginPos(), entity -> {
+                            Location oldLocation = originEntities.get(entity);
+                            newOrigin.put(entity, oldLocation != null ? oldLocation : entity.getLocation());
+                        });
+                        originEntities = newOrigin;
+                    } catch (Exception ignored) {
+                    } finally {
+                        isFetchingOrigin.set(false);
+                    }
+                });
+            } else {
+                isFetchingOrigin.set(false);
+            }
+        }
     }
 
     private void handleTeleportation() {
@@ -189,8 +246,47 @@ public class PortalEntityManager implements IPortalEntityManager {
      */
     private void teleportLocal(Entity entity) {
         PortalTransformations transformations = portal.getTransformations();
-
         Location destPos = transformations.moveToDestination(entity.getLocation());
+        final Location destLocation = destPos;
+
+        if (org.envel.betterportals.bukkit.util.SchedulerUtil.isFolia()) {
+            org.envel.betterportals.bukkit.util.SchedulerUtil.runAtLocation(destLocation, () -> {
+                Location finalDestPos = destLocation.clone();
+                if(entity instanceof Player) {
+                    finalDestPos = limitToBlockHitbox(finalDestPos);
+                }   else    {
+                    finalDestPos.add(0.0, 0.2, 0.0);
+                }
+
+                final Vector velocity = transformations.rotateToDestination(entity.getVelocity());
+
+                logger.fine("Teleporting entity with ID %d and of type %s to position %s", entity.getEntityId(), entity.getType(), finalDestPos.toVector());
+
+                boolean handlePassengers = entity.getWorld() != finalDestPos.getWorld();
+                List<Entity> passengers = entity.getPassengers();
+                if(handlePassengers) {
+                    for(Entity passenger : passengers) {
+                        entity.removePassenger(passenger);
+                        teleportLocal(passenger);
+                    }
+                }
+
+                if (entity instanceof Player && passengers.isEmpty()) {
+                    entity.teleportAsync(finalDestPos).thenAccept(success -> {
+                        if (Boolean.TRUE.equals(success)) {
+                            entity.setVelocity(velocity);
+                        }
+                    });
+                } else {
+                    entity.teleport(finalDestPos);
+                    entity.setVelocity(velocity);
+                    if(handlePassengers) {
+                        passengers.forEach(entity::addPassenger);
+                    }
+                }
+            });
+            return;
+        }
 
         if(entity instanceof Player) {
             destPos = limitToBlockHitbox(destPos);

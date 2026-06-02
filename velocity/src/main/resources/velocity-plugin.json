@@ -3,7 +3,7 @@
   "name": "BetterPortals",
   "version": "${version}",
   "authors": [
-    "envel"
+    "Envel"
   ],
   "dependencies": [],
   "main": "org.envel.betterportals.velocity.BetterPortals"

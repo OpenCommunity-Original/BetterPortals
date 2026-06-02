@@ -153,7 +153,7 @@ public class MessageConfig {
         return NBTTagUtil.hasMarkerTag(item, PORTAL_WAND_TAG);
     }
 
-    private String formatMiniMessage(String message) {
+    public String formatMiniMessage(String message) {
         if (message == null || message.isEmpty()) return "";
         try {
             return net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer.legacySection().serialize(

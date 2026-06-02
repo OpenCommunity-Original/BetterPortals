@@ -24,7 +24,7 @@ public class BlockDataFetcherFactory {
         if(portal.isCrossServer()) {
             return new ExternalBlockDataFetcher(logger, portalClient, renderConfig, portal);
         }   else    {
-            return new LocalBlockDataFetcher(portal);
+            return new LocalBlockDataFetcher(portal, renderConfig);
         }
     }
 }

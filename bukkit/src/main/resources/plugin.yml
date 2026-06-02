@@ -2,6 +2,8 @@ name: BetterPortals
 version: 1.0.0
 main: org.envel.betterportals.bukkit.BetterPortals
 description: "Plugin which allows nether portals to be seen through, and allows custom portal creation"
+folia-supported: true
+author: Envel
 depend:
   - ProtocolLib
 api-version: "1.21"
