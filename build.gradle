@@ -5,7 +5,7 @@ plugins {
 allprojects {
     apply plugin: 'java'
 
-    group = "com.lauriethefish.betterportals"
+    group = "org.envel.betterportals"
 
     // Optional, just for showing name
     afterEvaluate {
@@ -137,4 +137,4 @@ tasks.register("cleanTest") {
         }
     }
 }
-
+

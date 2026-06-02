@@ -1,0 +1,32 @@
+package org.envel.betterportals.bukkit.portal.predicate;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import org.envel.betterportals.api.BetterPortal;
+import org.envel.betterportals.api.PortalPredicate;
+import org.envel.betterportals.bukkit.config.MiscConfig;
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * Makes sure that portals outside of the configured activation distance can't be activated
+ */
+@Singleton
+public class ActivationDistance implements PortalPredicate {
+    private final MiscConfig miscConfig;
+
+    @Inject
+    public ActivationDistance(MiscConfig miscConfig) {
+        this.miscConfig = miscConfig;
+    }
+
+    @Override
+    public boolean test(@NotNull BetterPortal portal, @NotNull Player player) {
+        Location portalOrigin = portal.getOriginPos().getLocation();
+        Location playerPos = player.getLocation();
+        if(portalOrigin.getWorld() != playerPos.getWorld()) {return false;} // Portals in other worlds are never viewable
+
+        return playerPos.distance(portalOrigin) < miscConfig.getPortalActivationDistance();
+    }
+}

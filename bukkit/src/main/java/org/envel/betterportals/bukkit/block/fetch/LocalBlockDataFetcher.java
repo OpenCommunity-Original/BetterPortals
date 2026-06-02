@@ -1,0 +1,34 @@
+package org.envel.betterportals.bukkit.block.fetch;
+
+import org.envel.betterportals.api.IntVector;
+import org.envel.betterportals.bukkit.portal.IPortal;
+import org.bukkit.World;
+import org.bukkit.block.data.BlockData;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * Local portals already have their blocks accessible.
+ * This is a simple pass-through to Bukkit's API.
+ */
+public class LocalBlockDataFetcher implements IBlockDataFetcher {
+    private final World destinationWorld;
+
+    public LocalBlockDataFetcher(IPortal portal) {
+        this.destinationWorld = portal.getDestPos().getWorld();
+    }
+
+    @Override
+    public void update() {
+        // Do nothing, this is just a pass-through to Bukkit's API for local blocks.
+    }
+
+    @Override
+    public boolean isReady() {
+        return true;
+    }
+
+    @Override
+    public @NotNull BlockData getData(@NotNull IntVector position) {
+        return position.getBlock(destinationWorld).getBlockData();
+    }
+}

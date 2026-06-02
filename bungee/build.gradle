@@ -16,8 +16,8 @@ dependencies {
 }
 
 bungee {
-    main = 'com.lauriethefish.betterportals.bungee.BetterPortals'
-    author = 'lauriethefish@outlook.com'
+    main = 'org.envel.betterportals.bungee.BetterPortals'
+    author = 'envel'
     version = project.version
     name = 'BetterPortals'
     description = 'Proxy side plugin for BetterPortals which helps to allow cross-server portals'

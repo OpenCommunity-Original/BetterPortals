@@ -3,8 +3,8 @@
   "name": "BetterPortals",
   "version": "${version}",
   "authors": [
-    "lauriethefish@outlook.com"
+    "envel"
   ],
   "dependencies": [],
-  "main": "com.lauriethefish.betterportals.velocity.BetterPortals"
+  "main": "org.envel.betterportals.velocity.BetterPortals"
 }

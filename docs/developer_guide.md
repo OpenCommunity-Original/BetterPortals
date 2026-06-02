@@ -67,9 +67,9 @@ You can attach your VS Code debugger directly to a running Paper or Velocity ser
 When adding or modifying portal behavior:
 
 ### Packet Manipulation
-All ProtocolLib modifications (such as scaling coordinates, rotating velocities, or sending block changes) should reside in **`[PacketUtil](../bukkit/src/main/java/com/lauriethefish/betterportals/bukkit/nms/PacketUtil.java)`**. Avoid constructing or sending packets directly inside business logic classes.
+All ProtocolLib modifications (such as scaling coordinates, rotating velocities, or sending block changes) should reside in **`[PacketUtil](../bukkit/src/main/java/org/envel/betterportals/bukkit/nms/PacketUtil.java)`**. Avoid constructing or sending packets directly inside business logic classes.
 
 ### Math & Coordinates
-* Vector rotations and offsets: Use `[PortalTransformations](../bukkit/src/main/java/com/lauriethefish/betterportals/bukkit/portal/PortalTransformations.java)`.
-* Matrix calculation utility logic: Use `[RotationUtil](../bukkit/src/main/java/com/lauriethefish/betterportals/bukkit/nms/RotationUtil.java)`.
-* Modern block material NMS checks: Use `[MaterialUtil](../bukkit/src/main/java/com/lauriethefish/betterportals/bukkit/util/MaterialUtil.java)`.
+* Vector rotations and offsets: Use `[PortalTransformations](../bukkit/src/main/java/org/envel/betterportals/bukkit/portal/PortalTransformations.java)`.
+* Matrix calculation utility logic: Use `[RotationUtil](../bukkit/src/main/java/org/envel/betterportals/bukkit/nms/RotationUtil.java)`.
+* Modern block material NMS checks: Use `[MaterialUtil](../bukkit/src/main/java/org/envel/betterportals/bukkit/util/MaterialUtil.java)`.

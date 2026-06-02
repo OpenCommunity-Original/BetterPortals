@@ -43,9 +43,9 @@ graph TD
 * **Path:** `[shared](../shared/)`
 * **Purpose:** Contains all utility classes, logging wrappers, and core networking objects shared between Spigot/Paper servers and proxies.
 * **Key Components:**
-  - `com.lauriethefish.betterportals.shared.net`: Networking requests (e.g. `TeleportRequest`, `RelayRequest`) and responses.
-  - `com.lauriethefish.betterportals.shared.net.encryption`: Low-level AES-GCM-128 cryptographic streams (`EncryptedObjectStream`).
-  - `com.lauriethefish.betterportals.shared.logging`: Platform-agnostic logger interfaces.
+  - `org.envel.betterportals.shared.net`: Networking requests (e.g. `TeleportRequest`, `RelayRequest`) and responses.
+  - `org.envel.betterportals.shared.net.encryption`: Low-level AES-GCM-128 cryptographic streams (`EncryptedObjectStream`).
+  - `org.envel.betterportals.shared.logging`: Platform-agnostic logger interfaces.
 
 ### 3. `proxy`
 * **Path:** `[proxy](../proxy/)`

@@ -1,6 +1,6 @@
 name: BetterPortals
 version: 1.0.0
-main: com.lauriethefish.betterportals.bukkit.BetterPortals
+main: org.envel.betterportals.bukkit.BetterPortals
 description: "Plugin which allows nether portals to be seen through, and allows custom portal creation"
 depend:
   - ProtocolLib

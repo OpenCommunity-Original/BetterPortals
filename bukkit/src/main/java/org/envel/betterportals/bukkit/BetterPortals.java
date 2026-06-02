@@ -1,0 +1,233 @@
+package org.envel.betterportals.bukkit;
+
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+import org.envel.betterportals.bukkit.command.framework.CommandTree;
+import org.envel.betterportals.bukkit.config.ConfigManager;
+import org.envel.betterportals.bukkit.config.MiscConfig;
+import org.envel.betterportals.bukkit.config.ProxyConfig;
+import org.envel.betterportals.bukkit.events.IEventRegistrar;
+import org.envel.betterportals.bukkit.net.IPortalClient;
+import org.envel.betterportals.bukkit.player.IPlayerDataManager;
+import org.envel.betterportals.bukkit.portal.IPortalManager;
+import org.envel.betterportals.bukkit.portal.storage.IPortalStorage;
+import org.envel.betterportals.bukkit.tasks.BlockUpdateFinisher;
+import org.envel.betterportals.bukkit.tasks.MainUpdate;
+import org.envel.betterportals.bukkit.util.SchedulerUtil;
+import org.envel.betterportals.bukkit.util.performance.OperationTimer;
+import org.envel.betterportals.shared.logging.Logger;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+
+import org.envel.betterportals.bukkit.block.external.IExternalBlockWatcherManager;
+import org.envel.betterportals.bukkit.portal.predicate.CrossServerDestinationChecker;
+import java.io.IOException;
+import java.util.List;
+
+public class BetterPortals extends JavaPlugin {
+    @Inject private Logger logger;
+    @Inject private ConfigManager configManager;
+
+    @Inject private CommandTree commandTree;
+    @Inject private IPortalStorage portalStorage;
+    @Inject private IPlayerDataManager playerDataManager;
+    @Inject private MiscConfig miscConfig;
+    @Inject private ProxyConfig proxyConfig;
+    @Inject private IPortalClient portalClient;
+    @Inject private MainUpdate mainUpdate;
+    @Inject private BlockUpdateFinisher blockUpdateFinisher;
+    @Inject private IPortalManager portalManager;
+    @Inject private IEventRegistrar eventRegistrar;
+    @Inject private API apiImplementation;
+    @Inject private IExternalBlockWatcherManager blockWatcherManager;
+    @Inject private CrossServerDestinationChecker crossServerDestinationChecker;
+    @Inject private org.envel.betterportals.bukkit.portal.selection.SelectionVisualizer selectionVisualizer;
+    @Inject private org.envel.betterportals.bukkit.portal.effects.PortalEffectsTask portalEffectsTask;
+    @Inject private io.foxserver.common.locale.LocaleAPI localeApi;
+
+    private boolean firstEnable = true;
+    private boolean didEnableFail = false;
+
+    @Override
+    public void onEnable() {
+        if (getServer().getPluginManager().getPlugin("ProtocolLib") == null) {
+            getLogger().severe("==================================================");
+            getLogger().severe(" BetterPortals REQUIRES PROTOCOLLIB TO FUNCTION!");
+            getLogger().severe(" Please download and install ProtocolLib from:");
+            getLogger().severe(" https://www.spigotmc.org/resources/protocollib.1997/");
+            getLogger().severe("==================================================");
+            didEnableFail = true;
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
+        SchedulerUtil.init(this);
+        OperationTimer timer = new OperationTimer();
+        saveDefaultConfig();
+
+        if(firstEnable) {
+            startup();
+            if(didEnableFail) {return;}
+
+            if(miscConfig.isTestingCommandsEnabled()) {
+                commandTree.registerTestCommands();
+            }
+        }   else    {
+            reloadConfig();
+            loadConfig();
+        }
+
+        if(proxyConfig.isEnabled()) {
+            logger.fine("Proxy is enabled! Initialising connection . . .");
+            portalClient.connect();
+        }
+
+        if(!firstEnable) {
+            eventRegistrar.onPluginReload();
+            portalManager.onReload();
+        }
+
+        blockUpdateFinisher.start();
+        mainUpdate.start();
+        portalStorage.start();
+        selectionVisualizer.start();
+        portalEffectsTask.loadPresets();
+        portalEffectsTask.start();
+
+        apiImplementation.onEnable();
+        firstEnable = false;
+        logger.fine("Startup took %.03fms", timer.getTimeTakenMillis());
+    }
+
+    private boolean loadConfig() {
+        try {
+            configManager.loadValues(getConfig(), this);
+        }   catch(RuntimeException ex) {
+            logger.warning("Failed to reload the config file. Please check your YAML syntax!: %s: %s", ex.getClass().getName(), ex.getMessage());
+            return false;
+        }
+        return true;
+    }
+
+    private void startup() {
+        try {
+            Injector injector = Guice.createInjector(new MainModule(this));
+            injector.injectMembers(this);
+        } catch (RuntimeException ex) {
+            getLogger().severe("A critical error occurred during plugin startup");
+            ex.printStackTrace();
+            didEnableFail = true;
+            return;
+        }
+
+        if(!loadConfig()) {
+            didEnableFail = true;
+            return;
+        }
+
+        try {
+            portalStorage.loadPortals();
+        } catch(IOException | RuntimeException ex) {
+            getLogger().severe("Failed to load the portals from portals.yml. Did you modify it with an incorrect format?");
+            ex.printStackTrace();
+            didEnableFail = true;
+            return;
+        }
+    }
+
+    public void softReload() {
+        mainUpdate.stop();
+        portalStorage.stop();
+        blockUpdateFinisher.stop();
+        selectionVisualizer.stop();
+        portalEffectsTask.stop();
+        apiImplementation.onDisable();
+        SchedulerUtil.cancelAll();
+
+        logger.fine("Performing plugin soft-reload . . .");
+        if(proxyConfig.isEnabled()) {
+            portalClient.shutDown();
+        }
+
+        reloadConfig();
+        localeApi.reload();
+        if(!loadConfig()) {
+            return;
+        }
+
+        playerDataManager.onPluginReload();
+        portalManager.onReload();
+        blockWatcherManager.clear();
+        crossServerDestinationChecker.clear();
+
+        if(proxyConfig.isEnabled()) {
+            portalClient.connect();
+        }
+        eventRegistrar.onPluginReload();
+
+        blockUpdateFinisher.start();
+        mainUpdate.start();
+        portalStorage.start();
+        selectionVisualizer.start();
+        portalEffectsTask.loadPresets();
+        portalEffectsTask.start();
+
+        apiImplementation.onEnable();
+    }
+
+    @Override
+    public void onDisable() {
+        // We don't want to over-save the portals file if loading it failed
+        if(didEnableFail) {return;}
+
+        mainUpdate.stop();
+        portalStorage.stop();
+        blockUpdateFinisher.stop();
+        selectionVisualizer.stop();
+        portalEffectsTask.stop();
+        SchedulerUtil.cancelAll();
+
+        try {
+            playerDataManager.onPluginDisable();
+        }  catch(RuntimeException ex) {
+            logger.severe("Error occurred while resetting player views");
+            ex.printStackTrace();
+        }
+
+        try {
+            portalManager.onReload(); // Deactivates portals, unforce-loads chunks
+        } catch(RuntimeException ex) {
+            logger.severe("Error occurred while resetting portals");
+            ex.printStackTrace();
+        }
+
+        blockWatcherManager.clear();
+        crossServerDestinationChecker.clear();
+
+        try {
+            portalStorage.savePortals();
+        }   catch(RuntimeException | IOException ex) {
+            logger.severe("Error occurred while saving the portals to portals.yml. Check your file permissions!");
+            ex.printStackTrace();
+        }
+
+        if(portalClient.isConnectionOpen()) {
+            portalClient.shutDown();
+        }
+        logger.fine("Goodbye!");
+    }
+
+    // Forward these on to the command tree to process all of our commands
+    @Override
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        return commandTree.onGlobalCommand(sender, label, args);
+    }
+
+    @Override
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        return commandTree.onGlobalTabComplete(sender, label, args);
+    }
+}

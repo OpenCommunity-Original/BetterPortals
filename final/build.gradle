@@ -18,17 +18,17 @@ tasks.build.dependsOn tasks.shadowJar
 shadowJar {
     configurations = [project.configurations.runtimeClasspath, project(':bukkit').configurations.runtimeClasspath]
 
-    relocate 'org.aopalliance', 'com.lauriethefish.betterportals.dependencies.aopalliance'
-    relocate 'org.checkerframework', 'com.lauriethefish.betterportals.dependencies.checkerframework'
-    relocate 'org.intellij.lang.annotations', 'com.lauriethefish.betterportals.dependencies.intellij.lang.annotations'
-    relocate 'org.jetbrains.annotations', 'com.lauriethefish.betterportals.dependencies.jetbrains.annotations'
+    relocate 'org.aopalliance', 'org.envel.betterportals.dependencies.aopalliance'
+    relocate 'org.checkerframework', 'org.envel.betterportals.dependencies.checkerframework'
+    relocate 'org.intellij.lang.annotations', 'org.envel.betterportals.dependencies.intellij.lang.annotations'
+    relocate 'org.jetbrains.annotations', 'org.envel.betterportals.dependencies.jetbrains.annotations'
 
     // Unfortunately manually excluding GSON here (it's included with spigot) isn't really possible so we manually relocate these separately
-    relocate 'com.google.thirdparty', 'com.lauriethefish.betterportals.dependencies.com.google.thirdparty'
-    relocate 'com.google.j2objc', 'com.lauriethefish.betterportals.dependencies.com.google.j2objc'
+    relocate 'com.google.thirdparty', 'org.envel.betterportals.dependencies.com.google.thirdparty'
+    relocate 'com.google.j2objc', 'org.envel.betterportals.dependencies.com.google.j2objc'
 
-    relocate 'com.google.inject', 'com.lauriethefish.betterportals.dependencies.com.google.inject'
-    relocate 'com.google.errorprone', 'com.lauriethefish.betterportals.dependencies.com.google.errorprone'
+    relocate 'com.google.inject', 'org.envel.betterportals.dependencies.com.google.inject'
+    relocate 'com.google.errorprone', 'org.envel.betterportals.dependencies.com.google.errorprone'
 
     minimize {
         exclude(dependency('com.github.ben-manes.caffeine:caffeine:.*'))
