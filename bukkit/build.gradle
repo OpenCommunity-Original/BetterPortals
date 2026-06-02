@@ -10,13 +10,13 @@ repositories {
 
 dependencies {
     testImplementation 'net.dmulloy2:ProtocolLib:5.4.0'
-    testImplementation("io.papermc.paper:paper-api:26.1.2.build.+")
+    testImplementation("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     implementation 'com.google.inject:guice:7.0.0'
     implementation 'com.github.ben-manes.caffeine:caffeine:3.1.8'
 
     implementation project(':shared')
     implementation project(':api')
     compileOnly 'net.dmulloy2:ProtocolLib:5.4.0'
-    compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
+    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7.1'
 }
