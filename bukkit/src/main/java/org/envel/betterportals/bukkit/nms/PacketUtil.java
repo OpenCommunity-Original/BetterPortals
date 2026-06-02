@@ -53,9 +53,40 @@ public class PacketUtil {
      */
     public static void writeDoublePosition(@NotNull PacketContainer packet, @NotNull Vector position) {
         StructureModifier<Double> doubles = packet.getDoubles();
-        doubles.write(0, position.getX());
-        doubles.write(1, position.getY());
-        doubles.write(2, position.getZ());
+        if (doubles.size() >= 3) {
+            doubles.write(0, position.getX());
+            doubles.write(1, position.getY());
+            doubles.write(2, position.getZ());
+        } else {
+            try {
+                Object nmsPacket = packet.getHandle();
+                java.lang.reflect.Field xField = nmsPacket.getClass().getDeclaredField("x");
+                java.lang.reflect.Field yField = nmsPacket.getClass().getDeclaredField("y");
+                java.lang.reflect.Field zField = nmsPacket.getClass().getDeclaredField("z");
+                xField.setAccessible(true);
+                yField.setAccessible(true);
+                zField.setAccessible(true);
+                xField.setDouble(nmsPacket, position.getX());
+                yField.setDouble(nmsPacket, position.getY());
+                zField.setDouble(nmsPacket, position.getZ());
+            } catch (Throwable t) {
+                try {
+                    Object nmsPacket = packet.getHandle();
+                    for (java.lang.reflect.Field field : nmsPacket.getClass().getDeclaredFields()) {
+                        if (field.getType().getSimpleName().equals("Vec3") || field.getType().getSimpleName().equals("Position")) {
+                            field.setAccessible(true);
+                            Class<?> vec3Class = field.getType();
+                            java.lang.reflect.Constructor<?> constr = vec3Class.getConstructor(double.class, double.class, double.class);
+                            Object vec3 = constr.newInstance(position.getX(), position.getY(), position.getZ());
+                            field.set(nmsPacket, vec3);
+                            break;
+                        }
+                    }
+                } catch (Throwable t2) {
+                    // Ignore or fallback
+                }
+            }
+        }
     }
 
     /**
@@ -66,11 +97,40 @@ public class PacketUtil {
      */
     public static Vector readDoublePosition(@NotNull PacketContainer packet) {
         StructureModifier<Double> doubles = packet.getDoubles();
-        return new Vector(
-                doubles.read(0),
-                doubles.read(1),
-                doubles.read(2)
-        );
+        if (doubles.size() >= 3) {
+            return new Vector(
+                    doubles.read(0),
+                    doubles.read(1),
+                    doubles.read(2)
+            );
+        }
+        try {
+            Object nmsPacket = packet.getHandle();
+            java.lang.reflect.Field xField = nmsPacket.getClass().getDeclaredField("x");
+            java.lang.reflect.Field yField = nmsPacket.getClass().getDeclaredField("y");
+            java.lang.reflect.Field zField = nmsPacket.getClass().getDeclaredField("z");
+            xField.setAccessible(true);
+            yField.setAccessible(true);
+            zField.setAccessible(true);
+            return new Vector(xField.getDouble(nmsPacket), yField.getDouble(nmsPacket), zField.getDouble(nmsPacket));
+        } catch (Throwable t) {
+            try {
+                Object nmsPacket = packet.getHandle();
+                for (java.lang.reflect.Field field : nmsPacket.getClass().getDeclaredFields()) {
+                    if (field.getType().getSimpleName().equals("Vec3") || field.getType().getSimpleName().equals("Position")) {
+                        field.setAccessible(true);
+                        Object vec3 = field.get(nmsPacket);
+                        double x = (double) vec3.getClass().getMethod("x").invoke(vec3);
+                        double y = (double) vec3.getClass().getMethod("y").invoke(vec3);
+                        double z = (double) vec3.getClass().getMethod("z").invoke(vec3);
+                        return new Vector(x, y, z);
+                    }
+                }
+            } catch (Throwable t2) {
+                // Ignore
+            }
+        }
+        return new Vector(0, 0, 0);
     }
 
     /**

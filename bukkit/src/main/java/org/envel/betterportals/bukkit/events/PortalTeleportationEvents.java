@@ -58,7 +58,7 @@ public class PortalTeleportationEvents implements Listener {
             }
 
             // Send a warning for vanilla nether portals, since players might not realise that they need relighting
-            String warning = messageConfig.getWarningMessage("vanillaPortal");
+            String warning = messageConfig.getWarningMessage(event.getPlayer(), "vanillaPortal");
             if(!warning.isEmpty()) {
                 event.getPlayer().sendMessage(warning);
             }

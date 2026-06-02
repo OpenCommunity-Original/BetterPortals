@@ -91,8 +91,9 @@ public class SpawningEvents implements Listener {
             event.setCancelled(true);
             logger.fine("Not spawning portal - too big: %s", size);
 
+            Player player = event.getEntity() instanceof Player ? (Player) event.getEntity() : null;
             // Make sure to replace the current size place holder
-            String msg = messageConfig.getWarningMessage("portalTooBig");
+            String msg = messageConfig.getWarningMessage(player, "portalTooBig");
             msg = msg.replace("{size}", String.format("%dx%d", maxSize.getBlockX(), maxSize.getBlockY()));
             sendMessageToLighter(event, msg);
             return;
@@ -114,7 +115,8 @@ public class SpawningEvents implements Listener {
         // If unsuccessful (thrown when worlds are not linked), log for the purposes of debugging
         if(!successful) {
             logger.fine("Spawning was unsuccessful, blocking portal blocks from appearing!");
-            sendMessageToLighter(event, messageConfig.getWarningMessage("noWorldLink"));
+            Player player = event.getEntity() instanceof Player ? (Player) event.getEntity() : null;
+            sendMessageToLighter(event, messageConfig.getWarningMessage(player, "noWorldLink"));
             event.setCancelled(true);
         }
     }

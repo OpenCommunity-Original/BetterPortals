@@ -30,39 +30,43 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
 
     @Override
     public void showEntity(EntityInfo tracker, Collection<Player> players) {
-        // Generate the packet that NMS would normally use to spawn the entity
-        PacketContainer spawnPacket = EntityUtil.getRawEntitySpawnPacket(tracker.getEntity());
-        if(spawnPacket == null) {return;}
+        try {
+            // Generate the packet that NMS would normally use to spawn the entity
+            PacketContainer spawnPacket = EntityUtil.getRawEntitySpawnPacket(tracker.getEntity());
+            if(spawnPacket == null) {return;}
 
-        if(spawnPacket.getUUIDs().size() > 0) {
-            spawnPacket.getUUIDs().write(0, tracker.getEntityUniqueId());
-        }
-
-        // Use the rendered entity ID
-        spawnPacket.getIntegers().write(0, tracker.getEntityId());
-
-        // Translate to the correct rendered position
-        Vector actualPos = tracker.getEntity().getLocation().toVector();
-        if(tracker.getEntity() instanceof Hanging) {
-            actualPos = MathUtil.moveToCenterOfBlock(actualPos);
-        }
-
-        Vector renderedPos = tracker.getTranslation().transform(actualPos);
-        PacketUtil.writeDoublePosition(spawnPacket, renderedPos);
-        setSpawnRotation(spawnPacket, tracker);
-
-        PacketUtil.sendPacket(players, spawnPacket);
-
-        // Living Entities also require us to handle entity equipment
-        if(tracker.getEntity() instanceof LivingEntity) {
-            EntityEquipmentWatcher equipmentWatcher = new EntityEquipmentWatcher((LivingEntity) tracker.getEntity());
-            Map<EnumWrappers.ItemSlot, ItemStack> changes = equipmentWatcher.checkForChanges();
-            if(changes.size() > 0) {
-                sendEntityEquipment(tracker, changes, players);
+            if(spawnPacket.getUUIDs().size() > 0) {
+                spawnPacket.getUUIDs().write(0, tracker.getEntityUniqueId());
             }
-        }
 
-        sendMetadata(tracker, players);
+            // Use the rendered entity ID
+            spawnPacket.getIntegers().write(0, tracker.getEntityId());
+
+            // Translate to the correct rendered position
+            Vector actualPos = tracker.getEntity().getLocation().toVector();
+            if(tracker.getEntity() instanceof Hanging) {
+                actualPos = MathUtil.moveToCenterOfBlock(actualPos);
+            }
+
+            Vector renderedPos = tracker.getTranslation().transform(actualPos);
+            PacketUtil.writeDoublePosition(spawnPacket, renderedPos);
+            setSpawnRotation(spawnPacket, tracker);
+
+            PacketUtil.sendPacket(players, spawnPacket);
+
+            // Living Entities also require us to handle entity equipment
+            if(tracker.getEntity() instanceof LivingEntity) {
+                EntityEquipmentWatcher equipmentWatcher = new EntityEquipmentWatcher((LivingEntity) tracker.getEntity());
+                Map<EnumWrappers.ItemSlot, ItemStack> changes = equipmentWatcher.checkForChanges();
+                if(changes.size() > 0) {
+                    sendEntityEquipment(tracker, changes, players);
+                }
+            }
+
+            sendMetadata(tracker, players);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     // Positional helper calls are delegated to PacketUtil
@@ -104,197 +108,260 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
 
     @Override
     public void hideEntity(EntityInfo tracker, Collection<Player> players) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_DESTROY);
-        packet.getIntLists().write(0, Collections.singletonList(tracker.getEntityId()));
-        PacketUtil.sendPacket(players, packet);
+        try {
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_DESTROY);
+            packet.getIntLists().write(0, Collections.singletonList(tracker.getEntityId()));
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     @Override
     public void sendEntityMove(EntityInfo tracker, Vector offset, Collection<Player> players) {
-        offset = tracker.getRotation().transform(offset);
+        try {
+            offset = tracker.getRotation().transform(offset);
 
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.REL_ENTITY_MOVE);
-        packet.getIntegers().write(0, tracker.getEntityId());
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.REL_ENTITY_MOVE);
+            packet.getIntegers().write(0, tracker.getEntityId());
 
-        PacketUtil.writeRelativeOffset(packet, offset);
-        packet.getBooleans().write(0, tracker.getEntity().isOnGround());
+            PacketUtil.writeRelativeOffset(packet, offset);
+            packet.getBooleans().write(0, tracker.getEntity().isOnGround());
 
-        PacketUtil.sendPacket(players, packet);
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     @Override
     public void sendEntityMoveLook(EntityInfo tracker, Vector offset, Collection<Player> players) {
-        Location entityPos = tracker.findRenderedLocation();
-        offset = tracker.getRotation().transform(offset); // Make sure to transform the given offset so that it's correct for the rendered position
+        try {
+            Location entityPos = tracker.findRenderedLocation();
+            offset = tracker.getRotation().transform(offset); // Make sure to transform the given offset so that it's correct for the rendered position
 
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.REL_ENTITY_MOVE_LOOK);
-        packet.getIntegers().write(0, tracker.getEntityId());
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.REL_ENTITY_MOVE_LOOK);
+            packet.getIntegers().write(0, tracker.getEntityId());
 
-        PacketUtil.writeLookRotation(packet, entityPos.getYaw(), entityPos.getPitch());
-        PacketUtil.writeRelativeOffset(packet, offset);
-        packet.getBooleans().write(0, tracker.getEntity().isOnGround());
+            PacketUtil.writeLookRotation(packet, entityPos.getYaw(), entityPos.getPitch());
+            PacketUtil.writeRelativeOffset(packet, offset);
+            packet.getBooleans().write(0, tracker.getEntity().isOnGround());
 
-        PacketUtil.sendPacket(players, packet);
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
 
     @Override
     public void sendEntityLook(EntityInfo tracker, Collection<Player> players) {
-        // Transform the entity rotation to the origin of the portal
-        Location entityPos = tracker.findRenderedLocation();
+        try {
+            // Transform the entity rotation to the origin of the portal
+            Location entityPos = tracker.findRenderedLocation();
 
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_LOOK);
-        packet.getIntegers().write(0, tracker.getEntityId());
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_LOOK);
+            packet.getIntegers().write(0, tracker.getEntityId());
 
-        PacketUtil.writeLookRotation(packet, entityPos.getYaw(), entityPos.getPitch());
-        packet.getBooleans().write(0, tracker.getEntity().isOnGround());
+            PacketUtil.writeLookRotation(packet, entityPos.getYaw(), entityPos.getPitch());
+            packet.getBooleans().write(0, tracker.getEntity().isOnGround());
 
-        PacketUtil.sendPacket(players, packet);
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     @Override
     public void sendEntityTeleport(EntityInfo tracker, Collection<Player> players) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_TELEPORT);
-        packet.getIntegers().write(0, tracker.getEntityId());
+        try {
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_TELEPORT);
+            packet.getIntegers().write(0, tracker.getEntityId());
 
-        Location entityPos = tracker.findRenderedLocation();
+            Location entityPos = tracker.findRenderedLocation();
 
-        PacketUtil.writeDoublePosition(packet, entityPos.toVector());
-        PacketUtil.writeTeleportRotation(packet, entityPos.getYaw(), entityPos.getPitch());
+            PacketUtil.writeDoublePosition(packet, entityPos.toVector());
+            PacketUtil.writeTeleportRotation(packet, entityPos.getYaw(), entityPos.getPitch());
 
-        packet.getBooleans().write(0, tracker.getEntity().isOnGround());
-        PacketUtil.sendPacket(players, packet);
+            packet.getBooleans().write(0, tracker.getEntity().isOnGround());
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     @Override
     public void sendEntityHeadRotation(EntityInfo tracker, Collection<Player> players) {
-        // Entity yaw is actually head rotation in Bukkit
-        Location renderedPos = tracker.findRenderedLocation();
-
-        byte headRotation = RotationUtil.getPacketRotationByte(renderedPos.getYaw());
-
-        PacketContainer packet;
         try {
-            Object nmsEntity = tracker.getEntity().getClass().getMethod("getHandle").invoke(tracker.getEntity());
-            Class<?> nmsEntityClass = Class.forName("net.minecraft.world.entity.Entity");
-            Class<?> packetClass = Class.forName("net.minecraft.network.protocol.game.ClientboundRotateHeadPacket");
-            java.lang.reflect.Constructor<?> constructor = packetClass.getConstructor(nmsEntityClass, byte.class);
-            Object nmsPacket = constructor.newInstance(nmsEntity, headRotation);
+            // Entity yaw is actually head rotation in Bukkit
+            Location renderedPos = tracker.findRenderedLocation();
 
-            packet = new PacketContainer(PacketType.Play.Server.ENTITY_HEAD_ROTATION, nmsPacket);
-            packet.getIntegers().write(0, tracker.getEntityId());
-        } catch (Throwable ex) {
-            packet = new PacketContainer(PacketType.Play.Server.ENTITY_HEAD_ROTATION);
-            packet.getIntegers().write(0, tracker.getEntityId());
-            packet.getBytes().write(0, headRotation);
+            byte headRotation = RotationUtil.getPacketRotationByte(renderedPos.getYaw());
+
+            PacketContainer packet;
+            try {
+                Object nmsEntity = tracker.getEntity().getClass().getMethod("getHandle").invoke(tracker.getEntity());
+                Class<?> nmsEntityClass = Class.forName("net.minecraft.world.entity.Entity");
+                Class<?> packetClass = Class.forName("net.minecraft.network.protocol.game.ClientboundRotateHeadPacket");
+                java.lang.reflect.Constructor<?> constructor = packetClass.getConstructor(nmsEntityClass, byte.class);
+                Object nmsPacket = constructor.newInstance(nmsEntity, headRotation);
+
+                packet = new PacketContainer(PacketType.Play.Server.ENTITY_HEAD_ROTATION, nmsPacket);
+                packet.getIntegers().write(0, tracker.getEntityId());
+            } catch (Throwable ex) {
+                packet = new PacketContainer(PacketType.Play.Server.ENTITY_HEAD_ROTATION);
+                packet.getIntegers().write(0, tracker.getEntityId());
+                packet.getBytes().write(0, headRotation);
+            }
+
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
         }
-
-        PacketUtil.sendPacket(players, packet);
     }
 
     @Override
     public void sendMount(EntityInfo tracker, Collection<EntityInfo> riding, Collection<Player> players) {
-        int[] ridingIds = new int[riding.size()];
-        int i = 0;
-        for(EntityInfo ridingTracker : riding) {
-            ridingIds[i] = ridingTracker.getEntityId();
-            i++;
-        }
-
-        PacketContainer packet;
         try {
-            Object nmsEntity = tracker.getEntity().getClass().getMethod("getHandle").invoke(tracker.getEntity());
-            Class<?> nmsEntityClass = Class.forName("net.minecraft.world.entity.Entity");
-            Class<?> packetClass = Class.forName("net.minecraft.network.protocol.game.ClientboundSetPassengersPacket");
-            java.lang.reflect.Constructor<?> constructor = packetClass.getConstructor(nmsEntityClass);
-            Object nmsPacket = constructor.newInstance(nmsEntity);
+            int[] ridingIds = new int[riding.size()];
+            int i = 0;
+            for(EntityInfo ridingTracker : riding) {
+                ridingIds[i] = ridingTracker.getEntityId();
+                i++;
+            }
 
-            packet = new PacketContainer(PacketType.Play.Server.MOUNT, nmsPacket);
-            packet.getIntegers().write(0, tracker.getEntityId());
-            packet.getIntegerArrays().write(0, ridingIds);
-        } catch (Throwable ex) {
-            packet = new PacketContainer(PacketType.Play.Server.MOUNT);
-            packet.getIntegers().write(0, tracker.getEntityId());
-            packet.getIntegerArrays().write(0, ridingIds);
+            PacketContainer packet;
+            try {
+                Object nmsEntity = tracker.getEntity().getClass().getMethod("getHandle").invoke(tracker.getEntity());
+                Class<?> nmsEntityClass = Class.forName("net.minecraft.world.entity.Entity");
+                Class<?> packetClass = Class.forName("net.minecraft.network.protocol.game.ClientboundSetPassengersPacket");
+                java.lang.reflect.Constructor<?> constructor = packetClass.getConstructor(nmsEntityClass);
+                Object nmsPacket = constructor.newInstance(nmsEntity);
+
+                packet = new PacketContainer(PacketType.Play.Server.MOUNT, nmsPacket);
+                packet.getIntegers().write(0, tracker.getEntityId());
+                packet.getIntegerArrays().write(0, ridingIds);
+            } catch (Throwable ex) {
+                packet = new PacketContainer(PacketType.Play.Server.MOUNT);
+                packet.getIntegers().write(0, tracker.getEntityId());
+                packet.getIntegerArrays().write(0, ridingIds);
+            }
+
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
         }
-
-        PacketUtil.sendPacket(players, packet);
     }
 
     @Override
     public void sendEntityEquipment(EntityInfo tracker, Map<EnumWrappers.ItemSlot, ItemStack> changes, Collection<Player> players) {
-        // Why minecraft, why not just use a map...
-        List<Pair<EnumWrappers.ItemSlot, ItemStack>> wrappedChanges = new ArrayList<>();
-        changes.forEach((slot, item) -> wrappedChanges.add(new Pair<>(slot, item == null ? new ItemStack(Material.AIR) : item)));
+        try {
+            // Why minecraft, why not just use a map...
+            List<Pair<EnumWrappers.ItemSlot, ItemStack>> wrappedChanges = new ArrayList<>();
+            changes.forEach((slot, item) -> wrappedChanges.add(new Pair<>(slot, item == null ? new ItemStack(Material.AIR) : item)));
 
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_EQUIPMENT);
-        packet.getIntegers().write(0, tracker.getEntityId());
-        packet.getSlotStackPairLists().write(0, wrappedChanges);
-        PacketUtil.sendPacket(players, packet);
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_EQUIPMENT);
+            packet.getIntegers().write(0, tracker.getEntityId());
+            packet.getSlotStackPairLists().write(0, wrappedChanges);
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     @Override
     public void sendMetadata(EntityInfo tracker, Collection<Player> players) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_METADATA);
+        try {
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_METADATA);
 
-        packet.getIntegers().write(0, tracker.getEntityId());
+            packet.getIntegers().write(0, tracker.getEntityId());
 
-        WrappedDataWatcher dataWatcher = EntityUtil.getActualDataWatcher(tracker.getEntity()); // Get the entity's actual data watcher
+            WrappedDataWatcher dataWatcher = EntityUtil.getActualDataWatcher(tracker.getEntity()); // Get the entity's actual data watcher
 
-        // Convert the data watcher to a list of WrappedDataValues
-        List<WrappedDataValue> wrappedDataValueList = dataWatcher.getWatchableObjects().stream()
-                .filter(Objects::nonNull)
-                .map(entry -> {
-                    WrappedDataWatcher.WrappedDataWatcherObject dataWatcherObject = entry.getWatcherObject();
-                    return new WrappedDataValue(
-                            dataWatcherObject.getIndex(),
-                            dataWatcherObject.getSerializer(),
-                            entry.getRawValue());
-                })
-                .toList();
+            // Convert the data watcher to a list of WrappedDataValues
+            List<WrappedDataValue> wrappedDataValueList = dataWatcher.getWatchableObjects().stream()
+                    .filter(Objects::nonNull)
+                    .map(entry -> {
+                        WrappedDataWatcher.WrappedDataWatcherObject dataWatcherObject = entry.getWatcherObject();
+                        return new WrappedDataValue(
+                                dataWatcherObject.getIndex(),
+                                dataWatcherObject.getSerializer(),
+                                entry.getRawValue());
+                    })
+                    .toList();
 
-        packet.getDataValueCollectionModifier().write(0, wrappedDataValueList); // Write the data values to the packet
+            packet.getDataValueCollectionModifier().write(0, wrappedDataValueList); // Write the data values to the packet
 
-        PacketUtil.sendPacket(players, packet); // Send the packet to the specified players
+            PacketUtil.sendPacket(players, packet); // Send the packet to the specified players
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
 
     @Override
     public void sendEntityVelocity(EntityInfo tracker, Vector newVelocity, Collection<Player> players) {
-        // Rotate the velocity back to the origin of the portal
-        Vector entityVelocity = tracker.getRotation().transform(newVelocity);
-        // Avoid integer overflows by limiting these values to 3.9
-        entityVelocity = MathUtil.min(entityVelocity, new Vector(3.9, 3.9, 3.9));
-        entityVelocity = MathUtil.max(entityVelocity, new Vector(-3.9, -3.9, -3.9));
+        try {
+            // Rotate the velocity back to the origin of the portal
+            Vector entityVelocity = tracker.getRotation().transform(newVelocity);
+            // Avoid integer overflows by limiting these values to 3.9
+            entityVelocity = MathUtil.min(entityVelocity, new Vector(3.9, 3.9, 3.9));
+            entityVelocity = MathUtil.max(entityVelocity, new Vector(-3.9, -3.9, -3.9));
 
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_VELOCITY);
-        packet.getIntegers().write(0, tracker.getEntityId());
-        PacketUtil.writeVelocity(packet, entityVelocity);
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.ENTITY_VELOCITY);
+            packet.getIntegers().write(0, tracker.getEntityId());
+            PacketUtil.writeVelocity(packet, entityVelocity);
 
-        PacketUtil.sendPacket(players, packet);
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     @Override
     public void sendEntityAnimation(EntityInfo tracker, Collection<Player> players, AnimationType animationType) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.ANIMATION);
+        try {
+            PacketContainer packet;
+            try {
+                Object nmsEntity = tracker.getEntity().getClass().getMethod("getHandle").invoke(tracker.getEntity());
+                Class<?> nmsEntityClass = Class.forName("net.minecraft.world.entity.Entity");
+                Class<?> packetClass = Class.forName("net.minecraft.network.protocol.game.ClientboundAnimatePacket");
+                java.lang.reflect.Constructor<?> constructor = packetClass.getConstructor(nmsEntityClass, int.class);
+                Object nmsPacket = constructor.newInstance(nmsEntity, animationType.getNmsId());
 
-        StructureModifier<Integer> integers = packet.getIntegers();
-        integers.write(0, tracker.getEntityId());
-        integers.write(1, animationType.getNmsId());
+                packet = new PacketContainer(PacketType.Play.Server.ANIMATION, nmsPacket);
+                packet.getIntegers().write(0, tracker.getEntityId());
+            } catch (Throwable ex) {
+                try {
+                    packet = new PacketContainer(PacketType.Play.Server.ANIMATION);
+                    StructureModifier<Integer> integers = packet.getIntegers();
+                    integers.write(0, tracker.getEntityId());
+                    integers.write(1, animationType.getNmsId());
+                } catch (Throwable t) {
+                    return;
+                }
+            }
 
-        PacketUtil.sendPacket(players, packet);
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     @Override
     public void sendEntityPickupItem(EntityInfo tracker, EntityInfo pickedUp, Collection<Player> players) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.COLLECT);
+        try {
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.COLLECT);
 
-        StructureModifier<Integer> integers = packet.getIntegers();
-        integers.write(0, pickedUp.getEntityId());
-        integers.write(1, tracker.getEntityId());
-        integers.write(2, ((Item) pickedUp.getEntity()).getItemStack().getAmount());
+            StructureModifier<Integer> integers = packet.getIntegers();
+            integers.write(0, pickedUp.getEntityId());
+            integers.write(1, tracker.getEntityId());
+            integers.write(2, ((Item) pickedUp.getEntity()).getItemStack().getAmount());
 
-        PacketUtil.sendPacket(players, packet);
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Silently catch exceptions to prevent main thread crashes
+        }
     }
 
     private PlayerInfoData generatePlayerInfoData(EntityInfo tracker) {
@@ -350,8 +417,12 @@ public class EntityPacketManipulator implements IEntityPacketManipulator {
 
     @Override
     public void sendRemovePlayerProfile(EntityInfo tracker, Collection<Player> players) {
-        PacketContainer packet = new PacketContainer(PacketType.Play.Server.PLAYER_INFO_REMOVE);
-        packet.getUUIDLists().write(0, Collections.singletonList(tracker.getEntityUniqueId()));
-        PacketUtil.sendPacket(players, packet);
+        try {
+            PacketContainer packet = new PacketContainer(PacketType.Play.Server.PLAYER_INFO_REMOVE);
+            packet.getUUIDLists().write(0, Collections.singletonList(tracker.getEntityUniqueId()));
+            PacketUtil.sendPacket(players, packet);
+        } catch (Throwable t) {
+            // Prevent crashes from unsupported ProtocolLib methods on newer server versions
+        }
     }
 }

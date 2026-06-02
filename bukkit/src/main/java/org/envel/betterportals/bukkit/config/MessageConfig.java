@@ -207,7 +207,10 @@ public class MessageConfig {
 
     public String getPrefix(Player player) {
         String rawPrefix = localeApi.getRaw(player, "prefix");
-        return rawPrefix != null ? rawPrefix : prefix;
+        if (rawPrefix == null || rawPrefix.equals("<gray>[<green>BetterPortals</green>]</gray> ")) {
+            return "<bold><gradient:#00FFA0:#00BFFF>BetterPortals</gradient></bold> <gray>»</gray> ";
+        }
+        return rawPrefix;
     }
 
     public String getRawMessage(String name) {
