@@ -1,5 +1,5 @@
-import com.lauriethefish.betterportals.shared.net.encryption.CipherManager;
-import com.lauriethefish.betterportals.shared.net.encryption.EncryptedObjectStream;
+import org.envel.betterportals.shared.net.encryption.CipherManager;
+import org.envel.betterportals.shared.net.encryption.EncryptedObjectStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

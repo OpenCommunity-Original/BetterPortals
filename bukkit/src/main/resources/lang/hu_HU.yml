@@ -1,0 +1,134 @@
+# Hungarian Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Kattints a parancs automatikus kitöltéséhez:"
+
+notEnoughPerms: "<red>Nincs jogosultságod a parancs használatához!</red>"
+mustBePlayer: "<red>Csak játékosként használhatod ezt a parancsot</red>"
+mustMakeSelection: "<red>Először ki kell jelölnöd a portált</red>"
+invalidSelection: "<red>Érvénytelen kijelölés! A portál kijelölésének a portál két szemközti sarkán kell lennie</red>"
+coordinatesNotInLine: "<red>A megadott sarokkoordináták (%d, %d, %d), (%d, %d, %d) nincsenek megfelelően egy vonalban a lapos portál létrehozásához (átlós portálok nem engedélyezettek)</red>"
+invalidCoordinates: "<red>A megadott koordináták (%s, %s, %s) nem érvényes egész számok</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Nem használhatsz relatív koordinátákat, ha a parancsot a konzolból hajtod végre</red>"
+portalCreated: "Portál sikeresen létrehozva"
+noWorldExistsWithGivenName: "<red>Nem létezik világ a következő névvel: {name}</red>"
+mustSelectBothSides: "<red>Először ki kell jelölnöd a portál mindkét oldalát. Részletekért futtasd a /bp help parancsot</red>"
+mustSelectOrigin: "<red>Ki kell jelölnöd a portál kiindulási pontját (origin) ezen a szerveren</red>"
+wrongNumberOfArgs: "<red>Hibás számú argumentum. Futtasd a /bp help parancsot segítségért.</red>"
+noCommands: "<red>Nincs jogosultságod alparancsok használatára</red>"
+invalidArgs: "<red>Az egyik argumentum érvénytelen volt. Futtasd a /bp help parancsot segítségért.</red>"
+invalidBoolean: "<red>Nem sikerült értelmezni a(z) \"{arg}\" argumentumot logikai értékként. Segítség: elfogadott értékek: \"true\" / \"false\" és \"yes\" / \"no\"</red>"
+differentSizes: "<red>A kiindulási és a célportálnak azonos méretűnek kell lennie</red>"
+noPortalCloseEnough: "<red>Nem található portál a közeledben</red>"
+removeNotOwnedByPlayer: "<red>Nincs jogosultságod mások által készített portálok eltávolítására</red>"
+nameNotOwnedbyPlayer: "<red>Nincs jogosultságod mások által készített portálok átnevezésére</red>"
+unknownCommand: "<red>Ismeretlen parancs. Segítségért futtasd a /bp help parancsot</red>"
+proxyDisabled: "<red>Nem sikerült újrakapcsolódni a proxyhoz: nincs engedélyezve!</red>"
+alreadyConnected: "<red>Nem sikerült újrakapcsolódni a proxyhoz: a szerver már csatlakozva van!</red>"
+horizontalIssues: "<yellow>Figyelem: az eltérő kiindulási/cél irányú vízszintes portálok blokk-forgatási problémákat okozhatnak - nem minden blokk forgatható el minden irányba</yellow>"
+noName: "<red>Ennek a portálnak nincs neve</red>"
+nameNetherPortal: "<red>Nem nevezhetsz el nether portált</red>"
+seeThroughPortalDisabled: "Mostantól minden nether portál sima alapértelmezett portálnak fog tűnni neked!"
+seeThroughPortalEnabled: "Mostantól minden jogosult nether portál mutatni fogja a túloldalt."
+noPortalsWithName: "<red>Nem létezik portál a következő névvel: {name}</red>"
+noWorldLink: "<red>Sajnos ez a portál nem fog világítani, mivel a világ, amelyben tartózkodsz, nincs összekötve.</red>\nHa úgy gondolod, hogy ez hiba, lépj kapcsolatba egy adminisztrátorral, és linkeld be ezt a wiki oldalt: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Ez a portál túl nagy. A jelenlegi mérethatár {size}.</red>"
+vanillaPortal: "Ez egy alapértelmezett nether portál. Ha át szeretnél látni rajta, újra meg kell gyújtanod."
+outOfDate: "<yellow>A BetterPortals verziód elavult ({current} vs {new}). Letöltheted innen: {url}</yellow>"
+reload: "A plugin sikeresen újratöltve"
+originPortalSet: "Kiindulási portál beállítva"
+destPortalSet: "Célportál beállítva"
+portalsLinked: "Portálok sikeresen összekapcsolva"
+portalRemoved: "Portál eltávolítva"
+startedReconnection: "Megkezdődött az újracsatlakozás a proxyhoz. Részletek a konzolban."
+changedName: "Portál neve sikeresen megváltoztatva"
+currentName: "A portál neve: <yellow>{name}</yellow>"
+allowsItems: "Ez a portál engedélyezi a tárgyak teleportálását"
+doesNotAllowItems: "Ez a portál nem engedélyezi a tárgyak teleportálását"
+changedAllowsItems: "Sikeresen beállítva, hogy a portál engedélyezi a tárgyak teleportálását"
+changedDoesNotAllowItems: "Sikeresen beállítva, hogy a portál nem engedélyezi a tárgyak teleportálását"
+help: "Alparancsok"
+setPosA: "A pozíció beállítása"
+setPosB: "B pozíció beállítása"
+portalWandName: "<green>Portál Pálca</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Újratölti a plugint és a konfigurációs fájlt"
+  betterportals_reconnect:
+    description: "Újracsatlakozik a proxyhoz, ha megszakadt a kapcsolat"
+  betterportals_removebyname:
+    description: "Eltávolítja az összes megadott nevű portált"
+  betterportals_createfromcoords:
+    description: "Létrehoz egy portált a sarkaiból játékos jelenléte nélkül"
+  betterportals_remove:
+    description: "Eltávolítja a legközelebbi portált a játékos 20 blokkos körzetében"
+  betterportals_setOrigin:
+    description: "Beállítja a jelenlegi pálcakijelölést kiindulási pozíciónak"
+  betterportals_setDestination:
+    description: "Beállítja a jelenlegi pálcakijelölést célpozíciónak"
+  betterportals_linkPortals:
+    description: "Összekapcsolja a kiindulási és a célportált"
+  betterportals_linkExternalPortals:
+    description: "Összekapcsolja a szervereden lévő kijelölést egy másik szerveren lévő célponttal"
+  betterportals_wand:
+    description: "Kézbe adja a kijelöléshez szükséges pálcát"
+  betterportals_setPortalName:
+    description: "Beállítja a legközelebbi portál nevét 20 blokkon belül"
+  betterportals_getportalname:
+    description: "Megmondja a legközelebbi portál nevét 20 blokkon belül"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Megmondja, hogy a legközelebbi portál engedélyezi-e a tárgyak teleportálását"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Beállítja, hogy a legközelebbi portál engedélyezze-e a tárgyak teleportálását"
+  betterportals_setseethroughportal:
+    description: "Beállítja, hogy a jelenlegi játékos átlásson-e a portálokon."
+  betterportals_toggleseethroughportal:
+    description: "Átkapcsolja, hogy a jelenlegi játékos átlásson-e a portálokon."
+  betterportals_menu:
+    description: "Megnyitja a Portál Admin GUI menüt"
+  betterportals_setprice:
+    description: "Beállítja a legközelebbi portál használati díját"
+  betterportals_setpreset:
+    description: "Beállítja a legközelebbi portál effekt-előbeállítását"
+
+gui_title_list: "Portálok listája ({page}. oldal)"
+gui_title_editor: "Portál szerkesztő menü"
+gui_title_effects: "Portál effektek menü"
+gui_button_teleport: "<gold>Teleportálás a kiindulópontra"
+gui_lore_teleport: "<gray>Kattints a kiindulási ponthoz való teleportáláshoz"
+gui_button_item_mob: "<gold>Tárgy/Mob Teleportáció"
+gui_status_enabled: "<green>Engedélyezve"
+gui_status_disabled: "<red>Letiltva"
+gui_lore_click_toggle: "<gray>Állapot: {status}\n<gray>Kattints a váltáshoz"
+gui_button_dec_price: "<red>Ár csökkentése"
+gui_lore_dec_price: "<gray>Bal klikk: <yellow>-$1.00</yellow>\n<gray>Jobb klikk: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Jelenlegi ár: <yellow>{price}"
+gui_lore_price: "<gray>Kattints az ár visszaállításához $0.00-ra"
+gui_button_inc_price: "<green>Ár növelése"
+gui_lore_inc_price: "<gray>Bal klikk: <yellow>+$1.00</yellow>\n<gray>Jobb klikk: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Effekt előbeállítás"
+gui_lore_effects: "<gray>Jelenlegi effekt: <light_purple>{preset}</light_purple>\n<gray>Kattints az effektmenü megnyitásához"
+gui_button_delete: "<red>Portál törlése"
+gui_lore_delete: "<gray>Kattints a portál végleges törléséhez"
+gui_button_back: "<yellow>Vissza a listához"
+gui_button_back_to_editor: "<yellow>Vissza a szerkesztőhöz"
+gui_button_prev: "<yellow>Előző oldal"
+gui_button_next: "<yellow>Következő oldal"
+gui_button_sound: "<gold>Hanghatások"
+gui_lore_sound: "<gray>Állapot: {status}\n\n<gray>Kattints a hanghatások be/kikapcsolásához"
+gui_list_default_portal_name: "Egyedi portál"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Kiindulópont: <white>{origin}</white>\n<gray>Ár: <yellow>{price}</yellow>\n<gray>Effekt: <light_purple>{preset}</light_purple>\n\n<yellow>Kattints a beállítások szerkesztéséhez"
+gui_effects_active: "<green>● {name} (Aktív)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Részecske: <white>{particle}</white> (Darab: <white>{count}</white>, Sebesség: <white>{speed}</white>)\n<gray>Hang: <white>{sound}</white> (Hangerő: <white>{volume}</white>, Hangmagasság: <white>{pitch}</white>, Intervallum: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Kattints a beállítás kiválasztásához"
+gui_effects_selected: "<green>Kiválasztva"
+
+help_header: "<gold><bold>BetterPortals Súgó</bold></gold> <gray>({page}/{total_pages}. oldal)</gray>"
+help_previous: "[◀ Előző]"
+help_next: "[Következő ▶]"
+help_go_to_page: "<green>Ugrás a(z) {page}. oldalra"
+help_page_indicator: "<yellow>{page}. oldal a(z) {total_pages}-ból</yellow>"
+help_click_info: "<gray>💡 Kattints egy parancsra, hogy bemásold a chatbe.</gray>"

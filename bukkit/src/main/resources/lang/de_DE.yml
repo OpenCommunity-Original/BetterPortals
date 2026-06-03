@@ -1,0 +1,134 @@
+# German Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Klicke zum automatischen Ausfüllen des Befehls:"
+
+notEnoughPerms: "<red>Du hast keine Berechtigung, diesen Befehl zu verwenden!</red>"
+mustBePlayer: "<red>Du musst ein Spieler sein, um diesen Befehl zu verwenden</red>"
+mustMakeSelection: "<red>Du musst zuerst eine Auswahl treffen</red>"
+invalidSelection: "<red>Ungültige Auswahl! Portal-Auswahlen müssen auf den zwei Ecken eines Portals liegen</red>"
+coordinatesNotInLine: "<red>Die angegebenen Eckkoordinaten (%d, %d, %d), (%d, %d, %d) sind nicht korrekt ausgerichtet, um ein flaches Portal zu erzeugen (Portale sind auf Diagonalen nicht erlaubt)</red>"
+invalidCoordinates: "<red>Die Koordinaten (%s, %s, %s) sind keine gültigen Ganzzahlkoordinaten (relativ oder absolut)</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Relative Koordinaten können nicht verwendet werden, wenn der Befehl über die Konsole ausgeführt wird</red>"
+portalCreated: "Portal erfolgreich erstellt"
+noWorldExistsWithGivenName: "<red>Es existiert keine Welt namens {name}</red>"
+mustSelectBothSides: "<red>Du musst zuerst beide Seiten eines Portals auswählen. Für Informationen führe /bp help aus</red>"
+mustSelectOrigin: "<red>Du musst das Startportal (Origin) auf diesem Server auswählen</red>"
+wrongNumberOfArgs: "<red>Falsche Anzahl an Argumenten. Führe /bp help für Hilfe aus.</red>"
+noCommands: "<red>Du hast keine Berechtigung, Unterbefehle zu verwenden</red>"
+invalidArgs: "<red>Eines deiner Argumente war ungültig. Führe /bp help für Hilfe aus.</red>"
+invalidBoolean: "<red>Konnte \"{arg}\" nicht als Wahrheitswert analysieren. Hilfe: Mögliche Werte sind \"true\" oder \"false\" und \"yes\" oder \"no\"</red>"
+differentSizes: "<red>Das Start- und Zielportal müssen dieselbe Größe haben</red>"
+noPortalCloseEnough: "<red>Kein Portal nah genug gefunden</red>"
+removeNotOwnedByPlayer: "<red>Du hast keine Berechtigung, von anderen Personen erstellte Portale zu entfernen</red>"
+nameNotOwnedbyPlayer: "<red>Du hast keine Berechtigung, den Namen von Portalen zu ändern, die von anderen Personen erstellt wurden</red>"
+unknownCommand: "<red>Unbekannter Befehl. Für Hilfe führe /bp help aus</red>"
+proxyDisabled: "<red>Verbindung zum Proxy nicht möglich: Er ist nicht aktiviert!</red>"
+alreadyConnected: "<red>Verbindung zum Proxy nicht möglich: Der Server ist bereits verbunden!</red>"
+horizontalIssues: "<yellow>Warnung: Horizontale Portale mit unterschiedlichen Start-/Zielrichtungen können Probleme bei der Blockrotation verursachen - nicht alle Blöcke können in jede Richtung gedreht werden</yellow>"
+noName: "<red>Dieses Portal hat keinen Namen</red>"
+nameNetherPortal: "<red>Du kannst den Namen eines Netherportals nicht ändern</red>"
+seeThroughPortalDisabled: "Alle Netherportale sehen für dich jetzt wie normale Vanillaportale aus!"
+seeThroughPortalEnabled: "Alle berechtigten Netherportale zeigen dir nun, was sich auf der anderen Seite befindet."
+noPortalsWithName: "<red>Es existieren keine Portale mit dem Namen {name}</red>"
+noWorldLink: "<red>Leider wird dieses Portal nicht aktiviert, da die Welt, in der du dich befindest, nicht verknüpft ist.</red>\nWenn du glaubst, dass dies ein Fehler ist, kontaktiere einen Administrator und verlinke diese Wiki-Seite: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Dieses Portal ist zu groß. Das aktuelle Größenlimit ist {size}.</red>"
+vanillaPortal: "Dies ist ein normales Netherportal. Wenn du hindurchsehen möchtest, musst du es erneut entzünden."
+outOfDate: "<yellow>Deine Version von BetterPortals ist veraltet ({current} vs. {new}). Du kannst sie hier herunterladen: {url}</yellow>"
+reload: "Plugin neu geladen"
+originPortalSet: "Startportal festgelegt"
+destPortalSet: "Zielportal festgelegt"
+portalsLinked: "Portale erfolgreich verknüpft"
+portalRemoved: "Portal entfernt"
+startedReconnection: "Verbindungsaufbau zum Proxy gestartet. Details siehe Konsole."
+changedName: "Portalname erfolgreich geändert"
+currentName: "Der Name für dieses Portal lautet: <yellow>{name}</yellow>"
+allowsItems: "Dieses Portal erlaubt den Transport von Gegenständen"
+doesNotAllowItems: "Dieses Portal erlaubt den Transport von Gegenständen nicht"
+changedAllowsItems: "Erfolgreich festgelegt, dass das Portal den Transport von Gegenständen erlaubt"
+changedDoesNotAllowItems: "Erfolgreich festgelegt, dass das Portal den Transport von Gegenständen nicht erlaubt"
+help: "Unterbefehle"
+setPosA: "Position A festgelegt"
+setPosB: "Position B festgelegt"
+portalWandName: "<green>Portal-Zauberstab</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Lädt das Plugin und die Konfigurationsdatei neu"
+  betterportals_reconnect:
+    description: "Verbindet erneut mit dem Proxy, falls getrennt"
+  betterportals_removebyname:
+    description: "Entfernt alle Portale mit dem angegebenen Namen"
+  betterportals_createfromcoords:
+    description: "Erstellt ein Portal aus den Koordinaten seiner Ecken, ohne dass ein Spieler erforderlich ist"
+  betterportals_remove:
+    description: "Entfernt das nächste Portal im Umkreis von 20 Blöcken um den Spieler"
+  betterportals_setOrigin:
+    description: "Legt die aktuelle Auswahl des Portal-Zauberstabs als Startposition fest"
+  betterportals_setDestination:
+    description: "Legt die aktuelle Auswahl des Portal-Zauberstabs als Zielposition fest"
+  betterportals_linkPortals:
+    description: "Verknüpft Start- und Zielportal miteinander"
+  betterportals_linkExternalPortals:
+    description: "Verknüpft die Startauswahl auf diesem Server mit einem Ziel auf einem anderen Server"
+  betterportals_wand:
+    description: "Gibt dir den Zauberstab zur Auswahl von Portalen"
+  betterportals_setPortalName:
+    description: "Legt den Namen des nächsten Portals im Umkreis von 20 Blöcken fest"
+  betterportals_getportalname:
+    description: "Zeigt den Namen des nächsten Portals im Umkreis von 20 Blöcken an"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Zeigt an, ob das nächste Portal im Umkreis von 20 Blöcken den Transport von Gegenständen erlaubt"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Legt fest, ob das nächste Portal im Umkreis von 20 Blöcken den Transport von Gegenständen erlaubt"
+  betterportals_setseethroughportal:
+    description: "Legt fest, ob der aktuelle Spieler durch Portale hindurchsehen kann"
+  betterportals_toggleseethroughportal:
+    description: "Schaltet um, ob der aktuelle Spieler durch Portale hindurchsehen kann"
+  betterportals_menu:
+    description: "Öffnet das Portal-Admin-GUI-Menü"
+  betterportals_setprice:
+    description: "Legt den Preis für das nächste Portal fest"
+  betterportals_setpreset:
+    description: "Legt die Effekt-Voreinstellung für das nächste Portal fest"
+
+gui_title_list: "Portalliste (Seite {page})"
+gui_title_editor: "Portal-Editor-Menü"
+gui_title_effects: "Portal-Effekt-Menü"
+gui_button_teleport: "<gold>Teleport zum Start"
+gui_lore_teleport: "<gray>Klicken, um zum Portalstart zu teleportieren"
+gui_button_item_mob: "<gold>Gegenstands-/Mob-Teleportation"
+gui_status_enabled: "<green>Aktiviert"
+gui_status_disabled: "<red>Deaktiviert"
+gui_lore_click_toggle: "<gray>Status: {status}\n<gray>Klicken zum Umschalten"
+gui_button_dec_price: "<red>Preis verringern"
+gui_lore_dec_price: "<gray>Linksklick: <yellow>-1,00 $</yellow>\n<gray>Rechtsklick: <yellow>-10,00 $</yellow>"
+gui_button_price: "<gold>Aktueller Preis: <yellow>{price}"
+gui_lore_price: "<gray>Klicken, um den Preis auf 0,00 $ zurückzusetzen"
+gui_button_inc_price: "<green>Preis erhöhen"
+gui_lore_inc_price: "<gray>Linksklick: <yellow>+1,00 $</yellow>\n<gray>Rechtsklick: <yellow>+10,00 $</yellow>"
+gui_button_effects: "<gold>Effekt-Voreinstellung"
+gui_lore_effects: "<gray>Aktuelle Voreinstellung: <light_purple>{preset}</light_purple>\n<gray>Klicken, um das Effektmenü zu öffnen"
+gui_button_delete: "<red>Portal löschen"
+gui_lore_delete: "<gray>Klicken, um dieses Portal dauerhaft zu löschen"
+gui_button_back: "<yellow>Zurück zur Liste"
+gui_button_back_to_editor: "<yellow>Zurück zum Editor"
+gui_button_prev: "<yellow>Vorherige Seite"
+gui_button_next: "<yellow>Nächste Seite"
+gui_button_sound: "<gold>Soundeffekte"
+gui_lore_sound: "<gray>Status: {status}\n\n<gray>Klicken zum Umschalten der Portal-Soundeffekte"
+gui_list_default_portal_name: "Benutzerdefiniertes Portal"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Start: <white>{origin}</white>\n<gray>Preis: <yellow>{price}</yellow>\n<gray>Voreinstellung: <light_purple>{preset}</light_purple>\n\n<yellow>Klicken, um Einstellungen zu bearbeiten"
+gui_effects_active: "<green>● {name} (Aktiv)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Partikel: <white>{particle}</white> (Anzahl: <white>{count}</white>, Geschw.: <white>{speed}</white>)\n<gray>Sound: <white>{sound}</white> (Lautst.: <white>{volume}</white>, Tonhöhe: <white>{pitch}</white>, Intervall: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Klicken, um diese Voreinstellung auszuwählen"
+gui_effects_selected: "<green>Ausgewählt"
+
+help_header: "<gold><bold>BetterPortals Hilfe</bold></gold> <gray>(Seite {page}/{total_pages})</gray>"
+help_previous: "[◀ Zurück]"
+help_next: "[Weiter ▶]"
+help_go_to_page: "<green>Gehe zu Seite {page}"
+help_page_indicator: "<yellow>Seite {page} von {total_pages}</yellow>"
+help_click_info: "<gray>💡 Klicke auf einen Befehl, um ihn in dein Chatfenster zu kopieren.</gray>"

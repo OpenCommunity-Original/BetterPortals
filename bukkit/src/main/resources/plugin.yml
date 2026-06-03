@@ -1,13 +1,16 @@
 name: BetterPortals
-version: 0.14.1
-main: com.lauriethefish.betterportals.bukkit.BetterPortals
+version: 1.1.0
+main: org.envel.betterportals.bukkit.BetterPortals
 description: "Plugin which allows nether portals to be seen through, and allows custom portal creation"
+folia-supported: true
+author: Envel
 depend:
   - ProtocolLib
 api-version: "1.21"
 softdepend:
   - Multiverse-Core
   - My_Worlds
+  - Vault
 commands:
   betterportals:
     description: Main plugin command
@@ -25,34 +28,43 @@ permissions:
     default: op
   betterportals.linkexternal:
     description: ' Allows you to run /bp linkexternal to create cross-server portals.'
-  betterportals.reconnect:
-    description: ' Allows you to use the /bp reconnect command'
+    default: op
+  betterportals.removeclosest:
+    description: ' Allows you to use /bp removeclosest'
     default: op
   betterportals.reload:
-    description: Allows you to use /bp reload
+    description: ' Allows you to use /bp reload'
     default: op
-  betterportals.remove:
-    description: ' Allows you to remove portals that you created'
+  betterportals.create:
+    description: ' Allows you to use /bp create'
     default: op
-  betterportals.remove.others:
-    description: " Allows you to remove nether portals, as well as other portals not\
-      \ created by you"
+  betterportals.updatecoords:
+    description: ' Allows you to use /bp updatecoords'
     default: op
-  betterportals.see:
-    description: ' Required for any player to see portals'
-    default: "true"
-  betterportals.select:
-    description: Allows you to use /bp origin and /bp destination
+  betterportals.tp:
+    description: ' Allows you to use /bp tp'
     default: op
-  betterportals.setname:
-    description: ' Allows you to set the name of portals'
+  betterportals.setprice:
+    description: ' Allows you to use /bp setprice'
     default: op
-  betterportals.setname.others:
-    description: ' Allows you to set the name of portals that you didn''t create'
+  betterportals.setpreset:
+    description: ' Allows you to use /bp setpreset'
     default: op
-  betterportals.use:
-    description: ' Required for any player to use portals'
-    default: "true"
+  betterportals.bypassprice:
+    description: ' Allows you to bypass paying for custom portals.'
+    default: op
+  betterportals.admin:
+    description: ' Allows you to bypass portal size restrictions, and see debug information.'
+    default: op
+  betterportals.createcustom:
+    description: ' Allows you to use /bp createcustom'
+    default: op
   betterportals.wand:
-    description: Allows you to get the portal wand with /bp wands
+    description: ' Allows you to use /bp wand'
     default: op
+  betterportals.user:
+    description: ' Allows you to use portals'
+    default: true
+  betterportals.see:
+    description: ' Allows you to see through portals'
+    default: true

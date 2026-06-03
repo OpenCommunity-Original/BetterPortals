@@ -22,3 +22,8 @@ lombok.config
 *bin/
 
 .DS_Store
+
+# Test environment gitignore rules (prevents any Mojang code or runtime files from getting into git)
+/test-server/
+/test-client/
+.vscode/

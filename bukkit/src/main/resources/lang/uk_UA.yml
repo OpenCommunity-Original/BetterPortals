@@ -1,0 +1,135 @@
+# Ukrainian Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Натисніть для автозаповнення команди:"
+
+notEnoughPerms: "<red>У вас немає дозволу на використання цієї команди!</red>"
+mustBePlayer: "<red>Ви повинні бути гравцем, щоб використовувати цю команду</red>"
+mustMakeSelection: "<red>Спочатку потрібно зробити виділення</red>"
+invalidSelection: "<red>Некоректне виділення! Межі порталу мають бути на двох кутах рамки</red>"
+coordinatesNotInLine: "<red>Координати кутів (%d, %d, %d), (%d, %d, %d) не вирівняні по одній лінії (діагональні портали не підтримуються)</red>"
+invalidCoordinates: "<red>Координати (%s, %s, %s) не є коректними цілими числами</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Не можна використовувати відносні координати при виконанні команди з консолі</red>"
+portalCreated: "Портал успішно створено"
+noWorldExistsWithGivenName: "<red>Світ із назвою {name} не існує</red>"
+mustSelectBothSides: "<red>Спочатку виділіть обидві сторони порталу. Для довідки введіть /bp help</red>"
+mustSelectOrigin: "<red>Ви повинні виділити точку відправлення (origin) порталу на цьому сервері</red>"
+wrongNumberOfArgs: "<red>Невірна кількість аргументів. Введіть /bp help для довідки.</red>"
+noCommands: "<red>У вас немає дозволу на використання субкоманд</red>"
+invalidArgs: "<red>Один з аргументів вказано невірно. Введіть /bp help для довідки.</red>"
+invalidBoolean: "<red>Не вдалося розпізнати \"{arg}\" як логічне значення. Допустимі варіанти: \"true\"/\"false\" або \"yes\"/\"no\"</red>"
+differentSizes: "<red>Розміри порталів відправлення та призначення мають збігатися</red>"
+noPortalCloseEnough: "<red>Найближчий портал не знайдено</red>"
+removeNotOwnedByPlayer: "<red>У вас немає прав на видалення чужих порталів</red>"
+nameNotOwnedbyPlayer: "<red>У вас немає прав на перейменування чужих порталів</red>"
+unknownCommand: "<red>Невідома команда. Введіть /bp help для довідки</red>"
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+proxyDisabled: "<red>Не вдалося підключитися до проксі: підключення вимкнено в конфігурації!</red>"
+alreadyConnected: "<red>Не вдалося підключитися до проксі: сервер уже підключений!</red>"
+horizontalIssues: "<yellow>Попередження: горизонтальні портали з різним напрямком можуть некоректно відображати поворот блоків</yellow>"
+noName: "<red>Цей портал не має імені</red>"
+nameNetherPortal: "<red>Ви не можете змінити назву порталу Нижнього світу (Nether)</red>"
+seeThroughPortalDisabled: "Усі портали Нижнього світу тепер виглядатимуть як стандартні ванільні портали!"
+seeThroughPortalEnabled: "Усі підтримувані портали Нижнього світу тепер показуватимуть інший бік."
+noPortalsWithName: "<red>Портал з ім'ям {name} не знайдено</red>"
+noWorldLink: "<red>На жаль, цей портал не буде активовано, оскільки світ, у якому ви перебуваєте, не зв'язаний.</red>\nЯкщо ви вважаєте це помилкою, зв'яжіться з адміністрацією. Посилання на вікі: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Цей портал занадто великий. Ліміт розміру: {size}.</red>"
+vanillaPortal: "Це стандартний портал Нижнього світу. Перезапаліть його, щоб бачити крізь нього."
+outOfDate: "<yellow>Ваша версія BetterPortals застаріла ({current} проти {new}). Ви можете завантажити оновлення: {url}</yellow>"
+reload: "Конфігурацію плагіна успішно перезавантажено"
+originPortalSet: "Точку відправлення порталу встановлено"
+destPortalSet: "Точку призначення порталу встановлено"
+portalsLinked: "Портали успішно зв'язано"
+portalRemoved: "Портал видалено"
+startedReconnection: "Запущено процес перепідключення до проксі. Подробиці в консолі."
+changedName: "Ім'я порталу успішно змінено"
+currentName: "Ім'я цього порталу: <yellow>{name}</yellow>"
+allowsItems: "Цей портал дозволяє телепортацію предметів і мобів"
+doesNotAllowItems: "Цей портал забороняє телепортацію предметів і мобів"
+changedAllowsItems: "Телепортацію предметів і мобів через портал успішно увімкнено"
+changedDoesNotAllowItems: "Телепортацію предметів і мобів через портал успішно вимкнено"
+help: "Доступні команди"
+setPosA: "Точку A встановлено"
+setPosB: "Точку B встановлено"
+portalWandName: "<green>Паличка Виділення Порталів</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Перезавантажує конфігурацію та плагін"
+  betterportals_reconnect:
+    description: "Перепідключається до проксі-сервера в разі обриву"
+  betterportals_removebyname:
+    description: "Видаляє всі портали з вказаним ім'ям"
+  betterportals_createfromcoords:
+    description: "Створює портал за координатами кутів без участі гравця"
+  betterportals_remove:
+    description: "Видаляє найближчий портал в радіусі 20 блоків"
+  betterportals_setOrigin:
+    description: "Встановлює поточне виділення паличкою як точку відправлення"
+  betterportals_setDestination:
+    description: "Встановлює поточне виділення паличкою як точку призначення"
+  betterportals_linkPortals:
+    description: "Зв'язує вибрані точки відправлення та призначення"
+  betterportals_linkExternalPortals:
+    description: "Зв'язує точку відправлення на цьому сервері з точкою призначення на іншому"
+  betterportals_wand:
+    description: "Видає інструмент (паличку) для виділення порталів"
+  betterportals_setPortalName:
+    description: "Встановлює ім'я для найближчого порталу в радіусі 20 блоків"
+  betterportals_getportalname:
+    description: "Показує ім'я найближчого порталу в радіусі 20 блоків"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Показує, чи дозволено телепорт мобів/предметів через найближчий портал"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Налаштовує дозвіл на телепорт мобів/предметів через найближчий портал"
+  betterportals_setseethroughportal:
+    description: "Налаштовує видимість крізь портали для поточного гравця"
+  betterportals_toggleseethroughportal:
+    description: "Перемикає відображення крізь портали для поточного гравця"
+  betterportals_menu:
+    description: "Відкриває меню управління порталами (GUI)"
+  betterportals_setprice:
+    description: "Встановлює вартість використання найближчого порталу"
+  betterportals_setpreset:
+    description: "Встановлює візуальний ефект для найближчого порталу"
+
+gui_title_list: "Список порталів (Сторінка {page})"
+gui_title_editor: "Меню редагування порталу"
+gui_title_effects: "Меню ефектів порталу"
+gui_button_teleport: "<gold>Телепортуватися до початку"
+gui_lore_teleport: "<gray>Натисніть для телепортації до початку порталу"
+gui_button_item_mob: "<gold>Телепортація предметів/мобів"
+gui_status_enabled: "<green>Увімкнено"
+gui_status_disabled: "<red>Вимкнено"
+gui_lore_click_toggle: "<gray>Статус: {status}\n<gray>Натисніть для перемикання"
+gui_button_dec_price: "<red>Зменшити ціну"
+gui_lore_dec_price: "<gray>Лівий клік: <yellow>-$1.00</yellow>\n<gray>Правий клік: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Поточна ціна: <yellow>{price}"
+gui_lore_price: "<gray>Натисніть для скидання ціни до $0.00"
+gui_button_inc_price: "<green>Збільшити ціну"
+gui_lore_inc_price: "<gray>Лівий клік: <yellow>+$1.00</yellow>\n<gray>Правий клік: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Пресет ефектів"
+gui_lore_effects: "<gray>Поточний пресет: <light_purple>{preset}</light_purple>\n<gray>Натисніть, щоб відкрити меню ефектів"
+gui_button_delete: "<red>Видалити портал"
+gui_lore_delete: "<gray>Натисніть для безповоротного видалення цього порталу"
+gui_button_back: "<yellow>Назад до списку"
+gui_button_back_to_editor: "<yellow>Назад до редактора"
+gui_button_prev: "<yellow>Попередня сторінка"
+gui_button_next: "<yellow>Наступна сторінка"
+gui_button_sound: "<gold>Звукові ефекти"
+gui_lore_sound: "<gray>Статус: {status}\n\n<gray>Натисніть, щоб перемикнути звуки порталу"
+gui_list_default_portal_name: "Кастомний портал"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Початок: <white>{origin}</white>\n<gray>Ціна: <yellow>{price}</yellow>\n<gray>Пресет: <light_purple>{preset}</light_purple>\n\n<yellow>Натисніть для редагування"
+gui_effects_active: "<green>● {name} (Активний)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Частки: <white>{particle}</white> (Кіл-ть: <white>{count}</white>, Швидкість: <white>{speed}</white>)\n<gray>Звук: <white>{sound}</white> (Гум-ть: <white>{volume}</white>, Висота: <white>{pitch}</white>, Інтервал: <white>{interval}т</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Натисніть, щоб вибрати цей пресет"
+gui_effects_selected: "<green>Вибрано"
+
+help_header: "<gold><bold>Довідка по BetterPortals</bold></gold> <gray>(Сторінка {page}/{total_pages})</gray>"
+help_previous: "[◀ Назад]"
+help_next: "[Вперед ▶]"
+help_go_to_page: "<green>Перейти на сторінку {page}"
+help_page_indicator: "<yellow>Сторінка {page} з {total_pages}</yellow>"
+help_click_info: "<gray>💡 Натисніть на будь-яку команду, щоб скопіювати її в чат.</gray>"

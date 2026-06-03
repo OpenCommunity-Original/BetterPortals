@@ -1,0 +1,134 @@
+# Lithuanian Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Spustelėkite, kad automatiškai užpildytumėte komandą:"
+
+notEnoughPerms: "<red>Jūs neturite leidimo naudoti šios komandos!</red>"
+mustBePlayer: "<red>Norėdami naudoti šią komandą, turite būti žaidėjas</red>"
+mustMakeSelection: "<red>Pirmiausia turite pasirinkti sritį</red>"
+invalidSelection: "<red>Neteisingas pasirinkimas! Portalo pasirinkimai turi būti dviejuose portalo kampuose</red>"
+coordinatesNotInLine: "<red>Pateiktos kampų koordinatės (%d, %d, %d), (%d, %d, %d) nėra tinkamai suderintos, kad būtų sukurtas plokščias portalas (portalai įstrižainėse neleidžiami)</red>"
+invalidCoordinates: "<red>Koordinatės (%s, %s, %s) nėra galiojančios sveikųjų skaičių koordinatės</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Negalima naudoti santykinių koordinačių, kai komanda vykdoma iš konsolės</red>"
+portalCreated: "Portalą sėkmingai sukurta"
+noWorldExistsWithGivenName: "<red>Pasaulis pavadinimu {name} neegzistuoja</red>"
+mustSelectBothSides: "<red>Pirmiausia turite pasirinkti abi portalo puses. Norėdami gauti informacijos, paleiskite /bp help</red>"
+mustSelectOrigin: "<red>Šiame serveryje turite pasirinkti portalo pradžią (origin)</red>"
+wrongNumberOfArgs: "<red>Neteisingas argumentų skaičius. Paleiskite /bp help, kad gautumėte pagalbos.</red>"
+noCommands: "<red>Jūs neturite leidimo naudoti jokių subkomandų</red>"
+invalidArgs: "<red>Vienas iš jūsų argumentų buvo neteisingas. Paleiskite /bp help, kad gautumėte pagalbos.</red>"
+invalidBoolean: "<red>Nepavyko išanalizuoti „{arg}“ kaip loginio argumento. pagalba: galimos reikšmės yra „true“ arba „false“ ir „yes“ arba „no“</red>"
+differentSizes: "<red>Pradinis ir tikslo portalas turi būti to paties dydžio</red>"
+noPortalCloseEnough: "<red>Nerasta pakankamai arti esančio portalo</red>"
+removeNotOwnedByPlayer: "<red>Jūs neturite leidimo pašalinti kitų žmonių sukurtų portalų</red>"
+nameNotOwnedbyPlayer: "<red>Jūs neturite leidimo nustatyti kitų žmonių sukurtų portalų pavadinimo</red>"
+unknownCommand: "<red>Nežinoma komanda. Norėdami gauti pagalbos, paleiskite /bp help</red>"
+proxyDisabled: "<red>Nepavyko iš naujo prisijungti prie tarpinio serverio (proxy): jis neįjungtas!</red>"
+alreadyConnected: "<red>Nepavyko iš naujo prisijungti prie tarpinio serverio: serveris jau prijungtas!</red>"
+horizontalIssues: "<yellow>Įspėjimas: horizontalūs portalai su skirtingomis pradžios/tikslo kryptimis gali sukelti blokų sukimosi problemų - ne visus blokus galima sukti visomis kryptimis</yellow>"
+noName: "<red>Šis portalas neturi pavadinimo</red>"
+nameNetherPortal: "<red>Negalite nustatyti pragaro (nether) portalo pavadinimo</red>"
+seeThroughPortalDisabled: "Visi pragaro portalai jums dabar atrodys kaip paprasti vaniliniai portalai!"
+seeThroughPortalEnabled: "Visi tinkami pragaro portalai dabar rodys jums, kas yra kitoje pusėje."
+noPortalsWithName: "<red>Portalų su pavadinimu {name} nebuvo</red>"
+noWorldLink: "<red>Deja, šis portalas neužsidegs, nes pasaulis, kuriame esate, nėra susietas.</red>\nJei manote, kad tai klaida, susisiekite su administratoriumi ir pateikite šią „wiki“ nuorodą: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Šis portalas yra per didelis. Dabartinis dydžio limitas yra {size}.</red>"
+vanillaPortal: "Tai vanilinis pragaro portalas. Jei norite matyti per šį portalą, turėsite jį vėl uždegti."
+outOfDate: "<yellow>Jūsų BetterPortals versija yra pasenusi ({current} vs {new}). Ją galite atsisiųsti iš {url}</yellow>"
+reload: "Pluginas perkrautas sėkmingai"
+originPortalSet: "Pradžios portalas nustatytas"
+destPortalSet: "Tikslo portalas nustatytas"
+portalsLinked: "Portalai sėkmingai susieti"
+portalRemoved: "Portalas pašalintas"
+startedReconnection: "Pradėtas pakartotinis prisijungimas prie tarpinio serverio. Išsamesnės informacijos ieškokite konsolėje."
+changedName: "Sėkmingai pakeistas portalo pavadinimas"
+currentName: "Šio portalo pavadinimas yra: <yellow>{name}</yellow>"
+allowsItems: "Šis portalas leidžia daiktų teleportaciją"
+doesNotAllowItems: "Šis portalas neleidžia daiktų teleportacijos"
+changedAllowsItems: "Sėkmingai nustatyta, kad portalas leidžia daiktų teleportaciją"
+changedDoesNotAllowItems: "Sikmingai nustatyta, kad portalas neleidžia daiktų teleportacijos"
+help: "Subkomandos"
+setPosA: "Nustatyti poziciją A"
+setPosB: "Nustatyti poziciją B"
+portalWandName: "<green>Portalo Lazdelė</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Iš naujo įkelia pluginą ir konfigūracijos failą"
+  betterportals_reconnect:
+    description: "Iš naujo prisijungia prie tarpinio serverio, jei atsijungė"
+  betterportals_removebyname:
+    description: "Pašalina visus portalus su nurodytu pavadinimu"
+  betterportals_createfromcoords:
+    description: "Sukuria portalą iš jo kampų koordinačių nereikalaujant žaidėjo"
+  betterportals_remove:
+    description: "Pašalina artimiausią portalą 20 blokų atstumu nuo žaidėjo"
+  betterportals_setOrigin:
+    description: "Nustato dabartinį portalo lazdelės pasirinkimą kaip jūsų pradžios poziciją"
+  betterportals_setDestination:
+    description: "Nustato dabartinį portalo lazdelės pasirinkimą kaip jūsų tikslo poziciją"
+  betterportals_linkPortals:
+    description: "Susieja pradinį ir tikslo portalą kartu"
+  betterportals_linkExternalPortals:
+    description: "Susieja pradinį pasirinkimą šiame serveryje su tikslu kitame serveryje"
+  betterportals_wand:
+    description: "Duoda jums lazdelę portalams pasirinkti"
+  betterportals_setPortalName:
+    description: "Nustato artimiausio portalo pavadinimą 20 blokų atstumu"
+  betterportals_getportalname:
+    description: "Parodo artimiausio portalo pavadinimą 20 blokų atstumu"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Parodo, ar artimiausias portalas 20 blokų atstumu leidžia daiktų teleportaciją"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Nustato, ar artimiausias portalas 20 blokų atstumu leidžia daiktų teleportaciją"
+  betterportals_setseethroughportal:
+    description: "Nustato, ar dabartinis žaidėjas gali matyti, kas yra kitoje portalo pusėje."
+  betterportals_toggleseethroughportal:
+    description: "Perjungia, ar dabartinis žaidėjas gali matyti, kas yra kitoje portalo pusėje."
+  betterportals_menu:
+    description: "Atidaro portalo administratoriaus GUI meniu"
+  betterportals_setprice:
+    description: "Nustato artimiausio portalo kainą"
+  betterportals_setpreset:
+    description: "Nustato artimiausio portalo efektų nustatymą"
+
+gui_title_list: "Portalų sąrašas ({page} puslapis)"
+gui_title_editor: "Portalo redaktoriaus meniu"
+gui_title_effects: "Portalo efektų meniu"
+gui_button_teleport: "<gold>Teleportuotis į pradžią"
+gui_lore_teleport: "<gray>Spustelėkite, kad teleportuotumėtės į portalo pradžią"
+gui_button_item_mob: "<gold>Daiktų/Mobų teleportacija"
+gui_status_enabled: "<green>Įjungta"
+gui_status_disabled: "<red>Išjungta"
+gui_lore_click_toggle: "<gray>Būsena: {status}\n<gray>Spustelėkite, kad perjungtumėte"
+gui_button_dec_price: "<red>Sumažinti kainą"
+gui_lore_dec_price: "<gray>Kairysis paspaudimas: <yellow>-$1.00</yellow>\n<gray>Dešinysis paspaudimas: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Dabartinė kaina: <yellow>{price}"
+gui_lore_price: "<gray>Spustelėkite, kad atstatytumėte kainą į $0.00"
+gui_button_inc_price: "<green>Padidinti kainą"
+gui_lore_inc_price: "<gray>Kairysis paspaudimas: <yellow>+$1.00</yellow>\n<gray>Dešinysis paspaudimas: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Efekto nustatymas"
+gui_lore_effects: "<gray>Dabartinis nustatymas: <light_purple>{preset}</light_purple>\n<gray>Spustelėkite, kad atidarytumėte efektų meniu"
+gui_button_delete: "<red>Ištrinti portalą"
+gui_lore_delete: "<gray>Spustelėkite, kad visam laikui ištrintumėte šį portalą"
+gui_button_back: "<yellow>Atgal į sąrašą"
+gui_button_back_to_editor: "<yellow>Atgal į redaktorių"
+gui_button_prev: "<yellow>Ankstesnis puslapis"
+gui_button_next: "<yellow>Kitas puslapis"
+gui_button_sound: "<gold>Garso efektai"
+gui_lore_sound: "<gray>Būsena: {status}\n\n<gray>Spustelėkite, kad perjungtumėte portalo garso efektus"
+gui_list_default_portal_name: "Pasirinktinis portalas"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Pradžia: <white>{origin}</white>\n<gray>Kaina: <yellow>{price}</yellow>\n<gray>Nustatymas: <light_purple>{preset}</light_purple>\n\n<yellow>Spustelėkite, kad redaguotumėte nustatymus"
+gui_effects_active: "<green>● {name} (Aktyvus)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Dalelė: <white>{particle}</white> (Kiekis: <white>{count}</white>, Greitis: <white>{speed}</white>)\n<gray>Garsas: <white>{sound}</white> (Vol: <white>{volume}</white>, Pitch: <white>{pitch}</white>, Intervalas: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Spustelėkite, kad pasirinktumėte šį nustatymą"
+gui_effects_selected: "<green>Pasirinkta"
+
+help_header: "<gold><bold>BetterPortals Pagalba</bold></gold> <gray>({page}/{total_pages} puslapis)</gray>"
+help_previous: "[◀ Ankstesnis]"
+help_next: "[Kitas ▶]"
+help_go_to_page: "<green>Eiti į puslapį {page}"
+help_page_indicator: "<yellow>{page} puslapis iš {total_pages}</yellow>"
+help_click_info: "<gray>💡 Spustelėkite bet kurią komandą, kad nukopijuotumėte ją į savo pokalbį.</gray>"

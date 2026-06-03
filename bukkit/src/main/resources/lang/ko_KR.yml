@@ -1,0 +1,134 @@
+# Korean Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "클릭하여 명령어를 자동 완성:"
+
+notEnoughPerms: "<red>이 명령어를 사용할 권한이 없습니다!</red>"
+mustBePlayer: "<red>이 명령어를 사용하려면 플레이어여야 합니다</red>"
+mustMakeSelection: "<red>먼저 영역을 선택해야 합니다</red>"
+invalidSelection: "<red>잘못된 선택입니다! 포탈 영역 선택은 포탈의 양쪽 모서리여야 합니다</red>"
+coordinatesNotInLine: "<red>입력된 모서리 좌표 (%d, %d, %d), (%d, %d, %d)는 평평한 포탈을 만들기 위한 방향이 아닙니다 (대각선 포탈은 지원되지 않습니다)</red>"
+invalidCoordinates: "<red>좌표 (%s, %s, %s)는 올바른 정수 좌표가 아닙니다</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>콘솔에서 명령어를 실행할 때는 상대 좌표를 사용할 수 없습니다</red>"
+portalCreated: "포탈이 성공적으로 생성되었습니다"
+noWorldExistsWithGivenName: "<red>{name} 월드는 존재하지 않습니다</red>"
+mustSelectBothSides: "<red>먼저 포탈의 양쪽을 선택해야 합니다. 자세한 정보는 /bp help를 실행하세요</red>"
+mustSelectOrigin: "<red>이 서버에서 포탈의 출발지(Origin)를 선택해야 합니다</red>"
+wrongNumberOfArgs: "<red>잘못된 인수 개수입니다. 도움이 필요하면 /bp help를 실행하세요.</red>"
+noCommands: "<red>하위 명령어를 사용할 권한이 없습니다</red>"
+invalidArgs: "<red>인수 중 하나가 올바르지 않습니다. 도움이 필요하면 /bp help를 실행하세요.</red>"
+invalidBoolean: "<red>\"{arg}\"를 boolean 값으로 파싱할 수 없습니다. 도움말: 허용되는 값은 \"true\"/\"false\" 또는 \"yes\"/\"no\"입니다</red>"
+differentSizes: "<red>출발지 포탈과 목적지 포탈의 크기가 같아야 합니다</red>"
+noPortalCloseEnough: "<red>충분히 가까운 포탈을 찾을 수 없습니다</red>"
+removeNotOwnedByPlayer: "<red>다른 사람이 생성한 포탈을 삭제할 권한이 없습니다</red>"
+nameNotOwnedbyPlayer: "<red>다른 사람이 생성한 포탈의 이름을 설정할 권한이 없습니다</red>"
+unknownCommand: "<red>알 수 없는 명령어입니다. 도움이 필요하면 /bp help를 실행하세요</red>"
+proxyDisabled: "<red>프록시에 다시 연결할 수 없습니다: 활성화되어 있지 않습니다!</red>"
+alreadyConnected: "<red>프록시에 다시 연결할 수 없습니다: 서버가 이미 연결되어 있습니다!</red>"
+horizontalIssues: "<yellow>경고: 출발지와 목적지 방향이 다른 수평 포탈은 블록 회전 문제를 일으킬 수 있습니다 - 모든 블록이 모든 방향으로 회전할 수 있는 것은 아닙니다</yellow>"
+noName: "<red>이 포탈은 이름이 없습니다</red>"
+nameNetherPortal: "<red>지옥 포탈의 이름은 설정할 수 없습니다</red>"
+seeThroughPortalDisabled: "이제 모든 지옥 포탈이 일반 포탈처럼 보입니다!"
+seeThroughPortalEnabled: "이제 조건에 맞는 모든 지옥 포탈을 통해 반대편을 볼 수 있습니다."
+noPortalsWithName: "<red>이름이 {name}인 포탈이 존재하지 않습니다</red>"
+noWorldLink: "<red>아쉽게도 현재 위치한 월드가 연결되어 있지 않아 이 포탈이 활성화되지 않습니다.</red>\n오류라고 생각되시면 관리자에게 문의하고 다음 위키 페이지 링크를 전달하세요: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>이 포탈은 너무 큽니다. 현재 크기 제한은 {size}입니다.</red>"
+vanillaPortal: "이것은 일반 지옥 포탈입니다. 포탈 너머를 보려면 다시 활성화해야 합니다."
+outOfDate: "<yellow>사용 중인 BetterPortals 버전이 오래되었습니다 ({current} vs {new}). {url} 에서 다운로드할 수 있습니다</yellow>"
+reload: "플러그인을 다시 로드했습니다"
+originPortalSet: "출발지 포탈이 설정되었습니다"
+destPortalSet: "목적지 포탈이 설정되었습니다"
+portalsLinked: "포탈이 성공적으로 연결되었습니다"
+portalRemoved: "포탈이 제거되었습니다"
+startedReconnection: "프록시 재연결을 시작합니다. 자세한 내용은 콘솔을 확인하세요."
+changedName: "포탈 이름을 변경했습니다"
+currentName: "이 포탈의 이름은: <yellow>{name}</yellow>"
+allowsItems: "이 포탈은 아이템 이동을 허용합니다"
+doesNotAllowItems: "이 포탈은 아이템 이동을 허용하지 않습니다"
+changedAllowsItems: "포탈이 아이템 이동을 허용하도록 설정했습니다"
+changedDoesNotAllowItems: "포탈이 아이템 이동을 허용하지 않도록 설정했습니다"
+help: "하위 명령어"
+setPosA: "위치 A 설정"
+setPosB: "위치 B 설정"
+portalWandName: "<green>포탈 선택 완드</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "플러그인 및 설정 파일을 다시 로드합니다"
+  betterportals_reconnect:
+    description: "연결이 끊긴 경우 프록시에 다시 연결합니다"
+  betterportals_removebyname:
+    description: "지정된 이름의 모든 포탈을 제거합니다"
+  betterportals_createfromcoords:
+    description: "플레이어 없이 모서리 좌표로 포탈을 생성합니다"
+  betterportals_remove:
+    description: "플레이어 기준 20블록 내에서 가장 가까운 포탈을 제거합니다"
+  betterportals_setOrigin:
+    description: "현재 완드로 선택된 영역을 출발지 위치로 설정합니다"
+  betterportals_setDestination:
+    description: "현재 완드로 선택된 영역을 목적지 위치로 설정합니다"
+  betterportals_linkPortals:
+    description: "출발지 포탈과 목적지 포탈을 서로 연결합니다"
+  betterportals_linkExternalPortals:
+    description: "이 서버의 출발지 선택 영역을 다른 서버의 목적지와 연결합니다"
+  betterportals_wand:
+    description: "포탈 선택용 완드를 받습니다"
+  betterportals_setPortalName:
+    description: "20블록 내의 가장 가까운 포탈 이름을 설정합니다"
+  betterportals_getportalname:
+    description: "20블록 내의 가장 가까운 포탈 이름을 확인합니다"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "20블록 내의 가장 가까운 포탈이 아이템 이동을 허용하는지 여부를 확인합니다"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "20블록 내의 가장 가까운 포탈이 아이템 이동을 허용할지 여부를 설정합니다"
+  betterportals_setseethroughportal:
+    description: "현재 플레이어가 포탈 반대편을 볼 수 있는지 여부를 설정합니다."
+  betterportals_toggleseethroughportal:
+    description: "현재 플레이어가 포탈 반대편을 볼 수 있는지 여부를 토글합니다."
+  betterportals_menu:
+    description: "포탈 관리 GUI 메뉴를 엽니다"
+  betterportals_setprice:
+    description: "가장 가까운 포탈의 사용 가격을 설정합니다"
+  betterportals_setpreset:
+    description: "가장 가까운 포탈의 효과 프리셋을 설정합니다"
+
+gui_title_list: "포탈 목록 ({page} 페이지)"
+gui_title_editor: "포탈 에디터 메뉴"
+gui_title_effects: "포탈 효과 메뉴"
+gui_button_teleport: "<gold>출발지로 테레포트"
+gui_lore_teleport: "<gray>클릭하면 포탈 출발지로 이동합니다"
+gui_button_item_mob: "<gold>아이템/엔티티 이동"
+gui_status_enabled: "<green>활성화됨"
+gui_status_disabled: "<red>비활성화됨"
+gui_lore_click_toggle: "<gray>상태: {status}\n<gray>클릭하여 전환"
+gui_button_dec_price: "<red>가격 감소"
+gui_lore_dec_price: "<gray>좌클릭: <yellow>-$1.00</yellow>\n<gray>우클릭: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>현재 가격: <yellow>{price}"
+gui_lore_price: "<gray>클릭하여 가격을 $0.00으로 리셋"
+gui_button_inc_price: "<green>가격 증가"
+gui_lore_inc_price: "<gray>좌클릭: <yellow>+$1.00</yellow>\n<gray>우클릭: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>효과 프리셋"
+gui_lore_effects: "<gray>현재 프리셋: <light_purple>{preset}</light_purple>\n<gray>클릭하여 효과 메뉴 열기"
+gui_button_delete: "<red>포탈 삭제"
+gui_lore_delete: "<gray>클릭하여 이 포탈을 영구적으로 삭제"
+gui_button_back: "<yellow>목록으로 돌아가기"
+gui_button_back_to_editor: "<yellow>에디터로 돌아가기"
+gui_button_prev: "<yellow>이전 페이지"
+gui_button_next: "<yellow>다음 페이지"
+gui_button_sound: "<gold>음향 효과"
+gui_lore_sound: "<gray>상태: {status}\n\n<gray>클릭하여 포탈의 음향 효과를 토글합니다"
+gui_list_default_portal_name: "커스텀 포탈"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>출발지: <white>{origin}</white>\n<gray>가격: <yellow>{price}</yellow>\n<gray>프리셋: <light_purple>{preset}</light_purple>\n\n<yellow>클릭하여 설정 수정"
+gui_effects_active: "<green>● {name} (활성화됨)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>파티클: <white>{particle}</white> (개수: <white>{count}</white>, 속도: <white>{speed}</white>)\n<gray>사운드: <white>{sound}</white> (볼륨: <white>{volume}</white>, 피치: <white>{pitch}</white>, 간격: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>클릭하여 이 프리셋 선택"
+gui_effects_selected: "<green>선택됨"
+
+help_header: "<gold><bold>BetterPortals 도움말</bold></gold> <gray>({page}/{total_pages} 페이지)</gray>"
+help_previous: "[◀ 이전]"
+help_next: "[다음 ▶]"
+help_go_to_page: "<green>{page} 페이지로 이동"
+help_page_indicator: "<yellow>{page} / {total_pages} 페이지</yellow>"
+help_click_info: "<gray>💡 명령어를 클릭하면 채팅창에 복사됩니다.</gray>"

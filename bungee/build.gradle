@@ -12,12 +12,12 @@ dependencies {
     implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
     implementation project(':shared')
     implementation project(':proxy')
-    compileOnly 'net.md-5:bungeecord-api:1.21-R0.1-SNAPSHOT'
+    compileOnly 'net.md-5:bungeecord-api:1.21-R0.4'
 }
 
 bungee {
-    main = 'com.lauriethefish.betterportals.bungee.BetterPortals'
-    author = 'lauriethefish@outlook.com'
+    main = 'org.envel.betterportals.bungee.BetterPortals'
+    author = 'Envel'
     version = project.version
     name = 'BetterPortals'
     description = 'Proxy side plugin for BetterPortals which helps to allow cross-server portals'

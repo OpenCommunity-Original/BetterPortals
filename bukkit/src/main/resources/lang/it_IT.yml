@@ -1,0 +1,134 @@
+# Italian Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Clicca per completare automaticamente il comando:"
+
+notEnoughPerms: "<red>Non hai il permesso di usare questo comando!</red>"
+mustBePlayer: "<red>Devi essere un giocatore per usare questo comando</red>"
+mustMakeSelection: "<red>Devi prima effettuare una selezione</red>"
+invalidSelection: "<red>Selezione non valida! Le selezioni del portale devono essere sui due angoli di un portale</red>"
+coordinatesNotInLine: "<red>Le coordinate degli angoli fornite (%d, %d, %d), (%d, %d, %d) non sono allineate correttamente per produrre un portale piatto (non sono consentiti portali in diagonale)</red>"
+invalidCoordinates: "<red>Le coordinate (%s, %s, %s) non sono coordinate intere valide, relative o meno</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Impossibile utilizzare coordinate relative quando si esegue il comando dalla console</red>"
+portalCreated: "Portale creato con successo"
+noWorldExistsWithGivenName: "<red>Non esiste alcun mondo chiamato {name}</red>"
+mustSelectBothSides: "<red>Devi prima selezionare entrambi i lati del portale. Per informazioni, esegui /bp help</red>"
+mustSelectOrigin: "<red>Devi selezionare l'origine del portale su questo server</red>"
+wrongNumberOfArgs: "<red>Numero errato di argomenti. Esegui /bp help per aiuto.</red>"
+noCommands: "<red>Non hai il permesso di usare alcun sotto-comando</red>"
+invalidArgs: "<red>Uno dei tuoi argomenti non è valido. Esegui /bp help per aiuto.</red>"
+invalidBoolean: "<red>Impossibile analizzare \"{arg}\" come valore booleano. aiuto: i valori possibili sono \"true\" o \"false\" e \"yes\" o \"no\"</red>"
+differentSizes: "<red>Il portale di origine e quello di destinazione devono essere della stessa dimensione</red>"
+noPortalCloseEnough: "<red>Nessun portale trovato abbastanza vicino</red>"
+removeNotOwnedByPlayer: "<red>Non hai il permesso di rimuovere portali creati da altre persone</red>"
+nameNotOwnedbyPlayer: "<red>Non hai il permesso di impostare il nome di portali creati da altre persone</red>"
+unknownCommand: "<red>Comando sconosciuto. Per aiuto, esegui /bp help</red>"
+proxyDisabled: "<red>Impossibile riconnettersi al proxy: non è abilitato!</red>"
+alreadyConnected: "<red>Impossibile riconnettersi al proxy: il server è già connesso!</red>"
+horizontalIssues: "<yellow>Attenzione: i portali orizzontali con diverse direzioni di origine/destinazione possono causare problemi con le rotazioni dei blocchi - non tutti i blocchi possono essere ruotati in ogni direzione</yellow>"
+noName: "<red>Questo portale non ha un nome</red>"
+nameNetherPortal: "<red>Non puoi impostare il nome di un portale del Nether</red>"
+seeThroughPortalDisabled: "Tutti i portali del Nether ora ti sembreranno normali portali vanilla!"
+seeThroughPortalEnabled: "Tutti i portali del Nether idonei ora ti mostreranno cosa c'è dall'altra parte."
+noPortalsWithName: "<red>Non esistono portali con il nome {name}</red>"
+noWorldLink: "<red>Sfortunatamente, questo portale non si accenderà poiché il mondo in cui ti trovi non è collegato.</red>\nSe ritieni che si tratti di un errore, contatta un amministratore e fornisci questo link della wiki: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Questo portale è troppo grande. Il limite di dimensione attuale è {size}.</red>"
+vanillaPortal: "Questo è un portale del Nether vanilla. Se desideri vedere attraverso di esso, dovrai riaccenderlo."
+outOfDate: "<yellow>La tua versione di BetterPortals è obsoleta ({current} vs {new}). Puoi scaricarla da {url}</yellow>"
+reload: "Plugin ricaricato"
+originPortalSet: "Portale di origine impostato"
+destPortalSet: "Portale di destinazione impostato"
+portalsLinked: "Portali collegati con successo"
+portalRemoved: "Portale rimosso"
+startedReconnection: "Riconnessione al proxy avviata. Controlla la console per i dettagli."
+changedName: "Nome del portale modificato con successo"
+currentName: "Il nome di questo portale è: <yellow>{name}</yellow>"
+allowsItems: "Questo portale consente il teletrasporto di oggetti"
+doesNotAllowItems: "Questo portale non consente il teletrasporto di oggetti"
+changedAllowsItems: "Impostato con successo che il portale consente il teletrasporto di oggetti"
+changedDoesNotAllowItems: "Impostato con successo che il portale non consente il teletrasporto di oggetti"
+help: "Sottocomandi"
+setPosA: "Posizione A impostata"
+setPosB: "Posizione B impostata"
+portalWandName: "<green>Bacchetta del Portale</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Ricarica il plugin e il file di configurazione"
+  betterportals_reconnect:
+    description: "Si riconnette al proxy se disconnesso"
+  betterportals_removebyname:
+    description: "Rimuove tutti i portali con il nome indicato"
+  betterportals_createfromcoords:
+    description: "Crea un portale dalle coordinate dei suoi angoli senza richiedere un giocatore"
+  betterportals_remove:
+    description: "Rimuove il portale più vicino entro 20 blocchi dal giocatore"
+  betterportals_setOrigin:
+    description: "Imposta la selezione corrente della bacchetta del portale come posizione di origine"
+  betterportals_setDestination:
+    description: "Imposta la selezione corrente della bacchetta del portale come posizione di destinazione"
+  betterportals_linkPortals:
+    description: "Collega insieme il portale di origine e quello di destinazione"
+  betterportals_linkExternalPortals:
+    description: "Collega la selezione di origine su questo server con una destinazione su un altro server"
+  betterportals_wand:
+    description: "Ti dà la bacchetta per selezionare i portali"
+  betterportals_setPortalName:
+    description: "Imposta il nome del portale più vicino entro 20 blocchi"
+  betterportals_getportalname:
+    description: "Ti dice il nome del portale più vicino entro 20 blocchi"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Ti dice se il portale più vicino entro 20 blocchi consente o meno il teletrasporto di oggetti"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Imposta se il portale più vicino entro 20 blocchi consente o meno il teletrasporto di oggetti"
+  betterportals_setseethroughportal:
+    description: "Imposta se il giocatore corrente è in grado di vedere cosa c'è dall'altra parte del portale."
+  betterportals_toggleseethroughportal:
+    description: "Alterna se il giocatore corrente è in grado di vedere cosa c'è dall'altra parte del portale."
+  betterportals_menu:
+    description: "Apre il menu GUI dell'amministratore dei portali"
+  betterportals_setprice:
+    description: "Imposta il prezzo del portale più vicino"
+  betterportals_setpreset:
+    description: "Imposta il preset degli effetti del portale più vicino"
+
+gui_title_list: "Lista Portali (Pagina {page})"
+gui_title_editor: "Menu Editor Portale"
+gui_title_effects: "Menu Effetti Portale"
+gui_button_teleport: "<gold>Teletrasportati all'Origine"
+gui_lore_teleport: "<gray>Clicca per teletrasportarti all'origine del portale"
+gui_button_item_mob: "<gold>Teletrasporto Oggetti/Mob"
+gui_status_enabled: "<green>Abilitato"
+gui_status_disabled: "<red>Disabilitato"
+gui_lore_click_toggle: "<gray>Stato: {status}\n<gray>Clicca per attivare/disattivare"
+gui_button_dec_price: "<red>Diminuisci Prezzo"
+gui_lore_dec_price: "<gray>Clic Sinistro: <yellow>-$1.00</yellow>\n<gray>Clic Destro: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Prezzo Corrente: <yellow>{price}"
+gui_lore_price: "<gray>Clicca per azzerare il prezzo a $0.00"
+gui_button_inc_price: "<green>Aumenta Prezzo"
+gui_lore_inc_price: "<gray>Clic Sinistro: <yellow>+$1.00</yellow>\n<gray>Clic Destro: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Preset Effetto"
+gui_lore_effects: "<gray>Preset Corrente: <light_purple>{preset}</light_purple>\n<gray>Clicca per aprire il menu degli effetti"
+gui_button_delete: "<red>Elimina Portale"
+gui_lore_delete: "<gray>Clicca per eliminare permanentemente questo portale"
+gui_button_back: "<yellow>Torna alla Lista"
+gui_button_back_to_editor: "<yellow>Torna all'Editor"
+gui_button_prev: "<yellow>Pagina Precedente"
+gui_button_next: "<yellow>Pagina Successiva"
+gui_button_sound: "<gold>Effetti Sonori"
+gui_lore_sound: "<gray>Stato: {status}\n\n<gray>Clicca per attivare/disattivare gli effetti sonori del portale"
+gui_list_default_portal_name: "Portale Personalizzato"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Origine: <white>{origin}</white>\n<gray>Prezzo: <yellow>{price}</yellow>\n<gray>Preset: <light_purple>{preset}</light_purple>\n\n<yellow>Clicca per modificare le impostazioni"
+gui_effects_active: "<green>● {name} (Attivo)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Particella: <white>{particle}</white> (Qta: <white>{count}</white>, Vel: <white>{speed}</white>)\n<gray>Suono: <white>{sound}</white> (Vol: <white>{volume}</white>, Tono: <white>{pitch}</white>, Intervallo: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Clicca per selezionare questo preset"
+gui_effects_selected: "<green>Selezionato"
+
+help_header: "<gold><bold>Aiuto di BetterPortals</bold></gold> <gray>(Pagina {page}/{total_pages})</gray>"
+help_previous: "[◀ Precedente]"
+help_next: "[Successivo ▶]"
+help_go_to_page: "<green>Vai alla pagina {page}"
+help_page_indicator: "<yellow>Pagina {page} di {total_pages}</yellow>"
+help_click_info: "<gray>💡 Clicca su un comando qualsiasi per copiarlo nella chat.</gray>"

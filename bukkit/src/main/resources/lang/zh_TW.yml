@@ -1,0 +1,134 @@
+# Chinese Traditional Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "點擊自動填入指令："
+
+notEnoughPerms: "<red>您沒有權限使用此指令！</red>"
+mustBePlayer: "<red>您必須是玩家才能使用此指令</red>"
+mustMakeSelection: "<red>您必須先進行區域選取</red>"
+invalidSelection: "<red>無效的選取！傳送門的選取區域必須位於傳送門的兩角</red>"
+coordinatesNotInLine: "<red>給定的角落座標 (%d, %d, %d), (%d, %d, %d) 未正確對齊以產生扁平的傳送門（不允許對角線傳送門）</red>"
+invalidCoordinates: "<red>座標 (%s, %s, %s) 不是有效的整數座標（無論是相對座標還是其他座標）</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>從控制台執行指令時無法使用相對座標</red>"
+portalCreated: "傳送門建立成功"
+noWorldExistsWithGivenName: "<red>不存在名為 {name} 的世界</red>"
+mustSelectBothSides: "<red>您必須先選取傳送門的兩側。如需了解資訊，請執行 /bp help</red>"
+mustSelectOrigin: "<red>您必須在此伺服器上選取傳送門的起點</red>"
+wrongNumberOfArgs: "<red>參數數量錯誤。執行 /bp help 獲取說明。</red>"
+noCommands: "<red>您沒有權限使用任何子指令</red>"
+invalidArgs: "<red>您的參數之一無效。執行 /bp help 獲取說明。</red>"
+invalidBoolean: "<red>無法將 \"{arg}\" 解析為布林參數。說明：可能的值包括 \"true\" 或 \"false\" 以及 \"yes\" 或 \"no\"</red>"
+differentSizes: "<red>起點傳送門和終點傳送門的大小必須相同</red>"
+noPortalCloseEnough: "<red>未找到足夠接近的傳送門</red>"
+removeNotOwnedByPlayer: "<red>您沒有權限刪除其他人建立的傳送門</red>"
+nameNotOwnedbyPlayer: "<red>您沒有權限設定其他人建立的傳送門的名稱</red>"
+unknownCommand: "<red>未知指令。要獲取說明，請執行 /bp help</red>"
+proxyDisabled: "<red>無法重新連線到代理伺服器：它未啟用！</red>"
+alreadyConnected: "<red>無法重新連線到代理伺服器：伺服器已連線！</red>"
+horizontalIssues: "<yellow>警告：具有不同起點/終點方向的水平傳送門可能會導致方塊旋轉問題 - 並非所有方塊都可以在每個方向上旋轉</yellow>"
+noName: "<red>此傳送門沒有名稱</red>"
+nameNetherPortal: "<red>您無法設定下界傳送門的名稱</red>"
+seeThroughPortalDisabled: "現在所有下界傳送門在您看來都將與原版傳送門相同！"
+seeThroughPortalEnabled: "所有符合條件的下界傳送門現在都會向您展示另一側的景象。"
+noPortalsWithName: "<red>不存在名稱為 {name} 的傳送門</red>"
+noWorldLink: "<red>很遺憾，由於您所在的世界未連結，此傳送門將無法啟用。</red>\n如果您認為這是一個錯誤，請聯絡管理員並附上此 Wiki 頁面：https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>此傳送門太大。當前尺寸限制為 {size}。</red>"
+vanillaPortal: "這是一個原版下界傳送門。如果您想透視該傳送門，則需要重新啟用它。"
+outOfDate: "<yellow>您的 BetterPortals 版本已過時（當前版本為 {current}，最新版本為 {new}）。您可以從 {url} 下載它</yellow>"
+reload: "已重載插件"
+originPortalSet: "已設定起點傳送門"
+destPortalSet: "已設定終點傳送門"
+portalsLinked: "傳送門連結成功"
+portalRemoved: "傳送門已移除"
+startedReconnection: "已開始重新連線到代理伺服器。詳情請見控制台。"
+changedName: "成功變更傳送門名稱"
+currentName: "此傳送門的名稱為：<yellow>{name}</yellow>"
+allowsItems: "此傳送門允許物品傳送"
+doesNotAllowItems: "此傳送門不允許物品傳送"
+changedAllowsItems: "成功設定傳送门允許物品傳送"
+changedDoesNotAllowItems: "成功設定傳送門不允許物品傳送"
+help: "子指令"
+setPosA: "設定位置 A"
+setPosB: "設定位置 B"
+portalWandName: "<green>傳送門魔杖</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "重載插件和設定檔"
+  betterportals_reconnect:
+    description: "如果中斷連線，重新連線到代理伺服器"
+  betterportals_removebyname:
+    description: "移除所有具有給定名稱的傳送門"
+  betterportals_createfromcoords:
+    description: "根據角落座標建立傳送門，無需玩家參與"
+  betterportals_remove:
+    description: "移除玩家 20 格範圍內最近的傳送門"
+  betterportals_setOrigin:
+    description: "將當前傳送門魔杖選取的區域設定為起點位置"
+  betterportals_setDestination:
+    description: "將當前傳送門魔杖選取的區域設定為終點位置"
+  betterportals_linkPortals:
+    description: "將起點傳送門與終點傳送門連結在一起"
+  betterportals_linkExternalPortals:
+    description: "將此伺服器上的起點選取與另一個伺服器上的終點連結"
+  betterportals_wand:
+    description: "給予您用於選取傳送門的魔杖"
+  betterportals_setPortalName:
+    description: "設定 20 格範圍內最近的傳送門的名稱"
+  betterportals_getportalname:
+    description: "告訴您 20 格範圍內最近的傳送門的名稱"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "告訴您 20 格範圍內最近的傳送門是否允許物品傳送"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "設定 20 格範圍內最近的傳送門是否允許物品傳送"
+  betterportals_setseethroughportal:
+    description: "設定當前玩家是否能夠看到傳送門另一側的情況。"
+  betterportals_toggleseethroughportal:
+    description: "切換當前玩家是否能夠看到傳送門另一側的情況。"
+  betterportals_menu:
+    description: "打開傳送門管理員 GUI 菜單"
+  betterportals_setprice:
+    description: "設定最近的傳送門的價格"
+  betterportals_setpreset:
+    description: "設定最近的傳送門的特效預設"
+
+gui_title_list: "傳送門列表（第 {page} 頁）"
+gui_title_editor: "傳送門編輯器菜單"
+gui_title_effects: "傳送門特效菜單"
+gui_button_teleport: "<gold>傳送到起點"
+gui_lore_teleport: "<gray>點擊傳送到傳送門起點"
+gui_button_item_mob: "<gold>物品/實體傳送"
+gui_status_enabled: "<green>已啟用"
+gui_status_disabled: "<red>已停用"
+gui_lore_click_toggle: "<gray>狀態：{status}\n<gray>點擊切換"
+gui_button_dec_price: "<red>降低價格"
+gui_lore_dec_price: "<gray>左鍵點擊：<yellow>-$1.00</yellow>\n<gray>右鍵點擊：<yellow>-$10.00</yellow>"
+gui_button_price: "<gold>當前價格：<yellow>{price}"
+gui_lore_price: "<gray>點擊將價格重置為 $0.00"
+gui_button_inc_price: "<green>增加價格"
+gui_lore_inc_price: "<gray>左鍵點擊：<yellow>+$1.00</yellow>\n<gray>右鍵點擊：<yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>特效預設"
+gui_lore_effects: "<gray>當前預設：<light_purple>{preset}</light_purple>\n<gray>點擊打開特效菜單"
+gui_button_delete: "<red>刪除傳送門"
+gui_lore_delete: "<gray>點擊永久刪除此傳送門"
+gui_button_back: "<yellow>返回列表"
+gui_button_back_to_editor: "<yellow>返回編輯器"
+gui_button_prev: "<yellow>上一頁"
+gui_button_next: "<yellow>下一頁"
+gui_button_sound: "<gold>聲音特效"
+gui_lore_sound: "<gray>狀態：{status}\n\n<gray>點擊切換傳送門聲音特效"
+gui_list_default_portal_name: "自定義傳送門"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>起點: <white>{origin}</white>\n<gray>價格: <yellow>{price}</yellow>\n<gray>預設: <light_purple>{preset}</light_purple>\n\n<yellow>點擊編輯設定"
+gui_effects_active: "<green>● {name} (啟用)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>粒子: <white>{particle}</white> (數量: <white>{count}</white>, 速度: <white>{speed}</white>)\n<gray>聲音: <white>{sound}</white> (音量: <white>{volume}</white>, 音調: <white>{pitch}</white>, 間隔: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>點擊選擇此預设"
+gui_effects_selected: "<green>已選擇"
+
+help_header: "<gold><bold>BetterPortals 說明</bold></gold> <gray>(第 {page}/{total_pages} 頁)</gray>"
+help_previous: "[◀ 上一頁]"
+help_next: "[下一頁 ▶]"
+help_go_to_page: "<green>轉到第 {page} 頁"
+help_page_indicator: "<yellow>第 {page} 頁，共 {total_pages} 頁</yellow>"
+help_click_info: "<gray>💡 點擊任何指令將其複製到您的聊天框中。</gray>"

@@ -1,0 +1,134 @@
+# Thai Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "คลิกเพื่อกรอกคำสั่งอัตโนมัติ:"
+
+notEnoughPerms: "<red>คุณไม่มีสิทธิ์ใช้งานคำสั่งนี้!</red>"
+mustBePlayer: "<red>คุณต้องเป็นผู้เล่นถึงจะสามารถใช้งานคำสั่งนี้ได้</red>"
+mustMakeSelection: "<red>คุณต้องทำการเลือกพื้นที่ก่อน</red>"
+invalidSelection: "<red>การเลือกไม่ถูกต้อง! การเลือกพอร์ทัลต้องอยู่ที่มุมสองมุมของพอร์ทัล</red>"
+coordinatesNotInLine: "<red>พิกัดมุมที่ให้มา (%d, %d, %d), (%d, %d, %d) ไม่ตรงกันในการสร้างพอร์ทัลแบบแบน (ไม่อนุญาตให้ใช้พอร์ทัลในแนวทแยง)</red>"
+invalidCoordinates: "<red>พิกัด (%s, %s, %s) ไม่ใช่พิกัดจำนวนเต็มที่ถูกต้อง</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>ไม่สามารถใช้พิกัดสัมพัทธ์ได้เมื่อรันคำสั่งจากคอนโซล</red>"
+portalCreated: "สร้างพอร์ทัลสำเร็จแล้ว"
+noWorldExistsWithGivenName: "<red>ไม่มีโลกที่ชื่อ {name}</red>"
+mustSelectBothSides: "<red>คุณต้องเลือกพอร์ทัลทั้งสองด้านก่อน สำหรับข้อมูลเพิ่มเติม ให้รัน /bp help</red>"
+mustSelectOrigin: "<red>คุณต้องเลือกพอร์ทัลต้นทางบนเซิร์ฟเวอร์นี้</red>"
+wrongNumberOfArgs: "<red>จำนวนอาร์กิวเมนต์ไม่ถูกต้อง รัน /bp help สำหรับความช่วยเหลือ</red>"
+noCommands: "<red>คุณไม่มีสิทธิ์ใช้งานคำสั่งย่อยใดๆ</red>"
+invalidArgs: "<red>หนึ่งในอาร์กิวเมนต์ของคุณไม่ถูกต้อง รัน /bp help สำหรับความช่วยเหลือ</red>"
+invalidBoolean: "<red>ไม่สามารถแยกแยะ \"{arg}\" เป็นค่าบูลีนได้ ความช่วยเหลือ: ค่าที่เป็นไปได้คือ \"true\" หรือ \"false\" และ \"yes\" หรือ \"no\"</red>"
+differentSizes: "<red>พอร์ทัลต้นทางและปลายทางต้องมีขนาดเท่ากัน</red>"
+noPortalCloseEnough: "<red>ไม่พบพอร์ทัลที่ใกล้พอ</red>"
+removeNotOwnedByPlayer: "<red>คุณไม่มีสิทธิ์ลบพอร์ทัลที่สร้างโดยผู้อื่น</red>"
+nameNotOwnedbyPlayer: "<red>คุณไม่มีสิทธิ์ตั้งชื่อพอร์ทัลที่สร้างโดยผู้อื่น</red>"
+unknownCommand: "<red>ไม่รู้จักคำสั่ง รัน /bp help เพื่อขอความช่วยเหลือ</red>"
+proxyDisabled: "<red>ไม่สามารถเชื่อมต่อกับพร็อกซีได้: มันไม่ได้เปิดใช้งาน!</red>"
+alreadyConnected: "<red>ไม่สามารถเชื่อมต่อกับพร็อกซีได้: เซิร์ฟเวอร์เชื่อมต่ออยู่แล้ว!</red>"
+horizontalIssues: "<yellow>คำเตือน: พอร์ทัลแนวนอนที่มีทิศทางต้นทาง/ปลายทางต่างกันอาจทำให้เกิดปัญหากับการหมุนบล็อก - บล็อกบางบล็อกไม่สามารถหมุนได้ในทุกทิศทาง</yellow>"
+noName: "<red>พอร์ทัลนี้ไม่มีชื่อ</red>"
+nameNetherPortal: "<red>คุณไม่สามารถตั้งชื่อเนเธอร์พอร์ทัลได้</red>"
+seeThroughPortalDisabled: "เนเธอร์พอร์ทัลทั้งหมดจะดูเหมือนพอร์ทัลปกติสำหรับคุณตอนนี้!"
+seeThroughPortalEnabled: "เนเธอร์พอร์ทัลที่มีสิทธิ์ทั้งหมดจะแสดงให้คุณเห็นสิ่งที่อยู่อีกฝั่งหนึ่งแล้ว"
+noPortalsWithName: "<red>ไม่มีพอร์ทัลชื่อ {name} อยู่</red>"
+noWorldLink: "<red>ขออภัย พอร์ทัลนี้จะไม่ทำงานเนื่องจากโลกที่คุณอยู่ไม่ได้เชื่อมต่อกัน</red>\nหากคุณเชื่อว่านี่เป็นข้อผิดพลาด โปรดติดต่อผู้ดูแลระบบและแชร์ลิงก์วิกินี้: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>พอร์ทัลนี้ใหญ่เกินไป จำกัดขนาดปัจจุบันคือ {size}</red>"
+vanillaPortal: "นี่คือเนเธอร์พอร์ทัลปกติ หากคุณต้องการมองทะลุผ่านพอร์ทัลนี้ คุณต้องจุดไฟใหม่อีกครั้ง"
+outOfDate: "<yellow>เวอร์ชัน BetterPortals ของคุณล้าสมัยแล้ว ({current} เทียบกับ {new}) คุณสามารถดาวน์โหลดได้จาก {url}</yellow>"
+reload: "โหลดปลั๊กอินใหม่เรียบร้อยแล้ว"
+originPortalSet: "ตั้งค่าพอร์ทัลต้นทางแล้ว"
+destPortalSet: "ตั้งค่าพอร์ทัลปลายทางแล้ว"
+portalsLinked: "เชื่อมโยงพอร์ทัลสำเร็จแล้ว"
+portalRemoved: "ลบพอร์ทัลแล้ว"
+startedReconnection: "เริ่มเชื่อมต่อกับพร็อกซีใหม่ ดูรายละเอียดในคอนโซล"
+changedName: "เปลี่ยนชื่อพอร์ทัลสำเร็จแล้ว"
+currentName: "ชื่อของพอร์ทัลนี้คือ: <yellow>{name}</yellow>"
+allowsItems: "พอร์ทัลนี้อนุญาตให้เทเลพอร์ตไอเทมได้"
+doesNotAllowItems: "พอร์ทัลนี้ไม่อนุญาตให้เทเลพอร์ตไอเทมได้"
+changedAllowsItems: "ตั้งค่าสำเร็จแล้วว่าพอร์ทัลอนุญาตให้เทเลพอร์ตไอเทม"
+changedDoesNotAllowItems: "ตั้งค่าสำเร็จแล้วว่าพอร์ทัลไม่อนุญาตให้เทเลพอร์ตไอเทม"
+help: "คำสั่งย่อย"
+setPosA: "ตั้งค่าตำแหน่ง A"
+setPosB: "ตั้งค่าตำแหน่ง B"
+portalWandName: "<green>ไม้กายสิทธิ์พอร์ทัล</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "โหลดปลั๊กอินและไฟล์กำหนดค่าใหม่"
+  betterportals_reconnect:
+    description: "เชื่อมต่อกับพร็อกซีอีกครั้งหากตัดการเชื่อมต่อ"
+  betterportals_removebyname:
+    description: "ลบพอร์ทัลทั้งหมดด้วยชื่อที่กำหนด"
+  betterportals_createfromcoords:
+    description: "สร้างพอร์ทัลจากพิกัดของมุมโดยไม่ต้องใช้ผู้เล่น"
+  betterportals_remove:
+    description: "ลบพอร์ทัลที่ใกล้ที่สุดภายในระยะ 20 บล็อกของผู้เล่น"
+  betterportals_setOrigin:
+    description: "ตั้งค่าการเลือกไม้พอร์ทัลปัจจุบันเป็นตำแหน่งต้นทางของคุณ"
+  betterportals_setDestination:
+    description: "ตั้งค่าการเลือกไม้พอร์ทัลปัจจุบันเป็นตำแหน่งปลายทางของคุณ"
+  betterportals_linkPortals:
+    description: "เชื่อมโยงพอร์ทัลต้นทางและปลายทางเข้าด้วยกัน"
+  betterportals_linkExternalPortals:
+    description: "เชื่อมโยงการเลือกต้นทางในเซิร์ฟเวอร์นี้กับปลายทางในเซิร์ฟเวอร์อื่น"
+  betterportals_wand:
+    description: "ให้ไม้กายสิทธิ์แก่คุณเพื่อเลือกพอร์ทัล"
+  betterportals_setPortalName:
+    description: "ตั้งชื่อพอร์ทัลที่ใกล้ที่สุดภายในระยะ 20 บล็อก"
+  betterportals_getportalname:
+    description: "บอกชื่อพอร์ทัลที่ใกล้ที่สุดภายในระยะ 20 บล็อกให้คุณทราบ"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "บอกคุณว่าพอร์ทัลที่ใกล้ที่สุดภายในระยะ 20 บล็อกอนุญาตให้ส่งไอเทมหรือไม่"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "ตั้งค่าว่าพอร์ทัลที่ใกล้ที่สุดภายในระยะ 20 บล็อกจะอนุญาตให้ส่งไอเทมหรือไม่"
+  betterportals_setseethroughportal:
+    description: "ตั้งค่าว่าผู้เล่นปัจจุบันสามารถมองทะลุผ่านพอร์ทัลได้หรือไม่"
+  betterportals_toggleseethroughportal:
+    description: "สลับการมองทะลุผ่านพอร์ทัลสำหรับผู้เล่นปัจจุบัน"
+  betterportals_menu:
+    description: "เปิดเมนู GUI ผู้ดูแลพอร์ทัล"
+  betterportals_setprice:
+    description: "ตั้งราคาค่าผ่านทางของพอร์ทัลที่ใกล้ที่สุด"
+  betterportals_setpreset:
+    description: "ตั้งค่าเอฟเฟกต์สำหรับพอร์ทัลที่ใกล้ที่สุด"
+
+gui_title_list: "รายการพอร์ทัล (หน้า {page})"
+gui_title_editor: "เมนูแก้ไขพอร์ทัล"
+gui_title_effects: "เมนูเอฟเฟกต์พอร์ทัล"
+gui_button_teleport: "<gold>เทเลพอร์ตไปที่ต้นทาง"
+gui_lore_teleport: "<gray>คลิกเพื่อเทเลพอร์ตไปที่ต้นทางของพอร์ทัล"
+gui_button_item_mob: "<gold>การเทเลพอร์ตไอเทม/ม็อบ"
+gui_status_enabled: "<green>เปิดใช้งาน"
+gui_status_disabled: "<red>ปิดใช้งาน"
+gui_lore_click_toggle: "<gray>สถานะ: {status}\n<gray>คลิกเพื่อสลับ"
+gui_button_dec_price: "<red>ลดราคา"
+gui_lore_dec_price: "<gray>คลิกซ้าย: <yellow>-$1.00</yellow>\n<gray>คลิกขวา: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>ราคาปัจจุบัน: <yellow>{price}"
+gui_lore_price: "<gray>คลิกเพื่อรีเซ็ตราคาเป็น $0.00"
+gui_button_inc_price: "<green>เพิ่มราคา"
+gui_lore_inc_price: "<gray>คลิกซ้าย: <yellow>+$1.00</yellow>\n<gray>คลิกขวา: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>เอฟเฟกต์ที่เลือก"
+gui_lore_effects: "<gray>เอฟเฟกต์ปัจจุบัน: <light_purple>{preset}</light_purple>\n<gray>คลิกเพื่อเปิดเมนูเอฟเฟกต์"
+gui_button_delete: "<red>ลบพอร์ทัล"
+gui_lore_delete: "<gray>คลิกเพื่อลบพอร์ทัลนี้อย่างถาวร"
+gui_button_back: "<yellow>กลับไปที่รายการ"
+gui_button_back_to_editor: "<yellow>กลับไปที่เมนูแก้ไข"
+gui_button_prev: "<yellow>หน้าก่อนหน้า"
+gui_button_next: "<yellow>หน้าถัดไป"
+gui_button_sound: "<gold>เอฟเฟกต์เสียง"
+gui_lore_sound: "<gray>สถานะ: {status}\n\n<gray>คลิกเพื่อสลับเอฟเฟกต์เสียงพอร์ทัล"
+gui_list_default_portal_name: "พอร์ทัลกำหนดเอง"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>ต้นทาง: <white>{origin}</white>\n<gray>ราคา: <yellow>{price}</yellow>\n<gray>เอฟเฟกต์: <light_purple>{preset}</light_purple>\n\n<yellow>คลิกเพื่อแก้ไขการตั้งค่า"
+gui_effects_active: "<green>● {name} (เปิดใช้งาน)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>ละออง: <white>{particle}</white> (จำนวน: <white>{count}</white>, ความเร็ว: <white>{speed}</white>)\n<gray>เสียง: <white>{sound}</white> (ความดัง: <white>{volume}</white>, ระดับเสียง: <white>{pitch}</white>, ระยะเวลา: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>คลิกเพื่อเลือกเอฟเฟกต์นี้"
+gui_effects_selected: "<green>เลือกแล้ว"
+
+help_header: "<gold><bold>ความช่วยเหลือ BetterPortals</bold></gold> <gray>(หน้า {page}/{total_pages})</gray>"
+help_previous: "[◀ ก่อนหน้า]"
+help_next: "[ถัดไป ▶]"
+help_go_to_page: "<green>ไปที่หน้า {page}"
+help_page_indicator: "<yellow>หน้า {page} จาก {total_pages}</yellow>"
+help_click_info: "<gray>💡 คลิกคำสั่งใดก็ได้เพื่อคัดลอกไปยังช่องแชทของคุณ</gray>"

@@ -1,0 +1,137 @@
+# English Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Click to autofill command:"
+
+notEnoughPerms: "<red>You do not have permission to use this command!</red>"
+mustBePlayer: "<red>You must be a player to use this command</red>"
+mustMakeSelection: "<red>You must make a selection first</red>"
+invalidSelection: "<red>Invalid selection! Portal selections must be on the two corners of a portal</red>"
+coordinatesNotInLine: "<red>The given corner coordinates (%d, %d, %d), (%d, %d, %d) are not aligned correctly to produce a flat portal (portals are not allowed on diagonals)</red>"
+invalidCoordinates: "<red>The coordinates (%s, %s, %s) are not valid integer coordinates, relative or otherwise</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Cannot use relative coordinates when executing command from the console</red>"
+portalCreated: "Portal created successfully"
+noWorldExistsWithGivenName: "<red>No world exists called {name}</red>"
+mustSelectBothSides: "<red>You must select both sides of a portal first. For info, run /bp help</red>"
+mustSelectOrigin: "<red>You must select the origin of the portal on this server</red>"
+wrongNumberOfArgs: "<red>Wrong number of arguments. Run /bp help for help.</red>"
+noCommands: "<red>You don't have permission to use any sub-commands</red>"
+invalidArgs: "<red>One of your arguments was invalid. Run /bp help for help.</red>"
+invalidBoolean: "<red>Could not parse \"{arg}\" as a boolean argument. help: possible values are \"true\" or \"false\" and \"yes\" or \"no\"</red>"
+differentSizes: "<red>The origin and destination portal must be of the same size</red>"
+noPortalCloseEnough: "<red>No portal close enough found</red>"
+removeNotOwnedByPlayer: "<red>You do not have permission to remove portals created by other people</red>"
+nameNotOwnedbyPlayer: "<red>You don't have permission to set the name of portals created by other people</red>"
+unknownCommand: "<red>Unknown Command. For help, run /bp help</red>"
+proxyDisabled: "<red>Unable to reconnect to the proxy: it is not enabled!</red>"
+alreadyConnected: "<red>Unable to reconnect to the proxy: the server is already connected!</red>"
+horizontalIssues: "<yellow>Warning: horizontal portals with different origin/destination directions can cause issues with block rotations - not all blocks can be rotated in every direction</yellow>"
+noName: "<red>This portal has no name</red>"
+nameNetherPortal: "<red>You can't set the name of a nether portal</red>"
+seeThroughPortalDisabled: "All nether portals will now look like vanilla portals to you!"
+seeThroughPortalEnabled: "All eligible nether portals will now show you what's on the other side."
+noPortalsWithName: "<red>No portals existed with name {name}</red>"
+noWorldLink: "<red>Unfortunately, this portal will not be lit since the world that you are in is not linked.</red>\nIf you believe this to be a mistake, contact an admin and link this wiki page: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>This portal is too big. The current size limit is {size}.</red>"
+vanillaPortal: "This is a vanilla nether portal. If you want to view through this portal, you will need to relight it."
+outOfDate: "<yellow>Your version of BetterPortals is out of date ({current} vs {new}). You can download it from {url}</yellow>"
+reload: "Reloaded plugin"
+originPortalSet: "Origin portal set"
+destPortalSet: "Destination portal set"
+portalsLinked: "Portals linked successfully"
+portalRemoved: "Portal removed"
+startedReconnection: "Started reconnecting to the proxy. See console for details."
+changedName: "Successfully changed the portal name"
+currentName: "The name for this portal is: <yellow>{name}</yellow>"
+allowsItems: "This portal allows item teleportation"
+doesNotAllowItems: "This portal does not allow item teleportation"
+changedAllowsItems: "Successfully set that the portal allows item teleportation"
+changedDoesNotAllowItems: "Successfully set that the portal does not allow item teleportation"
+help: "Sub Commands"
+setPosA: "Set position A"
+setPosB: "Set position B"
+portalWandName: "<green>Portal Wand</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Reloads the plugin and the config file"
+  betterportals_reconnect:
+    description: "Reconnects to the proxy if disconnected"
+  betterportals_removebyname:
+    description: "Removes all portals with the given name"
+  betterportals_createfromcoords:
+    description: "Creates a portal from the coordinates of its corners without requiring a player"
+  betterportals_remove:
+    description: "Removes the nearest portal within 20 blocks of the player"
+  betterportals_setOrigin:
+    description: "Sets the current portal wand selection as your origin position"
+  betterportals_setDestination:
+    description: "Sets the current portal wand selection as your destination position"
+  betterportals_linkPortals:
+    description: "Links the origin and destination portal together"
+  betterportals_linkExternalPortals:
+    description: "Links the origin selection on this server with a destination on another server"
+  betterportals_wand:
+    description: "Gives you the wand for selecting portals"
+  betterportals_setPortalName:
+    description: "Sets the name of the nearest portal within 20 blocks"
+  betterportals_getportalname:
+    description: "Tells you the name of the nearest portal within 20 blocks"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Tells you whether or not the nearest portal within 20 blocks allows item teleportation"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Sets whether or not the nearest portal within 20 blocks allows item teleportation"
+  betterportals_setseethroughportal:
+    description: "Sets whether or not the current player is able to see what's on the other side of a portal."
+  betterportals_toggleseethroughportal:
+    description: "Toggles whether or not the current player is able to see what's on the other side of a portal."
+  betterportals_menu:
+    description: "Opens the Portal Admin GUI menu"
+  betterportals_setprice:
+    description: "Sets the price of the closest portal"
+  betterportals_setpreset:
+    description: "Sets the effect preset of the closest portal"
+
+gui_title_list: "Portals List (Page {page})"
+gui_title_editor: "Portal Editor Menu"
+gui_title_effects: "Portal Effects Menu"
+gui_button_teleport: "<gold>Teleport to Origin"
+gui_lore_teleport: "<gray>Click to teleport to portal origin"
+gui_button_item_mob: "<gold>Item/Mob Teleportation"
+gui_status_enabled: "<green>Enabled"
+gui_status_disabled: "<red>Disabled"
+gui_lore_click_toggle: "<gray>Status: {status}\n<gray>Click to toggle"
+gui_button_dec_price: "<red>Decrease Price"
+gui_lore_dec_price: "<gray>Left Click: <yellow>-$1.00</yellow>\n<gray>Right Click: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Current Price: <yellow>{price}"
+gui_lore_price: "<gray>Click to reset price to $0.00"
+gui_button_inc_price: "<green>Increase Price"
+gui_lore_inc_price: "<gray>Left Click: <yellow>+$1.00</yellow>\n<gray>Right Click: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Effect Preset"
+gui_lore_effects: "<gray>Current Preset: <light_purple>{preset}</light_purple>\n<gray>Click to open effects menu"
+gui_button_delete: "<red>Delete Portal"
+gui_lore_delete: "<gray>Click to permanently delete this portal"
+gui_button_back: "<yellow>Back to List"
+gui_button_back_to_editor: "<yellow>Back to Editor"
+gui_button_prev: "<yellow>Previous Page"
+gui_button_next: "<yellow>Next Page"
+gui_button_sound: "<gold>Sound Effects"
+gui_lore_sound: "<gray>Status: {status}\n\n<gray>Click to toggle portal sound effects"
+gui_list_default_portal_name: "Custom Portal"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Origin: <white>{origin}</white>\n<gray>Price: <yellow>{price}</yellow>\n<gray>Preset: <light_purple>{preset}</light_purple>\n\n<yellow>Click to Edit Settings"
+gui_effects_active: "<green>● {name} (Active)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Particle: <white>{particle}</white> (Count: <white>{count}</white>, Speed: <white>{speed}</white>)\n<gray>Sound: <white>{sound}</white> (Vol: <white>{volume}</white>, Pitch: <white>{pitch}</white>, Interval: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Click to select this preset"
+gui_effects_selected: "<green>Selected"
+
+help_header: "<gold><bold>BetterPortals Help</bold></gold> <gray>(Page {page}/{total_pages})</gray>"
+help_previous: "[◀ Previous]"
+help_next: "[Next ▶]"
+help_go_to_page: "<green>Go to page {page}"
+help_page_indicator: "<yellow>Page {page} of {total_pages}</yellow>"
+help_click_info: "<gray>💡 Click on any command to copy it to your chat box.</gray>"
+economy_charged: "Charged {amount} to use this portal."
+economy_not_enough_money: "<red>You need {amount} to pass through this portal! (Your balance: {balance})</red>"
+

@@ -1,0 +1,134 @@
+# Romanian Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Apasă pentru a completa automat comanda:"
+
+notEnoughPerms: "<red>Nu ai permisiunea de a folosi această comandă!</red>"
+mustBePlayer: "<red>Trebuie să fii jucător pentru a folosi această comandă</red>"
+mustMakeSelection: "<red>Trebuie să faci o selecție mai întâi</red>"
+invalidSelection: "<red>Selecție invalidă! Selecțiile portalului trebuie să fie pe cele două colțuri ale unui portal</red>"
+coordinatesNotInLine: "<red>Coordonatele de colț date (%d, %d, %d), (%d, %d, %d) nu sunt aliniate corect pentru a produce un portal plat (portalele nu sunt permise pe diagonală)</red>"
+invalidCoordinates: "<red>Coordonatele (%s, %s, %s) nu sunt coordonate întregi valide (relative sau nu)</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Nu se pot folosi coordonate relative când se execută comanda din consolă</red>"
+portalCreated: "Portal creat cu succes"
+noWorldExistsWithGivenName: "<red>Nu există nicio lume numită {name}</red>"
+mustSelectBothSides: "<red>Trebuie să selectezi ambele părți ale unui portal mai întâi. Pentru informații, rulează /bp help</red>"
+mustSelectOrigin: "<red>Trebuie să selectezi originea portalului pe acest server</red>"
+wrongNumberOfArgs: "<red>Număr greșit de argumente. Rulează /bp help pentru ajutor.</red>"
+noCommands: "<red>Nu ai permisiunea de a folosi nicio sub-comandă</red>"
+invalidArgs: "<red>Unul dintre argumentele tale a fost invalid. Rulează /bp help pentru ajutor.</red>"
+invalidBoolean: "<red>Nu s-a putut interpreta \"{arg}\" ca argument boolean. ajutor: valorile posibile sunt \"true\" sau \"false\" și \"yes\" sau \"no\"</red>"
+differentSizes: "<red>Portalul de origine și cel de destinație trebuie să aibă aceeași dimensiune</red>"
+noPortalCloseEnough: "<red>Nu s-a găsit niciun portal destul de aproape</red>"
+removeNotOwnedByPlayer: "<red>Nu ai permisiunea de a elimina portalele create de alte persoane</red>"
+nameNotOwnedbyPlayer: "<red>Nu ai permisiunea de a seta numele portalelor create de alte persoane</red>"
+unknownCommand: "<red>Comandă Necunoscută. Pentru ajutor, rulează /bp help</red>"
+proxyDisabled: "<red>Nu s-a putut reconecta la proxy: nu este activat!</red>"
+alreadyConnected: "<red>Nu s-a putut reconecta la proxy: serverul este deja conectat!</red>"
+horizontalIssues: "<yellow>Avertisment: portalele orizontale cu direcții diferite de origine/destinație pot cauza probleme cu rotațiile blocurilor - nu toate blocurile pot fi rotite în orice direcție</yellow>"
+noName: "<red>Acest portal nu are nume</red>"
+nameNetherPortal: "<red>Nu poți seta numele unui portal din nether</red>"
+seeThroughPortalDisabled: "Toate portalele din nether vor arăta acum ca niște portale obișnuite (vanilla) pentru tine!"
+seeThroughPortalEnabled: "Toate portalele din nether eligibile îți vor arăta acum ce se află pe partea cealaltă."
+noPortalsWithName: "<red>Nu există portale cu numele {name}</red>"
+noWorldLink: "<red>Din păcate, acest portal nu se va aprinde deoarece lumea în care te afli nu este conectată.</red>\nDacă crezi că aceasta este o greșeală, contactează un admin și trimite-i acest link wiki: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Acest portal este prea mare. Limita curentă de dimensiune este {size}.</red>"
+vanillaPortal: "Acesta este un portal din nether obișnuit. Dacă vrei să vezi prin el, va trebui să îl re-aprinzi."
+outOfDate: "<yellow>Versiunea ta de BetterPortals este învechită ({current} vs {new}). O poți descărca de pe {url}</yellow>"
+reload: "Plugin reîncărcat"
+originPortalSet: "Portal de origine setat"
+destPortalSet: "Portal de destinație setat"
+portalsLinked: "Portale conectate cu succes"
+portalRemoved: "Portal eliminat"
+startedReconnection: "S-a început reconectarea la proxy. Vezi consola pentru detalii."
+changedName: "Numele portalului a fost schimbat cu succes"
+currentName: "Numele pentru acest portal este: <yellow>{name}</yellow>"
+allowsItems: "Acest portal permite teleportarea obiectelor"
+doesNotAllowItems: "Acest portal nu permite teleportarea obiectelor"
+changedAllowsItems: "S-a setat cu succes ca portalul să permită teleportarea obiectelor"
+changedDoesNotAllowItems: "S-a setat cu succes ca portalul să nu permită teleportarea obiectelor"
+help: "Sub-comenzi"
+setPosA: "Setează poziția A"
+setPosB: "Setează poziția B"
+portalWandName: "<green>Bagheta Portalului</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Reîncarcă pluginul și fișierul de configurare"
+  betterportals_reconnect:
+    description: "Se reconectează la proxy dacă s-a deconectat"
+  betterportals_removebyname:
+    description: "Elimină toate portalele cu numele dat"
+  betterportals_createfromcoords:
+    description: "Creează un portal din coordonatele colțurilor sale fără a necesita un jucător"
+  betterportals_remove:
+    description: "Elimină cel mai apropiat portal pe o rază de 20 de blocuri de jucător"
+  betterportals_setOrigin:
+    description: "Setează selecția curentă a baghetei ca poziție de origine"
+  betterportals_setDestination:
+    description: "Setează selecția curentă a baghetei ca poziție de destinație"
+  betterportals_linkPortals:
+    description: "Conectează portalul de origine și cel de destinație împreună"
+  betterportals_linkExternalPortals:
+    description: "Conectează selecția de origine de pe acest server cu o destinație de pe alt server"
+  betterportals_wand:
+    description: "Îți oferă bagheta pentru selectarea portalelor"
+  betterportals_setPortalName:
+    description: "Setează numele celui mai apropiat portal pe o rază de 20 de blocuri"
+  betterportals_getportalname:
+    description: "Îți spune numele celui mai apropiat portal pe o rază de 20 de blocuri"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Îți spune dacă cel mai apropiat portal pe o rază de 20 de blocuri permite teleportarea obiectelor"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Setează dacă cel mai apropiat portal pe o rază de 20 de blocuri permite sau nu teleportarea obiectelor"
+  betterportals_setseethroughportal:
+    description: "Setează dacă jucătorul curent poate vedea ce este pe partea cealaltă a unui portal."
+  betterportals_toggleseethroughportal:
+    description: "Comută dacă jucătorul curent poate vedea ce este pe partea cealaltă a unui portal."
+  betterportals_menu:
+    description: "Deschide meniul GUI de administrare a portalelor"
+  betterportals_setprice:
+    description: "Setează prețul celui mai apropiat portal"
+  betterportals_setpreset:
+    description: "Setează efectul predefinit al celui mai apropiat portal"
+
+gui_title_list: "Listă Portale (Pagina {page})"
+gui_title_editor: "Meniu Editor Portal"
+gui_title_effects: "Meniu Efecte Portal"
+gui_button_teleport: "<gold>Teleportare la Origine"
+gui_lore_teleport: "<gray>Apasă pentru a te teleporta la originea portalului"
+gui_button_item_mob: "<gold>Teleportare Obiecte/Mob"
+gui_status_enabled: "<green>Activat"
+gui_status_disabled: "<red>Dezactivat"
+gui_lore_click_toggle: "<gray>Stare: {status}\n<gray>Apasă pentru a comuta"
+gui_button_dec_price: "<red>Scade Prețul"
+gui_lore_dec_price: "<gray>Click Stânga: <yellow>-$1.00</yellow>\n<gray>Click Dreapta: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Preț Curent: <yellow>{price}"
+gui_lore_price: "<gray>Apasă pentru a reseta prețul la $0.00"
+gui_button_inc_price: "<green>Crește Prețul"
+gui_lore_inc_price: "<gray>Click Stânga: <yellow>+$1.00</yellow>\n<gray>Click Dreapta: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Efect Predefinit"
+gui_lore_effects: "<gray>Efect Curent: <light_purple>{preset}</light_purple>\n<gray>Apasă pentru a deschide meniul de efecte"
+gui_button_delete: "<red>Șterge Portalul"
+gui_lore_delete: "<gray>Apasă pentru a șterge definitiv acest portal"
+gui_button_back: "<yellow>Înapoi la Listă"
+gui_button_back_to_editor: "<yellow>Înapoi la Editor"
+gui_button_prev: "<yellow>Pagina Precedentă"
+gui_button_next: "<yellow>Pagina Următoare"
+gui_button_sound: "<gold>Efecte Sonore"
+gui_lore_sound: "<gray>Stare: {status}\n\n<gray>Apasă pentru a comuta efectele sonore ale portalului"
+gui_list_default_portal_name: "Portal Personalizat"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Origine: <white>{origin}</white>\n<gray>Preț: <yellow>{price}</yellow>\n<gray>Efect: <light_purple>{preset}</light_purple>\n\n<yellow>Apasă pentru a Edita Setările"
+gui_effects_active: "<green>● {name} (Activ)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Particulă: <white>{particle}</white> (Număr: <white>{count}</white>, Viteză: <white>{speed}</white>)\n<gray>Sunet: <white>{sound}</white> (Vol: <white>{volume}</white>, Pitch: <white>{pitch}</white>, Interval: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Apasă pentru a selecta acest efect"
+gui_effects_selected: "<green>Selectat"
+
+help_header: "<gold><bold>Ajutor BetterPortals</bold></gold> <gray>(Pagina {page}/{total_pages})</gray>"
+help_previous: "[◀ Înapoi]"
+help_next: "[Înainte ▶]"
+help_go_to_page: "<green>Mergi la pagina {page}"
+help_page_indicator: "<yellow>Pagina {page} din {total_pages}</yellow>"
+help_click_info: "<gray>💡 Apasă pe orice comandă pentru a o copia în chat.</gray>"

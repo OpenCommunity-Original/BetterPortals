@@ -1,0 +1,134 @@
+# Japanese Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "クリックしてコマンドを自動入力："
+
+notEnoughPerms: "<red>このコマンドを実行する権限がありません！</red>"
+mustBePlayer: "<red>このコマンドを実行するにはプレイヤーである必要があります</red>"
+mustMakeSelection: "<red>最初に範囲選択を行う必要があります</red>"
+invalidSelection: "<red>無効な選択です！ポータルの選択はポータルの2つの角である必要があります</red>"
+coordinatesNotInLine: "<red>指定された角の座標 (%d, %d, %d), (%d, %d, %d) は、平らなポータルを作成するために正しく配置されていません (斜めのポータルは許可されていません)</red>"
+invalidCoordinates: "<red>座標 (%s, %s, %s) は有効な整数の座標ではありません</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>コンソールからコマンドを実行する場合、相対座標は使用できません</red>"
+portalCreated: "ポータルが正常に作成されました"
+noWorldExistsWithGivenName: "<red>{name} という名前の世界は存在しません</red>"
+mustSelectBothSides: "<red>最初にポータルの両側を選択する必要があります。詳細については /bp help を実行してください</red>"
+mustSelectOrigin: "<red>このサーバー上でポータルの始点（Origin）を選択する必要があります</red>"
+wrongNumberOfArgs: "<red>引数の数が違います。ヘルプを参照するには /bp help を実行してください。</red>"
+noCommands: "<red>サブコマンドを実行する権限がありません</red>"
+invalidArgs: "<red>引数のいずれかが無効です。ヘルプを参照するには /bp help を実行してください。</red>"
+invalidBoolean: "<red>\"{arg}\" を真偽値として解析できませんでした。ヘルプ：使用可能な値は \"true\" または \"false\"、および \"yes\" または \"no\" です</red>"
+differentSizes: "<red>始点ポータルと終点ポータルは同じサイズである必要があります</red>"
+noPortalCloseEnough: "<red>近くにポータルが見つかりませんでした</red>"
+removeNotOwnedByPlayer: "<red>他の人が作成したポータルを削除する権限がありません</red>"
+nameNotOwnedbyPlayer: "<red>他の人が作成したポータルの名前を設定する権限がありません</red>"
+unknownCommand: "<red>不明なコマンドです。ヘルプを参照するには /bp help を実行してください</red>"
+proxyDisabled: "<red>プロキシに再接続できません：有効になっていません！</red>"
+alreadyConnected: "<red>プロキシに再接続できません：サーバーはすでに接続されています！</red>"
+horizontalIssues: "<yellow>警告：始点と終点の方向が異なる水平ポータルは、ブロックの回転で問題が発生する可能性があります - すべてのブロックがすべての方向に回転できるわけではありません</yellow>"
+noName: "<red>このポータルには名前がありません</red>"
+nameNetherPortal: "<red>ネザーポータルの名前を設定することはできません</red>"
+seeThroughPortalDisabled: "すべてのネザーポータルが通常のバニラポータルのように見えるようになります！"
+seeThroughPortalEnabled: "対象となるすべてのネザーポータルで、反対側の景色が見えるようになります。"
+noPortalsWithName: "<red>{name} という名前のポータルは存在しません</red>"
+noWorldLink: "<red>残念ながら、現在いる世界がリンクされていないため、このポータルは起動しません。</red>\nこれが誤りであると思われる場合は、管理者に連絡し、次のWikiページを共有してください: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>このポータルは大きすぎます。現在のサイズ制限は {size} です。</red>"
+vanillaPortal: "これはバニラのネザーポータルです。ポータルの先を見通すには、再点火する必要があります。"
+outOfDate: "<yellow>お使いの BetterPortals のバージョンは古いです ({current} vs {new})。こちらからダウンロードできます: {url}</yellow>"
+reload: "プラグインをリロードしました"
+originPortalSet: "始点ポータルを設定しました"
+destPortalSet: "終点ポータルを設定しました"
+portalsLinked: "ポータルのリンクに成功しました"
+portalRemoved: "ポータルを削除しました"
+startedReconnection: "プロキシへの再接続を開始しました。詳細はコンソールを確認してください。"
+changedName: "ポータルの名前を正常に変更しました"
+currentName: "このポータルの名前は: <yellow>{name}</yellow>"
+allowsItems: "このポータルはアイテムのテレポートを許可しています"
+doesNotAllowItems: "このポータルはアイテムのテレポートを許可していません"
+changedAllowsItems: "ポータルがアイテムのテレポートを許可するように設定しました"
+changedDoesNotAllowItems: "ポータルがアイテムのテレポートを許可しないように設定しました"
+help: "サブコマンド"
+setPosA: "位置 A を設定"
+setPosB: "位置 B を設定"
+portalWandName: "<green>ポータル選択ワンド</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "プラグインと設定ファイルをリロードします"
+  betterportals_reconnect:
+    description: "切断されている場合、プロキシに再接続します"
+  betterportals_removebyname:
+    description: "指定された名前のポータルをすべて削除します"
+  betterportals_createfromcoords:
+    description: "プレイヤーを必要とせずに、角の座標からポータルを作成します"
+  betterportals_remove:
+    description: "プレイヤーから20ブロック以内にある最も近いポータルを削除します"
+  betterportals_setOrigin:
+    description: "現在のワンドの選択を始点位置として設定します"
+  betterportals_setDestination:
+    description: "現在のワンドの選択を終点位置として設定します"
+  betterportals_linkPortals:
+    description: "始点と終点のポータルをリンクします"
+  betterportals_linkExternalPortals:
+    description: "このサーバー上の始点の選択を別のサーバー上の終点とリンクします"
+  betterportals_wand:
+    description: "ポータルを選択するためのワンドを付与します"
+  betterportals_setPortalName:
+    description: "20ブロック以内にある最も近いポータルの名前を設定します"
+  betterportals_getportalname:
+    description: "20ブロック以内にある最も近いポータルの名前を表示します"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "20ブロック以内にある最も近いポータルがアイテムのテレポートを許可しているかどうかを表示します"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "20ブロック以内にある最も近いポータルがアイテムのテレポートを許可するかどうかを設定します"
+  betterportals_setseethroughportal:
+    description: "現在のプレイヤーがポータルの反対側を見通せるかどうかを設定します。"
+  betterportals_toggleseethroughportal:
+    description: "現在のプレイヤーがポータルの反対側を見通せるかどうかを切り替えます。"
+  betterportals_menu:
+    description: "ポータル管理GUIメニューを開きます"
+  betterportals_setprice:
+    description: "最も近いポータルの価格を設定します"
+  betterportals_setpreset:
+    description: "最も近いポータルのエフェクトプリセットを設定します"
+
+gui_title_list: "ポータル一覧 (ページ {page})"
+gui_title_editor: "ポータルエディタメニュー"
+gui_title_effects: "ポータルエフェクトメニュー"
+gui_button_teleport: "<gold>始点へテレポート"
+gui_lore_teleport: "<gray>クリックしてポータルの始点にテレポートします"
+gui_button_item_mob: "<gold>アイテム/Mobのテレポート"
+gui_status_enabled: "<green>有効"
+gui_status_disabled: "<red>無効"
+gui_lore_click_toggle: "<gray>ステータス: {status}\n<gray>クリックして切り替え"
+gui_button_dec_price: "<red>価格を下げる"
+gui_lore_dec_price: "<gray>左クリック: <yellow>-$1.00</yellow>\n<gray>右クリック: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>現在の価格: <yellow>{price}"
+gui_lore_price: "<gray>クリックして価格を $0.00 にリセットします"
+gui_button_inc_price: "<green>価格を上げる"
+gui_lore_inc_price: "<gray>左クリック: <yellow>+$1.00</yellow>\n<gray>右クリック: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>エフェクトプリセット"
+gui_lore_effects: "<gray>現在のプリセット: <light_purple>{preset}</light_purple>\n<gray>クリックしてエフェクトメニューを開く"
+gui_button_delete: "<red>ポータルを削除"
+gui_lore_delete: "<gray>クリックしてこのポータルを永久に削除します"
+gui_button_back: "<yellow>一覧に戻る"
+gui_button_back_to_editor: "<yellow>エディタに戻る"
+gui_button_prev: "<yellow>前のページ"
+gui_button_next: "<yellow>次のページ"
+gui_button_sound: "<gold>効果音"
+gui_lore_sound: "<gray>ステータス: {status}\n\n<gray>クリックしてポータルの効果音を切り替えます"
+gui_list_default_portal_name: "カスタムポータル"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>始点: <white>{origin}</white>\n<gray>価格: <yellow>{price}</yellow>\n<gray>プリセット: <light_purple>{preset}</light_purple>\n\n<yellow>クリックして設定を編集"
+gui_effects_active: "<green>● {name} (有効)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>パーティクル: <white>{particle}</white> (個数: <white>{count}</white>, 速度: <white>{speed}</white>)\n<gray>効果音: <white>{sound}</white> (音量: <white>{volume}</white>, ピッチ: <white>{pitch}</white>, 間隔: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>クリックしてこのプリセットを選択"
+gui_effects_selected: "<green>選択済み"
+
+help_header: "<gold><bold>BetterPortals ヘルプ</bold></gold> <gray>({page}/{total_pages} ページ)</gray>"
+help_previous: "[◀ 戻る]"
+help_next: "[次へ ▶]"
+help_go_to_page: "<green>{page} ページへ移動"
+help_page_indicator: "<yellow>{page} / {total_pages} ページ</yellow>"
+help_click_info: "<gray>💡 コマンドをクリックするとチャット欄にコピーされます。</gray>"

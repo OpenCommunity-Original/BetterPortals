@@ -1,0 +1,134 @@
+# Indonesian Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Klik untuk mengisi perintah otomatis:"
+
+notEnoughPerms: "<red>Anda tidak memiliki izin untuk menggunakan perintah ini!</red>"
+mustBePlayer: "<red>Anda harus menjadi pemain untuk menggunakan perintah ini</red>"
+mustMakeSelection: "<red>Anda harus membuat pilihan terlebih dahulu</red>"
+invalidSelection: "<red>Pilihan tidak valid! Pilihan portal harus berada di kedua sudut portal</red>"
+coordinatesNotInLine: "<red>Koordinat sudut yang diberikan (%d, %d, %d), (%d, %d, %d) tidak sejajar dengan benar untuk menghasilkan portal datar (portal tidak diperbolehkan pada posisi diagonal)</red>"
+invalidCoordinates: "<red>Koordinat (%s, %s, %s) bukan koordinat integer yang valid, relatif atau lainnya</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Tidak dapat menggunakan koordinat relatif saat menjalankan perintah dari konsol</red>"
+portalCreated: "Portal berhasil dibuat"
+noWorldExistsWithGivenName: "<red>Tidak ada dunia bernama {name}</red>"
+mustSelectBothSides: "<red>Anda harus memilih kedua sisi portal terlebih dahulu. Untuk informasi, jalankan /bp help</red>"
+mustSelectOrigin: "<red>Anda harus memilih asal portal di server ini</red>"
+wrongNumberOfArgs: "<red>Jumlah argumen salah. Jalankan /bp help untuk bantuan.</red>"
+noCommands: "<red>Anda tidak memiliki izin untuk menggunakan sub-perintah apa pun</red>"
+invalidArgs: "<red>Salah satu argumen Anda tidak valid. Jalankan /bp help untuk bantuan.</red>"
+invalidBoolean: "<red>Tidak dapat mengurai \"{arg}\" sebagai argumen boolean. bantuan: nilai yang mungkin adalah \"true\" atau \"false\" dan \"yes\" atau \"no\"</red>"
+differentSizes: "<red>Portal asal dan tujuan harus memiliki ukuran yang sama</red>"
+noPortalCloseEnough: "<red>Tidak ada portal yang cukup dekat ditemukan</red>"
+removeNotOwnedByPlayer: "<red>Anda tidak memiliki izin untuk menghapus portal yang dibuat oleh orang lain</red>"
+nameNotOwnedbyPlayer: "<red>Anda tidak memiliki izin untuk menetapkan nama portal yang dibuat oleh orang lain</red>"
+unknownCommand: "<red>Perintah Tidak Dikenal. Untuk bantuan, jalankan /bp help</red>"
+proxyDisabled: "<red>Tidak dapat menyambung kembali ke proxy: proxy tidak aktif!</red>"
+alreadyConnected: "<red>Tidak dapat menyambung kembali ke proxy: server sudah terhubung!</red>"
+horizontalIssues: "<yellow>Peringatan: portal horizontal dengan arah asal/tujuan yang berbeda dapat menyebabkan masalah dengan rotasi blok - tidak semua blok dapat diputar ke segala arah</yellow>"
+noName: "<red>Portal ini tidak memiliki nama</red>"
+nameNetherPortal: "<red>Anda tidak dapat menetapkan nama portal nether</red>"
+seeThroughPortalDisabled: "Semua portal nether sekarang akan terlihat seperti portal vanilla bagi Anda!"
+seeThroughPortalEnabled: "Semua portal nether yang memenuhi syarat sekarang akan menunjukkan kepada Anda apa yang ada di sisi lain."
+noPortalsWithName: "<red>Tidak ada portal dengan nama {name}</red>"
+noWorldLink: "<red>Sayangnya, portal ini tidak akan menyala karena dunia tempat Anda berada tidak terhubung.</red>\nJika Anda yakin ini adalah kesalahan, hubungi admin dan berikan tautan wiki ini: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Portal ini terlalu besar. Batas ukuran saat ini adalah {size}.</red>"
+vanillaPortal: "Ini adalah portal nether vanilla. Jika Anda ingin melihat menembus portal ini, Anda harus menyalakannya kembali."
+outOfDate: "<yellow>Versi BetterPortals Anda sudah usang ({current} vs {new}). Anda dapat mengunduhnya dari {url}</yellow>"
+reload: "Memuat ulang plugin"
+originPortalSet: "Portal asal telah ditetapkan"
+destPortalSet: "Portal tujuan telah ditetapkan"
+portalsLinked: "Portal berhasil dihubungkan"
+portalRemoved: "Portal dihapus"
+startedReconnection: "Mulai menyambung kembali ke proxy. Lihat konsol untuk detailnya."
+changedName: "Berhasil mengubah nama portal"
+currentName: "Nama untuk portal ini adalah: <yellow>{name}</yellow>"
+allowsItems: "Portal ini memungkinkan teleportasi item"
+doesNotAllowItems: "Portal ini tidak memungkinkan teleportasi item"
+changedAllowsItems: "Berhasil menetapkan bahwa portal memungkinkan teleportasi item"
+changedDoesNotAllowItems: "Berhasil menetapkan bahwa portal tidak memungkinkan teleportasi item"
+help: "Sub Perintah"
+setPosA: "Tetapkan posisi A"
+setPosB: "Tetapkan posisi B"
+portalWandName: "<green>Tongkat Portal</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Memuat ulang plugin dan file konfigurasi"
+  betterportals_reconnect:
+    description: "Menghubungkan kembali ke proxy jika terputus"
+  betterportals_removebyname:
+    description: "Menghapus semua portal dengan nama yang diberikan"
+  betterportals_createfromcoords:
+    description: "Membuat portal dari koordinat sudutnya tanpa memerlukan pemain"
+  betterportals_remove:
+    description: "Menghapus portal terdekat dalam jarak 20 blok dari pemain"
+  betterportals_setOrigin:
+    description: "Menetapkan pilihan tongkat portal saat ini sebagai posisi asal Anda"
+  betterportals_setDestination:
+    description: "Menetapkan pilihan tongkat portal saat ini sebagai posisi tujuan Anda"
+  betterportals_linkPortals:
+    description: "Menghubungkan portal asal dan tujuan bersama-sama"
+  betterportals_linkExternalPortals:
+    description: "Menghubungkan pilihan asal di server ini dengan tujuan di server lain"
+  betterportals_wand:
+    description: "Memberi Anda tongkat untuk memilih portal"
+  betterportals_setPortalName:
+    description: "Menetapkan nama portal terdekat dalam jarak 20 blok"
+  betterportals_getportalname:
+    description: "Memberi tahu Anda nama portal terdekat dalam jarak 20 blok"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Memberi tahu Anda apakah portal terdekat dalam jarak 20 blok memungkinkan teleportasi item atau tidak"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Menetapkan apakah portal terdekat dalam jarak 20 blok memungkinkan teleportasi item atau tidak"
+  betterportals_setseethroughportal:
+    description: "Menetapkan apakah pemain saat ini dapat melihat apa yang ada di sisi lain portal atau tidak."
+  betterportals_toggleseethroughportal:
+    description: "Mengaktifkan/menonaktifkan apakah pemain saat ini dapat melihat apa yang ada di sisi lain portal atau tidak."
+  betterportals_menu:
+    description: "Membuka menu GUI Admin Portal"
+  betterportals_setprice:
+    description: "Menetapkan harga portal terdekat"
+  betterportals_setpreset:
+    description: "Menetapkan preset efek portal terdekat"
+
+gui_title_list: "Daftar Portal (Halaman {page})"
+gui_title_editor: "Menu Editor Portal"
+gui_title_effects: "Menu Efek Portal"
+gui_button_teleport: "<gold>Teleportasi ke Asal"
+gui_lore_teleport: "<gray>Klik untuk teleportasi ke asal portal"
+gui_button_item_mob: "<gold>Teleportasi Item/Mob"
+gui_status_enabled: "<green>Aktif"
+gui_status_disabled: "<red>Nonaktif"
+gui_lore_click_toggle: "<gray>Status: {status}\n<gray>Klik untuk beralih"
+gui_button_dec_price: "<red>Turunkan Harga"
+gui_lore_dec_price: "<gray>Klik Kiri: <yellow>-$1.00</yellow>\n<gray>Klik Kanan: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Harga Saat Ini: <yellow>{price}"
+gui_lore_price: "<gray>Klik untuk mereset harga ke $0.00"
+gui_button_inc_price: "<green>Naikkan Harga"
+gui_lore_inc_price: "<gray>Klik Kiri: <yellow>+$1.00</yellow>\n<gray>Klik Kanan: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Preset Efek"
+gui_lore_effects: "<gray>Preset Saat Ini: <light_purple>{preset}</light_purple>\n<gray>Klik untuk membuka menu efek"
+gui_button_delete: "<red>Hapus Portal"
+gui_lore_delete: "<gray>Klik untuk menghapus portal ini secara permanen"
+gui_button_back: "<yellow>Kembali ke Daftar"
+gui_button_back_to_editor: "<yellow>Kembali ke Editor"
+gui_button_prev: "<yellow>Halaman Sebelumnya"
+gui_button_next: "<yellow>Halaman Berikutnya"
+gui_button_sound: "<gold>Efek Suara"
+gui_lore_sound: "<gray>Status: {status}\n\n<gray>Klik untuk mengaktifkan/menonaktifkan efek suara portal"
+gui_list_default_portal_name: "Portal Kustom"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Asal: <white>{origin}</white>\n<gray>Harga: <yellow>{price}</yellow>\n<gray>Preset: <light_purple>{preset}</light_purple>\n\n<yellow>Klik untuk Mengedit Pengaturan"
+gui_effects_active: "<green>● {name} (Aktif)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Partikel: <white>{particle}</white> (Jumlah: <white>{count}</white>, Kecepatan: <white>{speed}</white>)\n<gray>Suara: <white>{sound}</white> (Vol: <white>{volume}</white>, Pitch: <white>{pitch}</white>, Interval: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Klik untuk memilih preset ini"
+gui_effects_selected: "<green>Terpilih"
+
+help_header: "<gold><bold>Bantuan BetterPortals</bold></gold> <gray>(Halaman {page}/{total_pages})</gray>"
+help_previous: "[◀ Sebelumnya]"
+help_next: "[Berikutnya ▶]"
+help_go_to_page: "<green>Ke halaman {page}"
+help_page_indicator: "<yellow>Halaman {page} dari {total_pages}</yellow>"
+help_click_info: "<gray>💡 Klik perintah apa pun untuk menyalinnya ke kotak obrolan Anda.</gray>"

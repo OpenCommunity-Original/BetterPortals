@@ -1,0 +1,134 @@
+# Czech Translation for BetterPortals
+prefix: "<gray>[<green>BetterPortals</green>]</gray> "
+messageColor: "<green>"
+autofill_suggest: "Kliknutím automaticky vyplníte příkaz:"
+
+notEnoughPerms: "<red>Nemáte oprávnění k použití tohoto příkazu!</red>"
+mustBePlayer: "<red>Pro použití tohoto příkazu musíte být hráč</red>"
+mustMakeSelection: "<red>Nejprve musíte provést výběr</red>"
+invalidSelection: "<red>Neplatný výběr! Výběr portálu musí být na dvou rozích portálu</red>"
+coordinatesNotInLine: "<red>Zadané souřadnice rohů (%d, %d, %d), (%d, %d, %d) nejsou správně zarovnány, aby vytvořily plochý portál (portály nejsou povoleny na diagonálách)</red>"
+invalidCoordinates: "<red>Souřadnice (%s, %s, %s) nejsou platné celočíselné souřadnice</red>"
+cannotUseRelativeCoordinatesWithoutPlayer: "<red>Nelze použít relativní souřadnice při spouštění příkazu z konzole</red>"
+portalCreated: "Portál byl úspěšně vytvořen"
+noWorldExistsWithGivenName: "<red>Neexistuje žádný svět s názvem {name}</red>"
+mustSelectBothSides: "<red>Nejprve musíte vybrat obě strany portálu. Pro info spusťte /bp help</red>"
+mustSelectOrigin: "<red>Musíte vybrat počátek (origin) portálu na tomto serveru</red>"
+wrongNumberOfArgs: "<red>Nesprávný počet argumentů. Pro nápovědu spusťte /bp help.</red>"
+noCommands: "<red>Nemáte oprávnění používat žádné pod-příkazy</red>"
+invalidArgs: "<red>Jeden z vašich argumentů byl neplatný. Pro nápovědu spusťte /bp help.</red>"
+invalidBoolean: "<red>Nelze analyzovat \"{arg}\" jako boolean. nápověda: možné hodnoty jsou \"true\" / \"false\" a \"yes\" / \"no\"</red>"
+differentSizes: "<red>Počáteční a cílový portál musí mít stejnou velikost</red>"
+noPortalCloseEnough: "<red>Nebyl nalezen žádný dostatečně blízký portál</red>"
+removeNotOwnedByPlayer: "<red>Nemáte oprávnění odstraňovat portály vytvořené jinými lidmi</red>"
+nameNotOwnedbyPlayer: "<red>Nemáte oprávnění nastavovat název portálů vytvořených jinými lidmi</red>"
+unknownCommand: "<red>Neznámý příkaz. Pro nápovědu spusťte /bp help</red>"
+proxyDisabled: "<red>Nelze se znovu připojit k proxy: není povolena!</red>"
+alreadyConnected: "<red>Nelze se znovu připojit k proxy: server je již připojen!</red>"
+horizontalIssues: "<yellow>Varování: horizontální portály s různými směry počátku/cíle mohou způsobit problémy s rotací bloků - ne všechny bloky lze rotovat ve všech směrech</yellow>"
+noName: "<red>Tento portál nemá žádný název</red>"
+nameNetherPortal: "<red>Nelze nastavit název nether portálu</red>"
+seeThroughPortalDisabled: "Všechny nether portály nyní pro vás budou vypadat jako standardní vanilkové portály!"
+seeThroughPortalEnabled: "Všechny splňující nether portály vám nyní ukážou, co je na druhé straně."
+noPortalsWithName: "<red>Neexistují žádné portály s názvem {name}</red>"
+noWorldLink: "<red>Bohužel tento portál nebude aktivován, protože svět, ve kterém se nacházíte, není propojen.</red>\nPokud se domníváte, že se jedná o chybu, kontaktujte administrátora a odkažte na tuto wiki stránku: https://github.com/OpenCommunity-Original/BetterPortals/wiki/Editing-the-Config-file#world-connections"
+portalTooBig: "<red>Tento portál je příliš velký. Aktuální limit velikosti je {size}.</red>"
+vanillaPortal: "Toto je vanilkový nether portál. Pokud chcete vidět skrz něj, budete jej muset znovu zapálit."
+outOfDate: "<yellow>Vaše verze BetterPortals je zastaralá ({current} vs {new}). Můžete si ji stáhnout z {url}</yellow>"
+reload: "Plugin byl znovu načten"
+originPortalSet: "Počáteční portál nastaven"
+destPortalSet: "Cílový portál nastaven"
+portalsLinked: "Portály úspěšně propojeny"
+portalRemoved: "Portál odstraněn"
+startedReconnection: "Spuštěno opětovné připojování k proxy. Podrobnosti naleznete v konzoli."
+changedName: "Název portálu úspěšně změněn"
+currentName: "Název tohoto portálu je: <yellow>{name}</yellow>"
+allowsItems: "Tento portál umožňuje teleportaci předmětů"
+doesNotAllowItems: "Tento portál neumožňuje teleportaci předmětů"
+changedAllowsItems: "Úspěšně nastaveno, že portál umožňuje teleportaci předmětů"
+changedDoesNotAllowItems: "Úspěšně nastaveno, že portál neumožňuje teleportaci předmětů"
+help: "Pod-příkazy"
+setPosA: "Nastavit pozici A"
+setPosB: "Nastavit pozici B"
+portalWandName: "<green>Portálová Hůlka</green>"
+
+# Command translations
+commands:
+  betterportals_reload:
+    description: "Znovu načte plugin a konfigurační soubor"
+  betterportals_reconnect:
+    description: "Znovu se připojí k proxy, pokud je odpojen"
+  betterportals_removebyname:
+    description: "Odstraní všechny portály s daným názvem"
+  betterportals_createfromcoords:
+    description: "Vytvoří portál ze souřadnic jeho rohů bez požadavku na přítomnost hráče"
+  betterportals_remove:
+    description: "Odstraní nejbližší portál do 20 bloků od hráče"
+  betterportals_setOrigin:
+    description: "Nastaví aktuální výběr portálové hůlky jako vaši počáteční pozici"
+  betterportals_setDestination:
+    description: "Nastaví aktuální výběr portálové hůlky jako vaši cílovou pozici"
+  betterportals_linkPortals:
+    description: "Propojí počáteční a cílový portál dohromady"
+  betterportals_linkExternalPortals:
+    description: "Propojí počáteční výběr na tomto serveru s cílem na jiném serveru"
+  betterportals_wand:
+    description: "Dá vám hůlku pro výběr portálů"
+  betterportals_setPortalName:
+    description: "Nastaví název nejbližšího portálu do 20 bloků"
+  betterportals_getportalname:
+    description: "Zobrazí název nejbližšího portálu do 20 bloků"
+  betterportals_getallowNonPlayerTeleportation:
+    description: "Zobrazí, zda nejbližší portál do 20 bloků umožňuje teleportaci předmětů"
+  betterportals_setAllowNonPlayerTeleportation:
+    description: "Nastaví, zda nejbližší portál do 20 bloků umožňuje teleportaci předmětů"
+  betterportals_setseethroughportal:
+    description: "Nastaví, zda aktuální hráč vidí na druhou stranu portálu."
+  betterportals_toggleseethroughportal:
+    description: "Přepne, zda aktuální hráč vidí na druhou stranu portálu."
+  betterportals_menu:
+    description: "Otevře administrátorské menu GUI portálů"
+  betterportals_setprice:
+    description: "Nastaví cenu nejbližšího portálu"
+  betterportals_setpreset:
+    description: "Nastaví vizuální efekt nejbližšího portálu"
+
+gui_title_list: "Seznam portálů (Strana {page})"
+gui_title_editor: "Editor portálu"
+gui_title_effects: "Efekty portálu"
+gui_button_teleport: "<gold>Teleportovat na počátek"
+gui_lore_teleport: "<gray>Kliknutím se teleportujete na počátek portálu"
+gui_button_item_mob: "<gold>Teleportace předmětů/mobů"
+gui_status_enabled: "<green>Povoleno"
+gui_status_disabled: "<red>Zakázáno"
+gui_lore_click_toggle: "<gray>Stav: {status}\n<gray>Kliknutím přepnete"
+gui_button_dec_price: "<red>Snížit cenu"
+gui_lore_dec_price: "<gray>Levé kliknutí: <yellow>-$1.00</yellow>\n<gray>Pravé kliknutí: <yellow>-$10.00</yellow>"
+gui_button_price: "<gold>Aktuální cena: <yellow>{price}"
+gui_lore_price: "<gray>Kliknutím resetujete cenu na $0.00"
+gui_button_inc_price: "<green>Zvýšit cenu"
+gui_lore_inc_price: "<gray>Levé kliknutí: <yellow>+$1.00</yellow>\n<gray>Pravé kliknutí: <yellow>+$10.00</yellow>"
+gui_button_effects: "<gold>Vizuální efekt"
+gui_lore_effects: "<gray>Aktuální efekt: <light_purple>{preset}</light_purple>\n<gray>Kliknutím otevřete menu efektů"
+gui_button_delete: "<red>Smazat portál"
+gui_lore_delete: "<gray>Kliknutím trvale smažete tento portál"
+gui_button_back: "<yellow>Zpět na seznam"
+gui_button_back_to_editor: "<yellow>Zpět do editoru"
+gui_button_prev: "<yellow>Předchozí strana"
+gui_button_next: "<yellow>Další strana"
+gui_button_sound: "<gold>Zvukové efekty"
+gui_lore_sound: "<gray>Stav: {status}\n\n<gray>Kliknutím přepnete zvukové efekty portálu"
+gui_list_default_portal_name: "Vlastní portál"
+gui_list_item_lore: "<gray>ID: <white>{id}</white>\n<gray>Počátek: <white>{origin}</white>\n<gray>Cena: <yellow>{price}</yellow>\n<gray>Efekt: <light_purple>{preset}</light_purple>\n\n<yellow>Kliknutím upravíte nastavení"
+gui_effects_active: "<green>● {name} (Aktivní)</green>"
+gui_effects_inactive: "<gray>○ {name}</gray>"
+gui_effects_lore: "<gray>Částice: <white>{particle}</white> (Počet: <white>{count}</white>, Rychlost: <white>{speed}</white>)\n<gray>Zvuk: <white>{sound}</white> (Hlasitost: <white>{volume}</white>, Výška: <white>{pitch}</white>, Interval: <white>{interval}t</white>)\n\n{status_text}"
+gui_effects_click_select: "<yellow>Kliknutím vyberete tento efekt"
+gui_effects_selected: "<green>Vybráno"
+
+help_header: "<gold><bold>Nápověda BetterPortals</bold></gold> <gray>(Strana {page}/{total_pages})</gray>"
+help_previous: "[◀ Předchozí]"
+help_next: "[Další ▶]"
+help_go_to_page: "<green>Přejít na stranu {page}"
+help_page_indicator: "<yellow>Strana {page} z {total_pages}</yellow>"
+help_click_info: "<gray>💡 Kliknutím na jakýkoli příkaz jej zkopírujete do chatu.</gray>"
